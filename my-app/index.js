@@ -12,8 +12,10 @@ app.use(express.static(__dirname +'/frontend/'));
 
 var generator = new Generator (1,100,10);
 
+/*
 generator.on('newValueHasGenerate',function(val){ console.log(val)});
 generator.generateValue();
+*/
 
 //listening the node server on port 3000
 http.listen(3000, function () {

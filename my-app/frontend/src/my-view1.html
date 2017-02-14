@@ -11,9 +11,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 
+<script type="text/javascript">
+
+    $( init );
+
+    function init() {
+    $('#Draggable').draggable();
+    }
+
+</script>
+
+
+
+
 
 <dom-module id="my-view1">
   <template>
+
     <style include="shared-styles">
       :host {
         display: block;
@@ -21,19 +35,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
+    <style>
+      #Draggable { width: 50px; height: 50px; background: red; }
+    </style>
+
     <div class="card">
       <div class="circle">G</div>
       <h1>Générateur de signaux</h1>
 
       <div class="columns">
-        <div id="draggable" class="ui-widget-content">
-          <p>Drag item</p>
+        <div id="draggableContent" class="ui-widget-content">
+          <div id="Draggable"> </div>
         </div>
-        <div id="droppable" class="ui-widget-content">
+        <div id="droppableContent" class="ui-widget-content">
           <p>Drop zone</p>
         </div>
       </div>
       <div class="clear"></div>
+
+
 
 
 
