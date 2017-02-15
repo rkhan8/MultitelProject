@@ -64,10 +64,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <hr>
             <fieldset>
                 <label for="valMin">Valeur minimale : </label>
-                <input id="valMin" placeholder="valMin" type="text">
+                <input id="valMin" placeholder="valMin..." type="text">
                 <p></p>
                 <label for="valMax">Valeur maximale : </label>
-                <input id="valMax" placeholder="valMax" type="text">
+                <input id="valMax" placeholder="valMax..." type="text">
                 <button id="enregistrer" type="submit" onclick="validateFields()">Enregistrer</button>
             </fieldset>
         </form>
@@ -89,15 +89,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         //Function To Display Popup
         function div_show() {
             alert('fct div show');
-            $('#popupInterval').style.visibility = "visible";
+            //$('#popupContent').css('visibility', 'visible', 'display', 'block');
+            $('#popupContent').style.visibility = "visible";
             alert('visibile');
-            document.getElementById('popupInterval').style.display = "block";
+            document.getElementById('popupContent').style.display = "block";
         }
         //Function to Hide Popup
         function div_hide() {
             alert('fct div hide');
-            document.getElementById('popupInterval').style.visibility = "hidden";
-            document.getElementById('popupInterval').style.display = "none";
+            document.getElementById('popupContent').style.visibility = "hidden";
+            document.getElementById('popupContent').style.display = "none";
         }
     </script>
 
