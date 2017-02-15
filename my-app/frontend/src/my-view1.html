@@ -36,7 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <style>
-      #Draggable { width: 50px; height: 50px; background: red; }
+      #Draggable { width: 50px; height: 50px;}
     </style>
 
     <div class="card">
@@ -45,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <div class="columns">
         <div id="draggableContent" class="ui-widget-content">
-          <div id="Draggable"> </div>
+          <img src="../images/temperature.jpg" id="Draggable">
         </div>
         <div id="droppableContent" class="ui-widget-content">
           <p>Drop zone</p>
@@ -81,9 +81,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         function validateFields() {
             alert('fct valider');
             if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
-                alert("Vous devez donner la valeur min et la veleur max de l'intervale");
+                alert("Vous devez donner la valeur min et la veleur max de l'intervalle");
             } else {
-                alert("L'intervale de valeur est valide");
+                alert("L'intervalle de valeur est valide");
             }
         }
         //Function To Display Popup
