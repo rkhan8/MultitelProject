@@ -1,3 +1,5 @@
+@import "http://fonts.googleapis.com/css?family=Raleway";
+
 #view-source {
   position: fixed;
   display: block;
@@ -75,8 +77,6 @@ div.clear         { clear: both; }
 
 
 /*popup style*/
-@import "http://fonts.googleapis.com/css?family=Raleway";
-
 
 #popupContent {
   width:100%;
@@ -120,7 +120,8 @@ p {
   margin-top:30px
 }
 h2 {
-  background-color:#FEFFED;
+  background-color:lightblue;
+  font-size: xx-large;
   padding:20px 35px;
   margin:-10px -50px;
   text-align:center;
@@ -131,27 +132,38 @@ hr {
   border:0;
   border-top:1px solid #ccc
 }
-/*
+
 input[type=text] {
   width:82%;
   padding:10px;
   margin-top:30px;
   border:1px solid #ccc;
-  padding-left:10px;
+  padding-left: 10px;
   font-size:16px;
   font-family:raleway
 }
-*/
+
+#errorMsg {
+  font-size: medium;
+  color: red;
+  font-weight: bold;
+}
+
 label {
   font-size: large;
+  font-weight: bold;
 }
 
 #valMax {
   margin-top: 25px;
 }
 
+#valMin {
+  margin-top: 25px;
+}
+
 #enregistrer {
-  margin-top: 50px;
+  margin-top: 30px;
   text-decoration:none;
   width:100%;
   text-align:center;

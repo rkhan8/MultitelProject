@@ -21,7 +21,7 @@
     <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="../images/favicon.png">
 
     <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
     <!--
@@ -50,17 +50,14 @@
       });
       $( "#droppableContent" ).droppable({
         drop: function( event, ui ) {
+            show_popup()
           $( this )
             .addClass( "ui-state-highlight" )
         }
       });
     } );
   </script>
-
-
-
   </head>
-
 
   <body>
 
@@ -75,7 +72,7 @@
           <div class="columns">
             <div id="draggableContent" class="ui-widget-content">
               <img src="../images/temperature.jpg" height="50px" width="50px">
-              <img src="../images/temperature.jpg" height="50px" width="50px">
+              <img src="../images/electricity-icon.png" height="50px" width="50px">
             </div>
             <div id="droppableContent" class="ui-widget-content">
               <!--<h4>Drop Here</h4>-->
@@ -88,59 +85,54 @@
         <!--</div>-->
       </div>
 
-
-      <!--debut popup-->
+      <!--popup-->
       <div id="popupContent">
           <div id="popupInterval">
               <form>
-                  <img id="close-icon" src="../images/close-icon.png" onclick ="div_hide()">
+                  <img id="close-icon" src="../images/close-icon.png" onclick ="hide_popup(); return false;">
                   <h2>Valeurs de l'intervalle</h2>
                   <hr>
                   <fieldset>
+                      <div id="errorMsg" type="text"></div>
+                      <hr>
                       <label for="valMin">Valeur minimale : </label>
                       <input id="valMin" placeholder="valMin..." type="text">
                       <p></p>
                       <label for="valMax">Valeur maximale : </label>
                       <input id="valMax" placeholder="valMax..." type="text">
-                      <button id="enregistrer" type="submit" onclick="validateFields()">Enregistrer</button>
+                      <button id="enregistrer" type="submit" onclick="validateFields(); return false;">Enregistrer</button>
                   </fieldset>
               </form>
           </div>
         </div>
 
-        <button id="popup" onclick="div_show()">Popup</button>
-      <!--fin popup-->
-
-
-
-      <!-- drag and drop JQUERY-->
       <script type="text/javascript">
           function validateFields() {
-              alert('fct valider');
+              $('#errorMsg').text("");
               if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
-                  alert("Vous devez donner la valeur min et la valeur max de l'intervalle");
-              } else {
-                  alert("L'intervalle de valeur est valide");
+                  $('#errorMsg').text("Vous devez donner la valeur min et la valeur max de l'intervalle");
+              }
+              else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
+                  $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
+              }
+              else {
+                  $('#errorMsg').text("");
+                  hide_popup();
               }
           }
           //Function To Display Popup
-          function div_show() {
-              //alert('fct div show');
+          function show_popup() {
+              $('#errorMsg').text("");
               $('#popupContent').css('display', 'block');
-              //$('#popupContent').style.visibility = "visible";
-              //alert('visibile');
-              document.getElementById('popupContent').style.display = "block";
           }
           //Function to Hide Popup
-          function div_hide() {
-              //alert('fct div hide');
+          function hide_popup() {
+
+              $('#errorMsg').text("");
               $('#popupContent').css('display', 'none');
 
           }
       </script>
-
-
-
 
       <a id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
 
