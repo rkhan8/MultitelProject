@@ -2,22 +2,35 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var Generator = require('./backend/SignalGenerator');
+var signalOperation = require('./backend/Routes/SignalOperations')
 var events = require('events');
-var eventEmitter = new events.EventEmitter();
+
+
+
 //var pathcsv = __dirname + '/frontend/';
 
 //initialize the repository. Start the localhost server with index.html file
-app.use(express.static(__dirname +'/frontend/'));
+app.use(express.static(__dirname + '/frontend/'));
 
-var generator = new Generator (1,100,10);
 
-/*
-generator.on('newValueHasGenerate',function(val){ console.log(val)});
-generator.generateValue();
-*/
+
+io.on('connection', function (socket, signalValues) {
+    socket.on('createSignal', function (signalValues) {
+        signalOperation.createSignal(signalValues);
+    });
+
+    socket.on('activateSignal', function (socket) {
+
+        signalOperation.newValueEvent.on('newValueHasGenerate',function(val){socket.emit('newValue', val)});
+        signalOperation.activateSignal();
+    });
+});
+
+
+
 
 //listening the node server on port 3000
 http.listen(3000, function () {
     console.log('listening on *:3000');
+
 })
