@@ -1,0 +1,149 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Multitel Project</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="../images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/ressource_style.css">
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script>
+
+    var drop = false;
+
+    $( function() {
+      $( "#draggableContent img" ).draggable({
+        revert: "invalid",
+        stack: ".draggable"
+      });
+      $( "#droppableContent" ).droppable({
+        drop: function( event, ui ) {
+          $( this )
+            .addClass( "ui-state-highlight" )
+        }
+      });
+    } );
+  </script>
+
+
+
+  </head>
+
+
+  <body>
+
+      <!--<div class="mdl-grid">-->
+      <div id="contentG">
+        <!--<div class="generatorPanel mdl-color--black mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">-->
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <h3>Générateur de signaux</h3>
+
+          </div>
+
+          <div class="columns">
+            <div id="draggableContent" class="ui-widget-content">
+              <img src="../images/temperature.jpg" height="50px" width="50px">
+              <img src="../images/temperature.jpg" height="50px" width="50px">
+            </div>
+            <div id="droppableContent" class="ui-widget-content">
+              <!--<h4>Drop Here</h4>-->
+            </div>
+          </div>
+          <div class="clear"></div>
+
+        </br>
+
+        <!--</div>-->
+      </div>
+
+
+      <!--debut popup-->
+      <div id="popupContent">
+          <div id="popupInterval">
+              <form>
+                  <img id="close-icon" src="../images/close-icon.png" onclick ="div_hide()">
+                  <h2>Valeurs de l'intervalle</h2>
+                  <hr>
+                  <fieldset>
+                      <label for="valMin">Valeur minimale : </label>
+                      <input id="valMin" placeholder="valMin..." type="text">
+                      <p></p>
+                      <label for="valMax">Valeur maximale : </label>
+                      <input id="valMax" placeholder="valMax..." type="text">
+                      <button id="enregistrer" type="submit" onclick="validateFields()">Enregistrer</button>
+                  </fieldset>
+              </form>
+          </div>
+        </div>
+
+        <button id="popup" onclick="div_show()">Popup</button>
+      <!--fin popup-->
+
+
+
+      <!-- drag and drop JQUERY-->
+      <script type="text/javascript">
+          function validateFields() {
+              alert('fct valider');
+              if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
+                  alert("Vous devez donner la valeur min et la valeur max de l'intervalle");
+              } else {
+                  alert("L'intervalle de valeur est valide");
+              }
+          }
+          //Function To Display Popup
+          function div_show() {
+              //alert('fct div show');
+              $('#popupContent').css('display', 'block');
+              //$('#popupContent').style.visibility = "visible";
+              //alert('visibile');
+              document.getElementById('popupContent').style.display = "block";
+          }
+          //Function to Hide Popup
+          function div_hide() {
+              //alert('fct div hide');
+              $('#popupContent').css('display', 'none');
+
+          }
+      </script>
+
+
+
+
+      <a id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
+
+  </body>
+
+</html>
