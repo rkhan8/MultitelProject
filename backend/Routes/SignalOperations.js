@@ -3,6 +3,7 @@
  */
 
 var Signal = require('../Model/Signal');
+var random = require('random-js')();
 
 var ArrayList = require('arraylist');
 var EventEmitter = require('events').EventEmitter;
@@ -22,3 +23,16 @@ exports.activateSignal = function(req, res){
 
 exports.signals = signals;
 exports.newValueEvent = newValueEvent;
+
+module.exports =
+{
+  getobj:function Values(min, max, callback)
+  {
+
+    var value = random.real(min, max, true);
+    value = parseFloat(value).toFixed(2);
+
+
+    callback(null, value);
+  }
+}

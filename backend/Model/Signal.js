@@ -11,10 +11,23 @@ function Signal(min, max, variance) {
     this.max = max;
     this.variance = variance;
     this.currentValue = -1;
-
-
 };
 
+/*
+var generateRandomValue = function (min, max) {
+    var value = random.real(min, max, true);
+    return parseFloat(value.toFixed(2));
+};
+*/
+
+/*
+module.exports = function generateRandomValue(min, max) {
+    var value = random.real(min, max, true);
+    return parseFloat(value.toFixed(2));
+};
+*/
+
+/*
 Signal.prototype.generateUniformValue = function () {
     if(this.currentValue = -1){
         this.currentValue = generateRandomValue(this.min, this.max);
@@ -31,14 +44,24 @@ Signal.prototype.generateUniformValue = function () {
 
 
 };
+*/
 
-util.inherits(Signal, EventEmitter);
-module.exports = Signal;
+var generateUniformValue = function (min, max) {
+    if(this.currentValue = -1){
+        this.currentValue = generateRandomValue(min, max);
+        this.emit('newValueHasGenerate', this.currentValue);
+    }
+    else{
+        var minValue = value - this.variance;
+        var maxValue = value + this.variance;
+        if (minValue < this.min) minValue = 0;
+        if (maxValue > this.max) maxValue = this.max;
+        this.currentValue = generateRandomValue(minValue, maxValue);
+        this.emit('newValueHasGenerate', this.currentValue);
+    }
 
 
-var generateRandomValue = function (min, max) {
-    var value = random.real(min, max, true);
-    return parseFloat(value.toFixed(2));
 };
 
-
+util.inherits(Signal, EventEmitter);
+//module.exports = Signal;

@@ -37,52 +37,36 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../JS/view1.js"></script>
+
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 
-    <script>
 
-    var drop = false;
-
-    $( function() {
-      $( "#draggableContent img" ).draggable({
-        revert: "invalid",
-        stack: ".draggable"
-      });
-      $( "#droppableContent" ).droppable({
-        drop: function( event, ui ) {
-            show_popup()
-          $( this )
-            .addClass( "ui-state-highlight" )
-        }
-      });
-    } );
-  </script>
   </head>
 
   <body>
 
-      <!--<div class="mdl-grid">-->
       <div id="contentG">
-        <!--<div class="generatorPanel mdl-color--black mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">-->
           <div class="mdl-card__supporting-text mdl-color-text--grey-600">
             <h3>Générateur de signaux</h3>
-
           </div>
 
           <div class="columns">
             <div id="draggableContent" class="ui-widget-content">
               <img src="../images/temperature.jpg" height="50px" width="50px">
-              <img src="../images/electricity-icon.png" height="50px" width="50px">
+
+              <img src="../images/favicon.png" height="50px" width="50px">
             </div>
             <div id="droppableContent" class="ui-widget-content">
               <!--<h4>Drop Here</h4>-->
             </div>
           </div>
           <div class="clear"></div>
-
         </br>
 
-        <!--</div>-->
+        <input id="value"  placeholder="valMax..." type="text">
+
       </div>
 
       <!--popup-->
@@ -106,35 +90,13 @@
           </div>
         </div>
 
-      <script type="text/javascript">
-          function validateFields() {
-              $('#errorMsg').text("");
-              if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
-                  $('#errorMsg').text("Vous devez donner la valeur min et la valeur max de l'intervalle");
-              }
-              else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
-                  $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
-              }
-              else {
-                  $('#errorMsg').text("");
-                  hide_popup();
-              }
-          }
-          //Function To Display Popup
-          function show_popup() {
-              $('#errorMsg').text("");
-              $('#popupContent').css('display', 'block');
-          }
-          //Function to Hide Popup
-          function hide_popup() {
 
-              $('#errorMsg').text("");
-              $('#popupContent').css('display', 'none');
 
-          }
-      </script>
+      <a id="view-source" onclick="generate();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
 
-      <a id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
+
+
+
 
   </body>
 
