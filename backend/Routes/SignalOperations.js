@@ -10,21 +10,20 @@ var EventEmitter = require('events').EventEmitter;
 var signals =  new ArrayList;
 var newValueEvent = new EventEmitter();
 
-exports.createSignal =  function (req, res){
-    var signal = new Signal (req.min,req.max,req.variance);
+function createSignal (values){
+    var signal = new Signal (values.valMin,values.valMax,5);
     signals.add(signal);
 }
 
-exports.activateSignal = function(req, res){
+function activateSignal(){
     signals.get(0).on('newValueHasGenerate',function(value){ newValueEvent.emit('newValueHasGenerate', value)});
     setInterval(function(){signals.get(0).generateUniformValue()}, 1000);
 
 }
 
-exports.signals = signals;
-exports.newValueEvent = newValueEvent;
 
-module.exports =
+
+/*odule.exports =
 {
   getobj:function Values(min, max, callback)
   {
@@ -36,3 +35,8 @@ module.exports =
     callback(null, value);
   }
 }
+*/
+exports.signals = signals;
+exports.newValueEvent = newValueEvent;
+exports.createSignal = createSignal;
+exports.activateSignal = activateSignal;

@@ -1,5 +1,5 @@
 
-
+    var socket = io();
     $( function() {
       $( "#draggableContent img" ).draggable({
         revert: "invalid",
@@ -30,6 +30,7 @@
         }
         else {
             $('#errorMsg').text("");
+            createSignal();
             hide_popup();
         }
 
@@ -47,7 +48,24 @@
 
     }
 
+    function createSignal(){
 
+        socket.emit("createSignal",
+            {
+                valMin : $('#valMin').val(),
+                valMax : $('#valMax').val()
+            });
+    }
+
+    function generateSignal(){
+      socket.emit('activateSignal');
+      socket.on('newValue', function(newValue){
+          $('#value').val(newValue);
+      });
+    }
+
+
+/*
     function generate()
     {
       var socket = io();
@@ -73,8 +91,10 @@
 
 
     }
+    */
 
     function getvalues()
     {
 
     }
+
