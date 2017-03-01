@@ -17,7 +17,7 @@ function createSignal (values){
 
 function activateSignal(){
     signals.get(0).on('newValueHasGenerate',function(value){ newValueEvent.emit('newValueHasGenerate', value)});
-    setInterval(function(){signals.get(0).generateUniformValue()}, 1000);
+    setInterval(function(){signals.get(0).generateUniformValue()}, 100);
 
 }
 
