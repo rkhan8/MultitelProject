@@ -22,20 +22,6 @@ function activateSignal(){
 }
 
 
-
-/*odule.exports =
-{
-  getobj:function Values(min, max, callback)
-  {
-
-    var value = random.real(min, max, true);
-    value = parseFloat(value).toFixed(2);
-
-
-    callback(null, value);
-  }
-}
-*/
 exports.signals = signals;
 exports.newValueEvent = newValueEvent;
 exports.createSignal = createSignal;

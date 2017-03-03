@@ -15,13 +15,13 @@ function Signal(min, max, variance) {
 
 
 Signal.prototype.generateUniformValue = function () {
-    if(this.currentValue = -1){
+    if(this.currentValue == -1){
         this.currentValue = generateRandomValue(this.min, this.max);
         this.emit('newValueHasGenerate', this.currentValue);
     }
     else{
-        var minValue = value - this.variance;
-        var maxValue = value + this.variance;
+        var minValue = this.currentValue - this.variance;
+        var maxValue = this.currentValue + this.variance;
         if (minValue < this.min) minValue = 0;
         if (maxValue > this.max) maxValue = this.max;
         this.currentValue = generateRandomValue(minValue, maxValue);
