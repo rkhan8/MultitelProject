@@ -49,5 +49,26 @@ describe("Signal Test", function() {
 
         });
     });
+    describe("Binary Generator", function() {
+        it("Binary should return opposite binary value", function() {
+            var signal = new Signal(min, max, variance)
+            var result1;
+            var result2;
+            signal.on('newValueHasGenerate',function(value){
+                if(result1 == undefined){
+                    result1 = value;
+                    expect(result1).to.be.equal(0);
+                }
+                else{
+                    result2 = value;
+                    expect(result2).to.be.equal(1);
+                }
+            });
+            signal.generateBinaryValue();
+            signal.generateBinaryValue();
+
+        });
+
+    });
 
 });

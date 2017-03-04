@@ -21,7 +21,6 @@ function activateSignal(){
 
 }
 
-
 exports.signals = signals;
 exports.newValueEvent = newValueEvent;
 exports.createSignal = createSignal;
