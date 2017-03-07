@@ -13,12 +13,12 @@
             draggable.clone().appendTo(droppable);
             show_popup();
             // create input text
-            var inp = document.createElement('input');
-            document.getElementById('droppableContent').appendChild(inp);
-            $(inp).css('width', '50px');
-            $(inp).css('border-color', 'black');
-            $(inp).css('padding', '5px');
-            $(inp).css('height', '20px')
+            var input = document.createElement('input');
+            document.getElementById('droppableContent').appendChild(input);
+            $(input).css('width', '50px');
+            $(input).css('border-color', 'black');
+            $(input).css('padding', '5px');
+            $(input).css('height', '20px')
         }
       });
     } );

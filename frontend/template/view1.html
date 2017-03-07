@@ -89,14 +89,13 @@
                           <input id="nomGenerateur" placeholder="Nom..." type="text">
                       </div>
                       <p></p>
-                      <div>
-                          <label for="checkbox_category">Catégorie : </label>
-                          <span id="checkbox_category">
-                              <label for="decimal">Décimale</label>
-                                <input type="checkbox" name="checkbox" id="decimal" value="value">
-                              <label for="binaire">Binaire</label>
-                                <input type="checkbox" name="checkbox" id="binaire" value="value">
-                          </span>
+                      <div id="categorie">
+                          <select>
+                              <option value="">- Sélectionner la catégorie -</option>
+                              <option value="Decimale">Décimale</option>
+                              <option value="Binaire">Binaire</option>
+                          </select>
+
                       </div>
                       <div>
                           <label for="valMin">Valeur minimale : </label>

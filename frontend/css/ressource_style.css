@@ -160,9 +160,8 @@ label {
   font-weight: bold;
 }
 
-#checkbox_category {
-  margin-top: 25px;
-  margin-left: 0;
+#categorie option{
+  font-size: medium;
 }
 
 #valMin {
