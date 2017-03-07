@@ -75,6 +75,10 @@ div.clear         { clear: both; }
 #Draggable { width: 30px; height: 30px; background: red; }
 
 
+.value {
+  width: 25%;
+  display: none;
+}
 /*popup style*/
 
 #popupContent {
@@ -132,7 +136,7 @@ hr {
   border-top:1px solid #ccc
 }
 
-input[type=text] {
+#popupGenerator input[type=text] {
   width:60%;
   padding:10px;
   margin-top:10px;

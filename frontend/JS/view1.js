@@ -1,7 +1,7 @@
 
     var socket = io();
     $( function() {
-      $( "#draggableContent img" ).draggable({
+      $( ".generator" ).draggable({
           revert: "invalid",
           stack: ".draggable",
           helper:'clone'
@@ -12,12 +12,13 @@
             var draggable = ui.draggable;
             draggable.clone().appendTo(droppable);
             show_popup();
-            $('#value').css('visibility', 'visible');
-            /*
-          $( this )
-            .addClass( "ui-state-highlight" )
-          $("<input id='valMaxx' placeholder='valMax...'' type='text'>").insertAfter("#draggableContent img")*/
-
+            // create input text
+            var inp = document.createElement('input');
+            document.getElementById('droppableContent').appendChild(inp);
+            $(inp).css('width', '50px');
+            $(inp).css('border-color', 'black');
+            $(inp).css('padding', '5px');
+            $(inp).css('height', '20px')
         }
       });
     } );
@@ -46,7 +47,6 @@
     }
     //Function to Hide Popup
     function hide_popup() {
-
         $('#errorMsg').text("");
         $('#popupContent').css('display', 'none');
 
