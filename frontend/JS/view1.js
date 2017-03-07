@@ -2,12 +2,16 @@
     var socket = io();
     $( function() {
       $( "#draggableContent img" ).draggable({
-        revert: "invalid",
-        stack: ".draggable",
+          revert: "invalid",
+          stack: ".draggable",
+          helper:'clone'
       });
       $( "#droppableContent" ).droppable({
         drop: function( event, ui ) {
-            show_popup()
+            var droppable = $(this);
+            var draggable = ui.draggable;
+            draggable.clone().appendTo(droppable);
+            show_popup();
             $('#value').css('visibility', 'visible');
             /*
           $( this )
