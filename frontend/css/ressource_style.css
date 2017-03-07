@@ -75,7 +75,6 @@ div.clear         { clear: both; }
 #Draggable { width: 30px; height: 30px; background: red; }
 
 
-
 /*popup style*/
 
 #popupContent {
@@ -98,16 +97,17 @@ div.clear         { clear: both; }
   top:-14px;
   cursor:pointer
 }
-#popupInterval {
+#popupGenerator {
   position:absolute;
-  left:50%;
-  top:17%;
+  width: 500px;
+  left:40%;
+  top:5%;
   margin-left:-202px;
   font-family:'Raleway',sans-serif
 }
 
 form {
-  max-width:300px;
+  max-width:500px;
   min-width:250px;
   padding:10px 50px;
   border:2px solid gray;
@@ -124,7 +124,6 @@ h2 {
   font-size: xx-large;
   padding:20px 35px;
   margin:-10px -50px;
-  text-align:center;
   border-radius:10px 10px 0 0
 }
 hr {
@@ -133,7 +132,18 @@ hr {
   border-top:1px solid #ccc
 }
 
+input[type=text] {
+  width:60%;
+  padding:10px;
+  margin-top:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+  font-family:raleway;
+}
 
+#nomGenerateur {
+  width: 84%;
+}
 
 #errorMsg {
   font-size: medium;
@@ -146,8 +156,9 @@ label {
   font-weight: bold;
 }
 
-#valMax {
+#checkbox_category {
   margin-top: 25px;
+  margin-left: 0;
 }
 
 #valMin {
@@ -169,7 +180,7 @@ label {
   border-radius:5px
 }
 
-#value
-{
-  visibility: hidden;
+#enregistrer:hover {
+  background-color:lightseagreen;
 }
+

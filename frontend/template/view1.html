@@ -55,8 +55,8 @@
           <div class="columns">
             <div id="draggableContent" class="ui-widget-content">
               <img src="../images/temperature.jpg" height="50px" width="50px">
-
-              <img src="../images/favicon.png" height="50px" width="50px">
+              <img src="../images/icon-electricity.png" height="50px" width="50px">
+              <img src="../images/binary-icon.png" height="50px" width="50px">
             </div>
             <div id="droppableContent" class="ui-widget-content">
               <!--<h4>Drop Here</h4>-->
@@ -71,24 +71,42 @@
 
       <!--popup-->
       <div id="popupContent">
-          <div id="popupInterval">
+          <div id="popupGenerator">
               <form>
                   <img id="close-icon" src="../images/close-icon.png" onclick ="hide_popup(); return false;">
-                  <h2>Valeurs de l'intervalle</h2>
+                  <h2>Propriétés du générateur</h2>
                   <hr>
                   <fieldset>
                       <div id="errorMsg" type="text"></div>
                       <hr>
-                      <label for="valMin">Valeur minimale : </label>
-                      <input id="valMin" placeholder="valMin..." type="text">
+                      <div>
+                          <label for="nomGenerateur">Nom : </label>
+                          <input id="nomGenerateur" placeholder="Nom..." type="text">
+                      </div>
                       <p></p>
-                      <label for="valMax">Valeur maximale : </label>
-                      <input id="valMax" placeholder="valMax..." type="text">
+                      <div>
+                          <label for="checkbox_category">Catégorie : </label>
+                          <span id="checkbox_category">
+                              <label for="decimal">Décimale</label>
+                                <input type="checkbox" name="checkbox" id="decimal" value="value">
+                              <label for="binaire">Binaire</label>
+                                <input type="checkbox" name="checkbox" id="binaire" value="value">
+                          </span>
+                      </div>
+                      <div>
+                          <label for="valMin">Valeur minimale : </label>
+                          <input id="valMin" placeholder="valMin..." type="text">
+                      </div>
+                      <p></p>
+                      <div>
+                          <label for="valMax">Valeur maximale : </label>
+                          <input id="valMax" placeholder="valMax..." type="text">
+                      </div>
                       <button id="enregistrer" type="submit" onclick="validateFields(); return false;">Enregistrer</button>
                   </fieldset>
               </form>
           </div>
-        </div>
+      </div>
 
 
 
