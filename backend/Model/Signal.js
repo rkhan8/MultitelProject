@@ -6,7 +6,8 @@ var random = require('random-js')();
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
-function Signal(min, max, variance) {
+function Signal(generatorId, min, max, variance) {
+    this.generatorId = generatorId;
     this.min = min;
     this.max = max;
     this.variance = variance;
@@ -17,7 +18,10 @@ function Signal(min, max, variance) {
 Signal.prototype.generateUniformValue = function () {
     if(this.currentValue == undefined){
         this.currentValue = generateRandomValue(this.min, this.max);
-        this.emit('newValueHasGenerate', this.currentValue);
+        return {
+            generatorId: this.generatorId,
+            value: this.currentValue
+        }
     }
     else{
         var minValue = this.currentValue - this.variance;
@@ -25,7 +29,10 @@ Signal.prototype.generateUniformValue = function () {
         if (minValue < this.min) minValue = 0;
         if (maxValue > this.max) maxValue = this.max;
         this.currentValue = generateRandomValue(minValue, maxValue);
-        this.emit('newValueHasGenerate', this.currentValue);
+        return {
+            generatorId: this.generatorId,
+            value: this.currentValue
+        }
     }
 };
 

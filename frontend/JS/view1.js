@@ -1,5 +1,7 @@
 
     var socket = io();
+    var generators = new Array();
+
     $( function() {
       $( ".generator" ).draggable({
           revert: "invalid",
@@ -9,16 +11,29 @@
       $( "#droppableContent" ).droppable({
         drop: function( event, ui ) {
             var droppable = $(this);
-            var draggable = ui.draggable;
-            draggable.clone().appendTo(droppable);
+            var newGenerator = ui.draggable.clone();
+
+            var valueDisplayer = document.createElement('input');
+             valueDisplayer.disabled = true;
+
+            $(valueDisplayer).css('width', '50px');
+            $(valueDisplayer).css('border-color', 'black');
+            $(valueDisplayer).css('padding', '5px');
+            $(valueDisplayer).css('height', '20px');
+            newGenerator[0].appendChild(valueDisplayer);
+            newGenerator[0].id = generators.length + 1;
+
+            newGenerator[0].click(function (){
+                var test = $(this);
+            });
+
+            newGenerator.appendTo(droppable);
+            //newGenerator.clone().appendTo(droppable);
+            // create valueDisplayer text
+            /*document.getElementById('droppableContent').appendChild(valueDisplayer);*/
+            generators.push(newGenerator[0]);
             show_popup();
-            // create input text
-            var input = document.createElement('input');
-            document.getElementById('droppableContent').appendChild(input);
-            $(input).css('width', '50px');
-            $(input).css('border-color', 'black');
-            $(input).css('padding', '5px');
-            $(input).css('height', '20px')
+
         }
       });
     } );
@@ -37,6 +52,8 @@
             $('#errorMsg').text("");
             createSignal();
             hide_popup();
+            generateSignal();
+
         }
 
     }
@@ -56,49 +73,21 @@
 
         socket.emit("createSignal",
             {
+                generatorNumber : generators.length - 1,
                 valMin : $('#valMin').val(),
                 valMax : $('#valMax').val()
             });
     }
 
     function generateSignal(){
+
       socket.emit('activateSignal');
       socket.on('newValue', function(newValue){
-          $('#value').val(newValue);
+
+          generators[newValue.generatorId].getElementsByTagName('input')[0].value = newValue.value;
       });
     }
 
 
-/*
-    function generate()
-    {
-      var socket = io();
-      var val = [];
-      val.push($('#valMin').val(), $('#valMax').val());
-      socket.emit("sending_view1",
-      {
-          message : val
-      });
 
-      var vall = "";
-
-
-      socket.on('sending_values', function(res)
-      {
-        vall = res['message2'];
-        //alert(vall);
-
-        $('#value').val(vall);
-        //alert(vall);
-        //console.log(vall);
-      });
-
-
-    }
-    */
-
-    function getvalues()
-    {
-
-    }
 
