@@ -26,7 +26,7 @@ Signal.prototype.generateUniformValue = function () {
     else{
         var minValue = this.currentValue - this.variance;
         var maxValue = this.currentValue + this.variance;
-        if (minValue < this.min) minValue = 0;
+        if (minValue < this.min) minValue = this.min;
         if (maxValue > this.max) maxValue = this.max;
         this.currentValue = generateRandomValue(minValue, maxValue);
         return {
@@ -39,11 +39,17 @@ Signal.prototype.generateUniformValue = function () {
 Signal.prototype.generateBinaryValue = function(){
     if(this.currentValue == undefined){
         this.currentValue = 0;
-        this.emit('newValueHasGenerate', this.currentValue);
+        return {
+            generatorId: this.generatorId,
+            value: this.currentValue
+        }
     }
     else{
         this.currentValue = Math.abs(this.currentValue - 1);
-        this.emit('newValueHasGenerate', this.currentValue);
+        return {
+            generatorId: this.generatorId,
+            value: this.currentValue
+        }
 
     }
 };
@@ -56,3 +62,5 @@ var generateRandomValue = function (min, max) {
     var value = parseFloat(random.real(min, max, true));
     return parseFloat(value.toFixed(2));
 };
+
+

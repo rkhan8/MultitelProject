@@ -9,11 +9,25 @@ var ArrayList = require('arraylist');
 var EventEmitter = require('events').EventEmitter;
 var signals =  new ArrayList;
 var newValueEvent = new EventEmitter();
+newValueEvent.setMaxListeners(0);
 var interval;
 
 function createSignal (values){
-    var signal = new Signal (values.generatorNumber,values.valMin,values.valMax,5);
-    signals.add(signal);
+    var signal = new Signal (values.generatorId,values.valMin,values.valMax,5);
+    var index = searchSignalById(values.generatorId);
+    if(index === -1)
+        signals.add(signal);
+    else{
+        newValueEvent.emit('errorGeneratorId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
+    }
+}
+
+function searchSignalById(signalId){
+    for(i = 0 ; i < signals.length; i++){
+        if(signalId === signals.get(i).generatorId )
+            return i;
+    }
+    return -1;
 }
 
 function activateSignal(){
@@ -22,11 +36,11 @@ function activateSignal(){
     clearInterval(interval);
     interval = setInterval(function(){
         for( i= 0; i< signals.length; i++){
-            var values = signals.get(i).generateUniformValue()
-            newValueEvent.emit('newValueHasGenerate', values)
+            var values = signals.get(i).generateUniformValue();
+            newValueEvent.emit('newValueHasGenerate', values);
         }
 
-    },1000);
+    },500);
 
 }
 
