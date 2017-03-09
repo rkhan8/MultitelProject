@@ -69,6 +69,16 @@
   margin-right: 2%;
 }
 
+#droppableContent .generator{
+  position: absolute;
+}
+
+.ui-drop .generator{
+  position: absolute;
+}
+
+
+
 div.columns       { width: 100%; }
 div.clear         { clear: both; }
 
@@ -186,4 +196,3 @@ label {
 #enregistrer:hover {
   background-color:lightseagreen;
 }
-

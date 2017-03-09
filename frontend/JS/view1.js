@@ -3,13 +3,17 @@
     var generators = new Array();
     var generatorIsActivated = false;
 
+
     $( function() {
       $( ".generator" ).draggable({
-          revert: "invalid",
           stack: ".draggable",
+          cursor:'hand',
           helper:'clone'
       });
-      $( "#droppableContent" ).droppable({
+
+      $( ".ui-drop" ).droppable({
+        activeClass: 'ui-state-hover',
+        accept: '.generator'
         drop: function( event, ui ) {
             var droppable = $(this);
             var newGenerator = ui.draggable.clone();
@@ -29,18 +33,22 @@
                 show_popup($(currentGenerator).attr('id'))
             });
 
+            newGenerator.css('position', 'absolute');
+            newGenerator.css('top', ui.position.top);
+            newGenerator.css('left', ui.position.left);
+
             newGenerator.appendTo(droppable);
-            //newGenerator.clone().appendTo(droppable);
-            // create valueDisplayer text
-            /*document.getElementById('droppableContent').appendChild(valueDisplayer);*/
             generators.push(newGenerator);
-            show_popup( $(newGenerator).attr('id'));
+            //show_popup( $(newGenerator).attr('id'));
 
         }
+
+
       });
     } );
 
 
+    var generatorId = "";
 
     function validateFields() {
         $('#errorMsg').text("");
@@ -53,12 +61,11 @@
         else {
             $('#errorMsg').text("");
 
-            var generatorId = $('#nomGenerateur').val();
+            generatorId = $('#nomGenerateur').val();
             if(!$('#'+ generatorId).length){
                 $('#' + generators.length).attr('id', generatorId);
             }
 
-            createSignal(generatorId);
             hide_popup();
             generateSignal();
         }
@@ -77,6 +84,11 @@
 
     }
 
+    function hide_gen() {
+        $('.generator').css('display', 'none');
+
+    }
+
     function createSignal(generatorId){
 
         socket.emit("createSignal",
@@ -89,13 +101,10 @@
 
     function generateSignal(){
 
+      createSignal(generatorId);
+
       socket.emit('activateSignal');
       socket.on('newValue', function(newValue){
           $('#' + newValue.generatorId).find('input').val(newValue.value);
       });
     }
-
-
-
-
-
