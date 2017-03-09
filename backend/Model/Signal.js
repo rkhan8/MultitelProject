@@ -28,7 +28,7 @@ Signal.prototype.generateUniformValue = function () {
         var maxValue = this.currentValue + this.variance;
         if (minValue < this.min) minValue = this.min;
         if (maxValue > this.max) maxValue = this.max;
-        this.currentValue = generateRandomValue(minValue, maxValue);
+        this.currentValue = generateRandomValue(parseFloat(minValue), maxValue);
         return {
             generatorId: this.generatorId,
             value: this.currentValue
@@ -59,7 +59,7 @@ util.inherits(Signal, EventEmitter);
 module.exports = Signal;
 
 var generateRandomValue = function (min, max) {
-    var value = parseFloat(random.real(min, max, true));
+    var value = parseFloat(random.real(parseFloat(min), parseFloat(max), true));
     return parseFloat(value.toFixed(2));
 };
 
