@@ -13,7 +13,7 @@
 
       $( ".ui-drop" ).droppable({
         activeClass: 'ui-state-hover',
-        accept: '.generator'
+        accept: '.generator',
         drop: function( event, ui ) {
             var droppable = $(this);
             var newGenerator = ui.draggable.clone();
@@ -86,7 +86,6 @@
 
     function hide_gen() {
         $('.generator').css('display', 'none');
-
     }
 
     function createSignal(generatorId){
