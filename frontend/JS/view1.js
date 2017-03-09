@@ -28,18 +28,18 @@
             $(newGenerator).append(valueDisplayer);
             $(newGenerator).attr('id',generators.length + 1 );
 
-            $(newGenerator).click(function (){
-                var currentGenerator = $(this);
-                show_popup($(currentGenerator).attr('id'))
-            });
-
             newGenerator.css('position', 'absolute');
             newGenerator.css('top', ui.position.top);
             newGenerator.css('left', ui.position.left);
 
             newGenerator.appendTo(droppable);
             generators.push(newGenerator);
-            //show_popup( $(newGenerator).attr('id'));
+            show_popup( $(newGenerator).attr('id'));
+            
+            $(newGenerator).click(function (){
+                var currentGenerator = $(this);
+                show_popup($(currentGenerator).attr('id'))
+            });
 
         }
 
