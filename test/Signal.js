@@ -6,64 +6,52 @@ var expect    = require("chai").expect;
 var Signal = require('../backend/Model/Signal');
 var max = 100;
 var min = 1;
-var variance =  5;
+var category = "real";
 var generatorId = 1;
 
 describe("Signal Test", function() {
     describe("Signal object constructor", function() {
         it("Create an signal with min and max range value", function() {
 
-            var signal = new Signal(generatorId,min, max, variance);
-            expect(signal.generatorId).to.equal(generatorId);
-            expect(signal.min).to.equal(min);
-            expect(signal.max).to.equal(max);
-            expect(signal.variance).to.equal(variance);
+            var signal = new Signal(generatorId,category,min, max);
+            expect(signal.getGeneratorID()).to.equal(generatorId);
+            expect(signal.getMin()).to.equal(min);
+            expect(signal.getMax()).to.equal(max);
+            expect(signal.getCategory()).to.equal(category);
 
         });
     });
 
     describe("Generate random value", function() {
         it("Random value should return a number", function() {
-            var signal = new Signal(generatorId,min, max, variance)
-            var value = signal.generateUniformValue();
-            expect(value.generatorId).to.be.a('number');
-
-
-
+            var signal = new Signal(generatorId,category,min, max);
+            var result = signal.generateValue();
+            expect(result.value).to.be.a('number');
 
         });
 
-        it("Difference between to consecutive should less than 2*variance ", function() {
-            var signal = new Signal(generatorId,min, max, variance)
+        it("Random value should return value in range", function() {
+            var signal = new Signal(generatorId,category,min, max);
+            var result1 = signal.generateValue();
+            expect(result1.value).to.be.within(min, max);
+        });
 
-            var result1 = signal.generateUniformValue();
-            var result2 = signal.generateUniformValue();
-
-            expect(Math.abs(result1.value - result2.value)).to.be.below(2* variance);
-
-
-            signal.generateUniformValue();
-            signal.generateUniformValue();
-
+        it("Signal should generate multiple value in range", function(){
+            var signal = new Signal(generatorId,category,min, max);
+            for(i= 0; i<100 ; i++){
+                var result1 = signal.generateValue();
+                expect(result1.value).to.be.within(min, max);
+            }
         });
     });
     describe("Binary Generator", function() {
         it("Binary should return opposite binary value", function() {
-            var signal = new Signal(min, max, variance)
-            var result1;
-            var result2;
-            signal.on('newValueHasGenerate',function(value){
-                if(result1 == undefined){
-                    result1 = value;
-                    expect(result1).to.be.equal(0);
-                }
-                else{
-                    result2 = value;
-                    expect(result2).to.be.equal(1);
-                }
-            });
-            signal.generateBinaryValue();
-            signal.generateBinaryValue();
+            var category = "binary"
+            var signal = new Signal(generatorId,category,min, max);
+            var result1 = signal.generateValue();
+            var result2 = signal.generateValue();
+            expect(result1.value).to.be.equal(0);
+            expect(result2.value).to.be.equal(1);
 
         });
 

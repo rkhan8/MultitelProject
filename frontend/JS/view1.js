@@ -40,10 +40,7 @@
                 var currentGenerator = $(this);
                 show_popup($(currentGenerator).attr('id'))
             });
-
         }
-
-
       });
     } );
 
@@ -94,7 +91,8 @@
             {
                 generatorId : generatorId,
                 valMin : $('#valMin').val(),
-                valMax : $('#valMax').val()
+                valMax : $('#valMax').val(),
+                category: $('#category option:selected').val()
             });
     }
 

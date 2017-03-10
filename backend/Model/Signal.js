@@ -6,51 +6,92 @@ var random = require('random-js')();
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
-function Signal(generatorId, min, max, variance) {
-    this.generatorId = generatorId;
-    this.min = min;
-    this.max = max;
-    this.variance = variance;
-    this.currentValue = undefined;
+function Signal(generatorId, category, min, max) {
+    this._generatorId = generatorId;
+    this._min = min;
+    this._max = max;
+    this._variance = 2;
+    this._currentValue = undefined;
+    this._category = category;
+    this._generator = setupGenerator(category);
 };
 
+Signal.prototype.UpdateSignal = function (generatorId, category,min, max){
+    setupSignal(generatorId, category,min, max);
+}
+Signal.prototype.generateValue = function(){
+    return this._generator();
+}
+Signal.prototype.getGeneratorID = function(){
+    return this._generatorId;
+}
+Signal.prototype.getVariance = function(){
+    return this._variance;
+}
+Signal.prototype.getMin = function(){
+    return this._min;
+}
+Signal.prototype.getMax = function(){
+    return this._max;
+}
+Signal.prototype.getCategory = function(){
+    return this._category;
+}
 
-Signal.prototype.generateUniformValue = function () {
-    if(this.currentValue == undefined){
-        this.currentValue = generateRandomValue(this.min, this.max);
+
+function setupSignal(generatorId,category, min, max) {
+    this._generatorId = generatorId;
+    this._min = min;
+    this._max = max;
+    this._currentValue = undefined;
+    this._category = category;
+    this._generator = setupGenerator(category);
+}
+ function setupGenerator(category){
+    switch (category){
+        case "binary" :
+            return generateBinaryValue;
+        case "real" :
+            return generateRealValue;
+    }
+
+}
+
+var generateRealValue= function () {
+    if(this._currentValue == undefined){
+        this._currentValue = generateRandomValue(this._min, this._max);
         return {
-            generatorId: this.generatorId,
-            value: this.currentValue
+            generatorId: this._generatorId,
+            value: this._currentValue
         }
     }
     else{
-        var minValue = this.currentValue - this.variance;
-        var maxValue = this.currentValue + this.variance;
-        if (minValue < this.min) minValue = this.min;
-        if (maxValue > this.max) maxValue = this.max;
-        this.currentValue = generateRandomValue(parseFloat(minValue), maxValue);
+        var minValue = this._currentValue - this._variance;
+        var maxValue = this._currentValue + this._variance;
+        if (minValue < this._min) minValue = this._min;
+        if (maxValue > this._max) maxValue = this._max;
+        this._currentValue = generateRandomValue(parseFloat(minValue), maxValue);
         return {
-            generatorId: this.generatorId,
-            value: this.currentValue
+            generatorId: this._generatorId,
+            value: this._currentValue
         }
     }
 };
 
-Signal.prototype.generateBinaryValue = function(){
-    if(this.currentValue == undefined){
-        this.currentValue = 0;
+var generateBinaryValue = function(){
+    if(this._currentValue == undefined){
+        this._currentValue = 0;
         return {
-            generatorId: this.generatorId,
-            value: this.currentValue
+            generatorId: this._generatorId,
+            value: this._currentValue
         }
     }
     else{
-        this.currentValue = Math.abs(this.currentValue - 1);
+        this._currentValue = Math.abs(this._currentValue - 1);
         return {
-            generatorId: this.generatorId,
-            value: this.currentValue
+            generatorId: this._generatorId,
+            value: this._currentValue
         }
-
     }
 };
 

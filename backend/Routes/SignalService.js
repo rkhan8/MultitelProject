@@ -13,7 +13,7 @@ newValueEvent.setMaxListeners(0);
 var interval;
 
 function createSignal (values){
-    var signal = new Signal (values.generatorId,values.valMin,values.valMax,5);
+    var signal = new Signal (values.generatorId,values.category,values.valMin,values.valMax);
     var index = searchSignalById(values.generatorId);
     if(index === -1)
         signals.add(signal);
@@ -24,7 +24,7 @@ function createSignal (values){
 
 function searchSignalById(signalId){
     for(i = 0 ; i < signals.length; i++){
-        if(signalId === signals.get(i).generatorId )
+        if(signalId === signals.get(i).getGeneratorID() )
             return i;
     }
     return -1;
@@ -36,7 +36,7 @@ function activateSignal(){
     clearInterval(interval);
     interval = setInterval(function(){
         for( i= 0; i< signals.length; i++){
-            var values = signals.get(i).generateUniformValue();
+            var values = signals.get(i).generateValue();
             newValueEvent.emit('newValueHasGenerate', values);
         }
 
