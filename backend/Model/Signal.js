@@ -25,7 +25,7 @@ Signal.prototype.updateSignal = function (generatorId, category,min, max){
     this._generator = setupGenerator(category);
 }
 Signal.prototype.generateValue = function(){
-    return this._generator();
+    return this._generator;
 }
 Signal.prototype.getGeneratorID = function(){
     return this._generatorId;

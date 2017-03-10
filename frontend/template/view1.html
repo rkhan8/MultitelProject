@@ -86,15 +86,17 @@
                       <div id="errorMsg" type="text"></div>
                       <hr>
                       <div>
-                          <label for="nomGenerateur">Nom : </label>
-                          <input id="nomGenerateur" placeholder="Nom..." type="text">
+                          <label for="name">Nom : </label>
+                          <input id="name" placeholder="Nom..." type="text">
                       </div>
                       <p></p>
                       <div id="category">
                           <select>
                               <option value="">- Sélectionner la catégorie -</option>
-                              <option value="real">Réel</option>
+                              <option value="analog">Analogique</option>
                               <option value="binary">Binaire</option>
+                              <option value="virtual">Virtuel</option>
+
                           </select>
 
                       </div>
@@ -107,7 +109,7 @@
                           <label for="valMax">Valeur maximale : </label>
                           <input id="valMax" placeholder="valMax..." type="text">
                       </div>
-                      <button id="enregistrer" type="submit" onclick="validateFields(); return false;">Enregistrer</button>
+                      <button id="save" type="submit" onclick="validateFields(); return false;">Enregistrer</button>
                   </fieldset>
               </form>
           </div>

@@ -26,7 +26,10 @@
             $(valueDisplayer).css('padding', '5px');
             $(valueDisplayer).css('height', '20px');
             $(newGenerator).append(valueDisplayer);
-            $(newGenerator).attr('id',generators.length + 1 );
+            $(newGenerator).attr('id', generators.length + 1 );
+            $(newGenerator).attr('category', $('#category option:selected').val());
+            $(newGenerator).attr('valMin', $('#valMin').val());
+            $(newGenerator).attr('valMax', $('#valMax').val());
 
             newGenerator.css('position', 'absolute');
             newGenerator.css('top', ui.position.top);
@@ -34,11 +37,17 @@
 
             newGenerator.appendTo(droppable);
             generators.push(newGenerator);
-            show_popup( $(newGenerator).attr('id'));
-            
+            //show_popup( $(newGenerator).attr('id'));
+            show_popup();
+
             $(newGenerator).click(function (){
                 var currentGenerator = $(this);
-                show_popup($(currentGenerator).attr('id'))
+                var id = $(this).attr('id');
+                var category = $(this).attr('category');
+                var valMin = $(this).attr('valMin');
+                var valMax = $(this).attr('valMax');
+                //show_popup($(this).attr('id'))
+                update_generator(id, category, valMin, valMax);
             });
         }
       });
@@ -46,6 +55,10 @@
 
 
     var generatorId = "";
+    var generatorName = "";
+    var generatorCategory = "";
+    var generatorValMin = "";
+    var generatorValMax = "";
 
     function validateFields() {
         $('#errorMsg').text("");
@@ -55,10 +68,19 @@
         else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
             $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
         }
+        else if(document.getElementById('name').value == "") {
+            $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+        }
+        else if(document.getElementById('category').selectedIndex == 0) {
+            $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
+        }
         else {
             $('#errorMsg').text("");
 
-            generatorId = $('#nomGenerateur').val();
+            generatorId = $('#name').val();
+            generatorCategory = $('#category option:selected').val();
+            generatorValMin = $('#valMin').val();
+            generatorValMax = $('#valMax').val();
             if(!$('#'+ generatorId).length){
                 $('#' + generators.length).attr('id', generatorId);
             }
@@ -68,11 +90,24 @@
         }
 
     }
-    //Function To Display Popup
-    function show_popup(generatorId) {
+    //Function to display popup
+    function show_popup() {
+        $('#errorMsg').text("");
+        $('#name').val('');
+        $('#category option:selected').val('');
+        $('#valMin').val('');
+        $('#valMax').val('');
+        $('#popupContent').css('display', 'block');
+    }
+
+    //Function To update generator
+    function update_generator(generatorId, generatorCategory, generatorValMin, generatorValMax) {
         $('#errorMsg').text("");
         $('#popupContent').css('display', 'block');
-        $('#nomGenerateur').val(generatorId );
+        $('#name').val(generatorId );
+        $('#valMin').val(generatorValMin);
+        $('#valMax').val(generatorValMax);
+        $('#category').selectedOptions(generatorCategory);
     }
     //Function to Hide Popup
     function hide_popup() {
