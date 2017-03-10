@@ -4,13 +4,13 @@
 
 var expect    = require("chai").expect;
 var Signal = require('../backend/Model/Signal');
-var max = 100;
+var max = 10;
 var min = 1;
 var category = "real";
 var generatorId = 1;
 
 describe("Signal Test", function() {
-    describe("Signal object constructor", function() {
+    describe("object constructor", function() {
         it("Create an signal with min and max range value", function() {
 
             var signal = new Signal(generatorId,category,min, max);
@@ -20,6 +20,51 @@ describe("Signal Test", function() {
             expect(signal.getCategory()).to.equal(category);
 
         });
+    });
+    describe("Update signal", function(){
+        it("Update signal value should update value", function(){
+            var signal = new Signal(generatorId,category,min, max);
+            var max1 = 50;
+            var min1 = 35;
+            var category1 = "binary";
+            var generatorId1 = 2;
+
+            signal.updateSignal(generatorId1,category1,min1, max1);
+            expect(signal.getGeneratorID()).to.equal(generatorId1);
+            expect(signal.getMin()).to.equal(min1);
+            expect(signal.getMax()).to.equal(max1);
+            expect(signal.getCategory()).to.equal(category1);
+
+        });
+        it("Change signal range should change range value", function(){
+            var signal = new Signal(generatorId,category,min, max);
+            var result1 = signal.generateValue();
+            expect(result1.value).to.be.within(min, max);
+
+            var max1 = 50;
+            var min1 = 35;
+            var category1 = "real";
+            var generatorId1 = 2;
+            signal.updateSignal(generatorId1,category1,min1, max1);
+            var result1 = signal.generateValue();
+            expect(result1.value).to.be.within(min1, max1);
+
+        })
+        it("Change signal category should change signal generator function", function(){
+            var signal = new Signal(generatorId,category,min, max);
+            var result1 = signal.generateValue();
+            expect(result1.value).to.be.within(min, max);
+
+
+            var category1 = "binary";
+            var generatorId1 = 2;
+            signal.updateSignal(generatorId1,category1);
+             result1 = signal.generateValue();
+            var result2 = signal.generateValue();
+            expect(result1.value).to.be.equal(0);
+            expect(result2.value).to.be.equal(1);
+
+        })
     });
 
     describe("Generate random value", function() {
