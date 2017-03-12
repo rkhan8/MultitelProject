@@ -42,7 +42,6 @@ function queryLoad()
   });
 }
 
-
 function QuerySearch(idN, category, unity, startDate, endDate)
 {
   var idNAns = idN;

@@ -92,15 +92,20 @@ socket.on('SearchData', function(dataSearch){
 });
 
 
-function a()
+//Timeout Async execution function
+function executeAsync(func)
 {
-  var zz = $('#idNListbox').val();
-  var z = $('#idNListbox option:selected').text();
-  alert(z);
-  //alert(document.getElementbyId("idNListbox").length);
-
-
+  setTimeout(func, 0);
 }
+
+//Sort filter for table1
+var filterSort1 = function()
+{
+  $('#donnee').tablesorter({
+       sortList: [[0, 0]]
+    });
+}
+
 
 
 
@@ -108,5 +113,7 @@ function a()
 $(document).ready(function()
 {
     LoadDB();
+    executeAsync(filterSort1); //execute filter after initialize the table1
+    socket.setMaxListeners();//setMaxListeners to avoid memory leak (emit socket > 10)
 
 });
