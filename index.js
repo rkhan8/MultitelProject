@@ -3,23 +3,18 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var signalOperation = require('./backend/Routes/SignalService')
+var database = require('./backend/Routes/DatabaseService')
 var events = require('events');
-
-
-
-//var pathcsv = __dirname + '/frontend/';
 
 //initialize the repository. Start the localhost server with index.html file
 app.use(express.static(__dirname + '/frontend/'));
-
-
 
 //listening the node server on port 3000
 http.listen(3000, function () {
     console.log('listening on *:3000');
 })
 
-
+//createSignal
 io.on('connection', function (socket) {
     socket.on('createSignal', function (signalValues) {
         signalOperation.createSignal(signalValues);
@@ -27,7 +22,7 @@ io.on('connection', function (socket) {
 
 });
 
-
+//activateSignal
 io.on('connection', function (socket) {
     socket.on('activateSignal', function () {
 
@@ -38,3 +33,26 @@ io.on('connection', function (socket) {
 });
 
 
+
+//Database queries
+io.on('connection', function (socket) {
+    socket.on('loadDB', function () {
+
+        database.queryLoad();
+        database.PreloadValueEvent.on('LoadFirstData',function(data){socket.emit('PreDonnee', data)});
+        database.PreloadValueEvent.on('LoadSecondData',function(data2){socket.emit('PreDonnee2', data2)});
+    });
+
+});
+
+
+io.on('connection', function (socket) {
+    socket.on('search', function (idN, category, unity, startDate, endDate) {
+
+        database.QuerySearch(idN, category, unity, startDate, endDate);
+        database.PreloadValueEvent.on('SearchData',function(dataSearch){socket.emit('SearchData', dataSearch)});
+        //console.log(idN + " ; "+ category + " ; "+ unity + " ; "+ startDate + " ; "+ endDate)
+
+    });
+
+});

@@ -1,0 +1,206 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Multitel Project</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="../images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="../images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/ressource_style.css">
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="../JS/view2.js"></script>
+
+    <script type="text/javascript" src="../JS/filter.js"></script>
+    <script type="text/javascript" src="../JS/jquery.tablesorter.min.js"></script>
+
+
+
+  </head>
+
+  <body>
+
+      <div id="contentG">
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <h3>Historique et graph</h3>
+          </div>
+
+
+          <div class="columns">
+
+            idN :
+            <select id="idNListbox">
+            </select>
+
+            Catégorie :
+            <select id="catListbox">
+            </select>
+
+            Unité :
+            <select id="unityListbox">
+            </select>
+
+            Du :
+            <select id="startDateListbox">
+            </select>
+
+            au :
+            <select id="endDateListbox">
+            </select>
+
+
+            <a id="submitSearch" onclick="QuerySearch();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Recherche</a>
+
+          </div>
+          <div class="clear"></div>
+        </br>
+
+
+        <!--Table-->
+        <div id="tableView">
+          <form>
+            <input id ="input-tab" data-type="text" placeholder="Search" style="width:100%;">
+          </form>
+
+            <div class="tbl-content">
+              <table id="donnee" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab"><!--table data-->
+                <thead>
+                  <tr>
+                    <th>IDN</th>
+                    <th>Categorie</th>
+                    <th>Valeur minimale</th>
+                    <th>Valeur maximale</th>
+                    <th>Donnee</th>
+                    <th>Unité</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+
+                <tbody id="table1">
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+
+
+      </div>
+
+
+      <script type="text/javascript">
+
+
+
+
+
+          //Timeout Async execution function
+          function executeAsync(func)
+          {
+            setTimeout(func, 0);
+          }
+
+          //Sort filter for table1
+          var filterSort1 = function()
+          {
+            $('#donnee').tablesorter({
+                 sortList: [[0, 0]]
+              });
+          }
+
+
+          /*
+          var list1load = function()
+          {
+            //show element first table (id, cat, oldVolume, newVolume)
+            for(var j =0; j < ListTab[0].length; j++)
+            {
+              //inserting table content by incrementing all the element into the arraylist
+              var table = document.getElementById("table1");
+              var rowCount = table.rows.length;
+              var row = table.insertRow(rowCount);
+
+              row.insertCell(0).innerHTML = ListTab[0][j][0];
+              row.insertCell(1).innerHTML = ListTab[0][j][5];
+              row.insertCell(2).innerHTML = ListTab[0][j][1];
+              row.insertCell(3).innerHTML = Intl.NumberFormat().format(ListTab[0][j][2]);
+              row.insertCell(4).innerHTML = Intl.NumberFormat().format(ListTab[0][j][3]);
+              row.insertCell(5).innerHTML = Intl.NumberFormat().format(ListTab[0][j][4]);
+
+
+              //determine if difference is + or - and insert into tag <td>
+              var Cells = row.getElementsByTagName("td");
+
+              //if difference -
+              if(!Cells[5].innerText.indexOf("-"))
+              {
+                Cells[5].remove();
+                row.insertCell(5).innerHTML = "<font size='2px' color='red'>"+ListTab[0][j][4]+"</font>";
+
+              }
+              else //if difference +
+              {
+                Cells[5].remove();
+                row.insertCell(5).innerHTML = "<font size='2px' color='green'>"+ListTab[0][j][4]+"</font>";
+
+              }
+            }
+          }
+
+          */
+
+
+          //list1load(); // initialize table of all data
+          executeAsync(filterSort1); //execute filter after initialize the table1
+
+
+          socket.setMaxListeners();//setMaxListeners to avoid memory leak (emit socket > 10)
+
+
+
+
+
+      </script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>
