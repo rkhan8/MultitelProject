@@ -34,7 +34,9 @@
 
             newGenerator.appendTo(droppable);
             generators.push(newGenerator);
+
             $('#enregistrer').show();
+            $('#update').hide();
             show_popup( $(newGenerator).attr('id'));
 
             
