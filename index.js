@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var signalOperation = require('./backend/Routes/SignalService')
+var signalService = require('./backend/Routes/SignalService')
 var database = require('./backend/Routes/DatabaseService')
 var events = require('events');
 
@@ -17,7 +17,9 @@ http.listen(3000, function () {
 //createSignal
 io.on('connection', function (socket) {
     socket.on('createSignal', function (signalValues) {
-        signalOperation.createSignal(signalValues);
+        signalService.createSignal(signalValues);
+        signalService.signalServiceEvent.on('errorSignalId', function(message){socket.emit('errorSignalId', message)});
+
     });
 
 });
@@ -26,13 +28,27 @@ io.on('connection', function (socket) {
 io.on('connection', function (socket) {
     socket.on('activateSignal', function () {
 
-        signalOperation.newValueEvent.on('newValueHasGenerate',function(val){socket.emit('newValue', val)});
-        signalOperation.activateSignal();
+        signalService.signalServiceEvent.on('newValueHasGenerate',function(val){socket.emit('newValue', val)});
+        signalService.activateSignal();
     });
 
 });
 
+io.on('connection', function (socket) {
+    socket.on('getSignalInfos', function (signalId) {
 
+        signalService.signalServiceEvent.on('signalInfos',function(val){socket.emit('signalInfos', val)});
+        signalService.getSignalInformations(signalId);
+    });
+
+});
+
+io.on('connection', function (socket) {
+    socket.on('updateSignal', function (generatorInfos) {
+        signalService.updateSignal(generatorInfos);
+    });
+
+})
 
 //Database queries
 io.on('connection', function (socket) {

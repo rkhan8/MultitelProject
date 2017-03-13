@@ -3,23 +3,25 @@
  */
 var expect    = require("chai").expect;
 var signalService = require('../backend/Routes/SignalService');
+var sinon = require('sinon');
+var assert = require("chai").assert;
 
 var max = 100;
 var min = 1;
-var generatorId = 1;
+var signalId = 1;
 var value = {
-    generatorId:generatorId,
+    signalId: signalId,
     valMin: min,
     valMax: max
 };
 
 var value1 = {
-    generatorId:2,
+    signalId:2,
     valMin: min,
     valMax: max
 };
 var value2 = {
-    generatorId:3,
+    signalId:3,
     valMin: min,
     valMax: max
 };
@@ -27,7 +29,7 @@ var value2 = {
 describe("Signal Service", function() {
 
 
-    describe("Add signal to list of signals", function() {
+    describe("Create Signals", function() {
         it("Add One Signal to list of Signal", function() {
             signalService.createSignal(value);
             expect(signalService.signals.length).to.equal(1);
@@ -43,13 +45,26 @@ describe("Signal Service", function() {
             signalService.signals.clear();
 
         });
+        it("Add two signals with the same id is prohibited ", function(){
+
+            var spy = sinon.spy();
+            signalService.signalServiceEvent.on('errorExistingSignalId', spy);
+
+            signalService.createSignal(value);
+            signalService.createSignal(value);
+            assert(spy.calledOnce);
+
+        });
+
+
     });
 
     describe("Check signal integrity after adding to list of signal ", function() {
         it("Signal is consistant after adding to list of Signal", function() {
+            signalService.signals.clear();
             signalService.createSignal(value);
             var signal = signalService.signals.get(0);
-            expect(signal.getGeneratorID()).to.equal(generatorId);
+            expect(signal.getGeneratorID()).to.equal(signalId);
             expect(signal.getMin()).to.equal(min);
             expect(signal.getMax()).to.equal(max);
             signalService.signals.clear();

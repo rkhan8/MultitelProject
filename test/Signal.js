@@ -6,7 +6,7 @@ var expect    = require("chai").expect;
 var Signal = require('../backend/Model/Signal');
 var max = 10;
 var min = 1;
-var category = "real";
+var category = "analog";
 var generatorId = 1;
 
 describe("Signal Test", function() {
@@ -39,14 +39,16 @@ describe("Signal Test", function() {
         it("Change signal range should change range value", function(){
             var signal = new Signal(generatorId,category,min, max);
             var result1 = signal.generateValue();
+            console.log(result1);
             expect(result1.value).to.be.within(min, max);
 
             var max1 = 50;
             var min1 = 35;
-            var category1 = "real";
+            var category1 = "analog";
             var generatorId1 = 2;
             signal.updateSignal(generatorId1,category1,min1, max1);
             var result1 = signal.generateValue();
+
             expect(result1.value).to.be.within(min1, max1);
 
         })

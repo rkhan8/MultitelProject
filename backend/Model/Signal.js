@@ -42,13 +42,23 @@ Signal.prototype.getMax = function(){
 Signal.prototype.getCategory = function(){
     return this._category;
 }
+Signal.prototype.getSignalInformations = function(){
+    return {
+
+    minValue : this._min,
+    maxValue : this._max,
+    category : this._category
+    }
+}
 
 
 function setupGenerator(category){
     switch (category){
         case "binary" :
             return generateBinaryValue;
-        case "real" :
+        case "analog" :
+            return generateRealValue;
+        case "virtual" :
             return generateRealValue;
     }
 

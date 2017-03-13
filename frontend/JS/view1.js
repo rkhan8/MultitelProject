@@ -16,15 +16,15 @@
             var droppable = $(this);
             var newGenerator = ui.draggable.clone();
 
-            var valueDisplayer = document.createElement('input');
-             valueDisplayer.disabled = true;
-            $(valueDisplayer).css('width', '50px');
+            var valueDisplayer = createAndSetupInput();
+
             $(valueDisplayer).addClass("valueDisplay");
-            $(valueDisplayer).css('border-color', 'black');
-            $(valueDisplayer).css('padding', '5px');
-            $(valueDisplayer).css('height', '20px');
             $(newGenerator).append(valueDisplayer);
             $(newGenerator).attr('id',generators.length + 1 );
+
+            var signalName = createAndSetupInput();
+            $(signalName).addClass("signalName");
+            $(newGenerator).prepend(signalName);
 
 
 
@@ -34,18 +34,56 @@
 
             newGenerator.appendTo(droppable);
             generators.push(newGenerator);
+            $('#enregistrer').show();
             show_popup( $(newGenerator).attr('id'));
+
             
             $(newGenerator).click(function (){
                 var currentGenerator = $(this);
-                show_popup($(currentGenerator).attr('id'))
+                var generatorId = $(currentGenerator).attr('id');
+                socket.on('signalInfos',function(generatorInfos){
+                    $('#valMin').val(generatorInfos.minValue);
+                    $('#valMax').val(generatorInfos.maxValue);
+                    $('#category option:selected').val(generatorInfos.category)
+                });
+                socket.emit('getSignalInfos', generatorId);
+                $('#enregistrer').hide();
+                $('#update').show();
+                show_popup($(currentGenerator).attr('id'));
             });
         }
       });
     } );
 
 
-    var generatorId = "";
+    function createNewSignal(){
+        if(validateFields()){
+            var signalId = $('#nomGenerateur').val();
+            generateSignal(signalId);
+            $('#valMin').val("");
+            $('#valMax').val("");
+            hide_popup();
+        }
+
+    }
+    function updateSignal(){
+        if(validateFields()){
+            var signalId = $('#nomGenerateur').val();
+            updateSignalParameters(signalId);
+            $('#valMin').val("");
+            $('#valMax').val("");
+            hide_popup();
+        }
+    }
+    function updateSignalParameters(signalId){
+        socket.emit("updateSignal",
+            {
+                signalId : signalId,
+                valMin : $('#valMin').val(),
+                valMax : $('#valMax').val(),
+                category: $('#category option:selected').val()
+            });
+    }
 
     function validateFields() {
         $('#errorMsg').text("");
@@ -58,13 +96,15 @@
         else {
             $('#errorMsg').text("");
 
-            generatorId = $('#nomGenerateur').val();
+
+            var generatorId = $('#nomGenerateur').val();
             if(!$('#'+ generatorId).length){
                 $('#' + generators.length).attr('id', generatorId);
             }
+            $('#' + generatorId).find('.signalName').val($('#nomGenerateur').val());
+            return true;
 
-            hide_popup();
-            generateSignal();
+
         }
 
     }
@@ -85,23 +125,35 @@
         $('.generator').css('display', 'none');
     }
 
-    function createSignal(generatorId){
+    function createSignal(signalId, min , max, category){
 
         socket.emit("createSignal",
             {
-                generatorId : generatorId,
+                signalId : signalId,
                 valMin : $('#valMin').val(),
                 valMax : $('#valMax').val(),
                 category: $('#category option:selected').val()
             });
     }
 
-    function generateSignal(){
+    function createAndSetupInput(){
+        var input = document.createElement('input');
+        input.disabled = true;
+        $(input).css('width', '50px');
+        $(input).css('border-color', 'black');
+        $(input).css('padding', '5px');
+        $(input).css('height', '20px')
+        return input;
+    }
 
-      createSignal(generatorId);
+    function generateSignal(signalId){
+
+      createSignal(signalId);
 
       socket.emit('activateSignal');
       socket.on('newValue', function(newValue){
-          $('#' + newValue.generatorId).find('input').val(newValue.value);
+          $('#' + newValue.generatorId).find('.valueDisplay').val(newValue.value);
       });
     }
+
+
