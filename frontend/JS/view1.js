@@ -1,8 +1,6 @@
 
     var socket = io();
     var generators = new Array();
-    var generatorIsActivated = false;
-
 
     $( function() {
       $( ".generator" ).draggable({
@@ -20,13 +18,15 @@
 
             var valueDisplayer = document.createElement('input');
              valueDisplayer.disabled = true;
-
             $(valueDisplayer).css('width', '50px');
+            $(valueDisplayer).addClass("valueDisplay");
             $(valueDisplayer).css('border-color', 'black');
             $(valueDisplayer).css('padding', '5px');
             $(valueDisplayer).css('height', '20px');
             $(newGenerator).append(valueDisplayer);
             $(newGenerator).attr('id',generators.length + 1 );
+
+
 
             newGenerator.css('position', 'absolute');
             newGenerator.css('top', ui.position.top);
