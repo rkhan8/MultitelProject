@@ -13,6 +13,7 @@ function QuerySearch()
   var endDate = $('#endDateListbox option:selected').text();
 
   socket.emit('search', idN, category, unity, startDate, endDate);
+
 }
 
 function populate(data, data2)
@@ -73,6 +74,10 @@ function populateTable(dataSearch)
     row.insertCell(6).innerHTML = s.substring(0, s.indexOf('T'));
     //row.insertCell(5).innerHTML = Intl.NumberFormat().format(ListTab[0][j][4]);
   }
+
+  //load graph data
+  LoadLineGraph(dataSearch);
+  //LoadHistoGraph(dataSearch);
 
 }
 
