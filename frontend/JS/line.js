@@ -16,10 +16,10 @@ function LoadLineGraph(dataSearch)
     Data.push(dataSearch[i].ValueRec);
     //datasetName = dataSearch[0].DateRec
   }
-
   createLineGraph(DateTab, Data);
-
 }
+
+
 
 function createLineGraph(DateTab, Data)
 {

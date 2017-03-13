@@ -317,4 +317,6 @@ canvas{
     -ms-user-select: none;
     background-color: rgba(0,0,0,0.5);
     border-radius: 15px;
+    height: 100%;
+    width: 100%;
 }

@@ -77,7 +77,7 @@ function populateTable(dataSearch)
 
   //load graph data
   LoadLineGraph(dataSearch);
-  //LoadHistoGraph(dataSearch);
+  LoadHistoGraph(dataSearch);
 
 }
 
@@ -119,6 +119,6 @@ $(document).ready(function()
 {
     LoadDB();
     executeAsync(filterSort1); //execute filter after initialize the table1
-    socket.setMaxListeners();//setMaxListeners to avoid memory leak (emit socket > 10)
+    //socket.setMaxListeners();//setMaxListeners to avoid memory leak (emit socket > 10)
 
 });
