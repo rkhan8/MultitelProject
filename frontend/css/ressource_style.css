@@ -1,198 +1,350 @@
 @import "http://fonts.googleapis.com/css?family=Raleway";
 
 #view-source {
-  position: fixed;
-  display: block;
-  right: 0;
-  bottom: 0;
-  margin-right: 40px;
-  margin-bottom: 40px;
-  z-index: 900;
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
 }
 
 #main-body-view1
 {
-  background: blue;
+    background: blue;
 }
 
 .mdl-layout__content
 {
-  background: url("../images/sky.jpg");
-  background-size: cover;
+    background: url("../images/sky.jpg");
+    background-size: cover;
 }
 
 .mdl-layout--fixed-drawer>.mdl-layout__content
 {
-  height: 100%;
+    height: 100%;
 }
 
 #contentG
 {
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 15px;
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 2%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    margin-top: 2%;
 }
+
 
 .columns
 {
-  color: white;
+    color: white;
+}
+
+#choiceSearch
+{
+    margin-left: 2%;
+    overflow-x: auto;
+}
+
+select
+{
+    border-spacing: 5%;
 }
 
 
 #draggableContent {
-  width: 16%;
-  height: 270px;
-  padding: 0.5em;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-  border: solid;
-  border-color: #009900;
-  border-width: medium;
-  border-style: dotted;
-  float: left;
-  margin-left: 2%;
+    width: 16%;
+    height: 270px;
+    padding: 0.5em;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: solid;
+    border-color: #009900;
+    border-width: medium;
+    border-style: dotted;
+    float: left;
+    margin-left: 2%;
 }
 
 #droppableContent {
-  width: 72%;
-  height: 270px;
-  padding: 0.5em;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-  border: solid;
-  border-color: #009900;
-  border-width: medium;
-  border-style: dotted;
-  float: right;
-  margin-right: 2%;
+    width: 72%;
+    height: 270px;
+    padding: 0.5em;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: solid;
+    border-color: #009900;
+    border-width: medium;
+    border-style: dotted;
+    float: right;
+    margin-right: 2%;
 }
 
 #droppableContent .generator{
-  position: absolute;
+    position: absolute;
 }
 
 .ui-drop .generator{
-  position: absolute;
+    position: absolute;
 }
 
 
 
 div.columns       { width: 100%; }
 div.clear         { clear: both; }
+.space            {margin-top: 5%;}
 
 #Draggable { width: 30px; height: 30px; background: red; }
 
 
 .value {
-  width: 25%;
-  display: none;
+    width: 25%;
+    display: none;
 }
 /*popup style*/
 
 #popupContent {
-  width:100%;
-  height:100%;
-  opacity:.95;
-  top:0;
-  left:0;
-  display:none;
-  position:fixed;
-  background-color:#313131;
-  overflow:auto;
-  justify-content: space-around;
+    width:100%;
+    height:100%;
+    opacity:.95;
+    top:0;
+    left:0;
+    display:none;
+    position:fixed;
+    background-color:#313131;
+    overflow:auto;
+    justify-content: space-around;
 }
 #close-icon {
-  width: 40px;
-  height: 40px;
-  position:absolute;
-  right:-14px;
-  top:-14px;
-  cursor:pointer
+    width: 40px;
+    height: 40px;
+    position:absolute;
+    right:-14px;
+    top:-14px;
+    cursor:pointer
 }
 #popupGenerator {
-  position:absolute;
-  width: 500px;
-  left:40%;
-  top:5%;
-  margin-left:-202px;
-  font-family:'Raleway',sans-serif
+    position:absolute;
+    width: 500px;
+    left:40%;
+    top:5%;
+    margin-left:-202px;
+    font-family:'Raleway',sans-serif
 }
 
-form {
-  max-width:500px;
-  min-width:250px;
-  padding:10px 50px;
-  border:2px solid gray;
-  border-radius:10px;
-  font-family:raleway;
-  background-color:#fff
+#popformulaire {
+    max-width:500px;
+    min-width:250px;
+    padding:10px 50px;
+    border:2px solid gray;
+    border-radius:10px;
+    font-family:raleway;
+    background-color:#fff
 }
 
 p {
-  margin-top:30px
+    margin-top:30px
 }
 h2 {
-  background-color:lightblue;
-  font-size: xx-large;
-  padding:20px 35px;
-  margin:-10px -50px;
-  border-radius:10px 10px 0 0
+    background-color:lightblue;
+    font-size: xx-large;
+    padding:20px 35px;
+    margin:-10px -50px;
+    border-radius:10px 10px 0 0
 }
 hr {
-  margin:10px -50px;
-  border:0;
-  border-top:1px solid #ccc
+    margin:10px -50px;
+    border:0;
+    border-top:1px solid #ccc
 }
 
 #popupGenerator input[type=text] {
-  width:60%;
-  padding:10px;
-  margin-top:10px;
-  border:1px solid #ccc;
-  font-size:16px;
-  font-family:raleway;
+    width:60%;
+    padding:10px;
+    margin-top:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+    font-family:raleway;
 }
 
 #name {
-  width: 84%;
+    width: 84%;
 }
 
 #errorMsg {
-  font-size: medium;
-  color: red;
-  font-weight: bold;
+    font-size: medium;
+    color: red;
+    font-weight: bold;
 }
 
 label {
-  font-size: large;
-  font-weight: bold;
+    font-size: large;
+    font-weight: bold;
 }
 
-#category option{
-  font-size: medium;
+#categorie option{
+    font-size: medium;
 }
 
 #valMin {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
-#save {
-  margin-top: 30px;
-  text-decoration:none;
-  width:100%;
-  text-align:center;
-  display:block;
-  background-color:blue;
-  color:#fff;
-  border:1px solid blue;
-  padding:10px 0;
-  font-size:20px;
-  cursor:pointer;
-  border-radius:5px
+#save, #update {
+    margin-top: 30px;
+    text-decoration:none;
+    width:100%;
+    text-align:center;
+    display:block;
+    background-color:blue;
+    color:#fff;
+    border:1px solid blue;
+    padding:10px 0;
+    font-size:20px;
+    cursor:pointer;
+    border-radius:5px
 }
 
-#save:hover {
-  background-color:lightseagreen;
+#enregistrer:hover, #update:hover {
+    background-color:lightseagreen;
+}
+
+#submitSearch
+{
+    margin-left: 85%;
+    overflow-x:auto;
+    position: absolute;
+}
+
+
+
+
+/*table 1 (id, category, oldVol, newVol) */
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+#tableView{
+    /*
+    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+    background: linear-gradient(to right, #25c481, #25b7c4);
+    */
+    background-color: #101010;
+    font-family: 'Roboto', sans-serif;
+    width:100%;
+    /*height: 100%;*/
+}
+
+.tbl-content{
+
+    height:300px;
+    width: 100%;
+    overflow-x:auto;
+    margin-top: 0px;
+    border: 1px solid rgba(255,255,255,0.3);
+
+}
+
+
+#donnee{
+    width:100%;
+    table-layout: fixed;
+}
+
+#donnee thead{
+    width: 100%;
+    display: block;
+}
+
+#donnee thead tr{
+    /*display: block;*/
+    background-color: rgba(255,255,255,0.3);
+}
+
+#donnee thead th{
+    padding: 5px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    height: 30px;
+    width: 10%;
+    vertical-align: middle;
+}
+
+#donnee tbody{
+    display: block;
+    height: 270px;
+    overflow-x: auto;
+    position: static;
+    /*width: 100%;*/
+}
+
+#donnee tbody tr{
+    height: 0px;
+}
+
+#donnee tbody td{
+    padding: 15px;
+    text-align: left;
+    vertical-align:middle;
+    font-weight: 300;
+    font-size: 12px;
+    color: #fff;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+    width: 285px;
+    height: 0px;
+}
+
+/* for custom scrollbar for webkit browser*/
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
+}
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.9);
+}
+
+
+
+/*LineGraph CSS*/
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    /*background-color: rgba(0,0,0,0.8);*/
+    border-radius: 15px;
+}
+
+#graphTable{
+    width:100%;
+}
+
+#graphTable th
+{
+    padding: 0;
+}
+
+.graph-content{
+    /*height:100%;
+    width: 100%;*/
+    overflow-x:auto;
+}
+
+#tableLine
+{
+    width: 49.5%;
+    overflow-x:auto;
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    border-radius: 15px;
+}
+
+
+#tableHisto
+{
+    width: 49.5%;
+    overflow-x:auto;
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    border-radius: 15px;
 }

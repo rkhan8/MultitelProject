@@ -1,35 +1,30 @@
 
-    var socket = io();
-    var generators = new Array();
-    var generatorIsActivated = false;
+var socket = io();
+var generators = new Array();
 
+$( function() {
+    $( ".generator" ).draggable({
+        stack: ".draggable",
+        cursor:'hand',
+        helper:'clone'
+    });
 
-    $( function() {
-      $( ".generator" ).draggable({
-          stack: ".draggable",
-          cursor:'hand',
-          helper:'clone'
-      });
-
-      $( ".ui-drop" ).droppable({
+    $( ".ui-drop" ).droppable({
         activeClass: 'ui-state-hover',
         accept: '.generator',
         drop: function( event, ui ) {
             var droppable = $(this);
             var newGenerator = ui.draggable.clone();
 
-            var valueDisplayer = document.createElement('input');
-             valueDisplayer.disabled = true;
+            var valueDisplayer = createAndSetupInput();
 
-            $(valueDisplayer).css('width', '50px');
-            $(valueDisplayer).css('border-color', 'black');
-            $(valueDisplayer).css('padding', '5px');
-            $(valueDisplayer).css('height', '20px');
+            $(valueDisplayer).addClass("valueDisplay");
             $(newGenerator).append(valueDisplayer);
-            $(newGenerator).attr('id', generators.length + 1 );
-            $(newGenerator).attr('category', $('#category').find(":selected").text());
-            $(newGenerator).attr('valMin', $('#valMin').val());
-            $(newGenerator).attr('valMax', $('#valMax').val());
+            $(newGenerator).attr('id',generators.length + 1 );
+
+            var signalName = createAndSetupInput();
+            $(signalName).addClass("signalName");
+            $(newGenerator).prepend(signalName);
 
             newGenerator.css('position', 'absolute');
             newGenerator.css('top', ui.position.top);
@@ -37,111 +32,136 @@
 
             newGenerator.appendTo(droppable);
             generators.push(newGenerator);
-            //show_popup( $(newGenerator).attr('id'));
-            show_popup();
+
+            $('#save').show();
+            $('#update').hide();
+            show_popup( $(newGenerator).attr('id'));
+
 
             $(newGenerator).click(function (){
                 var currentGenerator = $(this);
-                var id = $(this).attr('id');
-                var category = $(this).attr('category');
-                var valMin = $(this).attr('valMin');
-                var valMax = $(this).attr('valMax');
-                //show_popup($(this).attr('id'))
-                update_generator(id, category, valMin, valMax);
+                var generatorId = $(currentGenerator).attr('id');
+                socket.on('signalInfos',function(generatorInfos){
+                    $('#valMin').val(generatorInfos.minValue);
+                    $('#valMax').val(generatorInfos.maxValue);
+                    $('#category').find(":selected").text(generatorInfos.category)
+                });
+                socket.emit('getSignalInfos', generatorId);
+                $('#save').hide();
+                $('#update').show();
+                show_popup($(currentGenerator).attr('id'));
             });
         }
-      });
-    } );
+    });
+} );
 
 
-    var generatorId = "";
-    var generatorName = "";
-    var generatorCategory = "";
-    var generatorValMin = "";
-    var generatorValMax = "";
+function createNewSignal(){
+    if(validateFields()){
+        var signalId = $('#name').val();
+        alert(signalId);
+        generateSignal(signalId);
+        $('#valMin').val("");
+        $('#valMax').val("");
+        hide_popup();
+    }
 
-    function validateFields() {
+}
+function updateSignal(){
+    if(validateFields()){
+        var signalId = $('#name').val();
+        updateSignalParameters(signalId);
+        $('#valMin').val("");
+        $('#valMax').val("");
+        hide_popup();
+    }
+}
+function updateSignalParameters(signalId){
+    socket.emit("updateSignal",
+        {
+            signalId : signalId,
+            valMin : $('#valMin').val(),
+            valMax : $('#valMax').val(),
+            category: $('#category').find(":selected").text()
+        });
+}
+
+function validateFields() {
+    $('#errorMsg').text("");
+    if(document.getElementById('name').value == "") {
+        $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+    }
+    else if(document.getElementById('category').selectedIndex == 0) {
+        $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
+    }
+    else if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
+        $('#errorMsg').text("Vous devez donner la valeur min et la valeur max de l'intervalle");
+    }
+    else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
+        $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
+    }
+
+    else {
         $('#errorMsg').text("");
-        if(document.getElementById('name').value == "") {
-            $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+
+        var generatorId = $('#name').val();
+        if(!$('#'+ generatorId).length){
+            $('#' + generators.length).attr('id', generatorId);
         }
-        else if(document.getElementById('category').selectedIndex == 0) {
-            $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
-        }
-        else if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
-            $('#errorMsg').text("Vous devez donner la valeur min et la valeur max de l'intervalle");
-        }
-        else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
-            $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
-        }
-
-        else {
-            $('#errorMsg').text("");
-
-            generatorId = $('#name').val();
-            generatorCategory = $('#category').find(":selected").text();
-            generatorValMin = $('#valMin').val();
-            generatorValMax = $('#valMax').val();
-            var currentGenerator = $('#' + generators.length);
-            if(!$('#'+ generatorId).length){
-                currentGenerator.attr('id', generatorId);
-                currentGenerator.attr('category', generatorCategory);
-                currentGenerator.attr('valMin', generatorValMin);
-                currentGenerator.attr('valMax', generatorValMax);
-
-            }
-            hide_popup();
-            generateSignal();
-        }
-
-    }
-    //Function to display popup
-    function show_popup() {
-        $('#errorMsg').text("");
-        $('#name').val('');
-        $('#category').find(":selected").index(0); 
-        $('#valMin').val('');
-        $('#valMax').val('');
-        $('#popupContent').css('display', 'block');
-    }
-
-    //Function To update generator
-    function update_generator(generatorId, generatorCategory, generatorValMin, generatorValMax) {
-        $('#errorMsg').text("");
-        $('#popupContent').css('display', 'block');
-        $('#name').val(generatorId );
-        $('#valMin').val(generatorValMin);
-        $('#valMax').val(generatorValMax);
-        $('#category').find(":selected").text(generatorCategory);
-    }
-    //Function to Hide Popup
-    function hide_popup() {
-        $('#errorMsg').text("");
-        $('#popupContent').css('display', 'none');
+        $('#' + generatorId).find('.signalName').val($('#name').val());
+        return true;
 
     }
 
-    function hide_gen() {
-        $('.generator').css('display', 'none');
-    }
+}
+//Function To Display Popup
+function show_popup(generatorId) {
+    $('#errorMsg').text("");
+    $('#category').find(":selected").index(0);
+    $('#popupContent').css('display', 'block');
+    $('#name').val(generatorId );
+}
+//Function to Hide Popup
+function hide_popup() {
+    $('#errorMsg').text("");
+    $('#popupContent').css('display', 'none');
 
-    function createSignal(generatorId){
+}
 
-        socket.emit("createSignal",
-            {
-                generatorId : generatorId,
-                valMin : $('#valMin').val(),
-                valMax : $('#valMax').val(),
-                category: $('#category').find(":selected").text()
-            });
-    }
+function hide_gen() {
+    $('.generator').css('display', 'none');
+}
 
-    function generateSignal(){
+function createSignal(signalId, min , max, category){
 
-      createSignal(generatorId);
+    socket.emit("createSignal",
+        {
+            signalId : signalId,
+            valMin : $('#valMin').val(),
+            valMax : $('#valMax').val(),
+            category: $('#category').find(":selected").text()
+        });
+}
 
-      socket.emit('activateSignal');
-      socket.on('newValue', function(newValue){
-          $('#' + newValue.generatorId).find('input').val(newValue.value);
-      });
-    }
+function createAndSetupInput(){
+    var input = document.createElement('input');
+    input.disabled = true;
+    $(input).css('width', '50px');
+    $(input).css('border-color', 'black');
+    $(input).css('padding', '5px');
+    $(input).css('height', '20px');
+    return input;
+}
+
+function generateSignal(signalId){
+
+    createSignal(signalId);
+
+    socket.emit('activateSignal');
+    socket.on('newValue', function(newValue){
+        alert(newValue);
+        $('#' + newValue.generatorId).find('.valueDisplay').val(newValue.value);
+    });
+}
+
+

@@ -1,6 +1,6 @@
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
@@ -39,90 +39,91 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-      <script src="../JS/view1.js"></script>
+    <script src="../JS/view1.js"></script>
 
 
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-      <div id="contentG">
-          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            <h3>Générateur de signaux</h3>
-          </div>
+<div id="contentG">
+    <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+        <h3>Générateur de signaux</h3>
+    </div>
 
-          <div class="columns">
-            <div id="draggableContent" class="ui-widget-content">
-                <div class="generator">
-                    <img src="../images/temperature.jpg" height="50px" width="50px">
-                </div>
-                <div class="generator">
-                    <img src="../images/icon-electricity.png" height="50px" width="50px">
-                </div>
-                <div class="generator">
-                    <img src="../images/iconeBinaire.jpg" height="50px" width="50px">
-                </div>
+    <div class="columns">
+        <div id="draggableContent" class="ui-widget-content">
+            <div class="generator">
+                <img src="../images/temperature.jpg" height="50px" width="50px">
             </div>
-            <!--<div id="droppableContent" class= "ui-drop" class="ui-widget-content">-->
-            <div id="droppableContent" class= "ui-drop">
+            <div class="generator">
+                <img src="../images/icon-electricity.png" height="50px" width="50px">
             </div>
-          </div>
-          <div class="clear"></div>
-        </br>
+            <div class="generator">
+                <img src="../images/iconeBinaire.jpg" height="50px" width="50px">
+            </div>
+        </div>
+        <!--<div id="droppableContent" class= "ui-drop" class="ui-widget-content">-->
+        <div id="droppableContent" class= "ui-drop">
+        </div>
+    </div>
+    <div class="clear"></div>
+    </br>
 
-        <!--<input id="value" type="text">-->
+    <!--<input id="value" type="text">-->
 
-      </div>
+</div>
 
-      <!--popup-->
-      <div id="popupContent">
-          <div id="popupGenerator">
-              <form>
-                  <img id="close-icon" src="../images/close-icon.png" onclick ="hide_popup(); return false;">
-                  <h2>Propriétés du générateur</h2>
-                  <hr>
-                  <fieldset>
-                      <div id="errorMsg" type="text"></div>
-                      <hr>
-                      <div>
-                          <label for="name">Nom : </label>
-                          <input id="name" placeholder="Nom..." type="text">
-                      </div>
-                      <p></p>
-                      <div>
-                          <label for="category">Catégorie : </label>
-                          <select id="category">
-                              <option value="">- Sélectionner la catégorie -</option>
-                              <option value="analog">Analogique</option>
-                              <option value="binary">Binaire</option>
-                              <option value="virtual">Virtuel</option>
-                          </select>
-                      </div>
-                      <p></p>
-                      <div>
-                          <label for="valMin">Valeur minimale : </label>
-                          <input id="valMin" placeholder="valMin..." type="text">
-                      </div>
-                      <p></p>
-                      <div>
-                          <label for="valMax">Valeur maximale : </label>
-                          <input id="valMax" placeholder="valMax..." type="text">
-                      </div>
-                      <button id="save" type="submit" onclick="validateFields(); return false;">Enregistrer</button>
-                  </fieldset>
-              </form>
-          </div>
-      </div>
-
-
-
-      <a id="view-source" onclick="generateSignal();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
+<!--popup-->
+<div id="popupContent">
+    <div id="popupGenerator">
+        <form id="popformulaire">
+            <img id="close-icon" src="../images/close-icon.png" onclick ="hide_popup(); return false;">
+            <h2>Propriétés du générateur</h2>
+            <hr>
+            <fieldset>
+                <div id="errorMsg" type="text"></div>
+                <hr>
+                <div>
+                    <label for="name">Nom : </label>
+                    <input id="name" placeholder="Nom..." type="text">
+                </div>
+                <p></p>
+                <div>
+                    <label for="category">Catégorie : </label>
+                    <select id="category">
+                        <option value="">- Sélectionner la catégorie -</option>
+                        <option value="analog">Analogique</option>
+                        <option value="binary">Binaire</option>
+                        <option value="virtual">Virtuel</option>
+                    </select>
+                </div>
+                <p></p>
+                <div>
+                    <label for="valMin">Valeur minimale : </label>
+                    <input id="valMin" placeholder="valMin..." type="text">
+                </div>
+                <p></p>
+                <div>
+                    <label for="valMax">Valeur maximale : </label>
+                    <input id="valMax" placeholder="valMax..." type="text">
+                </div>
+                <button id="save" type="submit" onclick="createNewSignal(); return false;">Enregistrer</button>
+                <button id="update" type="submit" onclick="updateSignal(); return false;" style="display: none;">Mettre a jour</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
 
 
 
+<a id="view-source" onclick="generateSignal();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
 
 
-  </body>
+
+
+
+</body>
 
 </html>
