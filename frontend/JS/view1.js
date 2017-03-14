@@ -35,7 +35,7 @@
             newGenerator.appendTo(droppable);
             generators.push(newGenerator);
 
-            $('#enregistrer').show();
+            $('#save').show();
             $('#update').hide();
             show_popup( $(newGenerator).attr('id'));
 
@@ -49,7 +49,7 @@
                     $('#category option:selected').val(generatorInfos.category)
                 });
                 socket.emit('getSignalInfos', generatorId);
-                $('#enregistrer').hide();
+                $('#save').hide();
                 $('#update').show();
                 show_popup($(currentGenerator).attr('id'));
             });

@@ -189,7 +189,7 @@ label {
   margin-top: 25px;
 }
 
-#enregistrer {
+#save, #update {
   margin-top: 30px;
   text-decoration:none;
   width:100%;
@@ -204,7 +204,7 @@ label {
   border-radius:5px
 }
 
-#enregistrer:hover {
+#save:hover, #update:hover {
   background-color:lightseagreen;
 }
 
