@@ -62,8 +62,6 @@
         if(validateFields()){
             var signalId = $('#nomGenerateur').val();
             generateSignal(signalId);
-            $('#valMin').val("");
-            $('#valMax').val("");
             hide_popup();
         }
 
@@ -72,8 +70,6 @@
         if(validateFields()){
             var signalId = $('#nomGenerateur').val();
             updateSignalParameters(signalId);
-            $('#valMin').val("");
-            $('#valMax').val("");
             hide_popup();
         }
     }
@@ -119,6 +115,8 @@
     //Function to Hide Popup
     function hide_popup() {
         $('#errorMsg').text("");
+        $('#valMin').val("");
+        $('#valMax').val("");
         $('#popupContent').css('display', 'none');
 
     }
