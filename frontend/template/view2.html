@@ -55,6 +55,7 @@
 
   <body>
 
+
       <div id="contentG">
           <div class="mdl-card__supporting-text mdl-color-text--grey-600">
             <h3>Historique et graph</h3>
@@ -63,33 +64,37 @@
 
           <div class="columns">
 
-            idN :
-            <select id="idNListbox">
-            </select>
+            <div id="choiceSearch">
+              idN :
+              <select id="idNListbox">
+              </select>
 
-            Catégorie :
-            <select id="catListbox">
-            </select>
+              Catégorie :
+              <select id="catListbox">
+              </select>
 
-            Unité :
-            <select id="unityListbox">
-            </select>
+              Unité :
+              <select id="unityListbox">
+              </select>
 
-            Du :
-            <select id="startDateListbox">
-            </select>
+              Du :
+              <select id="startDateListbox">
+              </select>
 
-            au :
-            <select id="endDateListbox">
-            </select>
+              au :
+              <select id="endDateListbox">
+              </select>
 
+
+            </div>
 
             <a id="submitSearch" onclick="QuerySearch();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Recherche</a>
 
           </div>
           <div class="clear"></div>
-        </br>
 
+
+        <div class="space"></div>
 
         <!--Table-->
         <div id="tableView">
@@ -98,7 +103,7 @@
           </form>
 
             <div class="tbl-content">
-              <table id="donnee" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab"><!--table data-->
+              <table id="donnee" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab">
                 <thead>
                   <tr>
                     <th>IDN</th>
@@ -119,22 +124,22 @@
           </div>
 
         </br>
-
-        <div style="width:100%;">
-            <canvas id="canvasLine"></canvas>
-        </div>
-
-      </br>
-
-      <div style= "width:100%;">
-        <canvas id="canvasHisto"></canvas> <!-- histogramme-->
-      </div>
-
       </br>
 
       </div>
 
-
+      <table id="graphTable">
+        <th>
+          <div id="tableLine">
+              <canvas id="canvasLine"></canvas>
+          </div>
+        </th>
+        <th>
+          <div id="tableHisto">
+              <canvas id="canvasHisto"></canvas>
+          </div>
+        </th>
+      </table>
 
   </body>
 

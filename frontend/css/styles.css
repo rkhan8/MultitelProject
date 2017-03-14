@@ -16,6 +16,8 @@
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
+  height: 100%;
+  width: 100%;
 }
 .demo-avatar {
   width: 48px;

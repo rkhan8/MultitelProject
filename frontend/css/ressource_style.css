@@ -28,26 +28,21 @@
 
 #contentG
 {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 15px;
-  margin-left: 2%;
-  margin-right: 2%;
   margin-top: 2%;
 }
 
-#contentGraph
-{
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 15px;
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 2%;
-}
 
 .columns
 {
   color: white;
+}
+
+#choiceSearch
+{
   margin-left: 2%;
+  overflow-x: auto;
 }
 
 select
@@ -96,6 +91,7 @@ select
 
 div.columns       { width: 100%; }
 div.clear         { clear: both; }
+.space            {margin-top: 5%;}
 
 #Draggable { width: 30px; height: 30px; background: red; }
 
@@ -212,30 +208,11 @@ label {
   background-color:lightseagreen;
 }
 
-#update {
-  margin-top: 30px;
-  text-decoration:none;
-  width:100%;
-  text-align:center;
-  display:block;
-  background-color:blue;
-  color:#fff;
-  border:1px solid blue;
-  padding:10px 0;
-  font-size:20px;
-  cursor:pointer;
-  border-radius:5px
-}
-
-#update:hover {
-  background-color:lightseagreen;
-}
-
 #submitSearch
 {
-  margin-left: 25%;
+  margin-left: 85%;
   overflow-x:auto;
-
+  position: absolute;
 }
 
 
@@ -288,7 +265,7 @@ label {
   color: #fff;
   text-transform: uppercase;
   height: 30px;
-  width: 5%;
+  width: 10%;
   vertical-align: middle;
 }
 
@@ -334,8 +311,40 @@ canvas{
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    background-color: rgba(0,0,0,0.5);
+    /*background-color: rgba(0,0,0,0.8);*/
     border-radius: 15px;
-    height: 100%;
-    width: 100%;
+}
+
+#graphTable{
+  width:100%;
+}
+
+#graphTable th
+{
+  padding: 0;
+}
+
+.graph-content{
+  /*height:100%;
+  width: 100%;*/
+  overflow-x:auto;
+}
+
+#tableLine
+{
+  width: 49.5%;
+  overflow-x:auto;
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
+}
+
+
+#tableHisto
+{
+  width: 49.5%;
+  overflow-x:auto;
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
 }
