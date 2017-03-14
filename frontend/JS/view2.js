@@ -35,6 +35,12 @@ function populate(data, data2)
     select3.options[0] = new Option("");
     select3.options[select3.options.length] = new Option(data[i].Unity);
 
+
+
+  }
+
+  for(var i = 0; i< data2.length; i++)
+  {
     //populate start date
     var s = data2[i].DateRec;
 
@@ -46,7 +52,6 @@ function populate(data, data2)
     var select5 = document.getElementById("endDateListbox");
     select5.options[0] = new Option("");
     select5.options[select5.options.length] = new Option(s.substring(0, s.indexOf('T')));
-
   }
 }
 
