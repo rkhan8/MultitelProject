@@ -3,7 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var signalService = require('./backend/Routes/SignalService')
-var database = require('./backend/Routes/DatabaseService')
+var DatabaseService = require('./backend/Routes/DatabaseService')
 var events = require('events');
 
 //initialize the repository. Start the localhost server with index.html file
@@ -53,10 +53,9 @@ io.on('connection', function (socket) {
 //Database queries
 io.on('connection', function (socket) {
     socket.on('loadDB', function () {
-
-        database.queryLoad();
-        database.PreloadValueEvent.on('LoadFirstData',function(data){socket.emit('PreDonnee', data)});
-        database.PreloadValueEvent.on('LoadSecondData',function(data2){socket.emit('PreDonnee2', data2)});
+        DatabaseService.LoadData();
+        DatabaseService.PreloadValueEvent.on('LoadFirstData',function(data){socket.emit('PreDonnee', data)});
+        DatabaseService.PreloadValueEvent.on('LoadSecondData',function(data2){socket.emit('PreDonnee2', data2)});
     });
 
 });
@@ -64,11 +63,8 @@ io.on('connection', function (socket) {
 
 io.on('connection', function (socket) {
     socket.on('search', function (idN, category, unity, startDate, endDate) {
-
-        database.QuerySearch(idN, category, unity, startDate, endDate);
-        database.PreloadValueEvent.on('SearchData',function(dataSearch){socket.emit('SearchData', dataSearch)});
-        //console.log(idN + " ; "+ category + " ; "+ unity + " ; "+ startDate + " ; "+ endDate)
-
+        DatabaseService.QuerySearch(idN, category, unity, startDate, endDate);
+        DatabaseService.PreloadValueEvent.on('SearchData',function(dataSearch){socket.emit('SearchData', dataSearch)});
     });
 
 });
