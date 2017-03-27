@@ -39,7 +39,7 @@
             $('#update').hide();
             show_popup( $(newGenerator).attr('id'));
 
-            
+
             $(newGenerator).click(function (){
                 var currentGenerator = $(this);
                 var generatorId = $(currentGenerator).attr('id');
@@ -146,14 +146,16 @@
         return input;
     }
 
-    function generateSignal(signalId){
+    function generateSignal(signalId)
+    {
 
       createSignal(signalId);
 
       socket.emit('activateSignal');
       socket.on('newValue', function(newValue){
           $('#' + newValue.generatorId).find('.valueDisplay').val(newValue.value);
+
+          //INSERT INTO DATABASE
+
       });
     }
-
-

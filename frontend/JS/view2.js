@@ -18,20 +18,31 @@ function QuerySearch()
 
 function populate(data, data2)
 {
+
+  var select1 = document.getElementById("idNListbox");
+  //select1.options.length = 0;
+
+  //populate category
+  var select2 = document.getElementById("catListbox");
+  //select2.options.length = 0;
+
+
+  //populate unity
+  var select3 = document.getElementById("unityListbox");
+  //select3.options.length = 0;
+
+
   for(var i = 0; i < data.length; i++)
   {
     //populate idN
-    var select1 = document.getElementById("idNListbox");
     select1.options[0] = new Option("");
     select1.options[select1.options.length] = new Option(data[i].idN);
 
     //populate category
-    var select2 = document.getElementById("catListbox");
     select2.options[0] = new Option("");
     select2.options[select2.options.length] = new Option(data[i].Category);
 
     //populate unity
-    var select3 = document.getElementById("unityListbox");
     select3.options[0] = new Option("");
     select3.options[select3.options.length] = new Option(data[i].Unity);
 
@@ -39,20 +50,29 @@ function populate(data, data2)
 
   }
 
+
+  var select4 = document.getElementById("startDateListbox");
+  //select4.options.length = 0;
+
+  var select5 = document.getElementById("endDateListbox");
+  //select5.options.length = 0;
+
+
   for(var i = 0; i< data2.length; i++)
   {
     //populate start date
     var s = data2[i].DateRec;
 
-    var select4 = document.getElementById("startDateListbox");
     select4.options[0] = new Option("");
     select4.options[select4.options.length] = new Option(s.substring(0, s.indexOf('T')));
 
     //populate end date
-    var select5 = document.getElementById("endDateListbox");
     select5.options[0] = new Option("");
     select5.options[select5.options.length] = new Option(s.substring(0, s.indexOf('T')));
   }
+
+  data = [];
+  data2 = [];
 }
 
 

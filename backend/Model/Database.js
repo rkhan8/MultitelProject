@@ -14,7 +14,6 @@ var connection = mysql.createConnection({
 
 function queryLoad()
 {
-  //connection.connect();
   //load idN, category and unity
   connection.query('SELECT * from Signals', function(err, rows, fields) {
     if (!err)
@@ -26,7 +25,6 @@ function queryLoad()
       console.log('Erreur de la requete');
     }
     ValueEvent.emit('LoadFirstDataDatabase', rows);
-    //return rows;
 
   });
 
