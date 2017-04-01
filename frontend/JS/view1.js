@@ -60,7 +60,7 @@
 
     function createNewSignal(){
         if(validateFields()){
-            var signalId = $('#nomGenerateur').val();
+            var signalId = $('#generatorName').val();
             generateSignal(signalId);
             hide_popup();
         }
@@ -68,7 +68,7 @@
     }
     function updateSignal(){
         if(validateFields()){
-            var signalId = $('#nomGenerateur').val();
+            var signalId = $('#generatorName').val();
             updateSignalParameters(signalId);
             hide_popup();
         }
@@ -95,11 +95,11 @@
             $('#errorMsg').text("");
 
 
-            var generatorId = $('#nomGenerateur').val();
+            var generatorId = $('#generatorName').val();
             if(!$('#'+ generatorId).length){
                 $('#' + generators.length).attr('id', generatorId);
             }
-            $('#' + generatorId).find('.signalName').val($('#nomGenerateur').val());
+            $('#' + generatorId).find('.signalName').val($('#generatorName').val());
             return true;
 
 
@@ -110,7 +110,7 @@
     function show_popup(generatorId) {
         $('#errorMsg').text("");
         $('#popupContent').css('display', 'block');
-        $('#nomGenerateur').val(generatorId );
+        $('#generatorName').val(generatorId );
     }
     //Function to Hide Popup
     function hide_popup() {
