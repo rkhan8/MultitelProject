@@ -86,19 +86,20 @@
                       <div id="errorMsg" type="text"></div>
                       <hr>
                       <div>
-                          <label for="nomGenerateur">Nom : </label>
-                          <input id="nomGenerateur" placeholder="Nom..." type="text">
+                          <label for="generatorName">Nom : </label>
+                          <input id="generatorName" placeholder="Nom..." type="text">
                       </div>
                       <p></p>
-                      <div id="category">
-                          <select>
+                      <div>
+                          <label for="category">Catégorie : </label>
+                          <select id="category">
                               <option value="">- Sélectionner la catégorie -</option>
                               <option value="analog">Analogique</option>
                               <option value="binary">Binaire</option>
                               <option value="virtual">Virtuel</option>
                           </select>
-
                       </div>
+                      <p></p>
                       <div>
                           <label for="valMin">Valeur minimale : </label>
                           <input id="valMin" placeholder="valMin..." type="text">
@@ -109,20 +110,20 @@
                           <input id="valMax" placeholder="valMax..." type="text">
                       </div>
                       <button id="save" type="submit" onclick="createNewSignal(); return false;">Enregistrer</button>
-                      <button id="update" type="submit" onclick="updateSignal(); return false;" style="display: none;">Mettre a jour</button>
+                      <button id="update" type="submit" onclick="updateSignal(); return false;" style="display: none;">Mettre à jour</button>
                   </fieldset>
               </form>
           </div>
       </div>
 
+      <label>
+          <textarea id="addGenTextArea"  rows="2" cols="30" style="display: none">
+            Hello from the other side!
+          </textarea>
+      </label>
 
+  <button id="add_generator" type="button" onclick="addNewGenerator()">Ajouter un générateur</button>
 
-      <a id="view-source" onclick="generateSignal();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Générer</a>
-
-
-
-
-
-  </body>
+</body>
 
 </html>

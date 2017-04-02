@@ -46,12 +46,13 @@
                 socket.on('signalInfos',function(generatorInfos){
                     $('#valMin').val(generatorInfos.minValue);
                     $('#valMax').val(generatorInfos.maxValue);
-                    $('#category option:selected').val(generatorInfos.category)
+                    document.getElementById('category').value = generatorInfos.category;
                 });
+
                 socket.emit('getSignalInfos', generatorId);
                 $('#save').hide();
                 $('#update').show();
-                show_popup($(currentGenerator).attr('id'));
+                show_updatePopup(generatorId);
             });
         }
       });
@@ -60,7 +61,7 @@
 
     function createNewSignal(){
         if(validateFields()){
-            var signalId = $('#nomGenerateur').val();
+            var signalId = $('#generatorName').val();
             generateSignal(signalId);
             hide_popup();
         }
@@ -68,7 +69,7 @@
     }
     function updateSignal(){
         if(validateFields()){
-            var signalId = $('#nomGenerateur').val();
+            var signalId = $('#generatorName').val();
             updateSignalParameters(signalId);
             hide_popup();
         }
@@ -79,44 +80,64 @@
                 signalId : signalId,
                 valMin : $('#valMin').val(),
                 valMax : $('#valMax').val(),
-                category: $('#category option:selected').val()
+                category: $('#category').find(":selected").val()
             });
     }
 
     function validateFields() {
         $('#errorMsg').text("");
-        if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
-            $('#errorMsg').text("Vous devez donner la valeur min et la valeur max de l'intervalle");
+        var nameValue = document.getElementById('generatorName').value;
+        var categoryValue = document.getElementById('category').value;
+        var genValMin = document.getElementById('valMin');
+        var genValMax = document.getElementById('valMax');
+
+        /*if(document.getElementById('category').value == "binary")  {
+            document.getElementById('valMin').disabled = true;
+            document.getElementById('valMax').disabled = true;
+        }*/
+        if(categoryValue == "") {
+            $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
         }
-        else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
+        else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == "" )) {
+            $('#errorMsg').text("Vous devez remplir tous les champs");
+        }
+        else if(categoryValue == "binary" && nameValue == "") {
+            $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+        }
+        else if(parseInt(genValMin.value) >= parseInt(genValMax.value)) {
             $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
         }
         else {
             $('#errorMsg').text("");
 
-
-            var generatorId = $('#nomGenerateur').val();
+            var generatorId = $('#generatorName').val();
             if(!$('#'+ generatorId).length){
                 $('#' + generators.length).attr('id', generatorId);
             }
-            $('#' + generatorId).find('.signalName').val($('#nomGenerateur').val());
+            $('#' + generatorId).find('.signalName').val($('#generatorName').val());
             return true;
-
-
         }
-
     }
     //Function To Display Popup
     function show_popup(generatorId) {
         $('#errorMsg').text("");
         $('#popupContent').css('display', 'block');
-        $('#nomGenerateur').val(generatorId );
+        $('#generatorName').val(generatorId );
     }
+
+    //Function show_updatePopup
+    function show_updatePopup(generatorId) {
+        $('#errorMsg').text("");
+        $('#popupContent').css('display', 'block');
+        $('#generatorName').val(generatorId);
+    }
+
     //Function to Hide Popup
     function hide_popup() {
         $('#errorMsg').text("");
         $('#valMin').val("");
         $('#valMax').val("");
+        document.getElementById('category').selectedIndex = 0;
         $('#popupContent').css('display', 'none');
 
     }
@@ -128,6 +149,7 @@
     function createSignal(signalId, min , max, category){
 
         socket.emit("createSignal",
+<<<<<<< HEAD
         {
             signalId : signalId,
             valMin : $('#valMin').val(),
@@ -144,6 +166,14 @@
         var Unity = "J";
 
         socket.emit("storeSignal",{SignalId, Category, valMin, valMax, Unity});
+=======
+            {
+                signalId : signalId,
+                valMin : $('#valMin').val(),
+                valMax : $('#valMax').val(),
+                category: $('#category').find(":selected").val()
+            });
+>>>>>>> bbab7a763156239a8679d6136103e43e76d070e2
     }
 
     function createAndSetupInput(){
@@ -152,7 +182,7 @@
         $(input).css('width', '50px');
         $(input).css('border-color', 'black');
         $(input).css('padding', '5px');
-        $(input).css('height', '20px')
+        $(input).css('height', '20px');
         return input;
     }
 
@@ -170,4 +200,8 @@
 
 
       });
+    }
+
+    function addNewGenerator() {
+        $('#addGenTextArea').show();
     }
