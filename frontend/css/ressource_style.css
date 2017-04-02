@@ -204,6 +204,21 @@ label {
   border-radius:5px
 }
 
+#add_generator {
+  text-align:center;
+  display:block;
+  background-color:black;
+  color:#fff;
+  border:1px solid darkgrey;
+  padding:10px 0;
+  font-size:15px;
+  cursor:pointer;
+  border-radius:5px
+}
+#add_generator:hover {
+  background-color: darkblue;
+}
+
 #save:hover, #update:hover {
   background-color:lightseagreen;
 }

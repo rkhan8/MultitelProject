@@ -180,3 +180,7 @@
 
       });
     }
+
+    function addNewGenerator() {
+        $('#addGenTextArea').show();
+    }
