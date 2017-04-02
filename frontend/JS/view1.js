@@ -86,15 +86,29 @@
 
     function validateFields() {
         $('#errorMsg').text("");
-        if (document.getElementById('valMin').value == "" || document.getElementById('valMax').value == "") {
-            $('#errorMsg').text("Vous devez donner la valeur min et la valeur max de l'intervalle");
+        var nameValue = document.getElementById('generatorName').value;
+        var categoryValue = document.getElementById('category').value;
+        var genValMin = document.getElementById('valMin');
+        var genValMax = document.getElementById('valMax');
+
+        /*if(document.getElementById('category').value == "binary")  {
+            document.getElementById('valMin').disabled = true;
+            document.getElementById('valMax').disabled = true;
+        }*/
+        if(categoryValue == "") {
+            $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
         }
-        else if(parseInt(document.getElementById('valMin').value) >= parseInt(document.getElementById('valMax').value)) {
+        else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == "" )) {
+            $('#errorMsg').text("Vous devez remplir tous les champs");
+        }
+        else if(categoryValue == "binary" && nameValue == "") {
+            $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+        }
+        else if(parseInt(genValMin.value) >= parseInt(genValMax.value)) {
             $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
         }
         else {
             $('#errorMsg').text("");
-
 
             var generatorId = $('#generatorName').val();
             if(!$('#'+ generatorId).length){
@@ -102,10 +116,7 @@
             }
             $('#' + generatorId).find('.signalName').val($('#generatorName').val());
             return true;
-
-
         }
-
     }
     //Function To Display Popup
     function show_popup(generatorId) {
