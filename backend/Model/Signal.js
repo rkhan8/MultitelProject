@@ -14,7 +14,7 @@ function Signal(generatorId, category, min, max) {
     this._currentValue = undefined;
     this._category = category;
     this._generator = setupGenerator(category);
-};
+}
 
 Signal.prototype.updateSignal = function (generatorId, category,min, max){
     this._generatorId = generatorId;
@@ -23,25 +23,25 @@ Signal.prototype.updateSignal = function (generatorId, category,min, max){
     this._currentValue = undefined;
     this._category = category;
     this._generator = setupGenerator(category);
-}
+};
 Signal.prototype.generateValue = function(){
     return this._generator();
-}
+};
 Signal.prototype.getGeneratorID = function(){
     return this._generatorId;
-}
+};
 Signal.prototype.getVariance = function(){
     return this._variance;
-}
+};
 Signal.prototype.getMin = function(){
     return this._min;
-}
+};
 Signal.prototype.getMax = function(){
     return this._max;
-}
+};
 Signal.prototype.getCategory = function(){
     return this._category;
-}
+};
 Signal.prototype.getSignalInformations = function(){
     return {
 
@@ -49,7 +49,7 @@ Signal.prototype.getSignalInformations = function(){
     maxValue : this._max,
     category : this._category
     }
-}
+};
 
 
 function setupGenerator(category){

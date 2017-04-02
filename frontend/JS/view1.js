@@ -46,12 +46,13 @@
                 socket.on('signalInfos',function(generatorInfos){
                     $('#valMin').val(generatorInfos.minValue);
                     $('#valMax').val(generatorInfos.maxValue);
-                    $('#category option:selected').val(generatorInfos.category)
+                    document.getElementById('category').value = generatorInfos.category;
                 });
+
                 socket.emit('getSignalInfos', generatorId);
                 $('#save').hide();
                 $('#update').show();
-                show_popup($(currentGenerator).attr('id'));
+                show_updatePopup(generatorId);
             });
         }
       });
@@ -79,7 +80,7 @@
                 signalId : signalId,
                 valMin : $('#valMin').val(),
                 valMax : $('#valMax').val(),
-                category: $('#category option:selected').val()
+                category: $('#category').find(":selected").val()
             });
     }
 
@@ -112,11 +113,20 @@
         $('#popupContent').css('display', 'block');
         $('#generatorName').val(generatorId );
     }
+
+    //Function show_updatePopup
+    function show_updatePopup(generatorId) {
+        $('#errorMsg').text("");
+        $('#popupContent').css('display', 'block');
+        $('#generatorName').val(generatorId);
+    }
+
     //Function to Hide Popup
     function hide_popup() {
         $('#errorMsg').text("");
         $('#valMin').val("");
         $('#valMax').val("");
+        document.getElementById('category').selectedIndex = 0;
         $('#popupContent').css('display', 'none');
 
     }
@@ -132,7 +142,7 @@
                 signalId : signalId,
                 valMin : $('#valMin').val(),
                 valMax : $('#valMax').val(),
-                category: $('#category option:selected').val()
+                category: $('#category').find(":selected").val()
             });
     }
 
@@ -142,7 +152,7 @@
         $(input).css('width', '50px');
         $(input).css('border-color', 'black');
         $(input).css('padding', '5px');
-        $(input).css('height', '20px')
+        $(input).css('height', '20px');
         return input;
     }
 
