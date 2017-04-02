@@ -56,7 +56,17 @@ io.on('connection', function (socket) {
 io.on('connection', function (socket) {
     socket.on('loadDB', function () {
         DatabaseService.LoadData();
-        Database.ValueEvent.on('LoadFirstDataDatabase',function(data){socket.emit('PreDonnee', data)});
+        Database.ValueEvent.on('LoadFirstDataDatabase',function(data)
+        {
+          Database.ValueEvent.on('LoadFirstDataDatabaseUnity',function(dataa)
+          {
+            Database.ValueEvent.on('LoadFirstDataDatabaseCategory',function(dataaa)
+            {
+              //console.log(data);
+              socket.emit('PreDonnee', data, dataa, dataaa);
+            });
+          });
+        });
         Database.ValueEvent.on('LoadSecondDataDatabase',function(data2){socket.emit('PreDonnee2', data2)});
     });
 
@@ -67,6 +77,21 @@ io.on('connection', function (socket) {
     socket.on('search', function (idN, category, unity, startDate, endDate) {
         DatabaseService.QuerySearch(idN, category, unity, startDate, endDate);
         Database.ValueEvent.on('SearchDataDatabase',function(dataSearch){socket.emit('SearchData', dataSearch)});
+    });
+
+});
+
+
+io.on('connection', function (socket) {
+    socket.on('storeSignal', function (signal) {
+        DatabaseService.StoreSignal(signal);
+    });
+
+});
+
+io.on('connection', function (socket) {
+    socket.on('storeSignalData', function (signalData) {
+        DatabaseService.StoreSignalData(signalData);
     });
 
 });

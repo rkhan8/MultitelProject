@@ -16,7 +16,19 @@ function QuerySearch(idN, category, unity, startDate, endDate)
   Database.QuerySearchData(idN, category, unity, startDate, endDate);
 }
 
+function StoreSignal(signal)
+{
+  Database.StoreSignalDatabase(signal);
+}
+
+function StoreSignalData(signalData)
+{
+  Database.StoreSignalDataDatabase(signalData);
+}
 
 exports.LoadData = LoadData;
 exports.QuerySearch = QuerySearch;
+exports.StoreSignal = StoreSignal;
+exports.StoreSignalData = StoreSignalData;
+
 exports.PreloadValueEvent = PreloadValueEvent;

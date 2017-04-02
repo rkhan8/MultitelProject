@@ -7,9 +7,9 @@ drop table SignalValue;
 
 
 /*tables for multitel project */
-create table Signals 
+create table Signals
 (
-	idN varchar(10) NOT NULL,
+	idN varchar(30) NOT NULL,
 	Category varchar(50) NOT NULL,
 	MinVal int NOT NULL,
 	MaxVal int NOT NULL,
@@ -20,7 +20,7 @@ create table Signals
 
 create table SignalValue
 (
-	idN varchar(10) NOT NULL,
+		idN varchar(30) NOT NULL,
     ValueRec decimal(5, 2) NOT NULL,
     DateRec date,
     foreign key (idN) references Signals(idN)

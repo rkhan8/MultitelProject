@@ -15,7 +15,8 @@ var connection = mysql.createConnection({
 function queryLoad()
 {
   //load idN, category and unity
-  connection.query('SELECT * from Signals', function(err, rows, fields) {
+
+  connection.query('SELECT idN, MinVal, MAxVal from Signals', function(err, rows, fields) {
     if (!err)
     {
       //console.log('Résultat: ', rows);
@@ -24,12 +25,15 @@ function queryLoad()
     {
       console.log('Erreur de la requete');
     }
+
     ValueEvent.emit('LoadFirstDataDatabase', rows);
 
   });
 
-  //load start and end date
-  connection.query('SELECT DISTINCT DateRec from SignalValue', function(err, rows2, fields) {
+
+
+
+  connection.query('SELECT DISTINCT Unity FROM Signals;', function(err, rows2, fields) {
     if (!err)
     {
       //console.log('Résultat: ', rows2);
@@ -38,7 +42,39 @@ function queryLoad()
     {
       console.log('Erreur de la requete');
     }
-    ValueEvent.emit('LoadSecondDataDatabase', rows2);
+
+    ValueEvent.emit('LoadFirstDataDatabaseUnity', rows2);
+
+
+  });
+
+  connection.query('SELECT DISTINCT Category FROM Signals;', function(err, rows3, fields) {
+    if (!err)
+    {
+      //console.log('Résultat: ', rows3);
+    }
+    else
+    {
+      console.log('Erreur de la requete');
+    }
+
+    ValueEvent.emit('LoadFirstDataDatabaseCategory', rows3);
+
+
+  });
+
+
+  //load start and end date
+  connection.query('SELECT DISTINCT DateRec from SignalValue', function(err, rows4, fields) {
+    if (!err)
+    {
+      //console.log('Résultat: ', rows2);
+    }
+    else
+    {
+      console.log('Erreur de la requete');
+    }
+    ValueEvent.emit('LoadSecondDataDatabase', rows4);
   });
 }
 
@@ -134,6 +170,41 @@ function QuerySearchData(idN, category, unity, startDate, endDate)
 }
 
 
+function StoreSignalDatabase(signal)
+{
+  connection.query("insert into Signals (idN, Category, MinVal, MAxVal, Unity) values ('"+signal.SignalId+"','"+signal.Category+"',"+signal.valMin+","+signal.valMax+",'"+signal.Unity+"');", function(err, rows, fields) {
+    if (!err)
+    {
+      //console.log('Signal enregistré');
+    }
+    else
+    {
+      console.log('Erreur de la requete');
+      console.log(err);
+    }
+  });
+}
+
+function StoreSignalDataDatabase(signalData)
+{
+  //console.log(signalData);
+
+  connection.query("insert into SignalValue (idN, ValueRec, DateRec) values ('"+signalData.generatorId+"','"+signalData.value+"', CURRENT_TIMESTAMP());", function(err, rows, fields) {
+    if (!err)
+    {
+      //console.log(signalData);
+    }
+    else
+    {
+      console.log('Erreur de la requete');
+      console.log(err);
+    }
+  });
+}
+
+
 exports.queryLoad = queryLoad;
 exports.QuerySearchData = QuerySearchData;
+exports.StoreSignalDatabase = StoreSignalDatabase;
+exports.StoreSignalDataDatabase = StoreSignalDataDatabase;
 exports.ValueEvent = ValueEvent;

@@ -128,12 +128,22 @@
     function createSignal(signalId, min , max, category){
 
         socket.emit("createSignal",
-            {
-                signalId : signalId,
-                valMin : $('#valMin').val(),
-                valMax : $('#valMax').val(),
-                category: $('#category option:selected').val()
-            });
+        {
+            signalId : signalId,
+            valMin : $('#valMin').val(),
+            valMax : $('#valMax').val(),
+            category: $('#category option:selected').val()
+        });
+
+
+        //Store signal to database
+        var SignalId = signalId;
+        var Category = $('#category option:selected').val();
+        var valMin = $('#valMin').val();
+        var valMax = $('#valMax').val();
+        var Unity = "J";
+
+        socket.emit("storeSignal",{SignalId, Category, valMin, valMax, Unity});
     }
 
     function createAndSetupInput(){
@@ -155,7 +165,9 @@
       socket.on('newValue', function(newValue){
           $('#' + newValue.generatorId).find('.valueDisplay').val(newValue.value);
 
-          //INSERT INTO DATABASE
+          //store signal data into DATABASE
+          socket.emit("storeSignalData", newValue);
+
 
       });
     }
