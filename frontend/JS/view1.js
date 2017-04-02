@@ -149,7 +149,6 @@
     function createSignal(signalId, min , max, category){
 
         socket.emit("createSignal",
-<<<<<<< HEAD
         {
             signalId : signalId,
             valMin : $('#valMin').val(),
@@ -166,15 +165,9 @@
         var Unity = "J";
 
         socket.emit("storeSignal",{SignalId, Category, valMin, valMax, Unity});
-=======
-            {
-                signalId : signalId,
-                valMin : $('#valMin').val(),
-                valMax : $('#valMax').val(),
-                category: $('#category').find(":selected").val()
-            });
->>>>>>> bbab7a763156239a8679d6136103e43e76d070e2
     }
+
+    
 
     function createAndSetupInput(){
         var input = document.createElement('input');
