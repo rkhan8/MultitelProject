@@ -138,9 +138,6 @@ var filterSort1 = function()
 }
 
 
-
-
-
 $(document).ready(function()
 {
     LoadDB();
