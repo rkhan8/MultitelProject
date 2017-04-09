@@ -2,7 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('signals', {
-    idN: {
+
+      idN: {
       type: DataTypes.STRING(10),
       allowNull: false,
       primaryKey: true
@@ -11,11 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    MinVal: {
+    MinValue: {
       type: "DOUBLE",
       allowNull: false
     },
-    MaxVal: {
+    MaxValue: {
       type: "DOUBLE",
       allowNull: false
     },
