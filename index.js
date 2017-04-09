@@ -70,6 +70,46 @@ io.on('connection', function (socket) {
 io.on('connection', function (socket) {
     socket.on('loadDB', function () {
 
+
+        persistanceService.persistenceEvent.on('signalsData', function(data){
+            socket.emit('PreDonnee', data);
+            /* structure de la data
+             [ { idN: '1',
+             Category: 'analog',
+             MinValue: 1,
+             MaxValue: 11,
+             Unity: null },
+             { idN: '2',
+             Category: 'analog',
+             MinValue: 1,
+             MaxValue: 11,
+             Unity: null }
+             ,{ idN: '3',
+             Category: 'analog',
+             MinValue: 1,
+             MaxValue: 11,
+             Unity: null }]
+             */
+        });
+        persistanceService.persistenceEvent.on('recordingDate', function (data) {
+            socket.emit('PreDonnee2', data);
+            /*
+            structure de data
+             [ { DateRec: '2017-08-05T01:12:26.000Z' },
+             { DateRec: '2017-08-05T01:12:27.000Z' },
+             { DateRec: '2017-08-05T01:12:28.000Z' },
+             { DateRec: '2017-08-05T01:12:29.000Z' },
+             { DateRec: '2017-08-05T01:12:30.000Z' },
+             { DateRec: '2017-08-05T01:12:31.000Z' },
+             { DateRec: '2017-08-05T01:12:32.000Z' },
+             { DateRec: '2017-08-05T01:12:33.000Z' },
+             { DateRec: '2017-08-05T01:12:34.000Z' },
+             { DateRec: '2017-08-05T01:12:35.000Z' } ]
+
+             */
+        });
+        persistanceService.getListOfRecordingDate();
+        persistanceService.getSignalFromDB();
         /* database.queryLoad();
          database.PreloadValueEvent.on('LoadFirstData',function(data){socket.emit('PreDonnee', data)});
          database.PreloadValueEvent.on('LoadSecondData',function(data2){socket.emit('PreDonnee2', data2)});*/
@@ -80,7 +120,7 @@ io.on('connection', function (socket) {
 
 io.on('connection', function (socket) {
     socket.on('search', function (idN, category, unity, startDate, endDate) {
-        persistanceService.searchSignalValues(1, 'analog', unity, startDate, endDate);
+        persistanceService.getSignalValues(1, 'analog', unity, startDate, endDate);
         persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) {
             socket.emit('SearchData', dataSearch);
         });

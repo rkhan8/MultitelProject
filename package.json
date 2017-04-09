@@ -26,6 +26,7 @@
     "mysql": "^2.13.0",
     "random-js": "^1.0.8",
     "sequelize": "^3.30.3",
+    "sequelize-mock": "^0.7.0",
     "sinon": "^1.17.7",
     "socket.io": "^1.7.3"
   }

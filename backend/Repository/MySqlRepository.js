@@ -60,18 +60,40 @@ function insertSignalValue(signalId, value, date) {
         mySqlRepositoryEvent.emit('signalValueCreateError', signalId);
     })
 }
-function searchSignalById(signalId) {
-    signalModel.find({where: {idN: signalId}})
-        .then(function (signal) {
-            mySqlRepositoryEvent.emit('found', signal.dataValues);
+function getSignals(signalId, category, minVal, maxVal, unity) {
+    var whereClause = {
+        idN: signalId,
+        MinValue: minVal,
+        MaxValue: maxVal,
+        category: category,
+        unity: unity
+    };
+    whereClause = _.pickBy(whereClause);
+    signalModel.findAll({where: whereClause})
+        .then(function (result) {
+            mySqlRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
         })
         .catch(function () {
             console.log(err);
-            mySqlRepositoryEvent.emit('searchSignalError', signalId);
+            mySqlRepositoryEvent.emit('getSignalsError', signalId);
         });
 
 }
-function searchSignalValues(signalId, category, unity, startDate, endDate) {
+
+function getDistinctDateOfRecordingSignalValue(){
+    signalValueModel.findAll({
+        attributes:[Sequelize.literal('DISTINCT `DateRec`'), 'DateRec']
+
+    }).then(function (result) {
+        mySqlRepositoryEvent.emit('signalValueRecordingDateFound', JSON.parse(JSON.stringify(result)));
+
+    }).catch(function (err) {
+        console.log(err);
+        mySqlRepositoryEvent.emit('signalValueRecordingDateError', signalId);
+
+    })
+}
+function getSignalValues(signalId, category, unity, startDate, endDate) {
     var whereClause2;
     var whereClause1 = {
         idN: signalId,
@@ -83,7 +105,7 @@ function searchSignalValues(signalId, category, unity, startDate, endDate) {
         $gte: endDate
     }
     date = _.pickBy(date);
-    if(!_.isEmpty(date)){
+    if (!_.isEmpty(date)) {
         whereClause2 = {
             dateRec: date
         };
@@ -104,13 +126,14 @@ function searchSignalValues(signalId, category, unity, startDate, endDate) {
         console.log(err);
         mySqlRepositoryEvent.emit('searchSignalValueError', signalId);
 
-    })
+    });
 
 
 }
 exports.mySqlRepositoryEvent = mySqlRepositoryEvent;
-exports.searchSignalValues = searchSignalValues;
+exports.getSignalValues = getSignalValues;
 exports.insertNewSignal = insertNewSignal;
 exports.insertSignalValue = insertSignalValue;
-exports.searchSignalById = searchSignalById;
+exports.getSignalFromDB = getSignals;
+exports.getDistinctDateOfRecordingSignalValue = getDistinctDateOfRecordingSignalValue;
 

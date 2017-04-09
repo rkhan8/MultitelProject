@@ -162,21 +162,42 @@ function saveSignalValue(signalId, value, date) {
 
 
 
-function searchSignalById(signalId) {
-    var signal = mySqlRepository.searchSignalById(signalId);
-    return signal;
+function getSignalFromDB(signalId, category, minVal, maxVal, unity) {
+    mySqlRepository.mySqlRepositoryEvent.on('signalsFounded', function (data) {
+        persistenceEvent.emit('signalsData', data);
+    })
+    mySqlRepository.mySqlRepositoryEvent.on('getSignalsError', function (signalId) {
+        persistenceEvent.emit('getSignalError', '');
+    });
+    mySqlRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
+
 }
 
-function searchSignalValues(signalId,category, unity, startDate, endDate) {
-    mySqlRepository.searchSignalValues(signalId,category, unity, startDate, endDate);
+function getListOfRecordingDate(){
+    mySqlRepository.mySqlRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
+        persistenceEvent.emit('recordingDate', data);
+    });
+    mySqlRepository.mySqlRepositoryEvent.on('signalValueRecordingDateError', function () {
+        persistenceEvent.emit('errorGetRecordingDate', '');
+    });
+    mySqlRepository.getDistinctDateOfRecordingSignalValue();
+}
+
+function getSignalValues(signalId, category, unity, startDate, endDate) {
     mySqlRepository.mySqlRepositoryEvent.on('signalValueFound', function (data) {
         persistenceEvent.emit('signalValueData', data);
-    })
+    });
+    mySqlRepository.mySqlRepositoryEvent.on('searchSignalValueError', function () {
+        persistenceEvent.emit('getSignalValueError', '');
+    });
+    mySqlRepository.getSignalValues(signalId,category, unity, startDate, endDate);
+
 
 }
 
 exports.persistenceEvent = persistenceEvent;
-exports.searchSignalValues = searchSignalValues;
+exports.getSignalValues = getSignalValues;
+exports.getListOfRecordingDate = getListOfRecordingDate;
 exports.storeSignalInformation = storeSignalInformation;
 exports.saveSignalValue = saveSignalValue;
-exports.searchSignalById = searchSignalById;
+exports.getSignalFromDB = getSignalFromDB;
