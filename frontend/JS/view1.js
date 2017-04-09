@@ -1,6 +1,7 @@
 
     var socket = io();
     var generators = new Array();
+    var stoppedGenerator = false;
 
     $( function() {
       $( ".generator" ).draggable({
@@ -26,8 +27,6 @@
             $(signalName).addClass("signalName");
             $(newGenerator).prepend(signalName);
 
-
-
             newGenerator.css('position', 'absolute');
             newGenerator.css('top', ui.position.top);
             newGenerator.css('left', ui.position.left);
@@ -37,8 +36,9 @@
 
             $('#save').show();
             $('#update').hide();
+            $('#stop').hide();
+            $('#reactivate').hide();
             show_popup( $(newGenerator).attr('id'));
-
 
             $(newGenerator).click(function (){
                 var currentGenerator = $(this);
@@ -52,6 +52,14 @@
                 socket.emit('getSignalInfos', generatorId);
                 $('#save').hide();
                 $('#update').show();
+                if(stoppedGenerator == false) {
+                    $('#reactivate').hide();
+                    $('#stop').show();
+                }
+                else {
+                    $('#reactivate').show();
+                    $('#stop').hide();
+                }
                 show_updatePopup(generatorId);
             });
         }
@@ -158,16 +166,14 @@
 
 
         //Store signal to database
-        var SignalId = signalId;
+        /*var SignalId = signalId;
         var Category = $('#category option:selected').val();
         var valMin = $('#valMin').val();
         var valMax = $('#valMax').val();
         var Unity = "J";
 
-        socket.emit("storeSignal",{SignalId, Category, valMin, valMax, Unity});
+        socket.emit("storeSignal",{SignalId, Category, valMin, valMax, Unity});*/
     }
-
-    
 
     function createAndSetupInput(){
         var input = document.createElement('input');
@@ -181,7 +187,6 @@
 
     function generateSignal(signalId)
     {
-
       createSignal(signalId);
 
       socket.emit('activateSignal');
@@ -189,12 +194,27 @@
           $('#' + newValue.generatorId).find('.valueDisplay').val(newValue.value);
 
           //store signal data into DATABASE
-          socket.emit("storeSignalData", newValue);
-
+          //socket.emit("storeSignalData", newValue);
 
       });
     }
 
     function addNewGenerator() {
         $('#addGenTextArea').show();
+    }
+
+    function stopGeneratingSignal() {
+        socket.on('newValue', function(newValue){
+            $('#' + newValue.generatorId).find('.valueDisplay').val("arrêt");
+        });
+
+        //$('.valueDisplay').val("stop");
+
+        hide_popup();
+        stoppedGenerator = true;
+    }
+
+    function reactivateGeneratingSignal() {
+        createNewSignal();
+        stoppedGenerator = false;
     }

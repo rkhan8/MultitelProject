@@ -189,7 +189,55 @@ label {
   margin-top: 25px;
 }
 
-#save, #update {
+#update{
+  float: left;
+  margin-top: 30px;
+  text-decoration:none;
+  width:45%;
+  text-align:center;
+  display:block;
+  background-color:blue;
+  color:#fff;
+  border:1px solid blue;
+  padding:10px 0;
+  font-size:20px;
+  cursor:pointer;
+  border-radius:5px
+}
+
+#stop {
+  float: right;
+  margin-top: 30px;
+  text-decoration:none;
+  width:45%;
+  text-align:center;
+  display:block;
+  background-color:red;
+  color:#fff;
+  border:1px solid red;
+  padding:10px 0;
+  font-size:20px;
+  cursor:pointer;
+  border-radius:5px
+}
+
+#reactivate {
+  float: right;
+  margin-top: 30px;
+  text-decoration:none;
+  width:45%;
+  text-align:center;
+  display:block;
+  background-color:darkgreen;
+  color:#fff;
+  border:1px solid darkgreen;
+  padding:10px 0;
+  font-size:20px;
+  cursor:pointer;
+  border-radius:5px
+}
+
+#save {
   margin-top: 30px;
   text-decoration:none;
   width:100%;
@@ -221,6 +269,14 @@ label {
 
 #save:hover, #update:hover {
   background-color:lightseagreen;
+}
+
+#stop:hover {
+  background-color: indianred;
+}
+
+#reactivate:hover {
+  background-color: green;
 }
 
 #submitSearch
