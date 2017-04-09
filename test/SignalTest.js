@@ -3,7 +3,7 @@
  */
 
 var expect    = require("chai").expect;
-var Signal = require('../backend/Model/Signal');
+var Signal = require('../backend/DomaineModel/Signal');
 var max = 10;
 var min = 1;
 var category = "analog";

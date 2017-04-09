@@ -2,7 +2,7 @@
  * Created by angem on 2017-03-08.
  */
 var expect    = require("chai").expect;
-var signalService = require('../backend/Routes/SignalService');
+var signalService = require('../backend/Service/SignalService');
 var sinon = require('sinon');
 var assert = require("chai").assert;
 
