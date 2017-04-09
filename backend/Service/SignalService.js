@@ -4,7 +4,7 @@
 var ArrayList = require('arraylist');
 var Signal = require('../DomaineModel/Signal');
 
-//var ArrayList = require('arraylist');
+
 var EventEmitter = require('events').EventEmitter;
 var signals = new ArrayList;
 var signalServiceEvent = new EventEmitter();
@@ -24,21 +24,6 @@ function createSignal(signalInfos) {
     }
 }
 
-/*function  saveSignal(signal){
-    var index = searchSignalById(signal.getGeneratorID());
-    if (index === -1) {
-        persistanceService.persistenceEvent.on('created', function () {
-            signals.add(signal)
-        });
-        persistanceService.persistenceEvent.on('createError', function (signalId) {
-            signalServiceEvent.emit('errorExistingSignalId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
-        });
-        persistanceService.storeSignalInformation(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax);
-    }
-    else {
-        signalServiceEvent.emit('errorExistingSignalId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
-    }
-}*/
 
 function updateSignal(signalInfos) {
     var index = searchSignalById(signalInfos.signalId);
@@ -86,7 +71,6 @@ function getSignalInformation(signalId) {
 
 exports.signals = signals;
 exports.signalServiceEvent = signalServiceEvent;
-//exports.saveSignal = saveSignal;
 exports.createSignal = createSignal;
 exports.updateSignal = updateSignal;
 exports.activateSignal = activateSignal;
