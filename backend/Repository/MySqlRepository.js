@@ -57,7 +57,7 @@ function insertSignalValue(signalId, value, date) {
         DateRec: date,
     })
         .then(function() {
-            getSignalFromDB
+            mySqlRepositoryEvent.emit('valueInserted', signalId);
         })
         .catch(function (err) {
         console.log(err);
