@@ -136,7 +136,7 @@
  exports.QuerySearch = QuerySearch;
  exports.PreloadValueEvent = PreloadValueEvent;
  */
-var mySqlRepository = require('../Repository/MySqlRepository');
+var mySqlRepository = require('../Repository/SignalRepository');
 var EventEmitter = require('events').EventEmitter;
 var persistenceEvent = new EventEmitter();
 persistenceEvent.setMaxListeners(0);
