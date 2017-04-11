@@ -160,12 +160,10 @@ function saveSignalValue(signalId, value, date) {
     mySqlRepository.insertSignalValue(signalId, value, date);
 }
 
-
-
 function getSignalFromDB(signalId, category, minVal, maxVal, unity) {
     mySqlRepository.mySqlRepositoryEvent.on('signalsFounded', function (data) {
         persistenceEvent.emit('signalsData', data);
-    })
+    });
     mySqlRepository.mySqlRepositoryEvent.on('getSignalsError', function (signalId) {
         persistenceEvent.emit('getSignalError', '');
     });

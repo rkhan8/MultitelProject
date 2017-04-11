@@ -55,7 +55,11 @@ function insertSignalValue(signalId, value, date) {
         idN: signalId,
         ValueRec: value,
         DateRec: date,
-    }).catch(function (err) {
+    })
+        .then(function() {
+            getSignalFromDB
+        })
+        .catch(function (err) {
         console.log(err);
         mySqlRepositoryEvent.emit('signalValueCreateError', signalId);
     })
@@ -103,7 +107,7 @@ function getSignalValues(signalId, category, unity, startDate, endDate) {
     var date = {
         $lte: startDate,
         $gte: endDate
-    }
+    };
     date = _.pickBy(date);
     if (!_.isEmpty(date)) {
         whereClause2 = {
