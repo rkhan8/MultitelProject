@@ -93,8 +93,8 @@ function populateTable(dataSearch)
     row.insertCell(0).innerHTML = dataSearch[j].idN.replace('_', ' ');
     row.insertCell(1).innerHTML = dataSearch[j].Category;
     row.insertCell(2).innerHTML = dataSearch[j].MinVal;
-    row.insertCell(3).innerHTML = dataSearch[j].MaxVal;;
-    row.insertCell(4).innerHTML = dataSearch[j].ValueRec;;
+    row.insertCell(3).innerHTML = dataSearch[j].MaxVal;
+    row.insertCell(4).innerHTML = dataSearch[j].ValueRec;
     row.insertCell(5).innerHTML = dataSearch[j].Unity;
     var s = dataSearch[j].DateRec;
     row.insertCell(6).innerHTML = s.substring(0, s.indexOf('T'));
@@ -108,9 +108,47 @@ function populateTable(dataSearch)
 }
 
 function exportResearchData() {
-  var worksheet = XLSX.utils.table_to_book(document.getElementById('table1'));
-  alert(worksheet);
+  var table = document.getElementById('table1');
+  var rowsLength = table.rows.length;
+  var columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  var columnsLength = columns.length;
+
+  var workbook = XLSX.utils.table_to_book(table);
+  alert(workbook);
+  var first_sheet_name = workbook.SheetNames[0];
+  var desired_value = '';
+  /* Get worksheet */
+  var worksheet = workbook.Sheets[first_sheet_name];
+
+  for(var i=1; i <= rowsLength; i++) {
+    for(var j=0; j < columnsLength; j++) {
+      var address_of_cell = columns[j] + i.toString();
+      /* Find desired cell */
+      var desired_cell = worksheet[address_of_cell];
+      /* Get the value */
+      desired_value = (desired_cell ? desired_cell.v : undefined);
+    }
+  }
+  alert(workbook);
+  XLSX.writeFile(workbook, 'out.xlsx');
+
+  /* bookType can be 'xlsx' or 'xlsm' or 'xlsb' or 'ods' */
+  var wopts = { bookType:'xlsx', bookSST:false, type:'binary' };
+
+  var wbout = XLSX.write(workbook, wopts);
+
+  function s2ab(s) {
+    var buf = new ArrayBuffer(s.length);
+    var view = new Uint8Array(buf);
+    for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
+  }
+  var FileSaver = require('file-saver');
+
+    /* the saveAs call downloads a file on the local machine */
+  FileSaver.saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "testDownload.xlsx");
 }
+
 
 //get idN, category, unity DateRec from table Signals
 socket.on('PreDonnee', function(data, dataa, dataaa){

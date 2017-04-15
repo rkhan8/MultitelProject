@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="file-saver" type="javaScript">
+    <CLASSES />
+    <DOCUMENTATION>
+      <root url="https://github.com/eligrey/FileSaver.js/blob/master/FileSaver.min.js" />
+    </DOCUMENTATION>
+    <SOURCES />
+  </library>
+</component>
