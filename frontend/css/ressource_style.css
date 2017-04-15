@@ -1,4 +1,5 @@
 @import "http://fonts.googleapis.com/css?family=Raleway";
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 
 #view-source {
   position: fixed;
@@ -91,7 +92,7 @@ select
 
 div.columns       { width: 100%; }
 div.clear         { clear: both; }
-.space            {margin-top: 5%;}
+.space            {margin-top: 2%;}
 
 #Draggable { width: 30px; height: 30px; background: red; }
 
@@ -189,22 +190,6 @@ label {
   margin-top: 25px;
 }
 
-#update{
-  float: left;
-  margin-top: 30px;
-  text-decoration:none;
-  width:45%;
-  text-align:center;
-  display:block;
-  background-color:blue;
-  color:#fff;
-  border:1px solid blue;
-  padding:10px 0;
-  font-size:20px;
-  cursor:pointer;
-  border-radius:5px
-}
-
 #stop {
   float: right;
   margin-top: 30px;
@@ -237,7 +222,7 @@ label {
   border-radius:5px
 }
 
-#save {
+#save, #update {
   margin-top: 30px;
   text-decoration:none;
   width:100%;
@@ -279,18 +264,22 @@ label {
   background-color: green;
 }
 
-#submitSearch
+.dataButtons {
+  display: inline;
+  float: right;
+  margin-right: 5%;
+}
+/*#submitSearch
 {
-  margin-left: 85%;
+  float: left;
   overflow-x:auto;
   position: absolute;
-}
+}*/
 
 
 
 
 /*table 1 (id, category, oldVol, newVol) */
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 #tableView{
   /*
   background: -webkit-linear-gradient(left, #25c481, #25b7c4);

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SheetJS" type="javaScript">
+    <CLASSES />
+    <DOCUMENTATION>
+      <root url="https://github.com/SheetJS/js-xlsx/blob/master/dist/xlsx.core.min.js" />
+    </DOCUMENTATION>
+    <SOURCES />
+  </library>
+</component>

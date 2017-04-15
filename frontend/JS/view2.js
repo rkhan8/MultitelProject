@@ -107,7 +107,10 @@ function populateTable(dataSearch)
 
 }
 
-
+function exportResearchData() {
+  var worksheet = XLSX.utils.table_to_book(document.getElementById('table1'));
+  alert(worksheet);
+}
 
 //get idN, category, unity DateRec from table Signals
 socket.on('PreDonnee', function(data, dataa, dataaa){

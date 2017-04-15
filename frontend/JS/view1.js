@@ -1,7 +1,7 @@
 
     var socket = io();
     var generators = new Array();
-    var stoppedGenerator = false;
+    //var stoppedGenerator = false;
 
     $( function() {
       $( ".generator" ).draggable({
@@ -36,8 +36,8 @@
 
             $('#save').show();
             $('#update').hide();
-            $('#stop').hide();
-            $('#reactivate').hide();
+            /*$('#stop').hide();
+            $('#reactivate').hide();*/
             show_popup( $(newGenerator).attr('id'));
 
             $(newGenerator).click(function (){
@@ -52,14 +52,14 @@
                 socket.emit('getSignalInfos', generatorId);
                 $('#save').hide();
                 $('#update').show();
-                if(stoppedGenerator == false) {
+                /*if(stoppedGenerator == false) {
                     $('#reactivate').hide();
                     $('#stop').show();
                 }
                 else {
                     $('#reactivate').show();
                     $('#stop').hide();
-                }
+                }*/
                 show_updatePopup(generatorId);
             });
         }
@@ -150,10 +150,6 @@
 
     }
 
-    function hide_gen() {
-        $('.generator').css('display', 'none');
-    }
-
     function createSignal(signalId, min , max, category){
 
         socket.emit("createSignal",
@@ -203,7 +199,7 @@
         $('#addGenTextArea').show();
     }
 
-    function stopGeneratingSignal() {
+    /*function stopGeneratingSignal() {
         socket.on('newValue', function(newValue){
             $('#' + newValue.generatorId).find('.valueDisplay').val("arrêt");
         });
@@ -217,4 +213,4 @@
     function reactivateGeneratingSignal() {
         createNewSignal();
         stoppedGenerator = false;
-    }
+    }*/

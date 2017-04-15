@@ -6,9 +6,9 @@ ValueEvent.setMaxListeners(0);
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root',
-  password : 'multitelroot',
-  database : 'Multitel'
+  user     : 'multitel',    //'root',
+  password : 'multitel',    //'multitelroot',
+  database : 'multitel'     //'Multitel'
 });
 
 

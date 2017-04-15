@@ -44,6 +44,11 @@
     <script type="text/javascript" src="../JS/filter.js"></script>
     <script type="text/javascript" src="../JS/jquery.tablesorter.min.js"></script>
 
+      <!-- SheetJS -->
+      <script lang="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.10/xlsx.core.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.10/cpexcel.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.10/xlsx.full.min.js"></script>
+
     <!-- graph-->
     <script src="../graph/dist/Chart.bundle.js"></script>
     <script src="../graph/utils.js"></script>
@@ -87,13 +92,20 @@
 
 
             </div>
-
-            <a id="submitSearch" onclick="QuerySearch();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Recherche</a>
-
           </div>
-          <div class="clear"></div>
 
+        <div class="dataButtons">
+            <a id="submitSearch" onclick="QuerySearch();"
+               class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
+              Recherche
+            </a>
+            <a id="submitExport" onclick="exportResearchData();"
+               class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
+              Exporter les données
+            </a>
+        </div>
 
+        <div class="clear"></div>
         <div class="space"></div>
 
         <!--Table-->
