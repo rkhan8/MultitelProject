@@ -47,6 +47,7 @@
                     $('#valMin').val(generatorInfos.minValue);
                     $('#valMax').val(generatorInfos.maxValue);
                     document.getElementById('category').value = generatorInfos.category;
+                    $('#unity').val(generatorInfos.unity);
                 });
 
                 socket.emit('getSignalInfos', generatorId);
@@ -88,7 +89,8 @@
                 signalId : signalId,
                 valMin : $('#valMin').val(),
                 valMax : $('#valMax').val(),
-                category: $('#category').find(":selected").val()
+                category: $('#category').find(":selected").val(),
+                unity: $('#unity').val()
             });
     }
 
@@ -96,21 +98,19 @@
         $('#errorMsg').text("");
         var nameValue = document.getElementById('generatorName').value;
         var categoryValue = document.getElementById('category').value;
+        var unityValue = document.getElementById('unity').value;
         var genValMin = document.getElementById('valMin');
         var genValMax = document.getElementById('valMax');
 
-        /*if(document.getElementById('category').value == "binary")  {
-            document.getElementById('valMin').disabled = true;
-            document.getElementById('valMax').disabled = true;
-        }*/
         if(categoryValue == "") {
             $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
         }
-        else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == "" )) {
+        else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == "" ||
+            unityValue == "")) {
             $('#errorMsg').text("Vous devez remplir tous les champs");
         }
-        else if(categoryValue == "binary" && nameValue == "") {
-            $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+        else if(categoryValue == "binary" && (nameValue == ""  || unityValue == "")) {
+            $('#errorMsg').text("Vous devez spécifier le nom et/ou l'unité du générateur");
         }
         else if(parseInt(genValMin.value) >= parseInt(genValMax.value)) {
             $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
@@ -145,6 +145,7 @@
         $('#errorMsg').text("");
         $('#valMin').val("");
         $('#valMax').val("");
+        $('#unity').val("");
         document.getElementById('category').selectedIndex = 0;
         $('#popupContent').css('display', 'none');
 
@@ -157,7 +158,8 @@
             signalId : signalId,
             valMin : $('#valMin').val(),
             valMax : $('#valMax').val(),
-            category: $('#category option:selected').val()
+            category: $('#category option:selected').val(),
+            unity: $('#unity').val()
         });
 
 

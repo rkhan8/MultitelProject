@@ -145,15 +145,18 @@ div.clear         { clear: both; }
 p {
   margin-top:30px
 }
+
 h2 {
   background-color:lightblue;
-  font-size: xx-large;
-  padding:20px 35px;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 35px;     /*20px 35px;*/
   margin:-10px -50px;
   border-radius:10px 10px 0 0
 }
 hr {
-  margin:10px -50px;
+  margin: 5px -10px;
   border:0;
   border-top:1px solid #ccc
 }
@@ -161,9 +164,10 @@ hr {
 #popupGenerator input[type=text] {
   width:60%;
   padding:10px;
+  margin-left: 20px;
   margin-top:10px;
   border:1px solid #ccc;
-  font-size:16px;
+  font-size:14px;
   font-family:raleway;
 }
 
@@ -178,7 +182,7 @@ hr {
 }
 
 label {
-  font-size: large;
+  font-size: medium;
   font-weight: bold;
 }
 
