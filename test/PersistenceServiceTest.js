@@ -2,7 +2,7 @@
 var expect = require("chai").expect;
 
 var persistenceService = require('../backend/Service/PersistenceService.js');
-var repository = require('../backend/Repository/MySqlRepository');
+var repository = require('../backend/Repository/SignalRepository');
 
 var idTest = '1';
 var categoryTest = 'analog';

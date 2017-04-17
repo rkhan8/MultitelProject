@@ -153,11 +153,11 @@ function storeSignalInformation(signalId, category, minVal, maxVal, unity) {
     mySqlRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
 }
 
-function saveSignalValue(signalId, value, date) {
+function saveSignalValue(signalId, value) {
     mySqlRepository.mySqlRepositoryEvent.on('signalValueCreateError', function (signalId) {
         persistenceEvent.emit('signalValueCreateError', signalId);
     });
-    mySqlRepository.insertSignalValue(signalId, value, date);
+    mySqlRepository.insertSignalValue(signalId, value);
 }
 
 function getSignalFromDB(signalId, category, minVal, maxVal, unity) {

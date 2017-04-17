@@ -49,12 +49,12 @@ function insertNewSignal(signalId, category, minVal, maxVal, unity) {
         });
 
 }
-function insertSignalValue(signalId, value, date) {
+function insertSignalValue(signalId, value) {
 
     signalValueModel.create({
         idN: signalId,
         ValueRec: value,
-        DateRec: date,
+        DateRec: sequelize.literal('CURRENT_TIMESTAMP()')
     })
         .then(function() {
             mySqlRepositoryEvent.emit('valueInserted', signalId);

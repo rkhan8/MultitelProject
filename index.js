@@ -40,7 +40,7 @@ io.on('connection', function (socket) {
     socket.on('activateSignal', function () {
 
         signalService.signalServiceEvent.on('newValueHasGenerate', function (val) {
-            persistanceService.saveSignalValue(val.generatorId, val.value, dateFormat('dd-mm-yy HH:MM:ss'));
+            persistanceService.saveSignalValue(val.generatorId, val.value);
             socket.emit('newValue', val);
         });
         signalService.activateSignal();

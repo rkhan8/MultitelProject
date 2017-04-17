@@ -7,7 +7,7 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 function Signal(generatorId, category, min, max) {
-    this._generatorId = generatorId;
+    this._signalId = generatorId;
     this._min = min;
     this._max = max;
     this._variance = 2;
@@ -16,8 +16,8 @@ function Signal(generatorId, category, min, max) {
     this._generator = setupGenerator(category);
 }
 
-Signal.prototype.updateSignal = function (generatorId, category,min, max){
-    this._generatorId = generatorId;
+Signal.prototype.updateSignal = function (signalId, category,min, max){
+    this._signalId = signalId;
     this._min = min;
     this._max = max;
     this._currentValue = undefined;
@@ -28,7 +28,7 @@ Signal.prototype.generateValue = function(){
     return this._generator();
 };
 Signal.prototype.getGeneratorID = function(){
-    return this._generatorId;
+    return this._signalId;
 };
 Signal.prototype.getVariance = function(){
     return this._variance;
@@ -68,7 +68,7 @@ var generateRealValue= function () {
     if(this._currentValue == undefined){
         this._currentValue = generateRandomValue(this._min, this._max);
         return {
-            generatorId: this._generatorId,
+            generatorId: this._signalId,
             value: this._currentValue
         }
     }
@@ -79,7 +79,7 @@ var generateRealValue= function () {
         if (maxValue > this._max) maxValue = this._max;
         this._currentValue = generateRandomValue(parseFloat(minValue), maxValue);
         return {
-            generatorId: this._generatorId,
+            generatorId: this._signalId,
             value: this._currentValue
         }
     }
@@ -89,14 +89,14 @@ var generateBinaryValue = function(){
     if(this._currentValue == undefined){
         this._currentValue = 0;
         return {
-            generatorId: this._generatorId,
+            generatorId: this._signalId,
             value: this._currentValue
         }
     }
     else{
         this._currentValue = Math.abs(this._currentValue - 1);
         return {
-            generatorId: this._generatorId,
+            generatorId: this._signalId,
             value: this._currentValue
         }
     }
