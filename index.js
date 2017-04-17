@@ -122,11 +122,11 @@ io.on('connection', function (socket) {
 
 io.on('connection', function (socket) {
     socket.on('search', function (idN, category, unity, startDate, endDate) {
-        persistanceService.getSignalValues(1, 'analog', unity, startDate, endDate);
+        persistanceService.getSignalValues(idN, category, unity, startDate, endDate);
         persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) {
             socket.emit('SearchData', dataSearch);
 
-            console.log(dataSearch);
+        //    console.log(dataSearch);
         });
 
         /* database.QuerySearch(idN, category, unity, startDate, endDate);

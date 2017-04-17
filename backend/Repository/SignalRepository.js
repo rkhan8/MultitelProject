@@ -114,10 +114,13 @@ function getSignalValues(signalId, category, unity, startDate, endDate) {
             dateRec: date
         };
     }
+    if(_.isEmpty(whereClause1))
+        whereClause1 = undefined;
 
     whereClause1 = _.pickBy(whereClause1);
     signalModel.find({
-        where: whereClause1, include: [{
+        where: whereClause1,
+        include: [{
             model: signalValueModel,
             where: whereClause2
         }
