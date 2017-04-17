@@ -16,9 +16,9 @@ function QuerySearch()
 
 }
 
-function populate(data, dataa, dataaa, data2)
+function populate(data, data2)
 {
-
+  //alert (data);
   var select1 = document.getElementById("idNListbox");
   //select1.options.length = 0;
 
@@ -38,22 +38,23 @@ function populate(data, dataa, dataaa, data2)
     //populate idN
     select1.options[0] = new Option("");
     select1.options[select1.options.length] = new Option(data[i].idN);
-  }
 
-  for(var i = 0; i<dataa.length; i++)
-  {
-    //populate category
+    //populate Unity
     select3.options[0] = new Option("");
-    select3.options[select3.options.length] = new Option(dataa[i].Unity);
-  }
+    select3.options[select3.options.length] = new Option(data[i].Unity);
 
-  for(var i = 0; i<dataaa.length; i++)
-  {
-    //populate unity
+    //populate Category
     select2.options[0] = new Option("");
-    select2.options[select2.options.length] = new Option(dataaa[i].Category);
+    select2.options[select2.options.length] = new Option(data[i].Category);
   }
 
+
+
+
+}
+
+function populateDate(data2)
+{
   var select4 = document.getElementById("startDateListbox");
   //select4.options.length = 0;
 
@@ -110,10 +111,12 @@ function populateTable(dataSearch)
 
 
 //get idN, category, unity DateRec from table Signals
-socket.on('PreDonnee', function(data, dataa, dataaa){
-    socket.on('PreDonnee2', function(data2){
-        populate(data, dataa, dataaa, data2);
-    });
+socket.on('PreDonnee', function(data){
+    populate(data);
+});
+
+socket.on('PreDonnee2', function(data2){
+    populateDate(data2);
 });
 
 

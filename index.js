@@ -91,8 +91,10 @@ io.on('connection', function (socket) {
              Unity: null }]
              */
         });
-        persistanceService.persistenceEvent.on('recordingDate', function (data) {
-            socket.emit('PreDonnee2', data);
+        persistanceService.persistenceEvent.on('recordingDate', function (data2) {
+            socket.emit('PreDonnee2', data2);
+
+            //console.log(data2);
             /*
             structure de data
              [ { DateRec: '2017-08-05T01:12:26.000Z' },
@@ -123,6 +125,8 @@ io.on('connection', function (socket) {
         persistanceService.getSignalValues(1, 'analog', unity, startDate, endDate);
         persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) {
             socket.emit('SearchData', dataSearch);
+
+            console.log(dataSearch);
         });
 
         /* database.QuerySearch(idN, category, unity, startDate, endDate);
