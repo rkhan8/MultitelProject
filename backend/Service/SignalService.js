@@ -38,7 +38,7 @@ function updateSignal(signalInfos) {
 
 function searchSignalById(signalId) {
     for (i = 0; i < signals.length; i++) {
-        if (signalId === signals.get(i).getGeneratorID())
+        if (signalId === signals.get(i).getSignalID())
             return i;
     }
     return -1;
@@ -48,7 +48,7 @@ function activateSignal() {
     clearInterval(interval);
     interval = setInterval(function () {
         for (i = 0; i < signals.length; i++) {
-            var values = signals.get(i).generateValue();
+            var values = signals.get(i).nextValue();
             signalServiceEvent.emit('newValueHasGenerate', values);
         }
 

@@ -186,7 +186,7 @@
 
       socket.emit('activateSignal');
       socket.on('newValue', function(newValue){
-          $('#' + newValue.generatorId).find('.valueDisplay').val(newValue.value);
+          $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
 
           //store signal data into DATABASE
           socket.emit("storeSignalData", newValue);

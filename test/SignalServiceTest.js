@@ -64,7 +64,7 @@ describe("Signal Service", function() {
             signalService.signals.clear();
             signalService.createSignal(value);
             var signal = signalService.signals.get(0);
-            expect(signal.getGeneratorID()).to.equal(signalId);
+            expect(signal.getSignalID()).to.equal(signalId);
             expect(signal.getMin()).to.equal(min);
             expect(signal.getMax()).to.equal(max);
             signalService.signals.clear();

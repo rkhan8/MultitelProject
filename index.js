@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 var signalService = require('./backend/Service/SignalService')
 var persistanceService = require('./backend/Service/PersistenceService')
 var events = require('events');
-var dateFormat = require('dateformat');
+
 
 //initialize the repository. Start the localhost server with index.html file
 app.use(express.static(__dirname + '/frontend/'));
@@ -15,108 +15,93 @@ http.listen(3000, function () {
     console.log('listening on *:3000');
 })
 
-//createSignal
+persistanceService.persistenceEvent.on('signalsId', function (signalsId) {
+    io.sockets.emit('signalsId', signalsId);
+});
+
+persistanceService.persistenceEvent.on('signalCreateError', function (signalId) {
+    io.sockets.emit('errorExistingSignalId', {
+        signalId: signalId,
+        message: 'Ce signal existe deja dans la base de donnée'
+    });
+});
+
+signalService.signalServiceEvent.on('newValueHasGenerate', function (val) {
+    persistanceService.saveSignalValue(val.signalId, val.value);
+    io.sockets.emit('newValue', val);
+});
+
+signalService.signalServiceEvent.on('signalInfos', function (val) {
+    io.sockets.emit('signalInfos', val)
+});
+
+persistanceService.persistenceEvent.on('signalsCategories', function (signalsCategories) {
+    io.sockets.emit('signalsCategories', signalsCategories);
+});
+
+persistanceService.persistenceEvent.on('signalsUnity', function (signalsUnity) {
+    io.sockets.emit('signalsUnity', signalsUnity);
+});
+
+persistanceService.persistenceEvent.on('recordingDates', function (dates) {
+    io.sockets.emit('recordingDates', dates);
+});
+
+
 io.on('connection', function (socket) {
+
     socket.on('createSignal', function (signalValues) {
         persistanceService.persistenceEvent.on('signalCreated', function () {
             signalService.createSignal(signalValues);
         });
-        persistanceService.persistenceEvent.on('signalCreateError', function (signalId) {
-            socket.emit('errorExistingSignalId', {
-                signalId: signalId,
-                message: 'Ce signal existe deja dans la base de donnée'
-            })
-        });
+
 
         signalService.signalServiceEvent.on('errorExistingSignalId', function (message) {
             socket.emit('errorExistingSignalId', message)
         });
         persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax);
     });
-});
 
-//activateSignal
-io.on('connection', function (socket) {
     socket.on('activateSignal', function () {
-
-        signalService.signalServiceEvent.on('newValueHasGenerate', function (val) {
-            persistanceService.saveSignalValue(val.generatorId, val.value);
-            socket.emit('newValue', val);
-        });
         signalService.activateSignal();
     });
 
-});
-
-io.on('connection', function (socket) {
     socket.on('getSignalInfos', function (signalId) {
-
-        signalService.signalServiceEvent.on('signalInfos', function (val) {
-            socket.emit('signalInfos', val)
-        });
         signalService.getSignalInformations(signalId);
     });
 
-});
-
-io.on('connection', function (socket) {
     socket.on('updateSignal', function (generatorInfos) {
         signalService.updateSignal(generatorInfos);
     });
 
-})
+    socket.on('getSignalsId', function () {
+        persistanceService.getSignalsId();
 
-//Database queries
-io.on('connection', function (socket) {
-    socket.on('loadDB', function () {
-
-
-        persistanceService.persistenceEvent.on('signalsData', function(data){
-            socket.emit('PreDonnee', data);
-            /* structure de la data
-             [ { idN: '1',
-             Category: 'analog',
-             MinValue: 1,
-             MaxValue: 11,
-             Unity: null },
-             { idN: '2',
-             Category: 'analog',
-             MinValue: 1,
-             MaxValue: 11,
-             Unity: null }
-             ,{ idN: '3',
-             Category: 'analog',
-             MinValue: 1,
-             MaxValue: 11,
-             Unity: null }]
-             */
-        });
-        persistanceService.persistenceEvent.on('recordingDate', function (data2) {
-            socket.emit('PreDonnee2', data2);
-
-            //console.log(data2);
-            /*
-            structure de data
-             [ { DateRec: '2017-08-05T01:12:26.000Z' },
-             { DateRec: '2017-08-05T01:12:27.000Z' },
-             { DateRec: '2017-08-05T01:12:28.000Z' },
-             { DateRec: '2017-08-05T01:12:29.000Z' },
-             { DateRec: '2017-08-05T01:12:30.000Z' },
-             { DateRec: '2017-08-05T01:12:31.000Z' },
-             { DateRec: '2017-08-05T01:12:32.000Z' },
-             { DateRec: '2017-08-05T01:12:33.000Z' },
-             { DateRec: '2017-08-05T01:12:34.000Z' },
-             { DateRec: '2017-08-05T01:12:35.000Z' } ]
-
-             */
-        });
-        persistanceService.getListOfRecordingDate();
-        persistanceService.getSignalFromDB();
-        /* database.queryLoad();
-         database.PreloadValueEvent.on('LoadFirstData',function(data){socket.emit('PreDonnee', data)});
-         database.PreloadValueEvent.on('LoadSecondData',function(data2){socket.emit('PreDonnee2', data2)});*/
     });
 
+    socket.on('getSignalsCategories', function () {
+        persistanceService.getSignalsCategories();
+    });
+
+    socket.on('getSignalsUnity', function () {
+        persistanceService.getSignalUnity();
+    });
+
+    socket.on('getRecordingDates', function () {
+        persistanceService.getRecordingDates();
+    });
+
+    socket.on('disconnect', function () {
+        socket.removeAllListeners('createSignal');
+        socket.removeAllListeners('activateSignal');
+        socket.removeAllListeners('getSignalInfos');
+        socket.removeAllListeners('updateSignal');
+        socket.removeAllListeners('getSignalsCategories');
+        socket.removeAllListeners('getSignalsUnity');
+        socket.removeAllListeners('getRecordingDates');
+
+
+    });
 });
 
 
@@ -126,7 +111,7 @@ io.on('connection', function (socket) {
         persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) {
             socket.emit('SearchData', dataSearch);
 
-        //    console.log(dataSearch);
+            //    console.log(dataSearch);
         });
 
         /* database.QuerySearch(idN, category, unity, startDate, endDate);

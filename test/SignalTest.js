@@ -14,7 +14,7 @@ describe("Signal Test", function() {
         it("Create an signal with min and max range value", function() {
 
             var signal = new Signal(generatorId,category,min, max);
-            expect(signal.getGeneratorID()).to.equal(generatorId);
+            expect(signal.getSignalID()).to.equal(generatorId);
             expect(signal.getMin()).to.equal(min);
             expect(signal.getMax()).to.equal(max);
             expect(signal.getCategory()).to.equal(category);
@@ -30,7 +30,7 @@ describe("Signal Test", function() {
             var generatorId1 = 2;
 
             signal.updateSignal(generatorId1,category1,min1, max1);
-            expect(signal.getGeneratorID()).to.equal(generatorId1);
+            expect(signal.getSignalID()).to.equal(generatorId1);
             expect(signal.getMin()).to.equal(min1);
             expect(signal.getMax()).to.equal(max1);
             expect(signal.getCategory()).to.equal(category1);
@@ -38,7 +38,7 @@ describe("Signal Test", function() {
         });
         it("Change signal range should change range value", function(){
             var signal = new Signal(generatorId,category,min, max);
-            var result1 = signal.generateValue();
+            var result1 = signal.nextValue();
             console.log(result1);
             expect(result1.value).to.be.within(min, max);
 
@@ -47,22 +47,22 @@ describe("Signal Test", function() {
             var category1 = "analog";
             var generatorId1 = 2;
             signal.updateSignal(generatorId1,category1,min1, max1);
-            var result1 = signal.generateValue();
+            var result1 = signal.nextValue();
 
             expect(result1.value).to.be.within(min1, max1);
 
         })
         it("Change signal category should change signal generator function", function(){
             var signal = new Signal(generatorId,category,min, max);
-            var result1 = signal.generateValue();
+            var result1 = signal.nextValue();
             expect(result1.value).to.be.within(min, max);
 
 
             var category1 = "binary";
             var generatorId1 = 2;
             signal.updateSignal(generatorId1,category1);
-             result1 = signal.generateValue();
-            var result2 = signal.generateValue();
+             result1 = signal.nextValue();
+            var result2 = signal.nextValue();
             expect(result1.value).to.be.equal(0);
             expect(result2.value).to.be.equal(1);
 
@@ -72,21 +72,21 @@ describe("Signal Test", function() {
     describe("Generate random value", function() {
         it("Random value should return a number", function() {
             var signal = new Signal(generatorId,category,min, max);
-            var result = signal.generateValue();
+            var result = signal.nextValue();
             expect(result.value).to.be.a('number');
 
         });
 
         it("Random value should return value in range", function() {
             var signal = new Signal(generatorId,category,min, max);
-            var result1 = signal.generateValue();
+            var result1 = signal.nextValue();
             expect(result1.value).to.be.within(min, max);
         });
 
         it("Signal should generate multiple value in range", function(){
             var signal = new Signal(generatorId,category,min, max);
             for(i= 0; i<100 ; i++){
-                var result1 = signal.generateValue();
+                var result1 = signal.nextValue();
                 expect(result1.value).to.be.within(min, max);
             }
         });
@@ -95,8 +95,8 @@ describe("Signal Test", function() {
         it("Binary should return opposite binary value", function() {
             var category = "binary"
             var signal = new Signal(generatorId,category,min, max);
-            var result1 = signal.generateValue();
-            var result2 = signal.generateValue();
+            var result1 = signal.nextValue();
+            var result2 = signal.nextValue();
             expect(result1.value).to.be.equal(0);
             expect(result2.value).to.be.equal(1);
 

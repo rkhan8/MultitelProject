@@ -1,8 +1,31 @@
 var socket = io();
 
-function LoadDB(){
-  socket.emit('loadDB');
+function LoadSearchKeyData(){
+    //get idN, category, unity DateRec from table Signals
+    socket.emit('getSignalsId');
+    socket.emit('getSignalsCategories');
+    socket.emit('getSignalsUnity');
+    socket.emit('getRecordingDates')
 }
+
+socket.on('signalsCategories', function(categories){
+    populateComboboxFromArray('catListbox',categories);
+});
+
+socket.on('recordingDates', function(dates){
+    populateComboboxFromArray('startDateListbox',dates);
+    populateComboboxFromArray('endDateListbox',dates);
+});
+
+socket.on('signalsId', function(signalsId){
+    populateComboboxFromArray('idNListbox',signalsId);
+});
+
+socket.on('signalsUnity', function(unities){
+    populateComboboxFromArray('unityListbox',unities);
+
+});
+
 
 function QuerySearch()
 {
@@ -16,6 +39,9 @@ function QuerySearch()
 
 }
 
+
+
+/* code mort
 function populate(data, data2)
 {
   //alert (data);
@@ -76,7 +102,7 @@ function populateDate(data2)
   }
 
 }
-
+*/
 
 function populateTable(dataSearch)
 {
@@ -110,15 +136,12 @@ function populateTable(dataSearch)
 
 
 
-//get idN, category, unity DateRec from table Signals
-socket.on('PreDonnee', function(data){
-    populate(data);
-});
-
-socket.on('PreDonnee2', function(data2){
-    populateDate(data2);
-});
-
+function populateComboboxFromArray(comboboxId, array){
+    for (i = 0; i < array.length; i++) {
+        var data = '<option>' + array[i] + '</option>'
+        $('#'+comboboxId).append(data);
+    }
+}
 
 
 socket.on('SearchData', function(dataSearch){
@@ -146,8 +169,7 @@ var filterSort1 = function()
 
 $(document).ready(function()
 {
-    LoadDB();
-    executeAsync(filterSort1); //execute filter after initialize the table1
-    //socket.setMaxListeners();//setMaxListeners to avoid memory leak (emit socket > 10)
+    LoadSearchKeyData();
+    executeAsync(filterSort1);
 
 });

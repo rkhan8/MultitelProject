@@ -136,66 +136,123 @@
  exports.QuerySearch = QuerySearch;
  exports.PreloadValueEvent = PreloadValueEvent;
  */
-var mySqlRepository = require('../Repository/SignalRepository');
+var SignalRepository = require('../Repository/SignalRepository');
 var EventEmitter = require('events').EventEmitter;
 var persistenceEvent = new EventEmitter();
-persistenceEvent.setMaxListeners(0);
+
+
+
+initialisePersistenceError();
+
+initialisePersitenceEvent();
+
+
+
 
 
 function storeSignalInformation(signalId, category, minVal, maxVal, unity) {
-    mySqlRepository.mySqlRepositoryEvent.on('signalCreateError', function (signalId) {
-        persistenceEvent.emit('signalCreateError', signalId);
-    });
-    mySqlRepository.mySqlRepositoryEvent.on('signalCreated', function (signalInfos) {
-        persistenceEvent.emit('signalCreated', signalInfos );
-    });
-
-    mySqlRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
+        SignalRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
 }
 
 function saveSignalValue(signalId, value) {
-    mySqlRepository.mySqlRepositoryEvent.on('signalValueCreateError', function (signalId) {
-        persistenceEvent.emit('signalValueCreateError', signalId);
-    });
-    mySqlRepository.insertSignalValue(signalId, value);
+    SignalRepository.insertSignalValue(signalId, value);
 }
 
 function getSignalFromDB(signalId, category, minVal, maxVal, unity) {
-    mySqlRepository.mySqlRepositoryEvent.on('signalsFounded', function (data) {
-        persistenceEvent.emit('signalsData', data);
-    });
-    mySqlRepository.mySqlRepositoryEvent.on('getSignalsError', function (signalId) {
-        persistenceEvent.emit('getSignalError', '');
-    });
-    mySqlRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
+    SignalRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
 
 }
 
-function getListOfRecordingDate(){
-    mySqlRepository.mySqlRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
-        persistenceEvent.emit('recordingDate', data);
-    });
-    mySqlRepository.mySqlRepositoryEvent.on('signalValueRecordingDateError', function () {
-        persistenceEvent.emit('errorGetRecordingDate', '');
-    });
-    mySqlRepository.getDistinctDateOfRecordingSignalValue();
+function getRecordingDates(){
+    SignalRepository.getRecordingDates();
+}
+
+function getSignalsId(){
+    SignalRepository.getSignalsId();
+}
+
+function getSignalsUnity(){
+    SignalRepository.getSignalsUnity();
+}
+
+function getSignalsCategories(){
+    SignalRepository.getSignalsCategories();
 }
 
 function getSignalValues(signalId, category, unity, startDate, endDate) {
-    mySqlRepository.mySqlRepositoryEvent.on('signalValueFound', function (data) {
-        persistenceEvent.emit('signalValueData', data);
+    SignalRepository.getSignalValues(signalId,category, unity, startDate, endDate);
+}
+
+function initialisePersistenceError() {
+    SignalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
+        persistenceEvent.emit('signalCreateError', signalId);
     });
-    mySqlRepository.mySqlRepositoryEvent.on('searchSignalValueError', function () {
+
+    SignalRepository.SignalRepositoryEvent.on('getSignalsError', function (signalId) {
+        persistenceEvent.emit('getSignalError', '');
+    });
+
+
+    SignalRepository.SignalRepositoryEvent.on('signalValueCreateError', function (signalId) {
+        persistenceEvent.emit('signalValueCreateError', signalId);
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalValueRecordingDateError', function () {
+        persistenceEvent.emit('errorGetRecordingDate', '');
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalsIdError', function () {
+        persistenceEvent.emit('errorGetSignalsId', '');
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalsUnityError', function () {
+        persistenceEvent.emit('errorGetSignalsUnity', '');
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalsCategoriesError', function () {
+        persistenceEvent.emit('errorSignalsCategories', '');
+    });
+}
+function initialisePersitenceEvent() {
+    SignalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {
+        persistenceEvent.emit('signalsCategories', data);
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('searchSignalValueError', function () {
         persistenceEvent.emit('getSignalValueError', '');
     });
-    mySqlRepository.getSignalValues(signalId,category, unity, startDate, endDate);
 
+    SignalRepository.SignalRepositoryEvent.on('signalCreated', function (signalInfos) {
+        persistenceEvent.emit('signalCreated', signalInfos);
+    });
 
+    SignalRepository.SignalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
+        persistenceEvent.emit('recordingDates', data);
+    });
+    SignalRepository.SignalRepositoryEvent.on('signalsFounded', function (data) {
+        persistenceEvent.emit('signalsData', data);
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalsIdFound', function (data) {
+        persistenceEvent.emit('signalsId', data);
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalsUnityFound', function (data) {
+        persistenceEvent.emit('signalsUnity', data);
+    });
+
+    SignalRepository.SignalRepositoryEvent.on('signalValueFound', function (data) {
+        persistenceEvent.emit('signalValueData', data);
+    });
 }
+
 
 exports.persistenceEvent = persistenceEvent;
 exports.getSignalValues = getSignalValues;
-exports.getListOfRecordingDate = getListOfRecordingDate;
+exports.getRecordingDates = getRecordingDates;
+exports.getSignalsCategories = getSignalsCategories;
+exports.getSignalsId = getSignalsId;
+exports.getSignalUnity = getSignalsUnity;
 exports.storeSignalInformation = storeSignalInformation;
 exports.saveSignalValue = saveSignalValue;
 exports.getSignalFromDB = getSignalFromDB;

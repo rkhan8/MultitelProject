@@ -18,7 +18,7 @@ describe('storeSignalInformation', function() {
     it('should store correct generator informations', function() {
         persistenceService.storeSignalInformation(idTest, categoryTest, minValTest, maxValTest, unityTest);
 
-        expect(repository.mySqlRepositoryEvent.emit('signalCreated', {
+        expect(repository.SignalRepositoryEvent.emit('signalCreated', {
             signalId: idTest,
             category: categoryTest,
             valMin: minValTest,
@@ -33,7 +33,7 @@ describe('saveSignalValue', function() {
    it('should save the correct signal value', function() {
        persistenceService.saveSignalValue(idTest, valueTest, dateTest);
 
-       expect(repository.mySqlRepositoryEvent.emit('signalValueCreated', {
+       expect(repository.SignalRepositoryEvent.emit('signalValueCreated', {
            signalId: idTest,
            value: valueTest,
            date: dateTest
@@ -48,18 +48,18 @@ describe('getSignalFromDB', function() {
        persistenceService.getSignalFromDB(idTest, categoryTest, minValTest, maxValTest, unityTest);
 
        expect(function (result) {
-           repository.mySqlRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)))
+           repository.SignalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)))
        })
    })
 });
 
-// tester si getListOfRecordingDate retourne la liste de dates
-describe('getListOfRecordingDate', function() {
+// tester si getRecordingDates retourne la liste de dates
+describe('getRecordingDates', function() {
     it('should return the list of recording date', function() {
-        persistenceService.getListOfRecordingDate();
+        persistenceService.getRecordingDates();
 
         expect(function (result) {
-            repository.mySqlRepositoryEvent.emit('signalValueRecordingDateFound', JSON.parse(JSON.stringify(result)))
+            repository.SignalRepositoryEvent.emit('signalValueRecordingDateFound', JSON.parse(JSON.stringify(result)))
 
         });
     })
@@ -71,7 +71,7 @@ describe('getSignalValues', function() {
         persistenceService.getSignalValues(idTest, categoryTest, unityTest, dateTest, endDateTest);
 
         expect(function (result) {
-            repository.mySqlRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)))
+            repository.SignalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)))
         })
     })
 });

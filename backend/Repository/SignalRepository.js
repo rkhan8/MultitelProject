@@ -2,30 +2,23 @@
  * Created by angem on 2017-03-25.
  */
 
-var Sequelize = require("sequelize");
+var mySqlCOnnection = require ('../Repository/DBconnection')
 var EventEmitter = require('events').EventEmitter;
-var mySqlRepositoryEvent = new EventEmitter();
+var signalRepositoryEvent = new EventEmitter();
 var _ = require('lodash');
 
 
-var sequelize = new Sequelize('multitel', 'multitel', 'multitel', {
-    host: 'localhost',
-    port: 3306,
-    dialect: 'mysql',
-    define: {
-        timestamps: false
-    }
-});
 
-var signalValueModel = sequelize.import(__dirname + '/Model/SignalValue');
-var signalModel = sequelize.import(__dirname + '/Model/Signal');
+
+var signalValueModel = mySqlCOnnection.DB.import(__dirname + '/Model/SignalValue');
+var signalModel = mySqlCOnnection.DB.import(__dirname + '/Model/Signal');
 signalModel.hasMany(signalValueModel, {foreignKey: 'idN'});
 signalValueModel.belongsTo(signalModel, {foreignKey: 'idN'});
 signalModel.sync();
 signalValueModel.sync();
 
 
-function insertNewSignal(signalId, category, minVal, maxVal, unity) {
+exports.insertNewSignal = function(signalId, category, minVal, maxVal, unity) {
     signalModel.create({
         idN: signalId,
         Category: category,
@@ -34,7 +27,7 @@ function insertNewSignal(signalId, category, minVal, maxVal, unity) {
         Unity: unity
     })
         .then(function () {
-            mySqlRepositoryEvent.emit('signalCreated', {
+            signalRepositoryEvent.emit('signalCreated', {
                 signalId: signalId,
                 category: category,
                 valMin: minVal,
@@ -43,28 +36,28 @@ function insertNewSignal(signalId, category, minVal, maxVal, unity) {
 
         })
         .catch(function (err) {
-            mySqlRepositoryEvent.emit('signalCreateError', signalId);
+            signalRepositoryEvent.emit('signalCreateError', signalId);
             console.log(err);
 
         });
 
 }
-function insertSignalValue(signalId, value) {
+exports.insertSignalValue = function(signalId, value) {
 
     signalValueModel.create({
         idN: signalId,
         ValueRec: value,
-        DateRec: sequelize.literal('CURRENT_TIMESTAMP()')
+        DateRec: mySqlCOnnection.DB.literal('CURRENT_TIMESTAMP()')
     })
         .then(function() {
-            mySqlRepositoryEvent.emit('valueInserted', signalId);
+            signalRepositoryEvent.emit('valueInserted', signalId);
         })
         .catch(function (err) {
         console.log(err);
-        mySqlRepositoryEvent.emit('signalValueCreateError', signalId);
+        signalRepositoryEvent.emit('signalValueCreateError', signalId);
     })
-}
-function getSignals(signalId, category, minVal, maxVal, unity) {
+};
+exports.getSignals = function(signalId, category, minVal, maxVal, unity) {
     var whereClause = {
         idN: signalId,
         MinValue: minVal,
@@ -75,29 +68,75 @@ function getSignals(signalId, category, minVal, maxVal, unity) {
     whereClause = _.pickBy(whereClause);
     signalModel.findAll({where: whereClause})
         .then(function (result) {
-            mySqlRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
+            signalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
         })
         .catch(function () {
             console.log(err);
-            mySqlRepositoryEvent.emit('getSignalsError', signalId);
+            signalRepositoryEvent.emit('getSignalsError', signalId);
         });
 
 }
-
-function getDistinctDateOfRecordingSignalValue(){
+exports.getRecordingDates = function(){
     signalValueModel.findAll({
-        attributes:[Sequelize.literal('DISTINCT `DateRec`'), 'DateRec']
+        attributes:[[mySqlCOnnection.DB.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
 
     }).then(function (result) {
-        mySqlRepositoryEvent.emit('signalValueRecordingDateFound', JSON.parse(JSON.stringify(result)));
+        var dates = JSON.parse(JSON.stringify(result));
+        signalRepositoryEvent.emit('signalValueRecordingDateFound',_.map(dates, 'DateRec') );
 
     }).catch(function (err) {
         console.log(err);
-        mySqlRepositoryEvent.emit('signalValueRecordingDateError', signalId);
+        signalRepositoryEvent.emit('signalValueRecordingDateError');
 
-    })
+    });
 }
-function getSignalValues(signalId, category, unity, startDate, endDate) {
+exports.getSignalsCategories = function(){
+    signalModel.findAll({
+        attributes:[[mySqlCOnnection.DB.literal('DISTINCT Category'), 'Category']]
+
+    }).then(function (result) {
+        var categories = JSON.parse(JSON.stringify(result));
+        signalRepositoryEvent.emit('signalsCategoriesFound',_.map(categories, 'Category'));
+
+    }).catch(function (err) {
+        console.log(err);
+        signalRepositoryEvent.emit('signalsCategoriesError');
+
+    });
+}
+
+exports.getSignalsUnity = function(){
+    signalModel.findAll({
+        attributes:[[mySqlCOnnection.DB.literal('DISTINCT Unity'), 'Unity']]
+
+    }).then(function (result) {
+        var unities = JSON.parse(JSON.stringify(result));
+        signalRepositoryEvent.emit('signalsUnityFound', _.map(unities,'Unity'));
+
+    }).catch(function (err) {
+        console.log(err);
+        signalRepositoryEvent.emit('signalsUnityError');
+
+    });
+}
+
+exports.getSignalsId = function(){
+    signalModel.findAll({
+        attributes:[[mySqlCOnnection.DB.literal('DISTINCT idN'), 'idN']]
+
+    }).then(function (result) {
+        var ids = JSON.parse(JSON.stringify(result));
+        signalRepositoryEvent.emit('signalsIdFound', _.map(ids,'idN'));
+
+    }).catch(function (err) {
+        console.log(err);
+        signalRepositoryEvent.emit('signalsIdError');
+
+    });
+}
+
+
+ exports.getSignalValues = function(signalId, category, unity, startDate, endDate) {
     var whereClause2;
     var whereClause1 = {
         idN: signalId,
@@ -127,20 +166,22 @@ function getSignalValues(signalId, category, unity, startDate, endDate) {
         ]
     })
         .then(function (result) {
-            mySqlRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
+            signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
 
         }).catch(function (err) {
         console.log(err);
-        mySqlRepositoryEvent.emit('searchSignalValueError', signalId);
+        signalRepositoryEvent.emit('searchSignalValueError', signalId);
 
     });
 
 
 }
-exports.mySqlRepositoryEvent = mySqlRepositoryEvent;
-exports.getSignalValues = getSignalValues;
-exports.insertNewSignal = insertNewSignal;
-exports.insertSignalValue = insertSignalValue;
-exports.getSignalFromDB = getSignals;
-exports.getDistinctDateOfRecordingSignalValue = getDistinctDateOfRecordingSignalValue;
+
+
+exports.SignalRepositoryEvent = signalRepositoryEvent;
+
+
+
+
+
 
