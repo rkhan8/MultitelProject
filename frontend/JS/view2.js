@@ -26,8 +26,13 @@ socket.on('signalsUnity', function(unities){
 
 });
 
+socket.on('signalsValues', function(signalsValues){
+    populateSignalsValuesTable(signalsValues);
+});
 
-function QuerySearch()
+
+
+function searchSignalsValuesBySelectedKey()
 {
   var idN = $('#idNListbox option:selected').text();
   var category = $('#catListbox option:selected').text();
@@ -35,11 +40,13 @@ function QuerySearch()
   var startDate = $('#startDateListbox option:selected').text();
   var endDate = $('#endDateListbox option:selected').text();
 
-  socket.emit('search', idN, category, unity, startDate, endDate);
+  socket.emit('searchSignalsValues', idN, category, unity, startDate, endDate);
 
 }
 
-
+function exportResearchData(type, fn) {
+    return export_table_to_excel('table1', type || 'xlsx', fn);
+}
 
 /* code mort
 function populate(data, data2)
@@ -104,39 +111,41 @@ function populateDate(data2)
 }
 */
 
-function populateTable(dataSearch)
+function populateSignalsValuesTable(signalsValues)
 {
 
   $("#table1 tr").remove(); //remove previous search data
-
+    var table = document.getElementById("table1");
   //show element first table (id, cat, oldVolume, newVolume)
-  for(var j =0; j < dataSearch.length; j++)
+  for(var j =0; j < signalsValues.length; j++)
   {
     //inserting table content by incrementing all the element into the arraylist
-    var table = document.getElementById("table1");
-    var rowCount = table.rows.length;
-    var row = table.insertRow(rowCount);
 
-    row.insertCell(0).innerHTML = dataSearch[j].idN.replace('_', ' ');
-    row.insertCell(1).innerHTML = dataSearch[j].Category;
-    row.insertCell(2).innerHTML = dataSearch[j].MinVal;
-    row.insertCell(3).innerHTML = dataSearch[j].MaxVal;;
-    row.insertCell(4).innerHTML = dataSearch[j].ValueRec;;
-    row.insertCell(5).innerHTML = dataSearch[j].Unity;
-    var s = dataSearch[j].DateRec;
-    row.insertCell(6).innerHTML = s.substring(0, s.indexOf('T'));
-    //row.insertCell(5).innerHTML = Intl.NumberFormat().format(ListTab[0][j][4]);
+    var row = table.insertRow(table.rows.length);
+
+    row.insertCell(0).innerHTML = signalsValues[j].idN.replace('_', ' ');
+    row.insertCell(1).innerHTML = signalsValues[j].signal.Category;
+    row.insertCell(2).innerHTML = signalsValues[j].signal.MinValue;
+    row.insertCell(3).innerHTML = signalsValues[j].signal.MaxValue;
+    row.insertCell(4).innerHTML = signalsValues[j].ValueRec;
+    row.insertCell(5).innerHTML = signalsValues[j].signal.Unity;
+    var dateRec = $.datepicker.formatDate( "dd-mm-yy", new Date( signalsValues[j].DateRec ));
+    row.insertCell(6).innerHTML = dateRec;
+
   }
 
   //load graph data
-  LoadLineGraph(dataSearch);
-  LoadHistoGraph(dataSearch);
+  LoadLineGraph(signalsValues);
+  LoadHistoGraph(signalsValues);
 
 }
 
 
 
 function populateComboboxFromArray(comboboxId, array){
+    var data = '<option></option>'
+    $('#'+comboboxId).append(data);
+
     for (i = 0; i < array.length; i++) {
         var data = '<option>' + array[i] + '</option>'
         $('#'+comboboxId).append(data);
@@ -144,9 +153,6 @@ function populateComboboxFromArray(comboboxId, array){
 }
 
 
-socket.on('SearchData', function(dataSearch){
-      populateTable(dataSearch);
-});
 
 
 //Timeout Async execution function

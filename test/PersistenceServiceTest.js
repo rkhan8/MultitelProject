@@ -65,10 +65,10 @@ describe('getRecordingDates', function() {
     })
 });
 
-// tester si getSignalValues retourne les informations d'un signal
-describe('getSignalValues', function() {
+// tester si getSignalsValues retourne les informations d'un signal
+describe('getSignalsValues', function() {
     it('should return the correct signal information', function() {
-        persistenceService.getSignalValues(idTest, categoryTest, unityTest, dateTest, endDateTest);
+        persistenceService.getSignalsValues(idTest, categoryTest, unityTest, dateTest, endDateTest);
 
         expect(function (result) {
             repository.SignalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)))

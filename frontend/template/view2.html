@@ -50,6 +50,12 @@
     <script type="text/javascript" src="../JS/line.js"></script>
     <script type="text/javascript" src="../JS/histo.js"></script>
 
+    <!-- exportation des données -->
+    <script src="../JS/Export2Excel.js"></script>
+    <script src="../JS/FileSaver.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.10/xlsx.full.min.js"></script>
+
 
   </head>
 
@@ -86,11 +92,18 @@
               </select>
 
 
-            </div>
 
-            <a id="submitSearch" onclick="QuerySearch();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Recherche</a>
 
-          </div>
+        <div class="dataButtons">
+          <a id="submitSearch" onclick="searchSignalsValuesBySelectedKey();"
+             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
+            Recherche
+          </a>
+          <a id="submitExport" onclick="exportResearchData('xlsx');"
+             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
+            Exporter les données
+          </a>
+        </div>
           <div class="clear"></div>
 
 

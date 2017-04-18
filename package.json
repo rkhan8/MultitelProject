@@ -28,6 +28,7 @@
     "sequelize": "^3.30.3",
     "sequelize-mock": "^0.7.0",
     "sinon": "^1.17.7",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "xlsx": "^0.9.11"
   }
 }

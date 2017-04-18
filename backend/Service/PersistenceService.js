@@ -180,7 +180,7 @@ function getSignalsCategories(){
 }
 
 function getSignalValues(signalId, category, unity, startDate, endDate) {
-    SignalRepository.getSignalValues(signalId,category, unity, startDate, endDate);
+    SignalRepository.getSignalsValues(signalId,category, unity, startDate, endDate);
 }
 
 function initialisePersistenceError() {
@@ -248,7 +248,7 @@ function initialisePersitenceEvent() {
 
 
 exports.persistenceEvent = persistenceEvent;
-exports.getSignalValues = getSignalValues;
+exports.getSignalsValues = getSignalValues;
 exports.getRecordingDates = getRecordingDates;
 exports.getSignalsCategories = getSignalsCategories;
 exports.getSignalsId = getSignalsId;

@@ -136,7 +136,7 @@ exports.getSignalsId = function(){
 }
 
 
- exports.getSignalValues = function(signalId, category, unity, startDate, endDate) {
+ exports.getSignalsValues = function(signalId, category, unity, startDate, endDate) {
     var whereClause2;
     var whereClause1 = {
         idN: signalId,
@@ -157,14 +157,22 @@ exports.getSignalsId = function(){
         whereClause1 = undefined;
 
     whereClause1 = _.pickBy(whereClause1);
-    signalModel.find({
+     signalValueModel.findAll({
+         where: whereClause2,
+         include: [{
+             model: signalModel,
+             where: whereClause1
+         }
+         ]
+     })
+   /* signalModel.findAll({
         where: whereClause1,
         include: [{
             model: signalValueModel,
             where: whereClause2
         }
         ]
-    })
+    })*/
         .then(function (result) {
             signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
 

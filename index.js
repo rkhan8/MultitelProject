@@ -31,6 +31,10 @@ signalService.signalServiceEvent.on('newValueHasGenerate', function (val) {
     io.sockets.emit('newValue', val);
 });
 
+signalService.signalServiceEvent.on('errorExistingSignalId', function (message) {
+    socket.emit('errorExistingSignalId', message)
+});
+
 signalService.signalServiceEvent.on('signalInfos', function (val) {
     io.sockets.emit('signalInfos', val)
 });
@@ -47,17 +51,17 @@ persistanceService.persistenceEvent.on('recordingDates', function (dates) {
     io.sockets.emit('recordingDates', dates);
 });
 
+persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) {
+    io.sockets.emit('signalsValues', dataSearch);
+});
+
+
 
 io.on('connection', function (socket) {
 
     socket.on('createSignal', function (signalValues) {
         persistanceService.persistenceEvent.on('signalCreated', function () {
             signalService.createSignal(signalValues);
-        });
-
-
-        signalService.signalServiceEvent.on('errorExistingSignalId', function (message) {
-            socket.emit('errorExistingSignalId', message)
         });
         persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax);
     });
@@ -91,6 +95,10 @@ io.on('connection', function (socket) {
         persistanceService.getRecordingDates();
     });
 
+    socket.on('searchSignalsValues', function (idN, category, unity, startDate, endDate) {
+        persistanceService.getSignalsValues(idN, category, unity, startDate, endDate);
+    });
+
     socket.on('disconnect', function () {
         socket.removeAllListeners('createSignal');
         socket.removeAllListeners('activateSignal');
@@ -106,46 +114,6 @@ io.on('connection', function (socket) {
 
 
 io.on('connection', function (socket) {
-    socket.on('search', function (idN, category, unity, startDate, endDate) {
-        persistanceService.getSignalValues(idN, category, unity, startDate, endDate);
-        persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) {
-            socket.emit('SearchData', dataSearch);
 
-            //    console.log(dataSearch);
-        });
-
-        /* database.QuerySearch(idN, category, unity, startDate, endDate);
-         database.PreloadValueEvent.on('SearchData',function(dataSearch){socket.emit('SearchData', dataSearch)});
-         //console.log(idN + " ; "+ category + " ; "+ unity + " ; "+ startDate + " ; "+ endDate)*/
-        /*
-         Nouvelle la nouvelle structure de données retournée mettre a jour le front end dans ce sens
-
-         { idN: '1',
-         Category: 'analog',
-         MinValue: 1,
-         MaxValue: 11,
-         Unity: null,
-         signalvalues:
-         [ { id: 1,
-         idN: '1',
-         ValueRec: 5.18,
-         DateRec: '2017-08-05T01:12:26.000Z' },
-         { id: 2,
-         idN: '1',
-         ValueRec: 6.57,
-         DateRec: '2017-08-05T01:12:26.000Z' },
-         { id: 3,
-         idN: '1',
-         ValueRec: 5.19,
-         DateRec: '2017-08-05T01:12:27.000Z' },
-         { id: 4,
-         idN: '1',
-         ValueRec: 3.22,
-         DateRec: '2017-08-05T01:12:27.000Z' },
-         ] }
-
-         */
-
-    });
 
 });
