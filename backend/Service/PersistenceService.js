@@ -150,46 +150,48 @@ initialisePersitenceEvent();
 
 
 
-function storeSignalInformation(signalId, category, minVal, maxVal, unity) {
+exports.storeSignalInformation = function(signalId, category, minVal, maxVal, unity) {
         SignalRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
 }
 
-function saveSignalValue(signalId, value) {
+exports.saveSignalValue = function(signalId, value) {
     SignalRepository.insertSignalValue(signalId, value);
 }
 
-function getSignalFromDB(signalId, category, minVal, maxVal, unity) {
+exports.getSignalFromDB = function(signalId, category, minVal, maxVal, unity) {
     SignalRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
 
 }
 
-function getRecordingDates(){
+exports.getRecordingDates = function(){
     SignalRepository.getRecordingDates();
 }
 
-function getSignalsId(){
+exports.getSignalsId = function(){
     SignalRepository.getSignalsId();
 }
 
-function getSignalsUnity(){
+exports.getSignalsUnity = function(){
     SignalRepository.getSignalsUnity();
 }
 
-function getSignalsCategories(){
+exports.getSignalsCategories= function(){
     SignalRepository.getSignalsCategories();
 }
 
-function getSignalValues(signalId, category, unity, startDate, endDate) {
+exports.getSignalValues = function(signalId, category, unity, startDate, endDate) {
     SignalRepository.getSignalsValues(signalId,category, unity, startDate, endDate);
 }
-
+exports.getSignals = function(signalId, category, minVal, maxVal, unity){
+    SignalRepository.getSignals(signalId, category, minVal, maxVal, unity)
+}
 function initialisePersistenceError() {
     SignalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
         persistenceEvent.emit('signalCreateError', signalId);
     });
 
     SignalRepository.SignalRepositoryEvent.on('getSignalsError', function (signalId) {
-        persistenceEvent.emit('getSignalError', '');
+        persistenceEvent.emit('getSignalsError', '');
     });
 
 
@@ -248,11 +250,3 @@ function initialisePersitenceEvent() {
 
 
 exports.persistenceEvent = persistenceEvent;
-exports.getSignalsValues = getSignalValues;
-exports.getRecordingDates = getRecordingDates;
-exports.getSignalsCategories = getSignalsCategories;
-exports.getSignalsId = getSignalsId;
-exports.getSignalUnity = getSignalsUnity;
-exports.storeSignalInformation = storeSignalInformation;
-exports.saveSignalValue = saveSignalValue;
-exports.getSignalFromDB = getSignalFromDB;

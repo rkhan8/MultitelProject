@@ -70,7 +70,7 @@ exports.getSignals = function(signalId, category, minVal, maxVal, unity) {
         .then(function (result) {
             signalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
         })
-        .catch(function () {
+        .catch(function (err) {
             console.log(err);
             signalRepositoryEvent.emit('getSignalsError', signalId);
         });

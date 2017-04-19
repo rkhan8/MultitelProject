@@ -15,6 +15,8 @@ http.listen(3000, function () {
     console.log('listening on *:3000');
 })
 
+
+
 persistanceService.persistenceEvent.on('signalsId', function (signalsId) {
     io.sockets.emit('signalsId', signalsId);
 });
@@ -55,19 +57,26 @@ persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) 
     io.sockets.emit('signalsValues', dataSearch);
 });
 
+persistanceService.persistenceEvent.on('signalCreated', function (signalInfos) {
+    signalService.createSignal(signalInfos);
+});
 
+persistanceService.persistenceEvent.once('signalsData', function(signals){
+    signalService.createSignals(signals);
+});
 
 io.on('connection', function (socket) {
 
     socket.on('createSignal', function (signalValues) {
-        persistanceService.persistenceEvent.on('signalCreated', function () {
-            signalService.createSignal(signalValues);
-        });
         persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax);
     });
 
-    socket.on('activateSignal', function () {
-        signalService.activateSignal();
+    socket.on('getAllSignals', function(){
+       socket.emit('signals',signalService.getSignals());
+    });
+
+    socket.on('activateGenerators', function () {
+        signalService.activateGenerators();
     });
 
     socket.on('getSignalInfos', function (signalId) {
@@ -101,7 +110,7 @@ io.on('connection', function (socket) {
 
     socket.on('disconnect', function () {
         socket.removeAllListeners('createSignal');
-        socket.removeAllListeners('activateSignal');
+        socket.removeAllListeners('activateGenerators');
         socket.removeAllListeners('getSignalInfos');
         socket.removeAllListeners('updateSignal');
         socket.removeAllListeners('getSignalsCategories');
@@ -112,8 +121,10 @@ io.on('connection', function (socket) {
     });
 });
 
+initialise();
+function initialise() {
+    signalService.activateGenerators();
+    persistanceService.getSignals();
+}
 
-io.on('connection', function (socket) {
 
-
-});

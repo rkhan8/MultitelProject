@@ -5,9 +5,10 @@
 var Generator = require('../DomaineModel/Generator');
 
 
-function Signal(signalId, category, min, max) {
+function Signal(signalId, category, min, max, unity) {
     this._signalId = signalId;
     this._category = category;
+    this._unity = unity;
     this._generator = new Generator(category, min, max);
 }
 

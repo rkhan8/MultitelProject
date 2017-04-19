@@ -12,7 +12,7 @@ signalServiceEvent.setMaxListeners(0);
 var interval;
 
 
-function createSignal(signalInfos) {
+exports.createSignal = function (signalInfos) {
     var index = searchSignalById(signalInfos.signalId);
     if (index === -1) {
         var signal = new Signal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax);
@@ -24,11 +24,21 @@ function createSignal(signalInfos) {
     }
 }
 
+exports.createSignals = function (signalsInfos) {
+    signalsInfos.forEach(function (signalInfos) {
+        var signal = new Signal(signalInfos.idN, signalInfos.Category, signalInfos.MaxValue, signalInfos.MinValue);
+        signals.add(signal);
+    });
+}
 
-function updateSignal(signalInfos) {
+exports.getSignals = function () {
+    return JSON.parse(JSON.stringify(signals));
+}
+
+exports.updateSignal = function (signalInfos) {
     var index = searchSignalById(signalInfos.signalId);
     if (index != -1) {
-        signals.get(index).updateSignal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax);
+        signals.get(index).updateSignal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax, signalInfos.Unity);
 
     }
     else {
@@ -44,7 +54,7 @@ function searchSignalById(signalId) {
     return -1;
 }
 
-function activateSignal() {
+exports.activateGenerators = function () {
     clearInterval(interval);
     interval = setInterval(function () {
         for (i = 0; i < signals.length; i++) {
@@ -56,22 +66,19 @@ function activateSignal() {
 
 }
 
-function getSignalInformation(signalId) {
-    var index = searchSignalById(signalId);
-    if (index != -1) {
-        var infos = signals.get(index).getSignalInformations();
-        signalServiceEvent.emit('signalInfos', infos);
-    }
-    else {
-        signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
-    }
+/* code mort ??
+ exports.getSignalInformation = function(signalId) {
+ var index = searchSignalById(signalId);
+ if (index != -1) {
+ var infos = signals.get(index).getSignalInformations();
+ signalServiceEvent.emit('signalInfos', infos);
+ }
+ else {
+ signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
+ }
 
-}
+ }*/
 
 
-exports.signals = signals;
 exports.signalServiceEvent = signalServiceEvent;
-exports.createSignal = createSignal;
-exports.updateSignal = updateSignal;
-exports.activateSignal = activateSignal;
-exports.getSignalInformations = getSignalInformation;
+
