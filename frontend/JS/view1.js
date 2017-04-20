@@ -26,9 +26,15 @@ $(function () {
         helper: 'clone'
     });
 
+    $(".generatorExisting").draggable({
+        stack: ".draggable",
+        cursor: 'hand',
+        helper: 'clone'
+    });
+
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        accept: '.generator',
+        accept: '.generator, .generatorExisting',
         drop: function (event, ui) {
             var droppable = $(this);
             var newGenerator = ui.draggable.clone();
@@ -79,6 +85,8 @@ $(function () {
 function initializeOldSignal()
 {
   var newGenerator;
+  var valueDisplayer = createAndSetupInput();
+
 
   for(var i = 0; i < signalTab.length ; i++)
   {
@@ -86,25 +94,14 @@ function initializeOldSignal()
     newGenerator = $('.generatorExisting');
   }
 
-  var valueDisplayer = createAndSetupInput();
   $(valueDisplayer).addClass("valueDisplay");
   $(newGenerator).append(valueDisplayer);
-  //$(newGenerator).attr('id', signalTab[0]);
 
-
-  var signalName = createAndSetupInput();
-  $(signalName).addClass("signalName");
-  $(newGenerator).prepend(signalName);
-
-
-  //newGenerator.css('position', 'absolute');
-  //newGenerator.css('top', newGenerator.position.top);
-  //newGenerator.css('left', newGenerator.position.left);
-
-  //newGenerator.appendTo(droppable);
-
-
-
+  //SET ID for each generator
+  for (var i = 0; i < newGenerator.length; i++)
+  {
+    newGenerator[i].setAttribute("id",signalTab[i]);
+  }
 
 }
 
@@ -124,7 +121,8 @@ function createNewSignal() {
 function createSignalGraph(signalId) {
     var div =  $('<div />');
     var canvas = $('<canvas/>', {
-        id: signalId + 'canvas'
+        id: signalId + 'canvas',
+        class: "canvas2"
     });
     div.append(canvas);
     $(".chartsZone").append(div);
