@@ -5,7 +5,7 @@ function LoadSearchKeyData(){
     socket.emit('getSignalsId');
     socket.emit('getSignalsCategories');
     socket.emit('getSignalsUnity');
-    socket.emit('getRecordingDates')
+    socket.emit('getRecordingDates');
 }
 
 socket.on('signalsCategories', function(categories){
@@ -13,8 +13,8 @@ socket.on('signalsCategories', function(categories){
 });
 
 socket.on('recordingDates', function(dates){
-    populateComboboxFromArray('startDateListbox',dates);
-    populateComboboxFromArray('endDateListbox',dates);
+    populateComboboxDateFromArray('startDateListbox',dates);
+    populateComboboxDateFromArray('endDateListbox',dates);
 });
 
 socket.on('signalsId', function(signalsId){
@@ -48,68 +48,7 @@ function exportResearchData(type, fn) {
     return export_table_to_excel('table1', type || 'xlsx', fn);
 }
 
-/* code mort
-function populate(data, data2)
-{
-  //alert (data);
-  var select1 = document.getElementById("idNListbox");
-  //select1.options.length = 0;
 
-  //populate category
-  var select2 = document.getElementById("catListbox");
-  //select2.options.length = 0;
-
-
-  //populate unity
-  var select3 = document.getElementById("unityListbox");
-  //select3.options.length = 0;
-
-
-  for(var i = 0; i < data.length; i++)
-  {
-
-    //populate idN
-    select1.options[0] = new Option("");
-    select1.options[select1.options.length] = new Option(data[i].idN);
-
-    //populate Unity
-    select3.options[0] = new Option("");
-    select3.options[select3.options.length] = new Option(data[i].Unity);
-
-    //populate Category
-    select2.options[0] = new Option("");
-    select2.options[select2.options.length] = new Option(data[i].Category);
-  }
-
-
-
-
-}
-
-function populateDate(data2)
-{
-  var select4 = document.getElementById("startDateListbox");
-  //select4.options.length = 0;
-
-  var select5 = document.getElementById("endDateListbox");
-  //select5.options.length = 0;
-
-
-  for(var i = 0; i< data2.length; i++)
-  {
-    //populate start date
-    var s = data2[i].DateRec;
-
-    select4.options[0] = new Option("");
-    select4.options[select4.options.length] = new Option(s.substring(0, s.indexOf('T')));
-
-    //populate end date
-    select5.options[0] = new Option("");
-    select5.options[select5.options.length] = new Option(s.substring(0, s.indexOf('T')));
-  }
-
-}
-*/
 
 function populateSignalsValuesTable(signalsValues)
 {
@@ -140,6 +79,15 @@ function populateSignalsValuesTable(signalsValues)
 
 }
 
+function populateComboboxDateFromArray(comboboxId, array){
+    var data = '<option></option>'
+    $('#'+comboboxId).append(data);
+
+    for (i = 0; i < array.length; i++) {
+        var data = '<option>' + $.datepicker.formatDate( "dd-mm-yy", new Date( array[i] )); + '</option>'
+        $('#'+comboboxId).append(data);
+    }
+}
 
 
 function populateComboboxFromArray(comboboxId, array){
@@ -151,9 +99,6 @@ function populateComboboxFromArray(comboboxId, array){
         $('#'+comboboxId).append(data);
     }
 }
-
-
-
 
 //Timeout Async execution function
 function executeAsync(func)
