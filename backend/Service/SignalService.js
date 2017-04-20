@@ -24,6 +24,8 @@ exports.createSignal = function (signalInfos) {
     }
 }
 
+
+
 exports.createSignals = function (signalsInfos) {
     signalsInfos.forEach(function (signalInfos) {
         var signal = new Signal(signalInfos.idN, signalInfos.Category, signalInfos.MaxValue, signalInfos.MinValue);
