@@ -2,6 +2,9 @@ var socket = io();
 var generators = new Array();
 var charts = new Array();
 
+signalTab = [];
+
+
 socket.emit('getAllSignals');
 
 socket.on('newValue', function (newValue) {
@@ -10,7 +13,10 @@ socket.on('newValue', function (newValue) {
 });
 
 socket.on('signals', function (signals) {
-    console.log(signals);
+    for(var i = 0; i < signals.length; i++)
+    {
+      signalTab.push(signals[i]._signalId);
+    }
 });
 
 $(function () {
@@ -69,6 +75,42 @@ $(function () {
 });
 
 
+
+function initializeOldSignal()
+{
+  var newGenerator;
+
+  for(var i = 0; i < signalTab.length ; i++)
+  {
+    $("#draggableContentExisting").prepend('<div class="generatorExisting"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
+    newGenerator = $('.generatorExisting');
+  }
+
+  var valueDisplayer = createAndSetupInput();
+  $(valueDisplayer).addClass("valueDisplay");
+  $(newGenerator).append(valueDisplayer);
+  //$(newGenerator).attr('id', signalTab[0]);
+
+
+  var signalName = createAndSetupInput();
+  $(signalName).addClass("signalName");
+  $(newGenerator).prepend(signalName);
+
+
+  //newGenerator.css('position', 'absolute');
+  //newGenerator.css('top', newGenerator.position.top);
+  //newGenerator.css('left', newGenerator.position.left);
+
+  //newGenerator.appendTo(droppable);
+
+
+
+
+}
+
+
+
+
 function createNewSignal() {
     if (validateFields()) {
         var signalId = $('#generatorName').val();
@@ -81,7 +123,7 @@ function createNewSignal() {
 
 function createSignalGraph(signalId) {
     var div =  $('<div />');
-    var canvas = $('<canvas />', {
+    var canvas = $('<canvas/>', {
         id: signalId + 'canvas'
     });
     div.append(canvas);
@@ -101,12 +143,9 @@ function createSignalGraph(signalId) {
     var chart = new Chart(canvas).Line(startingData);
     charts.push({id:signalId + 'canvas',
     chart:chart });
-
-
-
-
-
 }
+
+
 function updateSignalChart(signalId, value) {
        var chart = _.find(charts,{'id': signalId + 'canvas'});
        if(!_.isUndefined(chart)){
@@ -217,18 +256,3 @@ function createAndSetupInput() {
     $(input).css('height', '20px');
     return input;
 }
-
-
-/* code mort ???
- function generateSignal(signalId) {
-
- createSignal(signalId);
- socket.emit("storeSignalData", newValue);
-
-
- }
-
- function addNewGenerator() {
- $('#addGenTextArea').show();
- }
- */

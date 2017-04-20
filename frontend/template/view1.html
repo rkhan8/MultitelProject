@@ -56,25 +56,39 @@
           </div>
 
           <div class="columns">
-            <div id="draggableContent" class="ui-widget-content">
-                <div class="generator">
-                    <img src="../images/temperature.jpg" height="50px" width="50px">
-                </div>
-                <div class="generator">
-                    <img src="../images/icon-electricity.png" height="50px" width="50px">
-                </div>
-                <div class="generator">
-                    <img src="../images/iconeBinaire.jpg" height="50px" width="50px">
-                </div>
+
+            <div id="draggableContentExisting" class="ui-widget-content">
             </div>
-            <!--<div id="droppableContent" class= "ui-drop" class="ui-widget-content">-->
+
+
             <div id="droppableContent" class= "ui-drop">
             </div>
           </div>
           <div class="clear"></div>
+
         </br>
 
-        <!--<input id="value" type="text">-->
+          <div id="draggableContent" class="ui-widget-content">
+            <table>
+              <th>
+                <div class="generator">
+                    <img src="../images/temperature.jpg" height="50px" width="50px">
+                </div>
+              </th>
+              <th>
+                <div class="generator">
+                    <img src="../images/icon-electricity.png" height="50px" width="50px">
+                </div>
+              </th>
+              <th>
+                <div class="generator">
+                    <img src="../images/iconeBinaire.jpg" height="50px" width="50px">
+                </div>
+              </th>
+            </table>
+
+          </div>
+
 
       </div>
 
@@ -125,8 +139,16 @@
           </textarea>
       </label>
 
+
+      <button id="add_generator" type="button" onclick="initializeOldSignal()">Ajouter un générateur</button>
+
+    </br>
+
       <div class="chartsZone">
+        
       </div>
+
+    </br>
 
 
 </body>
