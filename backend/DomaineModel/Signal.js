@@ -12,6 +12,7 @@ function Signal(signalId, category, min, max, unity) {
     this._generator = new Generator(category, min, max);
 }
 
+
 Signal.prototype.updateSignal = function (signalId, category, min, max) {
     this._signalId = signalId;
     this._category = category;
