@@ -31,8 +31,6 @@ function queryLoad()
   });
 
 
-
-
   connection.query('SELECT DISTINCT Unity FROM Signals;', function(err, rows2, fields) {
     if (!err)
     {
@@ -78,7 +76,9 @@ function queryLoad()
   });
 }
 
-
+function getAllIds() {
+  return IdArray;
+}
 
 function QuerySearchData(idN, category, unity, startDate, endDate)
 {
