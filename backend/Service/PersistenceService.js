@@ -179,7 +179,7 @@ exports.getSignalsCategories= function(){
     SignalRepository.getSignalsCategories();
 }
 
-exports.getSignalValues = function(signalId, category, unity, startDate, endDate) {
+exports.getSignalsValues = function(signalId, category, unity, startDate, endDate) {
     SignalRepository.getSignalsValues(signalId,category, unity, startDate, endDate);
 }
 exports.getSignals = function(signalId, category, minVal, maxVal, unity){

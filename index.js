@@ -97,7 +97,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('getSignalsUnity', function () {
-        persistanceService.getSignalUnity();
+        persistanceService.getSignalsUnity();
     });
 
     socket.on('getRecordingDates', function () {
