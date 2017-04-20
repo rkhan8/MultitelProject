@@ -88,7 +88,7 @@ function createSignalGraph(signalId) {
     $(".chartsZone").append(div);
     canvas =  $('#'+ signalId + 'canvas'). get(0).getContext('2d');
     var startingData = {
-        labels: [1,2,3,4,5,6,7,9,10,11,12,13,14,15],
+        labels: ["","","","","","","","","","","","","","",""],
         datasets: [
             {
                 fillColor: "rgba(151,187,205,0.2)",
@@ -101,7 +101,7 @@ function createSignalGraph(signalId) {
     var chart = new Chart(canvas).Line(startingData);
     charts.push({id:signalId + 'canvas',
     chart:chart });
-    latestLabel = startingData.labels[15];
+
 
 
 
@@ -110,7 +110,7 @@ function createSignalGraph(signalId) {
 function updateSignalChart(signalId, value) {
        var chart = _.find(charts,{'id': signalId + 'canvas'});
        if(!_.isUndefined(chart)){
-           chart.chart.addData([value]);
+           chart.chart.addData([value],"");
            chart.chart.removeData();
        }
 

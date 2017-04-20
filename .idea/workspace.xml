@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a1ca8d0-23d0-4e35-8161-a655274b2428" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frontend/JS/Libraries/lodash.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/frontend/JS/Export2Excel.js" afterPath="$PROJECT_DIR$/frontend/JS/Libraries/Export2Excel.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/frontend/JS/FileSaver.js" afterPath="$PROJECT_DIR$/frontend/JS/Libraries/FileSaver.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/frontend/JS/filter.js" afterPath="$PROJECT_DIR$/frontend/JS/Libraries/filter.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/frontend/JS/histo.js" afterPath="$PROJECT_DIR$/frontend/JS/Libraries/histo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/frontend/JS/jquery.tablesorter.min.js" afterPath="$PROJECT_DIR$/frontend/JS/Libraries/jquery.tablesorter.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Service/SignalService.js" afterPath="$PROJECT_DIR$/backend/Service/SignalService.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/JS/view1.js" afterPath="$PROJECT_DIR$/frontend/JS/view1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/css/ressource_style.css" afterPath="$PROJECT_DIR$/frontend/css/ressource_style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/template/view1.html" afterPath="$PROJECT_DIR$/frontend/template/view1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/template/view2.html" afterPath="$PROJECT_DIR$/frontend/template/view2.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -55,8 +47,18 @@
       <file leaf-file-name="view1.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/JS/view1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1000">
-              <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="10" />
+            <state relative-caret-position="225">
+              <caret line="90" column="61" lean-forward="false" selection-start-line="90" selection-start-column="61" selection-end-line="90" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="82" column="43" lean-forward="false" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -67,6 +69,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="307">
               <caret line="43" column="12" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="43" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignalService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/Service/SignalService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1757">
+              <caret line="81" column="2" lean-forward="false" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -156,7 +168,6 @@
         <option value="$PROJECT_DIR$/frontend/index.html" />
         <option value="$PROJECT_DIR$/frontend/template/view2.html" />
         <option value="$PROJECT_DIR$/backend/Repository/SignalRepository.js" />
-        <option value="$PROJECT_DIR$/backend/Service/SignalService.js" />
         <option value="$PROJECT_DIR$/backend/DomaineModel/Signal.js" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/backend/Service/PersistenceService.js" />
@@ -164,6 +175,7 @@
         <option value="$PROJECT_DIR$/frontend/JS/view2.js" />
         <option value="$PROJECT_DIR$/frontend/css/ressource_style.css" />
         <option value="$PROJECT_DIR$/frontend/template/view1.html" />
+        <option value="$PROJECT_DIR$/backend/Service/SignalService.js" />
         <option value="$PROJECT_DIR$/frontend/JS/view1.js" />
       </list>
     </option>
@@ -513,16 +525,16 @@
       <workItem from="1492541618342" duration="6474000" />
       <workItem from="1492583594715" duration="6542000" />
       <workItem from="1492649924597" duration="3134000" />
-      <workItem from="1492653624036" duration="23171000" />
+      <workItem from="1492653624036" duration="24381000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87386000" />
+    <option name="totallyTimeSpent" value="88596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2869" y="-70" width="2902" height="1597" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16133568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -876,14 +888,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="73" column="4" lean-forward="false" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/Service/PersistenceService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -891,14 +895,6 @@
           <folding>
             <element signature="n#!!block;n#initialisePersistenceError#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/Service/SignalService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="62" column="52" lean-forward="true" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1008,10 +1004,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="82" column="43" lean-forward="false" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/Service/SignalService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1757">
+          <caret line="81" column="2" lean-forward="false" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/JS/view1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1000">
-          <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="10" />
+        <state relative-caret-position="225">
+          <caret line="90" column="61" lean-forward="false" selection-start-line="90" selection-start-column="61" selection-end-line="90" selection-end-column="61" />
           <folding />
         </state>
       </provider>

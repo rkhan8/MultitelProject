@@ -68,7 +68,7 @@ exports.activateGenerators = function () {
 
 }
 
-/* code mort ??
+
  exports.getSignalInformation = function(signalId) {
  var index = searchSignalById(signalId);
  if (index != -1) {
@@ -79,7 +79,7 @@ exports.activateGenerators = function () {
  signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
  }
 
- }*/
+ }
 
 
 exports.signalServiceEvent = signalServiceEvent;
