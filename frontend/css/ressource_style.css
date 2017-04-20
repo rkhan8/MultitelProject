@@ -354,6 +354,15 @@ canvas{
   border-radius: 15px;
 }
 
+.chartsZone
+{
+  width:70%;
+  overflow-x:auto;
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
+}
+
 
 #tableHisto
 {

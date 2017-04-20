@@ -1,10 +1,12 @@
 var socket = io();
 var generators = new Array();
+var charts = new Array();
 
 socket.emit('getAllSignals');
 
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
+   updateSignalChart(newValue.signalId, newValue.value);
 });
 
 socket.on('signals', function (signals) {
@@ -72,9 +74,49 @@ function createNewSignal() {
         var signalId = $('#generatorName').val();
         createSignal(signalId);
         hide_popup();
+        createSignalGraph(signalId);
     }
 
 }
+
+function createSignalGraph(signalId) {
+    var div =  $('<div />');
+    var canvas = $('<canvas />', {
+        id: signalId + 'canvas'
+    });
+    div.append(canvas);
+    $(".chartsZone").append(div);
+    canvas =  $('#'+ signalId + 'canvas'). get(0).getContext('2d');
+    var startingData = {
+        labels: [1,2,3,4,5,6,7,9,10,11,12,13,14,15],
+        datasets: [
+            {
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                data: [0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0]
+            }]
+    };
+    var chart = new Chart(canvas).Line(startingData);
+    charts.push({id:signalId + 'canvas',
+    chart:chart });
+    latestLabel = startingData.labels[15];
+
+
+
+
+}
+function updateSignalChart(signalId, value) {
+       var chart = _.find(charts,{'id': signalId + 'canvas'});
+       if(!_.isUndefined(chart)){
+           chart.chart.addData([value]);
+           chart.chart.removeData();
+       }
+
+
+}
+
 function updateSignal() {
     if (validateFields()) {
         var signalId = $('#generatorName').val();
@@ -176,14 +218,17 @@ function createAndSetupInput() {
     return input;
 }
 
-function generateSignal(signalId) {
 
-    createSignal(signalId);
-    socket.emit("storeSignalData", newValue);
+/* code mort ???
+ function generateSignal(signalId) {
+
+ createSignal(signalId);
+ socket.emit("storeSignalData", newValue);
 
 
-}
+ }
 
-function addNewGenerator() {
-    $('#addGenTextArea').show();
-}
+ function addNewGenerator() {
+ $('#addGenTextArea').show();
+ }
+ */
