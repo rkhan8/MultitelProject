@@ -26,7 +26,7 @@ $(function () {
         activeClass: 'ui-state-hover',
         accept: '.generator, .oldGenerator',
         drop: function (event, ui) {
-            var droppable = $(this);
+            var dropZone = $(this);
             var generator = ui.draggable.clone();
 
             var valueDisplayer = createAndSetupInput();
@@ -36,14 +36,16 @@ $(function () {
             generator.css('position', 'absolute');
             generator.css('top', ui.position.top);
             generator.css('left', ui.position.left);
+            generator.appendTo(dropZone);
 
-            generator.appendTo(droppable);
 
             if ($(generator).hasClass('generator')) {
-                createAndSetupNewGenerator(generator, droppable, ui);
+                setupNewGenerator(generator);
+
             }
             if ($(generator).hasClass('oldGenerator')) {
-                setupOldGenerator(generator, droppable, ui);
+                setupOldGenerator(generator);
+                ui.draggable.remove();
             }
 
             $(generator).click(function () {
@@ -68,10 +70,11 @@ $(function () {
 
 function setupOldGenerator(generator) {
     var signalId = $(generator).attr('id');
+
     createSignalGraph(signalId);
 }
 
-function createAndSetupNewGenerator(generator) {
+function setupNewGenerator(generator) {
 
 
     $(generator).attr('id', generators.length + 1);
