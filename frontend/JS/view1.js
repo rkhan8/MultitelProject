@@ -9,6 +9,8 @@ socket.emit('getAllSignals');
 
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
+    $('#' + newValue.signalId).find('.valueDisplayExisting').val(newValue.value);
+
    updateSignalChart(newValue.signalId, newValue.value);
 });
 
@@ -84,24 +86,35 @@ $(function () {
 
 function initializeOldSignal()
 {
-  var newGenerator;
-  var valueDisplayer = createAndSetupInput();
+
+  var newGeneratorExisting;
+  var valueDisplayerExisting = createAndSetupInputExisting();
 
 
   for(var i = 0; i < signalTab.length ; i++)
   {
     $("#draggableContentExisting").prepend('<div class="generatorExisting"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-    newGenerator = $('.generatorExisting');
+    newGeneratorExisting = $('.generatorExisting');
   }
 
-  $(valueDisplayer).addClass("valueDisplay");
-  $(newGenerator).append(valueDisplayer);
+  $(valueDisplayerExisting).addClass("valueDisplayExisting");
+  $(newGeneratorExisting).append(valueDisplayerExisting);
 
   //SET ID for each generator
-  for (var i = 0; i < newGenerator.length; i++)
+  for (var i = 0; i < newGeneratorExisting.length; i++)
   {
-    newGenerator[i].setAttribute("id",signalTab[i]);
+    newGeneratorExisting[i].setAttribute("id",signalTab[i]);
   }
+
+
+  var signalName = createAndSetupInputExisting();
+  $(signalName).addClass("signalNameExisting");
+  $(newGeneratorExisting).prepend(signalName);
+
+  //BUGGGGG GetSignalValue is not a function
+  //socket.emit('getSignalInfos', signalTab[i]);
+
+
 
 }
 
@@ -246,6 +259,17 @@ function createSignal(signalId, min, max, category) {
 
 
 function createAndSetupInput() {
+    var input = document.createElement('input');
+    input.disabled = true;
+    $(input).css('width', '50px');
+    $(input).css('border-color', 'black');
+    $(input).css('padding', '5px');
+    $(input).css('height', '20px');
+    return input;
+}
+
+
+function createAndSetupInputExisting() {
     var input = document.createElement('input');
     input.disabled = true;
     $(input).css('width', '50px');
