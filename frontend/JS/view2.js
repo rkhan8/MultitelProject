@@ -34,6 +34,9 @@ socket.on('signalsValues', function(signalsValues){
 
 function searchSignalsValuesBySelectedKey()
 {
+
+  loadshow();
+
   var idN = $('#idNListbox option:selected').text();
   var category = $('#catListbox option:selected').text();
   var unity = $('#unityListbox option:selected').text();
@@ -76,6 +79,9 @@ function populateSignalsValuesTable(signalsValues)
   //load graph data
   LoadLineGraph(signalsValues);
   LoadHistoGraph(signalsValues);
+
+  load();
+
 
 }
 
