@@ -68,7 +68,7 @@ persistanceService.persistenceEvent.once('signalsData', function(signals){
 io.on('connection', function (socket) {
 
     socket.on('createSignal', function (signalValues) {
-        persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax);
+        persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax, signalValues.unity);
     });
 
     socket.on('getAllSignals', function(){

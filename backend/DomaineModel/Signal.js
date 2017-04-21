@@ -36,7 +36,8 @@ Signal.prototype.getSignalInformations = function () {
     return {
 
        signalId: this._signalId,
-        category: this._category
+        category: this._category,
+        unity: this._unity
     }
 };
 

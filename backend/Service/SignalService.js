@@ -15,7 +15,7 @@ var interval;
 exports.createSignal = function (signalInfos) {
     var index = searchSignalById(signalInfos.signalId);
     if (index === -1) {
-        var signal = new Signal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax);
+        var signal = new Signal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax,signalInfos.unity);
         signals.add(signal);
 
     }

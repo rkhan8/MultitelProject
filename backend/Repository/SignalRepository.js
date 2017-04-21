@@ -164,16 +164,7 @@ exports.getSignalsId = function(){
              where: whereClause1
          }
          ]
-     })
-   /* signalModel.findAll({
-        where: whereClause1,
-        include: [{
-            model: signalValueModel,
-            where: whereClause2
-        }
-        ]
-    })*/
-        .then(function (result) {
+     }).then(function (result) {
             signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
 
         }).catch(function (err) {
