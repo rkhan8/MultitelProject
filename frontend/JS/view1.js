@@ -55,6 +55,7 @@ $(function () {
                     $('#valMin').val(generatorInfos.minValue);
                     $('#valMax').val(generatorInfos.maxValue);
                     document.getElementById('category').value = generatorInfos.category;
+                    $('#unity').val(generatorInfos.unity);
                 });
 
                 socket.emit('getSignalInfos', generatorId);
@@ -87,8 +88,6 @@ function setupNewGenerator(generator) {
     $('#save').show();
     $('#update').hide();
     show_popup($(generator).attr('id'));
-
-
 }
 
 function initializeOldSignal(signals) {
@@ -107,11 +106,8 @@ function initializeOldSignal(signals) {
         $(signalName).val(signals[i]._signalId);
         $(generator).prepend(signalName);
         generators.push(signals[i]._signalId);
-
-
     }
 }
-
 
 function createNewSignal() {
     if (validateFields()) {
@@ -167,13 +163,13 @@ function updateSignal() {
                 signalId: newSignalId,
                 valMin: $('#valMin').val(),
                 valMax: $('#valMax').val(),
-                category: $('#category').find(":selected").val()
+                category: $('#category').find(":selected").val(),
+                unity: $('#unity').val()
             });
         updateSignalInfos(newSignalId);
         hide_popup();
     }
 }
-
 
 function validateFields() {
     $('#errorMsg').text("");
@@ -181,19 +177,17 @@ function validateFields() {
     var categoryValue = document.getElementById('category').value;
     var genValMin = document.getElementById('valMin');
     var genValMax = document.getElementById('valMax');
+    var unityValue = document.getElementById('unity').value;
 
-    /*if(document.getElementById('category').value == "binary")  {
-     document.getElementById('valMin').disabled = true;
-     document.getElementById('valMax').disabled = true;
-     }*/
     if (categoryValue == "") {
         $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
     }
-    else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == "" )) {
+    else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == ""
+        || unityValue == "")) {
         $('#errorMsg').text("Vous devez remplir tous les champs");
     }
-    else if (categoryValue == "binary" && nameValue == "") {
-        $('#errorMsg').text("Vous devez spécifier le nom du générateur");
+    else if (categoryValue == "binary" && (nameValue == "" || unityValue == "")) {
+        $('#errorMsg').text("Vous devez spécifier le nom et/ou l'unité du générateur");
     }
     else if (parseInt(genValMin.value) >= parseInt(genValMax.value)) {
         $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
@@ -221,7 +215,6 @@ function updateSignalInfos(newSignalId) {
     if (index != -1) {
         charts[index].id = newSignalId + 'canvas';
     }
-
 }
 
 function show_popup(generatorId) {
@@ -242,9 +235,9 @@ function hide_popup() {
     $('#errorMsg').text("");
     $('#valMin').val("");
     $('#valMax').val("");
+    $('#unity').val("");
     document.getElementById('category').selectedIndex = 0;
     $('#popupContent').css('display', 'none');
-
 }
 
 function hide_gen() {
@@ -258,7 +251,8 @@ function createSignal(signalId, min, max, category) {
             signalId: signalId,
             valMin: $('#valMin').val(),
             valMax: $('#valMax').val(),
-            category: $('#category option:selected').val()
+            category: $('#category option:selected').val(),
+            unity: $('#unity').val()
         });
 }
 
