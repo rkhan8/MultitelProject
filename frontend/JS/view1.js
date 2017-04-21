@@ -3,8 +3,6 @@ var generators = new Array();
 var charts = new Array();
 
 
-
-
 socket.emit('getAllSignals');
 
 socket.on('newValue', function (newValue) {
@@ -13,10 +11,6 @@ socket.on('newValue', function (newValue) {
 });
 
 socket.on('signals', function (signals) {
-
-    for (var i = 0; i < signals.length; i++) {
-        signalTab.push(signals[i]._signalId);
-    }
     initializeOldSignal(signals);
 });
 
@@ -34,39 +28,57 @@ $(function () {
         drop: function (event, ui) {
             var droppable = $(this);
             var generator = ui.draggable.clone();
-            if($(generator).hasClass('generator')){
-                createAndSetupNewGenerator(generator, droppable);
+
+            var valueDisplayer = createAndSetupInput();
+            $(valueDisplayer).addClass("valueDisplay");
+            $(generator).append(valueDisplayer);
+
+            generator.css('position', 'absolute');
+            generator.css('top', ui.position.top);
+            generator.css('left', ui.position.left);
+
+            generator.appendTo(droppable);
+
+            if ($(generator).hasClass('generator')) {
+                createAndSetupNewGenerator(generator, droppable, ui);
             }
-            if($(generator).hasClass('oldGenerator')){
-                setupOldGenerator(generator, droppable);
+            if ($(generator).hasClass('oldGenerator')) {
+                setupOldGenerator(generator, droppable, ui);
             }
+
+            $(generator).click(function () {
+                var currentGenerator = $(this);
+                var generatorId = $(currentGenerator).attr('id');
+                socket.on('signalInfos', function (generatorInfos) {
+                    $('#valMin').val(generatorInfos.minValue);
+                    $('#valMax').val(generatorInfos.maxValue);
+                    document.getElementById('category').value = generatorInfos.category;
+                });
+
+                socket.emit('getSignalInfos', generatorId);
+                $('#save').hide();
+                $('#update').show();
+                show_updatePopup(generatorId);
+            });
 
 
         }
     });
 });
 
-function setupOldGenerator(generator,droppable){
-
+function setupOldGenerator(generator) {
+    var signalId = $(generator).attr('id');
+    createSignalGraph(signalId);
 }
 
-function createAndSetupNewGenerator(generator,dropZone){
+function createAndSetupNewGenerator(generator) {
 
-    var valueDisplayer = createAndSetupInput();
-    $(valueDisplayer).addClass("valueDisplay");
-    $(generator).append(valueDisplayer);
+
     $(generator).attr('id', generators.length + 1);
-
     var signalName = createAndSetupInput();
     $(signalName).addClass("signalName");
     $(generator).prepend(signalName);
 
-
-    generator.css('position', 'absolute');
-    generator.css('top', ui.position.top);
-    generator.css('left', ui.position.left);
-
-    generator.appendTo(dropZone);
     generators.push(generator);
 
     $('#save').show();
@@ -74,40 +86,25 @@ function createAndSetupNewGenerator(generator,dropZone){
     show_popup($(generator).attr('id'));
 
 
-    $(generator).click(function () {
-        var currentGenerator = $(this);
-        var generatorId = $(currentGenerator).attr('id');
-        socket.on('signalInfos', function (generatorInfos) {
-            $('#valMin').val(generatorInfos.minValue);
-            $('#valMax').val(generatorInfos.maxValue);
-            document.getElementById('category').value = generatorInfos.category;
-        });
-
-        socket.emit('getSignalInfos', generatorId);
-        $('#save').hide();
-        $('#update').show();
-        show_updatePopup(generatorId);
-    });
-
 }
 
 function initializeOldSignal(signals) {
 
-    var signalName = createAndSetupInput();
-
-
     for (var i = 0; i < signals.length; i++) {
-
+        var signalName = createAndSetupInput();
         var generator = $('<div class="oldGenerator"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-        $("#oldGenerator").prepend(generator);
-        generator.setAttribute("id", signals._signalId);
+        $("#draggableContentExisting").prepend(generator);
+        generator.get(0).setAttribute("id", signals[i]._signalId);
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
             helper: 'clone'
         });
-        $(generator).addClass("signalName");
-        $(generator).append(signalName);
+        $(signalName).addClass("signalName");
+        $(signalName).val(signals[i]._signalId);
+        $(generator).prepend(signalName);
+        generators.push(signals[i]._signalId);
+
 
     }
 }
@@ -161,14 +158,15 @@ function updateSignalChart(signalId, value) {
 
 function updateSignal() {
     if (validateFields()) {
-        var signalId = $('#generatorName').val();
+        var newSignalId = $('#generatorName').val();
         socket.emit("updateSignal",
             {
-                signalId: signalId,
+                signalId: newSignalId,
                 valMin: $('#valMin').val(),
                 valMax: $('#valMax').val(),
                 category: $('#category').find(":selected").val()
             });
+        updateSignalInfos(newSignalId);
         hide_popup();
     }
 }
@@ -200,16 +198,28 @@ function validateFields() {
     else {
         $('#errorMsg').text("");
 
-        var generatorId = $('#generatorName').val();
-        if (!$('#' + generatorId).length) {
-            $('#' + generators.length).attr('id', generatorId);
-        }
-        $('#' + generatorId).find('.signalName').val($('#generatorName').val());
+        var newSignalId = $('#generatorName').val();
+        updateSignalInfos(newSignalId);
         return true;
     }
 }
 //Function To Display Popup
 
+
+function updateSignalInfos(newSignalId) {
+    var signal = $('#droppableContent').get(0).lastChild;
+    var oldId = $(signal).attr('id');
+
+
+    $(signal).find('.signalName').val(newSignalId);
+    $(signal).attr('id', newSignalId);
+
+    var index = _.findIndex(charts, oldId + 'canvas');
+    if (index != -1) {
+        charts[index].id = newSignalId + 'canvas';
+    }
+
+}
 
 function show_popup(generatorId) {
     $('#errorMsg').text("");
