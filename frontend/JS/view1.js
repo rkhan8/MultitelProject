@@ -9,14 +9,15 @@ socket.emit('getAllSignals');
 
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
-   updateSignalChart(newValue.signalId, newValue.value);
+    updateSignalChart(newValue.signalId, newValue.value);
 });
 
 socket.on('signals', function (signals) {
-    for(var i = 0; i < signals.length; i++)
-    {
-      signalTab.push(signals[i]._signalId);
+
+    for (var i = 0; i < signals.length; i++) {
+        signalTab.push(signals[i]._signalId);
     }
+    initializeOldSignal(signals);
 });
 
 $(function () {
@@ -26,86 +27,90 @@ $(function () {
         helper: 'clone'
     });
 
-    $(".generatorExisting").draggable({
-        stack: ".draggable",
-        cursor: 'hand',
-        helper: 'clone'
-    });
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        accept: '.generator, .generatorExisting',
+        accept: '.generator, .oldGenerator',
         drop: function (event, ui) {
             var droppable = $(this);
-            var newGenerator = ui.draggable.clone();
-
-            var valueDisplayer = createAndSetupInput();
-
-            $(valueDisplayer).addClass("valueDisplay");
-            $(newGenerator).append(valueDisplayer);
-            $(newGenerator).attr('id', generators.length + 1);
-
-            var signalName = createAndSetupInput();
-            $(signalName).addClass("signalName");
-            $(newGenerator).prepend(signalName);
+            var generator = ui.draggable.clone();
+            if($(generator).hasClass('generator')){
+                createAndSetupNewGenerator(generator, droppable);
+            }
+            if($(generator).hasClass('oldGenerator')){
+                setupOldGenerator(generator, droppable);
+            }
 
 
-            newGenerator.css('position', 'absolute');
-            newGenerator.css('top', ui.position.top);
-            newGenerator.css('left', ui.position.left);
-
-            newGenerator.appendTo(droppable);
-            generators.push(newGenerator);
-
-            $('#save').show();
-            $('#update').hide();
-            show_popup($(newGenerator).attr('id'));
-
-
-            $(newGenerator).click(function () {
-                var currentGenerator = $(this);
-                var generatorId = $(currentGenerator).attr('id');
-                socket.on('signalInfos', function (generatorInfos) {
-                    $('#valMin').val(generatorInfos.minValue);
-                    $('#valMax').val(generatorInfos.maxValue);
-                    document.getElementById('category').value = generatorInfos.category;
-                });
-
-                socket.emit('getSignalInfos', generatorId);
-                $('#save').hide();
-                $('#update').show();
-                show_updatePopup(generatorId);
-            });
         }
     });
 });
 
-
-
-function initializeOldSignal()
-{
-  var newGenerator;
-  var valueDisplayer = createAndSetupInput();
-
-
-  for(var i = 0; i < signalTab.length ; i++)
-  {
-    $("#draggableContentExisting").prepend('<div class="generatorExisting"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-    newGenerator = $('.generatorExisting');
-  }
-
-  $(valueDisplayer).addClass("valueDisplay");
-  $(newGenerator).append(valueDisplayer);
-
-  //SET ID for each generator
-  for (var i = 0; i < newGenerator.length; i++)
-  {
-    newGenerator[i].setAttribute("id",signalTab[i]);
-  }
+function setupOldGenerator(generator,droppable){
 
 }
 
+function createAndSetupNewGenerator(generator,dropZone){
 
+    var valueDisplayer = createAndSetupInput();
+    $(valueDisplayer).addClass("valueDisplay");
+    $(generator).append(valueDisplayer);
+    $(generator).attr('id', generators.length + 1);
+
+    var signalName = createAndSetupInput();
+    $(signalName).addClass("signalName");
+    $(generator).prepend(signalName);
+
+
+    generator.css('position', 'absolute');
+    generator.css('top', ui.position.top);
+    generator.css('left', ui.position.left);
+
+    generator.appendTo(dropZone);
+    generators.push(generator);
+
+    $('#save').show();
+    $('#update').hide();
+    show_popup($(generator).attr('id'));
+
+
+    $(generator).click(function () {
+        var currentGenerator = $(this);
+        var generatorId = $(currentGenerator).attr('id');
+        socket.on('signalInfos', function (generatorInfos) {
+            $('#valMin').val(generatorInfos.minValue);
+            $('#valMax').val(generatorInfos.maxValue);
+            document.getElementById('category').value = generatorInfos.category;
+        });
+
+        socket.emit('getSignalInfos', generatorId);
+        $('#save').hide();
+        $('#update').show();
+        show_updatePopup(generatorId);
+    });
+
+}
+
+function initializeOldSignal(signals) {
+
+    var signalName = createAndSetupInput();
+
+
+    for (var i = 0; i < signals.length; i++) {
+
+       var generator = $('<div class="oldGenerator"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
+        $("#oldGenerator").prepend(generator);
+        generator.setAttribute("id", signals._signalId);
+        generator.draggable({
+            stack: ".draggable",
+            cursor: 'hand',
+            helper: 'clone'
+        });
+        $(generator).addClass("signalName");
+        $(generator).append(signalName);
+
+    }
+}
 
 
 function createNewSignal() {
@@ -119,57 +124,55 @@ function createNewSignal() {
 }
 
 function createSignalGraph(signalId) {
-    var div =  $('<div />');
+    var div = $('<div />');
     var canvas = $('<canvas/>', {
         id: signalId + 'canvas',
         class: "canvas2"
     });
     div.append(canvas);
     $(".chartsZone").append(div);
-    canvas =  $('#'+ signalId + 'canvas'). get(0).getContext('2d');
+    canvas = $('#' + signalId + 'canvas').get(0).getContext('2d');
     var startingData = {
-        labels: ["","","","","","","","","","","","","","",""],
+        labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
         datasets: [
             {
                 fillColor: "rgba(151,187,205,0.2)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
-                data: [0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0]
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }]
     };
     var chart = new Chart(canvas).Line(startingData);
-    charts.push({id:signalId + 'canvas',
-    chart:chart });
+    charts.push({
+        id: signalId + 'canvas',
+        chart: chart
+    });
 }
 
 
 function updateSignalChart(signalId, value) {
-       var chart = _.find(charts,{'id': signalId + 'canvas'});
-       if(!_.isUndefined(chart)){
-           chart.chart.addData([value],"");
-           chart.chart.removeData();
-       }
-
-
+    var chart = _.find(charts, {'id': signalId + 'canvas'});
+    if (!_.isUndefined(chart)) {
+        chart.chart.addData([value], "");
+        chart.chart.removeData();
+    }
 }
 
 function updateSignal() {
     if (validateFields()) {
         var signalId = $('#generatorName').val();
-        updateSignalParameters(signalId);
+        socket.emit("updateSignal",
+            {
+                signalId: signalId,
+                valMin: $('#valMin').val(),
+                valMax: $('#valMax').val(),
+                category: $('#category').find(":selected").val()
+            });
         hide_popup();
     }
 }
-function updateSignalParameters(signalId) {
-    socket.emit("updateSignal",
-        {
-            signalId: signalId,
-            valMin: $('#valMin').val(),
-            valMax: $('#valMax').val(),
-            category: $('#category').find(":selected").val()
-        });
-}
+
 
 function validateFields() {
     $('#errorMsg').text("");
@@ -206,6 +209,8 @@ function validateFields() {
     }
 }
 //Function To Display Popup
+
+
 function show_popup(generatorId) {
     $('#errorMsg').text("");
     $('#popupContent').css('display', 'block');

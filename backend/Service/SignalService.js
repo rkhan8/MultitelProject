@@ -69,7 +69,7 @@ exports.activateGenerators = function () {
 }
 
 
- exports.getSignalInformation = function(signalId) {
+ exports.getSignalInformations = function(signalId) {
  var index = searchSignalById(signalId);
  if (index != -1) {
  var infos = signals.get(index).getSignalInformations();
