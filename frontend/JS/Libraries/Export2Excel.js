@@ -14,7 +14,7 @@ function s2ab(s) {
 function export_table_to_excel(id, type, fn) {
 var wb = XLSX.utils.table_to_book(document.getElementById(id), {sheet:"Sheet JS"});
 var wbout = XLSX.write(wb, {bookType:type, bookSST:true, type: 'binary'});
-var fname = fn || 'test.' + type;
+var fname = fn || 'Données de la recherche.' + type;
 try {
 	saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), fname);
 } catch(e) { if(typeof console != 'undefined') console.log(e, wbout); }
