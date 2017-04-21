@@ -71,8 +71,10 @@ function populateSignalsValuesTable(signalsValues)
     row.insertCell(3).innerHTML = signalsValues[j].signal.MaxValue;
     row.insertCell(4).innerHTML = signalsValues[j].ValueRec;
     row.insertCell(5).innerHTML = signalsValues[j].signal.Unity;
-    var dateRec = $.datepicker.formatDate( "dd-mm-yy", new Date( signalsValues[j].DateRec ));
-    row.insertCell(6).innerHTML = dateRec;
+    //var dateRec = $.datepicker.formatDate( "dd-mm-yy", new Date( signalsValues[j].DateRec ));
+      signalsValues[j].DateRec =  signalsValues[j].DateRec.replace('T', " ");
+      signalsValues[j].DateRec = signalsValues[j].DateRec.replace('Z',"")
+    row.insertCell(6).innerHTML = signalsValues[j].DateRec;
 
   }
 
