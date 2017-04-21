@@ -36,16 +36,20 @@ $(function () {
             generator.css('position', 'absolute');
             generator.css('top', ui.position.top);
             generator.css('left', ui.position.left);
+            generator.draggable();
             generator.appendTo(dropZone);
 
 
             if ($(generator).hasClass('generator')) {
                 setupNewGenerator(generator);
+                $(generator).removeClass('generator')
 
             }
             if ($(generator).hasClass('oldGenerator')) {
                 setupOldGenerator(generator);
                 ui.draggable.remove();
+                $(generator).removeClass('oldGenerator');
+
             }
 
             $(generator).click(function () {
