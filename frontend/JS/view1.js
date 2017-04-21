@@ -2,7 +2,7 @@ var socket = io();
 var generators = new Array();
 var charts = new Array();
 
-signalTab = [];
+
 
 
 socket.emit('getAllSignals');
@@ -98,7 +98,7 @@ function initializeOldSignal(signals) {
 
     for (var i = 0; i < signals.length; i++) {
 
-       var generator = $('<div class="oldGenerator"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
+        var generator = $('<div class="oldGenerator"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
         $("#oldGenerator").prepend(generator);
         generator.setAttribute("id", signals._signalId);
         generator.draggable({

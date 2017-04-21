@@ -42,7 +42,7 @@
 
 #choiceSearch
 {
-  margin-left: 2%;
+  /*margin-left: 2%;*/
   overflow-x: auto;
 }
 
@@ -242,9 +242,16 @@ label {
 
 #submitSearch
 {
-  margin-left: 85%;
+  margin-left: 79%;
   overflow-x:auto;
   position: absolute;
+}
+
+#submitExport
+{
+  margin-left: 79%;
+  overflow-x:auto;
+  position: relative;
 }
 
 
@@ -266,7 +273,7 @@ label {
 .tbl-content{
 
   height:300px;
-  width: 100%;
+  width: 99.8%;
   overflow-x:auto;
   margin-top: 0px;
   border: 1px solid rgba(255,255,255,0.3);
@@ -393,5 +400,5 @@ canvas{
 .canvas2
 {
   height: 50%;
-  width: 50%;
+  width: 99%;
 }
