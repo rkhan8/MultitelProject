@@ -82,10 +82,11 @@ function populateSignalsValuesTable(signalsValues)
 function populateComboboxDateFromArray(comboboxId, array){
     var data = '<option></option>'
     $('#'+comboboxId).append(data);
-
     for (i = 0; i < array.length; i++) {
-        var data = '<option>' + $.datepicker.formatDate( "dd-mm-yy", new Date( array[i] )); + '</option>'
+        var date = array[i].slice(0, 10).split('-');
+        var data = '<option>' + $.datepicker.formatDate( "dd-mm-yy", new Date( date ))+'</option>';
         $('#'+comboboxId).append(data);
+
     }
 }
 
