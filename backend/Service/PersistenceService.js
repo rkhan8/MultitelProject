@@ -137,6 +137,7 @@
  exports.PreloadValueEvent = PreloadValueEvent;
  */
 var SignalRepository = require('../Repository/SignalRepository');
+var batimentRepository = require ('../Repository/BatimentRepository');
 var EventEmitter = require('events').EventEmitter;
 var persistenceEvent = new EventEmitter();
 

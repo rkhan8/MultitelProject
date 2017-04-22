@@ -8,13 +8,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     Compagnie: {
       type: DataTypes.STRING(300),
-      allowNull: false,
-      primaryKey: true
+      allowNull: false
     },
     NomBatiment: {
       type: DataTypes.STRING(300),
-      allowNull: false,
-      primaryKey: true
+      allowNull: false
     },
     Adresse: {
       type: DataTypes.STRING(600),
@@ -27,6 +25,12 @@ module.exports = function(sequelize, DataTypes) {
     Numero: {
       type: DataTypes.INTEGER(11),
       allowNull: false
+    },
+    batimentId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     }
   }, {
     tableName: 'batiment'

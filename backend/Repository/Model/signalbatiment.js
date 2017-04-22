@@ -14,20 +14,12 @@ module.exports = function(sequelize, DataTypes) {
         key: 'idN'
       }
     },
-    Compagnie: {
-      type: DataTypes.STRING(300),
+    batimentId: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
         model: 'batiment',
-        key: 'Compagnie'
-      }
-    },
-    NomBatiment: {
-      type: DataTypes.STRING(300),
-      allowNull: false,
-      references: {
-        model: 'batiment',
-        key: 'NomBatiment'
+        key: 'batimentId'
       }
     }
   }, {

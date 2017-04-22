@@ -10,12 +10,9 @@ var _ = require('lodash');
 
 
 
-var signalValueModel = mySqlCOnnection.DB.import(__dirname + '/Model/SignalValue');
-var signalModel = mySqlCOnnection.DB.import(__dirname + '/Model/Signal');
-signalModel.hasMany(signalValueModel, {foreignKey: 'idN'});
-signalValueModel.belongsTo(signalModel, {foreignKey: 'idN'});
-signalModel.sync();
-signalValueModel.sync();
+var signalValueModel = mySqlCOnnection.db.signalValueModel;
+var signalModel = mySqlCOnnection.db.signalModel;
+
 
 
 exports.insertNewSignal = function(signalId, category, minVal, maxVal, unity) {
@@ -47,7 +44,7 @@ exports.insertSignalValue = function(signalId, value) {
     signalValueModel.create({
         idN: signalId,
         ValueRec: value,
-        DateRec: mySqlCOnnection.DB.literal('CURRENT_TIMESTAMP()')
+        DateRec: mySqlCOnnection.sequelize.literal('CURRENT_TIMESTAMP()')
     })
         .then(function() {
             signalRepositoryEvent.emit('valueInserted', signalId);
@@ -78,7 +75,7 @@ exports.getSignals = function(signalId, category, minVal, maxVal, unity) {
 }
 exports.getRecordingDates = function(){
     signalValueModel.findAll({
-        attributes:[[mySqlCOnnection.DB.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
+        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
 
     }).then(function (result) {
         var dates = JSON.parse(JSON.stringify(result));
@@ -92,7 +89,7 @@ exports.getRecordingDates = function(){
 }
 exports.getSignalsCategories = function(){
     signalModel.findAll({
-        attributes:[[mySqlCOnnection.DB.literal('DISTINCT Category'), 'Category']]
+        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Category'), 'Category']]
 
     }).then(function (result) {
         var categories = JSON.parse(JSON.stringify(result));
@@ -107,7 +104,7 @@ exports.getSignalsCategories = function(){
 
 exports.getSignalsUnity = function(){
     signalModel.findAll({
-        attributes:[[mySqlCOnnection.DB.literal('DISTINCT Unity'), 'Unity']]
+        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Unity'), 'Unity']]
 
     }).then(function (result) {
         var unities = JSON.parse(JSON.stringify(result));
@@ -122,7 +119,7 @@ exports.getSignalsUnity = function(){
 
 exports.getSignalsId = function(){
     signalModel.findAll({
-        attributes:[[mySqlCOnnection.DB.literal('DISTINCT idN'), 'idN']]
+        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT idN'), 'idN']]
 
     }).then(function (result) {
         var ids = JSON.parse(JSON.stringify(result));

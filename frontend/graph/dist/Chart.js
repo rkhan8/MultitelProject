@@ -7306,7 +7306,7 @@ module.exports = function(Chart) {
 	var helpers = Chart.helpers;
 
 	Chart.scaleService = {
-		// Scale registration object. Extensions can register new scale types (such as log or DB scales) and then
+		// Scale registration object. Extensions can register new scale types (such as log or sequelize scales) and then
 		// use the new chart options to grab the correct scale
 		constructors: {},
 		// Use a registration function so that we can move to an ES6 map when we no longer need to support
