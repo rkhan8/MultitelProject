@@ -47,7 +47,7 @@ $(function () {
 
             if ($(generator).hasClass('ui-draggable')) {
                 $(generator).addClass('drag');
-                $(generator).removeClass('ui-draggable');
+                //$(generator).removeClass('ui-draggable');
             }
 
             if ($(generator).hasClass('generator')) {
@@ -74,17 +74,6 @@ $(function () {
             if ($(generator).hasClass('drag')) {
               $(generator).removeClass('drag');
             }
-
-
-
-
-
-
-
-
-
-
-
 
             //event when click to generator
             $(generator).click(function () {
