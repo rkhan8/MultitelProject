@@ -1,6 +1,7 @@
 var socket = io();
 var generators = new Array();
 var charts = new Array();
+var signalGet;
 
 
 socket.emit('getAllSignals');
@@ -11,23 +12,28 @@ socket.on('newValue', function (newValue) {
 });
 
 socket.on('signals', function (signals) {
+    signalGet = signals;
     initializeOldSignal(signals);
 });
 
 $(function () {
+
     $(".generator").draggable({
         stack: ".draggable",
         cursor: 'hand',
-        helper: 'clone'
+        helper: 'clone',
+        containment : '#droppableContent'
     });
 
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        accept: '.generator, .oldGenerator',
+        //accept: '.generator, .oldGenerator, .drag, .ui-draggable',
+        accept: '.ui-draggable',
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
+            var currentPos = ui.helper.position();
 
             var valueDisplayer = createAndSetupInput();
             $(valueDisplayer).addClass("valueDisplay");
@@ -39,19 +45,48 @@ $(function () {
             generator.draggable();
             generator.appendTo(dropZone);
 
+            if ($(generator).hasClass('ui-draggable')) {
+                $(generator).addClass('drag');
+                $(generator).removeClass('ui-draggable');
+            }
 
             if ($(generator).hasClass('generator')) {
                 setupNewGenerator(generator);
-                $(generator).removeClass('generator')
-
+                $(generator).removeClass('generator');
             }
+
             if ($(generator).hasClass('oldGenerator')) {
                 setupOldGenerator(generator);
                 ui.draggable.remove();
                 $(generator).removeClass('oldGenerator');
-
             }
 
+            $(".drag").draggable({
+              stack: ".draggable",
+              cursor: 'hand',
+              containment : '#droppableContent',
+              drag: function(event, ui) {
+
+                // Show the current dragged position of image
+              }
+            });
+
+            if ($(generator).hasClass('drag')) {
+              $(generator).removeClass('drag');
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            //event when click to generator
             $(generator).click(function () {
                 var currentGenerator = $(this);
                 var generatorId = $(currentGenerator).attr('id');
@@ -69,8 +104,16 @@ $(function () {
             });
 
 
+            alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
+
+
         }
     });
+
+
+
+
+
 });
 
 function setupOldGenerator(generator) {
@@ -104,7 +147,8 @@ function initializeOldSignal(signals) {
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            helper: 'clone'
+            helper: 'clone',
+            containment : '#droppableContent'
         });
         $(signalName).addClass("signalName");
         $(signalName).val(signals[i]._signalId);
@@ -222,16 +266,42 @@ function updateSignalInfos(newSignalId) {
 }
 
 function show_popup(generatorId) {
+  /*
     $('#errorMsg').text("");
     $('#popupContent').css('display', 'block');
     $('#generatorName').val(generatorId);
+    */
+    $('#errorMsg').text("");
+    var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
+    dialog.showModal();
+    dialog.querySelector('.save').addEventListener('click', function() {
+      //validateFields();
+      $('#generatorName').val(generatorId);
+      dialog.close();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
+
 }
 
 //Function show_updatePopup
 function show_updatePopup(generatorId) {
+  /*
     $('#errorMsg').text("");
     $('#popupContent').css('display', 'block');
     $('#generatorName').val(generatorId);
+    */
+    $('#errorMsg').text("");
+    var dialog = document.querySelector('#UpdateGeneratorPopUp');
+    dialog.showModal();
+    dialog.querySelector('.save').addEventListener('click', function() {
+      $('#generatorName').val(generatorId);
+      dialog.close();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
 }
 
 //Function to Hide Popup

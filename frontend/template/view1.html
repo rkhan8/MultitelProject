@@ -44,8 +44,6 @@
 
       <script src="../JS/view1.js"></script>
 
-
-
   </head>
 
   <body>
@@ -93,49 +91,153 @@
       </div>
 
       <!--popup-->
-      <div id="popupContent">
-          <div id="popupGenerator">
-              <form id="popformulaire">
-                  <img id="close-icon" src="../images/close-icon.png" onclick ="hide_popup(); return false;">
-                  <h2>Propriétés du générateur</h2>
-                  <hr>
-                  <fieldset>
-                      <div id="errorMsg" type="text"></div>
-                      <hr>
-                      <div>
-                          <label for="generatorName">Nom : </label>
-                          <input id="generatorName" placeholder="Nom..." type="text">
-                      </div>
-                      <p></p>
-                      <div>
-                          <label for="category">Catégorie : </label>
-                          <select id="category">
-                              <option value="">- Sélectionner la catégorie -</option>
-                              <option value="analog">Analogique</option>
-                              <option value="binary">Binaire</option>
-                              <option value="virtual">Virtuel</option>
-                          </select>
-                      </div>
-                      <p></p>
-                      <div>
-                          <label for="unity">Unité : </label>
-                          <input id="unity" placeholder="Unité..." type="text">
-                      </div>
-                      <div>
-                          <label for="valMin">Valeur minimale : </label>
-                          <input id="valMin" placeholder="valMin..." type="text">
-                      </div>
-
-                      <div>
-                          <label for="valMax">Valeur maximale : </label>
-                          <input id="valMax" placeholder="valMax..." type="text">
-                      </div>
-                      <button id="save" type="submit" onclick="createNewSignal(); return false;">Enregistrer</button>
-                      <button id="update" type="submit" onclick="updateSignal(); return false;" style="display: none;">Mettre à jour</button>
-                  </fieldset>
-              </form>
+        <dialog id="EnregistrerGeneratorPopUp" class="mdl-dialog">
+          <h4 class="mdl-dialog__title">Propriétés du générateur</h4>
+          <div class="mdl-dialog__content">
+            <table id="panelInfo" cellpadding="4">
+              <tr>
+                <th>
+                  <label for="generatorName">Nom : </label>
+                </th>
+                <td>
+                  <select id="generatorName">
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="category">Catégorie : </label>
+                </th>
+                <td>
+                  <select id="category">
+                      <option value="">- Sélectionner la catégorie -</option>
+                      <option value="analog">Analogique</option>
+                      <option value="binary">Binaire</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="unity">Unité : </label>
+                </th>
+                <td>
+                  <input id="unity" placeholder="Unité..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Adresse">Adresse : </label>
+                </th>
+                <td>
+                  <input id="adress" placeholder="adresse..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Batiment">Batiment : </label>
+                </th>
+                <td>
+                  <input id="batiment" placeholder="batiment..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Etage">Etage : </label>
+                </th>
+                <td>
+                  <input id="etage" placeholder="etage..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Porte">Porte : </label>
+                </th>
+                <td>
+                  <input id="porte" placeholder="porte..." type="text">
+                </td>
+              </tr>
+            </table>
           </div>
-      </div>
+          <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Fermer</button>
+            <button type="button" class="mdl-button save" onclick="createNewSignal();">Enregistrer</button>
+          </div>
+        </dialog>
+
+
+        <dialog id="UpdateGeneratorPopUp" class="mdl-dialog">
+          <h4 class="mdl-dialog__title">Propriétés du générateur</h4>
+          <div class="mdl-dialog__content">
+
+            <table id="panelInfo" cellpadding="4">
+              <tr>
+                <th>
+                  <label for="generatorName">Nom : </label>
+                </th>
+                <td>
+                  <input id="generatorName" placeholder="Nom..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="category">Catégorie : </label>
+                </th>
+                <td>
+                  <select id="category">
+                      <option value="">- Sélectionner la catégorie -</option>
+                      <option value="analog">Analogique</option>
+                      <option value="binary">Binaire</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="unity">Unité : </label>
+                </th>
+                <td>
+                  <input id="unity" placeholder="Unité..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Adresse">Adresse : </label>
+                </th>
+                <td>
+                  <input id="adress" placeholder="adresse..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Batiment">Batiment : </label>
+                </th>
+                <td>
+                  <input id="batiment" placeholder="batiment..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Etage">Etage : </label>
+                </th>
+                <td>
+                  <input id="etage" placeholder="etage..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="Porte">Porte : </label>
+                </th>
+                <td>
+                  <input id="porte" placeholder="porte..." type="text">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Fermer</button>
+            <button type="button" class="mdl-button save" onclick="updateSignal();">Mettre à jour</button>
+          </div>
+        </dialog>
+
     </br>
 
       <div class="chartsZone">
