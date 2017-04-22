@@ -17,8 +17,8 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         CodePostal: CodePostal,
         Numero: Numero
     })
-        .then({
-
+        .then(function(){
+            batimentRepositoryEvent.emit('batimentAjouterOk');
         })
         .catch(function (err) {
             batimentRepositoryEvent.emit('ajouterBatimentError', err.detail);

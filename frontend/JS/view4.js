@@ -3,6 +3,9 @@ function populateSignalsValuesTable(signalsValues) {
 }
 
 var socket = io();
+socket.on('batimentAjouterOk',function(){
+
+});
 function CreateBatiment() {
 
     socket.emit('ajouterBatiment', {

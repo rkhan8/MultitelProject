@@ -256,6 +256,9 @@ function initialisePersitenceEvent() {
     SignalRepository.SignalRepositoryEvent.on('signalValueFound', function (data) {
         persistenceEvent.emit('signalValueData', data);
     });
+    batimentRepository.batimentRepositoryEvent.on('batimentAjouterOk', function(){
+        persistenceEvent.emit('batimentAjouterOk');
+    })
 }
 
 

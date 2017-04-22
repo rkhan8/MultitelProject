@@ -64,6 +64,9 @@ persistanceService.persistenceEvent.on('signalCreated', function (signalInfos) {
 persistanceService.persistenceEvent.once('signalsData', function(signals){
     signalService.createSignals(signals);
 });
+persistanceService.persistenceEvent.on('batimentAjouterOk', function(){
+    io.sockets.emit('batimentAjouterOk');
+})
 
 
 
