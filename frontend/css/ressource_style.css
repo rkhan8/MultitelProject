@@ -101,6 +101,24 @@ select
   position: absolute;
 }
 
+#droppableContentBatiment {
+  width: 94%;
+  height: 270px;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  border: solid;
+  border-color: #009900;
+  border-width: medium;
+  border-style: dotted;
+  float: right;
+  margin-right: 2%;
+}
+
+#droppableContentBatiment .generator{
+  position: absolute;
+}
+
 .ui-drop .generator{
   position: absolute;
 }
@@ -389,6 +407,21 @@ canvas{
 
 #panelInfo tr{
   margin-bottom: 5px;
+}
+
+
+#AddBatiment
+{
+  background: rgba(255,255,255, 0.7);
+  color: black;
+  margin-left: 2%;
+  width: 96.5%;
+  border-radius: 15px;
+}
+
+#champAlign
+{
+  margin-left: 2%;
 }
 
 

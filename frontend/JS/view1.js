@@ -26,10 +26,10 @@ $(function () {
     });
 
 
-
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        accept: '.generator, .oldGenerator, .drag',
+        //accept: '.generator, .oldGenerator, .drag, .ui-draggable',
+        accept: '.ui-draggable',
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
@@ -45,36 +45,43 @@ $(function () {
             generator.draggable();
             generator.appendTo(dropZone);
 
+            if ($(generator).hasClass('ui-draggable')) {
+                $(generator).addClass('drag');
+                $(generator).removeClass('ui-draggable');
+            }
 
             if ($(generator).hasClass('generator')) {
                 setupNewGenerator(generator);
                 $(generator).removeClass('generator');
-                //$(generator).addClass('drag');
             }
+
             if ($(generator).hasClass('oldGenerator')) {
                 setupOldGenerator(generator);
                 ui.draggable.remove();
                 $(generator).removeClass('oldGenerator');
-                //$(generator).addClass('drag');
             }
-            if ($(generator).hasClass('ui-draggable')) {
-                $(generator).addClass('drag');
-            }
+
+            $(".drag").draggable({
+              stack: ".draggable",
+              cursor: 'hand',
+              containment : '#droppableContent',
+              drag: function(event, ui) {
+
+                // Show the current dragged position of image
+              }
+            });
+
             if ($(generator).hasClass('drag')) {
-              $(".drag").draggable({
-                stack: ".draggable",
-                cursor: 'hand',
-                containment : '#droppableContent'
-              });
-              //alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
               $(generator).removeClass('drag');
             }
-            /*
-            if ($(generator).hasClass('ui-draggable')) {
-                $(generator).addClass('drag');
-                //alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
-            }
-            */
+
+
+
+
+
+
+
+
 
 
 
@@ -96,7 +103,9 @@ $(function () {
                 show_updatePopup(generatorId);
             });
 
+
             alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
+
 
         }
     });
