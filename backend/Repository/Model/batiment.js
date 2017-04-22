@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     Adresse: {
       type: DataTypes.STRING(600),
-      allowNull: false
+      allowNull: true
     },
     CodePostal: {
       type: DataTypes.STRING(45),
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     Numero: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     batimentId: {
       type: DataTypes.INTEGER(11),
