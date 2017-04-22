@@ -10,8 +10,8 @@ function CreateBatiment() {
         nomBatiment: $('#batiment').val(),
         nbEtages: $('#nbEtages').val(),
         adresse: $('#adresse').val(),
-        codePostal: $('#codePostal'),
-        numero: $('#numero')
+        codePostal: $('#codePostal').val(),
+        numero: $('#numero').val()
     });
 
 }
