@@ -25,11 +25,24 @@ $(function () {
         containment : '#droppableContent'
     });
 
+    /*
+    $(".ui-draggable").draggable({
+        stack: ".draggable",
+        cursor: 'hand',
+        helper: 'clone',
+        containment : '#droppableContent',
+        drag : function()
+        {
+          alert("ok");
+
+        }
+    });
+    */
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        //accept: '.generator, .oldGenerator, .drag, .ui-draggable',
-        accept: '.ui-draggable',
+        accept: '.generator, .oldGenerator, .drag',
+        //accept: '.ui-draggable',
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
@@ -74,6 +87,8 @@ $(function () {
             if ($(generator).hasClass('drag')) {
               $(generator).removeClass('drag');
             }
+
+            //$(generator).addClass('drag');
 
             //event when click to generator
             $(generator).click(function () {
