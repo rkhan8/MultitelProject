@@ -186,6 +186,11 @@ exports.getSignalsValues = function(signalId, category, unity, startDate, endDat
 exports.getSignals = function(signalId, category, minVal, maxVal, unity){
     SignalRepository.getSignals(signalId, category, minVal, maxVal, unity)
 }
+
+exports.ajouterBatiment = function(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero){
+    batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
+}
+
 function initialisePersistenceError() {
     SignalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
         persistenceEvent.emit('signalCreateError', signalId);
@@ -215,6 +220,10 @@ function initialisePersistenceError() {
     SignalRepository.SignalRepositoryEvent.on('signalsCategoriesError', function () {
         persistenceEvent.emit('errorSignalsCategories', '');
     });
+
+    batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function(message){
+        persistenceEvent.emit('errorAjouterBatiment',message);
+    })
 }
 function initialisePersitenceEvent() {
     SignalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {

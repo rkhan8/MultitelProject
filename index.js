@@ -65,6 +65,8 @@ persistanceService.persistenceEvent.once('signalsData', function(signals){
     signalService.createSignals(signals);
 });
 
+
+
 io.on('connection', function (socket) {
 
     socket.on('createSignal', function (signalValues) {
@@ -106,6 +108,10 @@ io.on('connection', function (socket) {
 
     socket.on('searchSignalsValues', function (idN, category, unity, startDate, endDate) {
         persistanceService.getSignalsValues(idN, category, unity, startDate, endDate);
+    });
+
+    socket.on('ajouterBatiment', function(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero){
+        persistanceService.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
     });
 
     socket.on('disconnect', function () {
