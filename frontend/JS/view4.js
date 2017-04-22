@@ -11,7 +11,7 @@ function CreateBatiment() {
         nbEtages: $('#nbEtages').val(),
         adresse: $('#adresse').val(),
         codePostal: $('#codePostal'),
-        numero: $('#numero'),
-    })
+        numero: $('#numero')
+    });
 
 }

@@ -93,8 +93,16 @@
                 <span class="mdl-textfield__error">Il ne s'agit pas d'un nombre</span>
               </div>
 
+            </br>
+                Nb étage:
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="nbEtage">
+                  <label class="mdl-textfield__label" for="numero">Numero...</label>
+                  <span class="mdl-textfield__error">Il ne s'agit pas d'un nombre</span>
+                </div>
+
               <div class="dataButtons">
-                <a id="submitSearch" onclick="CreateBatiment();"
+                <a id="addBatimentButton" onclick="CreateBatiment();"
                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
                   Créer
                 </a>
