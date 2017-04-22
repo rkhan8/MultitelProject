@@ -74,14 +74,14 @@
             </br>
               Adresse:
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="compagnie">
+                <input class="mdl-textfield__input" type="text" id="adresse">
                 <label class="mdl-textfield__label" for="adresse">Adresse...</label>
               </div>
 
             </br>
               Code Postal:
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="compagnie">
+                <input class="mdl-textfield__input" type="text" id="codepostal">
                 <label class="mdl-textfield__label" for="codepostal">Code Postale...</label>
               </div>
 
@@ -92,6 +92,14 @@
                 <label class="mdl-textfield__label" for="numero">Numero...</label>
                 <span class="mdl-textfield__error">Il ne s'agit pas d'un nombre</span>
               </div>
+
+            </br>
+                Nb étage:
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="nbEtage">
+                  <label class="mdl-textfield__label" for="numero">Numero...</label>
+                  <span class="mdl-textfield__error">Il ne s'agit pas d'un nombre</span>
+                </div>
 
               <div class="dataButtons">
                 <a id="submitSearch" onclick="CreateBatiment();"
