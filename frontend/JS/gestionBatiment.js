@@ -27,7 +27,7 @@ function PopUpCreer(){
 }
 
 
-function ValidateFieldChange(){
+function ValidateField(){
   debugger;
   if($("#compagnie").val() == "" || $("#batiment").val() == ""){
     $("#addBatimentButton").attr('disabled', true);
