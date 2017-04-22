@@ -26,4 +26,30 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         });
 
 }
+exports.searchCompagnies= function(){
+    mySqlCOnnection.db.batimentModel.findAll({
+        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
+    }).then(function (result) {
+        var compagnies = JSON.parse(JSON.stringify(result));
+        signalRepositoryEvent.emit('batimentCompagniesFound',_.map(compagnies, 'compagnie'));
+
+    }).catch(function (err) {
+        console.log(err);
+        signalRepositoryEvent.emit('batimentCompagniesError');
+
+    });
+};
+exports.searchCompagnieBatimentsName = function(compagnieName){
+
+  mySqlCOnnection.db.batimentModel.findAll({
+      attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT NomBatiment'), 'NomBatiment']],
+      where: {
+          Compagnie: compagnieName
+
+      }
+  }).then(function(result){
+      var batiments = JSON.parse(JSON.stringify(result));
+    signalRepositoryEvent.emit('batimentCompagniesFound',_.map(batiments, 'NomBatiment'));
+  })
+};
 exports.batimentRepositoryEvent = batimentRepositoryEvent;
