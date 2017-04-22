@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a1ca8d0-23d0-4e35-8161-a655274b2428" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/Repository/BatimentRepository.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/Repository/Model/batiment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/Repository/Model/signalbatiment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/Repository/Model/signalpositionondropzone.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/Repository/Model/signals.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dataModel.mwb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dataModel.mwb.bak" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/DBconnection.js" afterPath="$PROJECT_DIR$/backend/Repository/DBconnection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/Model/signal.js" afterPath="$PROJECT_DIR$/backend/Repository/Model/signal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/Model/signalValue.js" afterPath="$PROJECT_DIR$/backend/Repository/Model/signalValue.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/SignalRepository.js" afterPath="$PROJECT_DIR$/backend/Repository/SignalRepository.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Service/PersistenceService.js" afterPath="$PROJECT_DIR$/backend/Service/PersistenceService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/graph/dist/Chart.bundle.js" afterPath="$PROJECT_DIR$/frontend/graph/dist/Chart.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/graph/dist/Chart.js" afterPath="$PROJECT_DIR$/frontend/graph/dist/Chart.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -520,12 +509,12 @@
       <workItem from="1492791897926" duration="711000" />
       <workItem from="1492796360344" duration="2402000" />
       <workItem from="1492870537430" duration="257000" />
-      <workItem from="1492872518320" duration="8590000" />
+      <workItem from="1492872518320" duration="8835000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126681000" />
+    <option name="totallyTimeSpent" value="126926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1909" y="-11" width="1942" height="1056" extended-state="6" />
@@ -533,6 +522,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24562334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32680538" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
