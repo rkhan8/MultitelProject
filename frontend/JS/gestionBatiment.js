@@ -25,3 +25,13 @@ function PopUpCreer(){
     dialog.close();
   });
 }
+
+
+function ValidateFieldChange(){
+  debugger;
+  if($("#compagnie").val() == "" || $("#batiment").val() == ""){
+    $("#addBatimentButton").attr('disabled', true);
+  } else if($("#compagnie").val() != "" && $("#batiment").val() != ""){
+    $("#addBatimentButton").attr('disabled', false);
+  }
+}

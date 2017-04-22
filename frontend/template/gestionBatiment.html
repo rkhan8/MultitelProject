@@ -60,7 +60,7 @@
             <div id="champAlign">
               Compagnie :
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="compagnie" required="">
+                <input class="mdl-textfield__input" type="text" id="compagnie" required="" onchange ="ValidateFieldChange();">
                 <label class="mdl-textfield__label" for="compagnie">Compagnie...</label>
                 <span class="mdl-textfield__error">Veuillez renseignez ce champs</span>
               </div>
@@ -68,7 +68,7 @@
             </br>
               Batiment :
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="batiment" required="">
+                <input class="mdl-textfield__input" type="text" id="batiment" required="" onchange="ValidateFieldChange();">
                 <label class="mdl-textfield__label" for="adresse">Batiment...</label>
                 <span class="mdl-textfield__error">Veuillez renseignez ce champs</span>
               </div>
@@ -104,7 +104,7 @@
                 </div>
 
               <div class="dataButtons">
-                <a id="addBatimentButton" onclick="CreateBatiment();"
+                <a id="addBatimentButton" onclick="CreateBatiment();" disabled="true"
                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
                   Créer
                 </a>
