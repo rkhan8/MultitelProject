@@ -29,10 +29,11 @@ $(function () {
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        accept: '.generator, .oldGenerator',
+        accept: '.generator, .oldGenerator, .drag',
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
+            var currentPos = ui.helper.position();
 
             var valueDisplayer = createAndSetupInput();
             $(valueDisplayer).addClass("valueDisplay");
@@ -47,15 +48,35 @@ $(function () {
 
             if ($(generator).hasClass('generator')) {
                 setupNewGenerator(generator);
-                $(generator).removeClass('generator')
-
+                $(generator).removeClass('generator');
+                //$(generator).addClass('drag');
             }
             if ($(generator).hasClass('oldGenerator')) {
                 setupOldGenerator(generator);
                 ui.draggable.remove();
                 $(generator).removeClass('oldGenerator');
-
+                //$(generator).addClass('drag');
             }
+            if ($(generator).hasClass('ui-draggable')) {
+                $(generator).addClass('drag');
+            }
+            if ($(generator).hasClass('drag')) {
+              $(".drag").draggable({
+                stack: ".draggable",
+                cursor: 'hand',
+                containment : '#droppableContent'
+              });
+              //alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
+              $(generator).removeClass('drag');
+            }
+            /*
+            if ($(generator).hasClass('ui-draggable')) {
+                $(generator).addClass('drag');
+                //alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
+            }
+            */
+
+
 
 
             //event when click to generator
@@ -75,10 +96,15 @@ $(function () {
                 show_updatePopup(generatorId);
             });
 
-
+            alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
 
         }
     });
+
+
+
+
+
 });
 
 function setupOldGenerator(generator) {
@@ -240,6 +266,7 @@ function show_popup(generatorId) {
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     dialog.showModal();
     dialog.querySelector('.save').addEventListener('click', function() {
+      //validateFields();
       $('#generatorName').val(generatorId);
       dialog.close();
     });
