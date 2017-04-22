@@ -4,7 +4,7 @@ function populateSignalsValuesTable(signalsValues) {
 
 var socket = io();
 socket.on('batimentAjouterOk',function(){
-
+  PopUpCreer();
 });
 function CreateBatiment() {
 
@@ -16,5 +16,12 @@ function CreateBatiment() {
         codePostal: $('#codePostal').val(),
         numero: $('#numero').val()
     });
+}
 
+function PopUpCreer(){
+  var dialog = document.querySelector('#SuccessPopUp');
+  dialog.showModal();
+  dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
 }
