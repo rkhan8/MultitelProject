@@ -110,8 +110,8 @@ io.on('connection', function (socket) {
         persistanceService.getSignalsValues(idN, category, unity, startDate, endDate);
     });
 
-    socket.on('ajouterBatiment', function(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero){
-        persistanceService.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
+    socket.on('ajouterBatiment', function(batiment){
+        persistanceService.ajouterBatiment(batiment.compagnie, batiment.nomBatiment, batiment.nbEtages, batiment.adresse, batiment.codePostal, batiment.numero);
     });
 
     socket.on('disconnect', function () {
