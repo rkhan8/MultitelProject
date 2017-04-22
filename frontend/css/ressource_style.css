@@ -382,6 +382,17 @@ canvas{
 
 
 
+
+#panelInfo th{
+  text-align: left;
+}
+
+#panelInfo tr{
+  margin-bottom: 5px;
+}
+
+
+
 /*loading */
 
 /* Absolute Center CSS Spinner */

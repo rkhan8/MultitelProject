@@ -229,4 +229,5 @@ _:-ms-input-placeholder, :root .demo-graph {
 
 .mdl-dialog{
   width: 40%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 9px 46px 8px, rgba(0, 0, 0, 0.1) 0px 11px 15px -7px, rgba(0, 0, 0, 0.1) 0px 24px 38px 3px;
 }
