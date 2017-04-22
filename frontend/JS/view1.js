@@ -1,6 +1,7 @@
 var socket = io();
 var generators = new Array();
 var charts = new Array();
+var signalGet;
 
 
 socket.emit('getAllSignals');
@@ -11,15 +12,24 @@ socket.on('newValue', function (newValue) {
 });
 
 socket.on('signals', function (signals) {
+    signalGet = signals;
     initializeOldSignal(signals);
 });
 
 $(function () {
+
     $(".generator").draggable({
         stack: ".draggable",
         cursor: 'hand',
-        helper: 'clone'
+        helper: 'clone',
+        containment : '#droppableContent'/*,
+        start : function(event, ui){
+        // Show start dragged position of image.
+        var currentPos = ui.helper.position();
+        alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
+      }*/
     });
+
 
 
     $(".ui-drop").droppable({
@@ -69,6 +79,7 @@ $(function () {
             });
 
 
+
         }
     });
 });
@@ -104,7 +115,8 @@ function initializeOldSignal(signals) {
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            helper: 'clone'
+            helper: 'clone',
+            containment : '#droppableContent'
         });
         $(signalName).addClass("signalName");
         $(signalName).val(signals[i]._signalId);
