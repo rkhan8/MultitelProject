@@ -22,12 +22,7 @@ $(function () {
         stack: ".draggable",
         cursor: 'hand',
         helper: 'clone',
-        containment : '#droppableContent'/*,
-        start : function(event, ui){
-        // Show start dragged position of image.
-        var currentPos = ui.helper.position();
-        alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
-      }*/
+        containment : '#droppableContent'
     });
 
 
@@ -62,6 +57,8 @@ $(function () {
 
             }
 
+
+            //event when click to generator
             $(generator).click(function () {
                 var currentGenerator = $(this);
                 var generatorId = $(currentGenerator).attr('id');
@@ -234,16 +231,41 @@ function updateSignalInfos(newSignalId) {
 }
 
 function show_popup(generatorId) {
+  /*
     $('#errorMsg').text("");
     $('#popupContent').css('display', 'block');
     $('#generatorName').val(generatorId);
+    */
+    $('#errorMsg').text("");
+    var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
+    dialog.showModal();
+    dialog.querySelector('.save').addEventListener('click', function() {
+      $('#generatorName').val(generatorId);
+      dialog.close();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
+
 }
 
 //Function show_updatePopup
 function show_updatePopup(generatorId) {
+  /*
     $('#errorMsg').text("");
     $('#popupContent').css('display', 'block');
     $('#generatorName').val(generatorId);
+    */
+    $('#errorMsg').text("");
+    var dialog = document.querySelector('#UpdateGeneratorPopUp');
+    dialog.showModal();
+    dialog.querySelector('.save').addEventListener('click', function() {
+      $('#generatorName').val(generatorId);
+      dialog.close();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
 }
 
 //Function to Hide Popup

@@ -226,3 +226,7 @@ _:-ms-input-placeholder, :root .demo-graph {
     margin-left: 20px;
     margin-right: 10px;
 }
+
+.mdl-dialog{
+  width: 40%;
+}
