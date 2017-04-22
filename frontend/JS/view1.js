@@ -75,17 +75,6 @@ $(function () {
               $(generator).removeClass('drag');
             }
 
-
-
-
-
-
-
-
-
-
-
-
             //event when click to generator
             $(generator).click(function () {
                 var currentGenerator = $(this);
