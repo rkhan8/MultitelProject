@@ -185,6 +185,9 @@ exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
 exports.getNotDiplayedSignalsId = function () {
     signalRepository.getNotDiplayedSignalsId();
 };
+exports.getDisplaySignalSignal = function(){
+    signalRepository.getSignalByStatus(1);
+}
 
 exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
     batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
@@ -232,6 +235,9 @@ function initialisePersistenceError() {
     signalRepository.SignalRepositoryEvent.on('searchNotDisplayedSignalsError', function (details) {
         persistenceEvent.emit('errorSearchNotDisplayedSignals', details);
     });
+    signalRepository.SignalRepositoryEvent.on('getSignalDisplayedErr', function(details){
+        persistenceEvent.emit('errorGetDisplayedSignal', details);
+    })
 
     batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function (message) {
         persistenceEvent.emit('errorAjouterBatiment', message);
@@ -265,18 +271,18 @@ function initialisePersitenceEvent() {
     signalRepository.SignalRepositoryEvent.on('signalsFounded', function (data) {
         persistenceEvent.emit('signalsData', data);
     });
-
     signalRepository.SignalRepositoryEvent.on('signalsIdFound', function (data) {
         persistenceEvent.emit('signalsId', data);
     });
-
     signalRepository.SignalRepositoryEvent.on('signalsUnityFound', function (data) {
         persistenceEvent.emit('signalsUnity', data);
     });
     signalRepository.SignalRepositoryEvent.on('notDisplayedSignalsFound', function (data) {
         persistenceEvent.emit('notDisplayedSignals', data);
-    })
-
+    });
+    signalRepository.SignalRepositoryEvent.on('signalsByStatusFounded', function(data){
+        persistenceEvent.emit('displayedSignals', data);
+    });
     signalRepository.SignalRepositoryEvent.on('signalValueFound', function (data) {
         persistenceEvent.emit('signalValueData', data);
     });

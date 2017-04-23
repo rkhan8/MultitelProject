@@ -1,18 +1,18 @@
 var socket = io();
 var generators = new Array();
 var charts = new Array();
-var signalGet;
 
 
-socket.emit('getAllSignals');
+
+socket.emit('getAllDisplayedSignals');
 
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
     updateSignalChart(newValue.signalId, newValue.value);
 });
 
-socket.on('signals', function (signals) {
-    signalGet = signals;
+socket.on('displayedSignals', function (signals) {
+
     initializeOldSignal(signals);
 });
 
@@ -131,7 +131,7 @@ function initializeOldSignal(signals) {
         var signalName = createAndSetupInput();
         var generator = $('<div class="oldGenerator"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
         $("#draggableContentExisting").prepend(generator);
-        generator.get(0).setAttribute("id", signals[i]._signalId);
+        generator.get(0).setAttribute("id", signals[i].idN);
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
@@ -139,9 +139,9 @@ function initializeOldSignal(signals) {
             containment : '#droppableContent'
         });
         $(signalName).addClass("signalName");
-        $(signalName).val(signals[i]._signalId);
+        $(signalName).val(signals[i].idN);
         $(generator).prepend(signalName);
-        generators.push(signals[i]._signalId);
+        generators.push(signals[i].idN);
     }
 }
 

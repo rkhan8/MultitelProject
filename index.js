@@ -78,7 +78,11 @@ persistanceService.persistenceEvent.on('batimentInfos', function(data){
 });
 persistanceService.persistenceEvent.on('notDisplayedSignals', function(data){
     io.sockets.emit('notDisplayedSignals', data);
+});
+persistanceService.persistenceEvent.on('displayedSignals',function(data){
+    io.sockets.emit('displayedSignals', data);
 })
+
 
 
 
@@ -89,8 +93,11 @@ io.on('connection', function (socket) {
         persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax, signalValues.unity);
     });
 
-    socket.on('getAllSignals', function(){
+   /* socket.on('getAllSignals', function(){
        socket.emit('signals',signalService.getSignals());
+    });*/
+    socket.on('getAllDisplayedSignals', function(){
+        persistanceService.getDisplaySignalSignal();
     });
 
     socket.on('activateGenerators', function () {

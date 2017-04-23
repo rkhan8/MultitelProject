@@ -132,6 +132,21 @@ exports.getSignalsId = function(){
     });
 }
 
+exports.getSignalByStatus = function(status){
+    connection.db.signalStatusModel.findAll({
+        where :{
+            status: status
+        }, include :[{
+                model: connection.db.signalModel
+        }]
+    }).then(function(result){
+        signalRepositoryEvent.emit('signalsByStatusFounded', JSON.parse(JSON.stringify(result)));
+    }).catch(function(err){
+        console.log(err);
+        signalRepositoryEvent.emit('getSignalDisplayedErr', err.detail);
+    })
+}
+
 exports.getNotDiplayedSignalsId = function(){
     connection.db.signalStatusModel.findAll({
         attributes : ['idN'],
