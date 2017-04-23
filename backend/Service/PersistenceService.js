@@ -194,6 +194,12 @@ exports.removeSignalFromDisplay = function(signalId){
 exports.addSignalOnDisplay = function(signalId){
     signalRepository.updateSignalStatus(signalId, 1);
 };
+exports.deleteSignalPosition = function(singnalId){
+    signalRepository.deleteSignalPosition(singnalId);
+}
+exports.updateSignalPosition = function(signalId, positionLeft, posistion, view){
+    signalRepository.updateSignalPosition(signalId, positionLeft, posistion, view);
+}
 
 exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
     batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);

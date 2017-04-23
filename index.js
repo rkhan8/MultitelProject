@@ -99,6 +99,7 @@ io.on('connection', function (socket) {
     socket.on('getAllDisplayedSignals', function(){
         persistanceService.getDisplaySignalSignal();
     });
+    socket.on('')
 
     socket.on('activateGenerators', function () {
         signalService.activateGenerators();
