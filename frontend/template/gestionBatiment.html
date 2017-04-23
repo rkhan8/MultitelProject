@@ -133,17 +133,12 @@
 
               <div id="choiceSearch">
                 Compagnie :
-
-                <select id="CompagnieListbox">
-
+                <select id="CompagnieListbox" onchange="ValidateBatimentSearch();">
                 </select>
 
                 Bâtiment :
                 <select id="batimentListbox">
                 </select>
-
-
-
               </div>
 
               <div class="dataButtons">
@@ -156,19 +151,16 @@
               <div class="space"></div>
 
               <div id="tableView">
-                <form>
-                  <input id ="input-tab" data-type="text" placeholder="Search" style="width:100%;">
-                </form>
-
                   <div class="tbl-content">
-                    <table id="donnee" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab">
+                    <table id="donneeBatiment" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab">
                       <thead>
                         <tr>
                           <th>Compagnie</th>
                           <th>Batiment</th>
                           <th>Adresse</th>
-                          <th>Etage</th>
-                          <th>Nb de capteurs</th>
+                          <th>Code postal</th>
+                          <th>NbEtage</th>
+                          <th></th>
                         </tr>
                       </thead>
 

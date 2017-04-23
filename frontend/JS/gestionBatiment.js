@@ -57,6 +57,16 @@ function PopUpCreerSucess() {
 }
 
 
+//TABLE
+
+//Sort filter for table1
+var filterSort1 = function()
+{
+  $('#donneeBatiment').tablesorter({
+       sortList: [[0, 0]]
+    });
+}
+
 
 function populateBatimentValuesTable(batimentValues) {
 
@@ -65,22 +75,30 @@ function populateBatimentValuesTable(batimentValues) {
     //show element first table (id, cat, oldVolume, newVolume)
     for (var j = 0; j < batimentValues.length; j++) {
         //inserting table content by incrementing all the element into the arraylist
-
-        console.log(batimentValues[j]);
-        /*
         var row = table.insertRow(table.rows.length);
 
-        //A MODIFIER
-        row.insertCell(0).innerHTML = batimentValues[j].Compagnie;
-        row.insertCell(1).innerHTML = batimentValues[j].NomBatiment;
-        row.insertCell(2).innerHTML = batimentValues[j].signal.MinValue;
-        row.insertCell(3).innerHTML = batimentValues[j].Adressse;
-        row.insertCell(4).innerHTML = batimentValues[j].Etage;
-        row.insertCell(5).innerHTML = batimentValues[j].NbCapteur;
-        */
+        row.insertCell(0).innerHTML = batimentValues[j].batimentId;
+        row.insertCell(1).innerHTML = '<input id="compagnie" type="text" value="'+batimentValues[j].Compagnie+'"/>';
+        row.insertCell(2).innerHTML = '<input id="batiment" type="text" value="'+batimentValues[j].NomBatiment+'"/>';
+        row.insertCell(3).innerHTML = '<input id="adresse" type="text" value="'+batimentValues[j].Adresse+'"/>';
+        row.insertCell(4).innerHTML = '<input id="codePostal" type="text" value="'+batimentValues[j].CodePostal+'"/>';
+        row.insertCell(5).innerHTML = '<input id="NbEtage" type="text" value="'+batimentValues[j].NbEtages+'"/>';
+        row.insertCell(6).innerHTML = '<a id="MAJbatimentButton" onclick="updateBatiment();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">MAJ</a>'
+        row.insertCell(7).innerHTML = '<a id="DeletebatimentButton" onclick="deleteBatiment();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Supprimer</a>'
+
     }
 
 }
+
+
+function updateBatiment(){
+
+}
+
+function deleteBatiment(){
+
+}
+
 
 
 function populateComboboxFromArray(comboboxId, array) {
@@ -100,5 +118,15 @@ function ValidateField() {
         $("#addBatimentButton").attr('disabled', true);
     } else if ($("#compagnie").val() != "" && $("#batiment").val() != "") {
         $("#addBatimentButton").attr('disabled', false);
+    }
+}
+
+
+function ValidateBatimentSearch() {
+    debugger;
+    if ($("CompagnieListbox").val() == "") {
+        $("#batimentListbox").combobox('disabled');
+    } else if ($("CompagnieListbox").val() != "") {
+        $("#batimentListbox").combobox('enable');
     }
 }
