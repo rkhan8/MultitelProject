@@ -18,6 +18,7 @@ socket.on('batimentsName', function (data) {
 });
 
 socket.on('batimentsInfos', function(data){
+    // les informations pour remplir le tableau pour le resultat de la recherche sont ici
     console.log(data);
 })
 
