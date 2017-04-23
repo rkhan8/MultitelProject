@@ -327,6 +327,61 @@ label {
   height: 0px;
 }
 
+
+#donneeBatiment{
+  width:100%;
+  table-layout: fixed;
+}
+
+#donneeBatiment thead{
+  width: 100%;
+  display: block;
+}
+
+#donneeBatiment thead tr{
+  /*display: block;*/
+  background-color: rgba(255,255,255,0.3);
+}
+
+#donneeBatiment thead th{
+  padding: 5px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+  height: 30px;
+  width: 5%;
+  vertical-align: middle;
+}
+
+#donneeBatiment tbody{
+  display: block;
+  height: 270px;
+  overflow-x: auto;
+  position: static;
+  /*width: 100%;*/
+}
+
+#donneeBatiment tbody tr{
+  height: 0px;
+}
+
+#donneeBatiment tbody td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+  width: 285px;
+  height: 0px;
+}
+
+
+
+
 /* for custom scrollbar for webkit browser*/
 ::-webkit-scrollbar {
     width: 6px;
