@@ -90,20 +90,29 @@ $(function () {
                 $('#update').show();
                 show_updatePopup(generatorId);
             });
-
-
-
-
-
         }
     });
-
-
-
-
-
 });
 
+function removeSignalFromDisplay(){
+ var generator = $('#lastGeneratorName').val();
+}
+
+function updateSignal() {
+    if (validateFields()) {
+
+        socket.emit("updateSignal",
+            {
+                signalId: newSignalId = $('#lastGeneratorName').val(),
+                valMin: $('#valMin').val(),
+                valMax: $('#valMax').val(),
+                category: $('#lastGategory').find(":selected").val(),
+                unity: $('#lastUnity').val()
+            });
+        updateSignalInfos(newSignalId);
+        hide_popup();
+    }
+}
 function setupOldGenerator(generator) {
     var signalId = $(generator).attr('id');
 
@@ -191,21 +200,7 @@ function updateSignalChart(signalId, value) {
     }
 }
 
-function updateSignal() {
-    if (validateFields()) {
-        var newSignalId = $('#generatorName').val();
-        socket.emit("updateSignal",
-            {
-                signalId: newSignalId,
-                valMin: $('#valMin').val(),
-                valMax: $('#valMax').val(),
-                category: $('#category').find(":selected").val(),
-                unity: $('#unity').val()
-            });
-        updateSignalInfos(newSignalId);
-        hide_popup();
-    }
-}
+
 
 function validateFields() {
     $('#errorMsg').text("");

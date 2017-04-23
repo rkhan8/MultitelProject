@@ -2,20 +2,17 @@
  * Created by angem on 2017-03-25.
  */
 
-var connection = require ('../Repository/DBconnection')
+var connection = require('../Repository/DBconnection')
 var EventEmitter = require('events').EventEmitter;
 var signalRepositoryEvent = new EventEmitter();
 var _ = require('lodash');
-
-
 
 
 var signalValueModel = connection.db.signalValueModel;
 var signalModel = connection.db.signalModel;
 
 
-
-exports.insertNewSignal = function(signalId, category, minVal, maxVal, unity) {
+exports.insertNewSignal = function (signalId, category, minVal, maxVal, unity) {
     signalModel.create({
         idN: signalId,
         Category: category,
@@ -39,22 +36,22 @@ exports.insertNewSignal = function(signalId, category, minVal, maxVal, unity) {
         });
 
 }
-exports.insertSignalValue = function(signalId, value) {
+exports.insertSignalValue = function (signalId, value) {
 
     signalValueModel.create({
         idN: signalId,
         ValueRec: value,
         DateRec: connection.sequelize.literal('CURRENT_TIMESTAMP()')
     })
-        .then(function() {
+        .then(function () {
             signalRepositoryEvent.emit('valueInserted', signalId);
         })
         .catch(function (err) {
-        console.log(err);
-        signalRepositoryEvent.emit('signalValueCreateError', signalId);
-    })
+            console.log(err);
+            signalRepositoryEvent.emit('signalValueCreateError', signalId);
+        })
 };
-exports.getSignals = function(signalId, category, minVal, maxVal, unity) {
+exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
     var whereClause = {
         idN: signalId,
         MinValue: minVal,
@@ -73,13 +70,13 @@ exports.getSignals = function(signalId, category, minVal, maxVal, unity) {
         });
 
 }
-exports.getRecordingDates = function(){
+exports.getRecordingDates = function () {
     signalValueModel.findAll({
-        attributes:[[connection.sequelize.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
+        attributes: [[connection.sequelize.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
 
     }).then(function (result) {
         var dates = JSON.parse(JSON.stringify(result));
-        signalRepositoryEvent.emit('signalValueRecordingDateFound',_.map(dates, 'DateRec') );
+        signalRepositoryEvent.emit('signalValueRecordingDateFound', _.map(dates, 'DateRec'));
 
     }).catch(function (err) {
         console.log(err);
@@ -87,13 +84,13 @@ exports.getRecordingDates = function(){
 
     });
 }
-exports.getSignalsCategories = function(){
+exports.getSignalsCategories = function () {
     signalModel.findAll({
-        attributes:[[connection.sequelize.literal('DISTINCT Category'), 'Category']]
+        attributes: [[connection.sequelize.literal('DISTINCT Category'), 'Category']]
 
     }).then(function (result) {
         var categories = JSON.parse(JSON.stringify(result));
-        signalRepositoryEvent.emit('signalsCategoriesFound',_.map(categories, 'Category'));
+        signalRepositoryEvent.emit('signalsCategoriesFound', _.map(categories, 'Category'));
 
     }).catch(function (err) {
         console.log(err);
@@ -102,13 +99,13 @@ exports.getSignalsCategories = function(){
     });
 }
 
-exports.getSignalsUnity = function(){
+exports.getSignalsUnity = function () {
     signalModel.findAll({
-        attributes:[[connection.sequelize.literal('DISTINCT Unity'), 'Unity']]
+        attributes: [[connection.sequelize.literal('DISTINCT Unity'), 'Unity']]
 
     }).then(function (result) {
         var unities = JSON.parse(JSON.stringify(result));
-        signalRepositoryEvent.emit('signalsUnityFound', _.map(unities,'Unity'));
+        signalRepositoryEvent.emit('signalsUnityFound', _.map(unities, 'Unity'));
 
     }).catch(function (err) {
         console.log(err);
@@ -117,13 +114,13 @@ exports.getSignalsUnity = function(){
     });
 }
 
-exports.getSignalsId = function(){
+exports.getSignalsId = function () {
     signalModel.findAll({
-        attributes:[[connection.sequelize.literal('DISTINCT idN'), 'idN']]
+        attributes: [[connection.sequelize.literal('DISTINCT idN'), 'idN']]
 
     }).then(function (result) {
         var ids = JSON.parse(JSON.stringify(result));
-        signalRepositoryEvent.emit('signalsIdFound', _.map(ids,'idN'));
+        signalRepositoryEvent.emit('signalsIdFound', _.map(ids, 'idN'));
 
     }).catch(function (err) {
         console.log(err);
@@ -132,30 +129,78 @@ exports.getSignalsId = function(){
     });
 }
 
-exports.getSignalByStatus = function(status){
+exports.getSignalByStatus = function (status) {
     connection.db.signalStatusModel.findAll({
-        where :{
+        where: {
             status: status
-        }, include :[{
-                model: connection.db.signalModel
+        }, include: [{
+            model: connection.db.signalModel
         }]
-    }).then(function(result){
+    }).then(function (result) {
         signalRepositoryEvent.emit('signalsByStatusFounded', JSON.parse(JSON.stringify(result)));
-    }).catch(function(err){
+    }).catch(function (err) {
         console.log(err);
         signalRepositoryEvent.emit('getSignalDisplayedErr', err.detail);
     })
+};
+
+exports.deleteSignalPosition = function (signalId) {
+    connection.db.signalpositiOndropZoneModel.destroy({
+        where: {
+            idN: signalId
+        }
+    })
+        .then(function () {
+            signalRepositoryEvent.emit('signalPositionDeleted')
+        })
+        .cacth(function (err) {
+            signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
+        });
+}
+exports.updateSignalPosition = function (signalId, positionLeft, positionTop, view) {
+    connection.db.signalpositiOndropZoneModel.update(
+        {
+            PositionTop: positionTop,
+            PositionLeft: positionLeft,
+            view: view
+        },
+        {
+            where: {
+                idN: signalId
+            }
+        }.then(function () {
+            signalRepositoryEvent.emit('signalPositionUdpate');
+        })
+            .cacth(function (err) {
+                signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
+            })
+    )
+}
+exports.updateSignalStatus = function (signalId, newStatus) {
+    connection.db.signalStatusModel.update(
+        {status: newStatus},
+        {
+            where: {
+                idN: signalId
+            }
+        }
+    ).then(function () {
+        signalRepositoryEvent.emit('signalStatusUpdated')
+    })
+        .cacth(function (err) {
+            signalRepositoryEvent.emit('errorUpdateSignalStatus', err.detail);
+        });
 }
 
-exports.getNotDiplayedSignalsId = function(){
+exports.getNotDiplayedSignalsId = function () {
     connection.db.signalStatusModel.findAll({
-        attributes : ['idN'],
+        attributes: ['idN'],
         where: {
             status: 0
         }
-    }).then(function(result){
+    }).then(function (result) {
         var ids = JSON.parse(JSON.stringify(result));
-        signalRepositoryEvent.emit('notDisplayedSignalsFound', _.map(ids,'idN'));
+        signalRepositoryEvent.emit('notDisplayedSignalsFound', _.map(ids, 'idN'));
 
     }).catch(function (err) {
         console.log(err);
@@ -166,7 +211,7 @@ exports.getNotDiplayedSignalsId = function(){
 }
 
 
- exports.getSignalsValues = function(signalId, category, unity, startDate, endDate) {
+exports.getSignalsValues = function (signalId, category, unity, startDate, endDate) {
     var whereClause2;
     var whereClause1 = {
         idN: signalId,
@@ -183,21 +228,21 @@ exports.getNotDiplayedSignalsId = function(){
             dateRec: date
         };
     }
-    if(_.isEmpty(whereClause1))
+    if (_.isEmpty(whereClause1))
         whereClause1 = undefined;
 
     whereClause1 = _.pickBy(whereClause1);
-     signalValueModel.findAll({
-         where: whereClause2,
-         include: [{
-             model: signalModel,
-             where: whereClause1
-         }
-         ]
-     }).then(function (result) {
-            signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
+    signalValueModel.findAll({
+        where: whereClause2,
+        include: [{
+            model: signalModel,
+            where: whereClause1
+        }
+        ]
+    }).then(function (result) {
+        signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
 
-        }).catch(function (err) {
+    }).catch(function (err) {
         console.log(err);
         signalRepositoryEvent.emit('searchSignalValueError', signalId);
 

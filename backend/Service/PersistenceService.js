@@ -187,7 +187,13 @@ exports.getNotDiplayedSignalsId = function () {
 };
 exports.getDisplaySignalSignal = function(){
     signalRepository.getSignalByStatus(1);
-}
+};
+exports.removeSignalFromDisplay = function(signalId){
+    signalRepository.updateSignalStatus(signalId, 0);
+};
+exports.addSignalOnDisplay = function(signalId){
+    signalRepository.updateSignalStatus(signalId, 1);
+};
 
 exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
     batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
@@ -250,7 +256,7 @@ function initialisePersistenceError() {
     });
     batimentRepository.batimentRepositoryEvent.on('searchBatimentInfosError', function (details) {
         persistenceEvent.emit('errorSearchBatimentInfos', details);
-    })
+    });
 }
 function initialisePersitenceEvent() {
     signalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {

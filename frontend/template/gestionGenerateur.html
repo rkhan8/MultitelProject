@@ -172,18 +172,18 @@
             <table id="panelInfo" cellpadding="4">
               <tr>
                 <th>
-                  <label for="generatorName">Nom : </label>
+                  <label for="lastGeneratorName">Nom : </label>
                 </th>
                 <td>
-                  <input id="generatorName" placeholder="Nom..." type="text">
+                  <input id="lastGeneratorName" placeholder="Nom..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="category">Catégorie : </label>
+                  <label for="lastGategory">Catégorie : </label>
                 </th>
                 <td>
-                  <select id="category">
+                  <select id="lastGategory">
                       <option value="">- Sélectionner la catégorie -</option>
                       <option value="analog">Analogique</option>
                       <option value="binary">Binaire</option>
@@ -192,42 +192,42 @@
               </tr>
               <tr>
                 <th>
-                  <label for="unity">Unité : </label>
+                  <label for="lastUnity">Unité : </label>
                 </th>
                 <td>
-                  <input id="unity" placeholder="Unité..." type="text">
+                  <input id="lastUnity" placeholder="Unité..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="Adress">Adresse : </label>
+                  <label for="lastAdresse">Adresse : </label>
                 </th>
                 <td>
-                  <input id="adress" placeholder="adresse..." type="text">
+                  <input id="lastAdresse" placeholder="adresse..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="Batiment">Batiment : </label>
+                  <label for="lastBatimentName">Batiment : </label>
                 </th>
                 <td>
-                  <input id="batiment" placeholder="batiment..." type="text">
+                  <input id="lastBatimentName" placeholder="batiment..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="Etage">Etage : </label>
+                  <label for="lastEtageNumber">Etage : </label>
                 </th>
                 <td>
-                  <input id="etage" placeholder="etage..." type="text">
+                  <input id="lastEtageNumber" placeholder="etage..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="Porte">Porte : </label>
+                  <label for="lastDoorNumber">Porte : </label>
                 </th>
                 <td>
-                  <input id="porte" placeholder="porte..." type="text">
+                  <input id="lastDoorNumber" placeholder="porte..." type="text">
                 </td>
               </tr>
             </table>
@@ -235,6 +235,7 @@
           <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button close">Fermer</button>
             <button type="button" class="mdl-button save" onclick="updateSignal();">Mettre à jour</button>
+            <button type="button" class="mdl-button save" onclick="removeSignalFromDisplay();">Supprimer</button>
           </div>
         </dialog>
 
