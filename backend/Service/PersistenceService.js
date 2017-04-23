@@ -249,7 +249,7 @@ function initialisePersistenceError() {
         persistenceEvent.emit('errorGetDisplayedSignal', details);
     });
     signalRepository.signalRepositoryEvent.on('signalUpdateError', function(details){
-        persitenceEvent.emit('errorSignalUpdate', details);
+        persistenceEvent.emit('errorSignalUpdate', details);
     });
 
     batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function (message) {
@@ -282,7 +282,8 @@ function initialisePersitenceEvent() {
         persistenceEvent.emit('signalCreated', signalInfos);
     });
     signalRepository.signalRepositoryEvent.on('signalUpdated', function(){
-        persitenceEvent.emit('signalUpdated');
+
+        persistenceEvent.emit('signalUpdated');
     });
     signalRepository.signalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
         persistenceEvent.emit('recordingDates', data);
