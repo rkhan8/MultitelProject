@@ -9,6 +9,34 @@ socket.on('signalInfos', function (signalInfos) {
 
 })
 
+socket.on('compagnie', function (data) {
+    $('#newCompagnieGenerateur option').remove();
+    $('#lastCompagnie option').remove();
+    populateComboboxFromArray('newCompagnieGenerateur', data)
+    populateComboboxFromArray('lastCompagnie', data)
+});
+
+socket.on('batimentsName', function (data) {
+    $('#newNomBatiment option').remove();
+    $('#lastBatimentName option').remove();
+    populateComboboxFromArray('newNomBatiment', data)
+    populateComboboxFromArray('lastBatimentName', data)
+});
+socket.on('batimentsInfos', function(batimenInfos){
+    var etages = new Array();
+    for(var i = 0; i <= batimenInfos[0].NbEtages ; i++){
+        etages.push(i);
+    }
+
+
+    $('#lastEtageNumber option').remove();
+    $('#newNumeroEtage option').remove();
+    populateComboboxFromArray('lastEtageNumber',etages);
+    populateComboboxFromArray('newNumeroEtage',etages);
+
+});
+
+
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
     updateSignalChart(newValue.signalId, newValue.value);
@@ -26,6 +54,7 @@ socket.on('notDisplayedSignals', function (data) {
 socket.on('signalRemovedFromDisplay', function () {
     //afficher un popup avec le message
 })
+
 
 
 $(function () {
@@ -87,18 +116,25 @@ $(function () {
 
                 }
             });
-
-            //event when click to generator
-
         }
     });
 
 });
 
-
 $(function () {
+    $('#newCompagnieGenerateur').change(function () {
+        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
+    });
 
+    $('#newNomBatiment').change(function () {
+
+        socket.emit('searchBatimentsValues', {
+            NomBatiment: $(this).find('option:selected').val(),
+            compagnie: $('#newCompagnieGenerateur').find('option:selected').val()
+        });
+    });
 });
+
 
 function removeSignalFromDisplay(signalId) {
 
@@ -168,7 +204,7 @@ function initializeOldSignal(signals) {
 function addSignalOnDisplaying() {
     if (validateFields()) {
         var signalId = $('#generatorNameIdList').val();
-        socket.emit("createSignl",
+        socket.emit("addsignalOnPlayingList",
             {
                 signalId: $('#generatorNameIdList').find(':selected').val(),
                 category: $('#categoryNewgenerateur option:selected').val(),
@@ -264,13 +300,9 @@ function updateSignalInfos(newSignalId) {
 }
 
 function show_popup(signalId) {
-    /*
-     $('#errorMsg').text("");
-     $('#popupContent').css('display', 'block');
-     $('#generatorName').val(generatorId);
-     */
 
     socket.emit('getNotDisplayedSignalsId');
+    socket.emit('getComapgniesName');
     $('#errorMsg').text("");
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     dialog.showModal();
@@ -288,11 +320,7 @@ function show_popup(signalId) {
 
 //Function show_updatePopup
 function show_updatePopup(signalId) {
-    /*
-     $('#errorMsg').text("");
-     $('#popupContent').css('display', 'block');
-     $('#generatorName').val(generatorId);
-     */
+
     $('#removeSignalButton').click(function () {
         removeSignalFromDisplay(signalId);
     });
@@ -316,22 +344,6 @@ function hide_popup() {
     document.getElementById('categoryNewgenerateur').selectedIndex = 0;
     $('#popupContent').css('display', 'none');
 }
-
-function hide_gen() {
-    $('.generator').css('display', 'none');
-}
-
-/*function createSignal(signalId, min, max, category) {
-
- socket.emit("createSignal",
- {
- signalId: signalId,
- valMin: $('#valMin').val(),
- valMax: $('#valMax').val(),
- category: $('#category option:selected').val(),
- unity: $('#unity').val()
- });
- }*/
 
 
 function createAndSetupInput() {

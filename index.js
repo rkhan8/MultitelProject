@@ -16,7 +16,6 @@ http.listen(3000, function () {
 })
 
 
-
 persistanceService.persistenceEvent.on('signalsId', function (signalsId) {
     io.sockets.emit('signalsId', signalsId);
 });
@@ -61,57 +60,58 @@ persistanceService.persistenceEvent.on('signalCreated', function (signalInfos) {
     signalService.createSignal(signalInfos);
 });
 
-persistanceService.persistenceEvent.once('signalsData', function(signals){
+persistanceService.persistenceEvent.once('signalsData', function (signals) {
     signalService.createSignals(signals);
 });
-persistanceService.persistenceEvent.on('batimentAjouterOk', function(){
+persistanceService.persistenceEvent.on('batimentAjouterOk', function () {
     io.sockets.emit('batimentAjouterOk');
 });
-persistanceService.persistenceEvent.on('compagnies', function(data){
+persistanceService.persistenceEvent.on('compagnies', function (data) {
     io.sockets.emit('compagnie', data);
 });
-persistanceService.persistenceEvent.on('batimentsName', function(data){
+persistanceService.persistenceEvent.on('batimentsName', function (data) {
     io.sockets.emit('batimentsName', data);
 })
-persistanceService.persistenceEvent.on('batimentInfos', function(data){
+persistanceService.persistenceEvent.on('batimentInfos', function (data) {
     io.sockets.emit('batimentsInfos', data);
 });
-persistanceService.persistenceEvent.on('notDisplayedSignals', function(data){
+persistanceService.persistenceEvent.on('notDisplayedSignals', function (data) {
     io.sockets.emit('notDisplayedSignals', data);
 });
-persistanceService.persistenceEvent.on('displayedSignals',function(data){
+persistanceService.persistenceEvent.on('displayedSignals', function (data) {
     io.sockets.emit('displayedSignals', data);
 });
-persistanceService.persistenceEvent.on('signalStatusUpdated', function(){
+persistanceService.persistenceEvent.on('signalStatusUpdated', function () {
     io.sockets.emit('signalRemovedFromDisplay');
 });
-
-
-
+persistanceService.persistenceEvent.on('signalUpdated', function(){
+    io.sockets.emit('signalUpdated');
+})
 
 
 io.on('connection', function (socket) {
 
-    socket.on('createSignal', function (signalValues) {
-        persistanceService.storeSignalInformation(signalValues.signalId, signalValues.category, signalValues.valMin, signalValues.valMax, signalValues.unity);
+    socket.on('addsignalOnPlayingList', function (signalInfos) {
+        // persistanceService.storeSignalInformation(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax, signalInfos.unity);
+        persistanceService.makeSignalDisplayable(signalInfos.signalId, signalInfos.compagnie, signalInfos.nomBatiment, signalInfos.numeroEtage, signalInfos.unity,signalInfos.category)
     });
 
-   /* socket.on('getAllSignals', function(){
-       socket.emit('signals',signalService.getSignals());
-    });*/
-    socket.on('getAllDisplayedSignals', function(){
+    /* socket.on('getAllSignals', function(){
+     socket.emit('signals',signalService.getSignals());
+     });*/
+    socket.on('getAllDisplayedSignals', function () {
         persistanceService.getDisplaySignalSignal();
     });
-    socket.on('removeSignalFromDisplay',function (signalId){
-       persistanceService.removeSignalFromDisplay(signalId);
+    socket.on('removeSignalFromDisplay', function (signalId) {
+        persistanceService.removeSignalFromDisplay(signalId);
     });
-    socket.on('addSignalOnDisplay', function(signalId){
+    socket.on('addSignalOnDisplay', function (signalId) {
         persitanceService.addSignalOnDisplay(signalId)
     });
-    socket.on('deletesignalPosition', function(signalId){
+    socket.on('deletesignalPosition', function (signalId) {
         persistanceService.deleteSignalPosition(signalId)
     });
-    socket.on('updateSignalPosition', function(signalId, positionLeft, positionTop){
+    socket.on('updateSignalPosition', function (signalId, positionLeft, positionTop) {
 
     })
 
@@ -146,19 +146,19 @@ io.on('connection', function (socket) {
         persistanceService.getSignalsValues(idN, category, unity, startDate, endDate);
     });
 
-    socket.on('ajouterBatiment', function(batiment){
+    socket.on('ajouterBatiment', function (batiment) {
         persistanceService.ajouterBatiment(batiment.compagnie, batiment.nomBatiment, batiment.nbEtages, batiment.adresse, batiment.codePostal, batiment.numero);
     });
-    socket.on('getComapgniesName', function(){
-       persistanceService.getCompagnies();
+    socket.on('getComapgniesName', function () {
+        persistanceService.getCompagnies();
     });
-    socket.on('getCompagnieBatiment', function(compagnie){
+    socket.on('getCompagnieBatiment', function (compagnie) {
         persistanceService.getCompagnieBatimentsName(compagnie)
     });
-    socket.on('searchBatimentsValues', function(searchKey){
+    socket.on('searchBatimentsValues', function (searchKey) {
         persistanceService.getBatimentsInformations(searchKey.compagnie, searchKey.NomBatiment);
     });
-    socket.on('getNotDisplayedSignalsId', function(){
+    socket.on('getNotDisplayedSignalsId', function () {
         persistanceService.getNotDiplayedSignalsId();
     });
 
@@ -174,7 +174,6 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('getComapgniesName');
         socket.removeAllListeners('getCompagnieBatiment');
         socket.removeAllListeners('searchBatimentsValues');
-
 
 
     });

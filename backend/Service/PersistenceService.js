@@ -211,6 +211,13 @@ exports.getBatimentsInformations = function (compagnie, nomBatiment) {
     batimentRepository.getBatimentsInformations(compagnie, nomBatiment);
 };
 
+exports.makeSignalDisplayable = function (signalId, compagnie, nomBatiment, Etage, unity, category){
+    signalRepository.updateSignalStatus(signalId, 1);
+    batimentRepository.createSignalBatimentInformations(signalId, compagnie, nomBatiment, Etage);
+    signalRepository.updateSignalInformations(signalId,category, unity)
+
+}
+
 
 function initialisePersistenceError() {
     signalRepository.signalRepositoryEvent.on('signalCreateError', function (signalId) {
@@ -228,7 +235,6 @@ function initialisePersistenceError() {
     signalRepository.signalRepositoryEvent.on('signalsIdError', function () {
         persistenceEvent.emit('errorGetSignalsId', '');
     });
-
     signalRepository.signalRepositoryEvent.on('signalsUnityError', function () {
         persistenceEvent.emit('errorGetSignalsUnity', '');
     });
@@ -241,7 +247,10 @@ function initialisePersistenceError() {
     });
     signalRepository.signalRepositoryEvent.on('getSignalDisplayedErr', function(details){
         persistenceEvent.emit('errorGetDisplayedSignal', details);
-    })
+    });
+    signalRepository.signalRepositoryEvent.on('signalUpdateError', function(details){
+        persitenceEvent.emit('errorSignalUpdate', details);
+    });
 
     batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function (message) {
         persistenceEvent.emit('errorAjouterBatiment', message);
@@ -255,6 +264,10 @@ function initialisePersistenceError() {
     batimentRepository.batimentRepositoryEvent.on('searchBatimentInfosError', function (details) {
         persistenceEvent.emit('errorSearchBatimentInfos', details);
     });
+    batimentRepository.batimentRepositoryEvent.on('createBatimentInfosError', function(details){
+       persistenceEvent.emit('errorCreateBatimentInfos',details)
+    });
+
 }
 function initialisePersitenceEvent() {
     signalRepository.signalRepositoryEvent.on('signalsCategoriesFound', function (data) {
@@ -268,7 +281,9 @@ function initialisePersitenceEvent() {
     signalRepository.signalRepositoryEvent.on('signalCreated', function (signalInfos) {
         persistenceEvent.emit('signalCreated', signalInfos);
     });
-
+    signalRepository.signalRepositoryEvent.on('signalUpdated', function(){
+        persitenceEvent.emit('signalUpdated');
+    });
     signalRepository.signalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
         persistenceEvent.emit('recordingDates', data);
     });
@@ -311,6 +326,9 @@ function initialisePersitenceEvent() {
     });
     batimentRepository.batimentRepositoryEvent.on('batimentInfosFound', function (data) {
         persistenceEvent.emit('batimentInfos', data);
+    });
+    batimentRepository.batimentRepositoryEvent.on('signalBatimentInfosCreated', function(){
+        persistenceEvent.emit('signalBatimentInfosCreated')
     })
 }
 

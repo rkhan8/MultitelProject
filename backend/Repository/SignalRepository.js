@@ -21,20 +21,36 @@ exports.insertNewSignal = function (signalId, category, minVal, maxVal, unity) {
         Unity: unity
     })
         .then(function () {
-            signalRepositoryEvent.emit('signalCreated', {
-                signalId: signalId,
-                category: category,
-                valMin: minVal,
-                valMax: maxVal
-            });
+            signalRepositoryEvent.emit('signalCreated');
 
         })
         .catch(function (err) {
-            signalRepositoryEvent.emit('signalCreateError', signalId);
+            signalRepositoryEvent.emit('signalCreateError', err.detail);
             console.log(err);
 
         });
 
+}
+exports.updateSignalInformations = function (signalId, category, unity) {
+    signalModel.update(
+        {
+            idN: signalId,
+            Category: category,
+            Unity: unity
+        },
+        {
+            where: {
+                idN: signalId
+            }
+        })
+        .then(function () {
+            signalRepositoryEvent.emit('signalUpdated');
+        })
+        .catch(function (err) {
+            signalRepositoryEvent.emit('signalUpdateError', err.detail);
+            console.log(err);
+
+        })
 }
 exports.insertSignalValue = function (signalId, value) {
 
@@ -150,9 +166,9 @@ exports.deleteSignalPosition = function (signalId, view) {
             idN: signalId,
             view: view
         }
-    })  .then(function () {
-            signalRepositoryEvent.emit('signalPositionDeleted')
-        })
+    }).then(function () {
+        signalRepositoryEvent.emit('signalPositionDeleted')
+    })
         .catch(function (err) {
             signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
         });

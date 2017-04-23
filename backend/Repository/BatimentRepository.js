@@ -74,4 +74,27 @@ exports.getBatimentsInformations = function (compagnie, nomBatiment) {
         });
 
 }
+exports.createSignalBatimentInformations = function (signalId, compagnie, nomBatiment, Etage) {
+
+    connection.db.batimentModel.findOne({
+        where: {
+            Compagnie: compagnie,
+            NomBatiment: nomBatiment
+        }
+    })
+        .then(function (result) {
+            var batiment = JSON.parse(JSON.stringify(result))
+            connection.db.signalBatimentModel.create({
+                batimentId: batiment.batimentId,
+                idN: signalId,
+                Etage: Etage
+            }).then(function(){
+                batimentRepositoryEvent.emit('signalBatimentInfosCreated');
+            })
+        })
+        .catch(function (err) {
+            console.log(err.detail);
+            batimentRepositoryEvent.emit('createBatimentInfosError', err.detail);
+        });
+}
 exports.batimentRepositoryEvent = batimentRepositoryEvent;
