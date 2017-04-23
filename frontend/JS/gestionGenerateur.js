@@ -3,8 +3,11 @@ var generators = new Array();
 var charts = new Array();
 
 
-
 socket.emit('getAllDisplayedSignals');
+socket.on('signalInfos', function (signalInfos) {
+
+
+})
 
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
@@ -12,14 +15,17 @@ socket.on('newValue', function (newValue) {
 });
 
 socket.on('displayedSignals', function (signals) {
-
     initializeOldSignal(signals);
 });
 
-socket.on('notDisplayedSignals', function(data){
+socket.on('notDisplayedSignals', function (data) {
     $('#generatorNameIdList option').remove();
     populateComboboxFromArray('generatorNameIdList', data)
 });
+
+socket.on('signalRemovedFromDisplay', function () {
+    //afficher un popup avec le message
+})
 
 
 $(function () {
@@ -28,9 +34,8 @@ $(function () {
         stack: ".draggable",
         cursor: 'hand',
         helper: 'clone',
-        containment : '#droppableContent'
+        containment: '#droppableContent'
     });
-
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
@@ -39,7 +44,7 @@ $(function () {
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
-           // var currentPos = ui.helper.position();
+            // var currentPos = ui.helper.position();
 
             var valueDisplayer = createAndSetupInput();
             $(valueDisplayer).addClass("valueDisplay");
@@ -49,89 +54,95 @@ $(function () {
             generator.css('top', ui.position.top);
             generator.css('left', ui.position.left);
             generator.appendTo(dropZone);
+            $(generator).addClass('signal')
 
 
-              if ($(generator).hasClass('generator')) {
-                  setupNewGenerator(generator);
-                  $(generator).removeClass('generator');
-              }
+            if ($(generator).hasClass('generator')) {
+                setupNewSignal(generator);
+                $(generator).removeClass('generator');
+            }
 
-              if ($(generator).hasClass('oldGenerator')) {
-                  setupOldGenerator(generator);
-                  ui.draggable.remove();
-                  $(generator).removeClass('oldGenerator');
-              }
+            if ($(generator).hasClass('oldGenerator')) {
+                setupOldsignal(generator);
+                ui.draggable.remove();
+                $(generator).removeClass('oldGenerator');
+            }
 
+            $('.signal').click(function () {
+                var currentGenerator = $(this);
+                var signalId = $(currentGenerator).attr('id');
 
+                socket.emit('getSignalInfos', signalId);
+                $('#save').hide();
+                $('#update').show();
+                show_updatePopup(signalId);
+            });
             $(generator).draggable({
                 stack: ".draggable",
                 cursor: 'hand',
-                containment : '#droppableContent',
-                stop: function(event, ui) {
+                containment: '#droppableContent',
+                stop: function (event, ui) {
                     //mettre le code recuperer la position ici !!
-                    alert("left="+parseInt($(this).position().left)+" top="+parseInt($(this).position().top));
+                    alert("left=" + parseInt($(this).position().left) + " top=" + parseInt($(this).position().top));
 
                 }
             });
 
             //event when click to generator
-            $(generator).click(function () {
-                var currentGenerator = $(this);
-                var generatorId = $(currentGenerator).attr('id');
-                socket.on('signalInfos', function (generatorInfos) {
-                    $('#valMin').val(generatorInfos.minValue);
-                    $('#valMax').val(generatorInfos.maxValue);
-                    document.getElementById('category').value = generatorInfos.category;
-                    $('#unity').val(generatorInfos.unity);
-                });
 
-                socket.emit('getSignalInfos', generatorId);
-                $('#save').hide();
-                $('#update').show();
-                show_updatePopup(generatorId);
-            });
         }
     });
+
 });
 
-function removeSignalFromDisplay(){
- var generator = $('#lastGeneratorName').val();
+
+$(function () {
+
+});
+
+function removeSignalFromDisplay(signalId) {
+
+    socket.emit('removeSignalFromDisplay', signalId);
+    socket.emit('deletesignalPosition', signalId);
+    $('#' + signalId).remove();
 }
 
 function updateSignal() {
     if (validateFields()) {
-
+        newSignalId = $('#lastGeneratorName').val();
         socket.emit("updateSignal",
             {
-                signalId: newSignalId = $('#lastGeneratorName').val(),
-                valMin: $('#valMin').val(),
-                valMax: $('#valMax').val(),
+                signalId: $('#lastGeneratorName').val(),
                 category: $('#lastGategory').find(":selected").val(),
-                unity: $('#lastUnity').val()
+                unity: $('#lastUnity').val(),
+                nomBatiment: $('#lastBatimentName').find(":selected").val(),
+                compagnie: $('#lastCompagnie').find(":selected").val(),
+                numeroEtage: $('#lastEtageNumber').find(":selected").val()
+
             });
         updateSignalInfos(newSignalId);
         hide_popup();
     }
 }
-function setupOldGenerator(generator) {
-    var signalId = $(generator).attr('id');
+function setupOldsignal(signal) {
+    var signalId = $(signal).attr('id');
 
     createSignalGraph(signalId);
 }
 
-function setupNewGenerator(generator) {
+function setupNewSignal(signal) {
 
 
-    $(generator).attr('id', generators.length + 1);
+    // $(signal).attr('id', generators.length + 1);
     var signalName = createAndSetupInput();
     $(signalName).addClass("signalName");
-    $(generator).prepend(signalName);
+    $(signal).prepend(signalName);
 
-    generators.push(generator);
+    generators.push(signal);
 
     $('#save').show();
     $('#update').hide();
-    show_popup($(generator).attr('id'));
+    show_popup();
 }
 
 function initializeOldSignal(signals) {
@@ -145,7 +156,7 @@ function initializeOldSignal(signals) {
             stack: ".draggable",
             cursor: 'hand',
             helper: 'clone',
-            containment : '#droppableContent'
+            containment: '#droppableContent'
         });
         $(signalName).addClass("signalName");
         $(signalName).val(signals[i].idN);
@@ -154,11 +165,20 @@ function initializeOldSignal(signals) {
     }
 }
 
-function createNewSignal() {
+function addSignalOnDisplaying() {
     if (validateFields()) {
-        var signalId = $('#generatorName').val();
-        createSignal(signalId);
+        var signalId = $('#generatorNameIdList').val();
+        socket.emit("createSignl",
+            {
+                signalId: $('#generatorNameIdList').find(':selected').val(),
+                category: $('#categoryNewgenerateur option:selected').val(),
+                unity: $('#unityNewGenerateur').val(),
+                nomBatiment: $('#newNomBatiment').find(":selected").val(),
+                compagnie: $('#newCompagnieGenerateur').find(":selected").val(),
+                numeroEtage: $('#newNumeroEtage').find(":selected").val()
+            });
         hide_popup();
+        updateSignalInfos(signalId);
         createSignalGraph(signalId);
     }
 
@@ -201,33 +221,28 @@ function updateSignalChart(signalId, value) {
 }
 
 
-
 function validateFields() {
     $('#errorMsg').text("");
-    var nameValue = document.getElementById('generatorName').value;
-    var categoryValue = document.getElementById('category').value;
-    var genValMin = document.getElementById('valMin');
-    var genValMax = document.getElementById('valMax');
-    var unityValue = document.getElementById('unity').value;
 
-    if (categoryValue == "") {
+    var signalName = $('#generatorNameIdList').find(':selected').val();
+    var category = $('#categoryNewgenerateur').find(":selected").val();
+    var unityValue = $('#unityNewGenerateur').val();
+    var compagnie = $('#newCompagnieGenerateur').find(":selected").val();
+    var nomBatiment = $('#newNomBatiment').find(":selected").val();
+    var numeroEtage = $('#newNumeroEtage').find(":selected").val();
+
+    if (category == "") {
         $('#errorMsg').text("Vous devez spécifier la catégorie du générateur");
     }
-    else if (categoryValue != "binary" && (nameValue == "" || genValMin.value == "" || genValMax.value == ""
-        || unityValue == "")) {
-        $('#errorMsg').text("Vous devez remplir tous les champs");
-    }
-    else if (categoryValue == "binary" && (nameValue == "" || unityValue == "")) {
+
+    else if (category == "binary" && (signalName == "" || unityValue == "")) {
         $('#errorMsg').text("Vous devez spécifier le nom et/ou l'unité du générateur");
-    }
-    else if (parseInt(genValMin.value) >= parseInt(genValMax.value)) {
-        $('#errorMsg').text("La valeur minimale  de l'intervalle doit être inférieure à sa valeur maximale");
     }
     else {
         $('#errorMsg').text("");
 
-        var newSignalId = $('#generatorName').val();
-        updateSignalInfos(newSignalId);
+        var signalId = $('#generatorName').val();
+        updateSignalInfos(signalId);
         return true;
     }
 }
@@ -248,54 +263,57 @@ function updateSignalInfos(newSignalId) {
     }
 }
 
-function show_popup(generatorId) {
-  /*
-    $('#errorMsg').text("");
-    $('#popupContent').css('display', 'block');
-    $('#generatorName').val(generatorId);
-    */
+function show_popup(signalId) {
+    /*
+     $('#errorMsg').text("");
+     $('#popupContent').css('display', 'block');
+     $('#generatorName').val(generatorId);
+     */
+
     socket.emit('getNotDisplayedSignalsId');
     $('#errorMsg').text("");
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     dialog.showModal();
-    dialog.querySelector('.save').addEventListener('click', function() {
-      //validateFields();
-      $('#generatorName').val(generatorId);
-      dialog.close();
+    dialog.querySelector('.save').addEventListener('click', function () {
+        //validateFields();
+        // $('#generatorName').val(signalId);
+        dialog.close();
     });
-    dialog.querySelector('.close').addEventListener('click', function() {
-      dialog.close();
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
     });
 
 
 }
 
 //Function show_updatePopup
-function show_updatePopup(generatorId) {
-  /*
-    $('#errorMsg').text("");
-    $('#popupContent').css('display', 'block');
-    $('#generatorName').val(generatorId);
-    */
+function show_updatePopup(signalId) {
+    /*
+     $('#errorMsg').text("");
+     $('#popupContent').css('display', 'block');
+     $('#generatorName').val(generatorId);
+     */
+    $('#removeSignalButton').click(function () {
+        removeSignalFromDisplay(signalId);
+    });
     $('#errorMsg').text("");
     var dialog = document.querySelector('#UpdateGeneratorPopUp');
     dialog.showModal();
-    dialog.querySelector('.save').addEventListener('click', function() {
-      $('#generatorName').val(generatorId);
-      dialog.close();
+    dialog.querySelector('.save').addEventListener('click', function () {
+        $('#generatorName').val(signalId);
+        dialog.close();
     });
-    dialog.querySelector('.close').addEventListener('click', function() {
-      dialog.close();
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
     });
 }
 
 //Function to Hide Popup
 function hide_popup() {
     $('#errorMsg').text("");
-    $('#valMin').val("");
-    $('#valMax').val("");
-    $('#unity').val("");
-    document.getElementById('category').selectedIndex = 0;
+    $('#lastUnity').val("");
+    $('#unityNewGenerateur').val("");
+    document.getElementById('categoryNewgenerateur').selectedIndex = 0;
     $('#popupContent').css('display', 'none');
 }
 
@@ -303,17 +321,17 @@ function hide_gen() {
     $('.generator').css('display', 'none');
 }
 
-function createSignal(signalId, min, max, category) {
+/*function createSignal(signalId, min, max, category) {
 
-    socket.emit("createSignal",
-        {
-            signalId: signalId,
-            valMin: $('#valMin').val(),
-            valMax: $('#valMax').val(),
-            category: $('#category option:selected').val(),
-            unity: $('#unity').val()
-        });
-}
+ socket.emit("createSignal",
+ {
+ signalId: signalId,
+ valMin: $('#valMin').val(),
+ valMax: $('#valMax').val(),
+ category: $('#category option:selected').val(),
+ unity: $('#unity').val()
+ });
+ }*/
 
 
 function createAndSetupInput() {

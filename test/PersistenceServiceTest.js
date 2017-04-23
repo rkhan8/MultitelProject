@@ -18,7 +18,7 @@ describe('storeSignalInformation', function() {
     it('should store correct generator informations', function() {
         persistenceService.storeSignalInformation(idTest, categoryTest, minValTest, maxValTest, unityTest);
 
-        expect(repository.SignalRepositoryEvent.emit('signalCreated', {
+        expect(repository.signalRepositoryEvent.emit('signalCreated', {
             signalId: idTest,
             category: categoryTest,
             valMin: minValTest,
@@ -33,7 +33,7 @@ describe('saveSignalValue', function() {
    it('should save the correct signal value', function() {
        persistenceService.saveSignalValue(idTest, valueTest, dateTest);
 
-       expect(repository.SignalRepositoryEvent.emit('signalValueCreated', {
+       expect(repository.signalRepositoryEvent.emit('signalValueCreated', {
            signalId: idTest,
            value: valueTest,
            date: dateTest
@@ -48,7 +48,7 @@ describe('getSignalFromDB', function() {
        persistenceService.getSignalFromDB(idTest, categoryTest, minValTest, maxValTest, unityTest);
 
        expect(function (result) {
-           repository.SignalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)))
+           repository.signalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)))
        })
    })
 });
@@ -59,7 +59,7 @@ describe('getRecordingDates', function() {
         persistenceService.getRecordingDates();
 
         expect(function (result) {
-            repository.SignalRepositoryEvent.emit('signalValueRecordingDateFound', JSON.parse(JSON.stringify(result)))
+            repository.signalRepositoryEvent.emit('signalValueRecordingDateFound', JSON.parse(JSON.stringify(result)))
 
         });
     })
@@ -71,7 +71,7 @@ describe('getSignalsValues', function() {
         persistenceService.getSignalsValues(idTest, categoryTest, unityTest, dateTest, endDateTest);
 
         expect(function (result) {
-            repository.SignalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)))
+            repository.signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)))
         })
     })
 });

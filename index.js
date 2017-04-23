@@ -81,7 +81,10 @@ persistanceService.persistenceEvent.on('notDisplayedSignals', function(data){
 });
 persistanceService.persistenceEvent.on('displayedSignals',function(data){
     io.sockets.emit('displayedSignals', data);
-})
+});
+persistanceService.persistenceEvent.on('signalStatusUpdated', function(){
+    io.sockets.emit('signalRemovedFromDisplay');
+});
 
 
 
@@ -99,7 +102,18 @@ io.on('connection', function (socket) {
     socket.on('getAllDisplayedSignals', function(){
         persistanceService.getDisplaySignalSignal();
     });
-    //socket.on('')
+    socket.on('removeSignalFromDisplay',function (signalId){
+       persistanceService.removeSignalFromDisplay(signalId);
+    });
+    socket.on('addSignalOnDisplay', function(signalId){
+        persitanceService.addSignalOnDisplay(signalId)
+    });
+    socket.on('deletesignalPosition', function(signalId){
+        persistanceService.deleteSignalPosition(signalId)
+    });
+    socket.on('updateSignalPosition', function(signalId, positionLeft, positionTop){
+
+    })
 
     socket.on('activateGenerators', function () {
         signalService.activateGenerators();
