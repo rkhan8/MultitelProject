@@ -19,7 +19,7 @@ socket.on('batimentsName', function (data) {
 
 socket.on('batimentsInfos', function(data){
     // les informations pour remplir le tableau pour le resultat de la recherche sont ici
-    console.log(data);
+    populateBatimentValuesTable(data);
 })
 
 $(function () {
@@ -66,6 +66,8 @@ function populateBatimentValuesTable(batimentValues) {
     for (var j = 0; j < batimentValues.length; j++) {
         //inserting table content by incrementing all the element into the arraylist
 
+        console.log(batimentValues[j]);
+        /*
         var row = table.insertRow(table.rows.length);
 
         //A MODIFIER
@@ -75,7 +77,7 @@ function populateBatimentValuesTable(batimentValues) {
         row.insertCell(3).innerHTML = batimentValues[j].Adressse;
         row.insertCell(4).innerHTML = batimentValues[j].Etage;
         row.insertCell(5).innerHTML = batimentValues[j].NbCapteur;
-
+        */
     }
 
 }
