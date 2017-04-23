@@ -474,6 +474,7 @@ canvas{
   margin-left: 2%;
   width: 96.5%;
   border-radius: 15px;
+  display: none;
 }
 
 #champAlign
