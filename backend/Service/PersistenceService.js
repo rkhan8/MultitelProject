@@ -190,6 +190,12 @@ exports.getSignals = function(signalId, category, minVal, maxVal, unity){
 exports.ajouterBatiment = function(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero){
     batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
 }
+exports.searchCompagnies = function(){
+    batimentRepository.searchCompagnies();
+}
+exports.searchCompagnieBatimentsName = function(compagnie){
+    batimentRepository.searchCompagnieBatimentsName(compagnie);
+}
 
 function initialisePersistenceError() {
     SignalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
@@ -223,7 +229,13 @@ function initialisePersistenceError() {
 
     batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function(message){
         persistenceEvent.emit('errorAjouterBatiment',message);
-    })
+    });
+    batimentRepository.batimentRepositoryEvent.on('searchCompagniesError', function(data){
+        persistenceEvent.emit('searchCompagniesError',data);
+    });
+    batimentRepository.batimentRepositoryEvent.on('searchBatimentsError', function(data){
+        persistenceEvent.emit('searchBatimentsNameError', data);
+    });
 }
 function initialisePersitenceEvent() {
     SignalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {
@@ -258,7 +270,13 @@ function initialisePersitenceEvent() {
     });
     batimentRepository.batimentRepositoryEvent.on('batimentAjouterOk', function(){
         persistenceEvent.emit('batimentAjouterOk');
-    })
+    });
+    batimentRepository.batimentRepositoryEvent.on('compagniesFound', function(data){
+        persistenceEvent.emit('compagnies',data);
+    });
+    batimentRepository.batimentRepositoryEvent.on('batimentsFound', function(data){
+        persistenceEvent.emit('batimentsName', data);
+    });
 }
 
 

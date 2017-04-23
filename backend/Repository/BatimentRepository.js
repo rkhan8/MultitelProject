@@ -31,11 +31,11 @@ exports.searchCompagnies= function(){
         attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
     }).then(function (result) {
         var compagnies = JSON.parse(JSON.stringify(result));
-        signalRepositoryEvent.emit('batimentCompagniesFound',_.map(compagnies, 'compagnie'));
+        batimentRepositoryEvent.emit('compagniesFound',_.map(compagnies, 'Compagnie'));
 
     }).catch(function (err) {
         console.log(err);
-        signalRepositoryEvent.emit('batimentCompagniesError');
+        batimentRepositoryEvent.emit('searchCompagniesError',err.detail);
 
     });
 };
@@ -49,7 +49,10 @@ exports.searchCompagnieBatimentsName = function(compagnieName){
       }
   }).then(function(result){
       var batiments = JSON.parse(JSON.stringify(result));
-    signalRepositoryEvent.emit('batimentCompagniesFound',_.map(batiments, 'NomBatiment'));
+      batimentRepositoryEvent.emit('batimentsFound',_.map(batiments, 'NomBatiment'));
+  }).catch(function(err){
+      console.log(err);
+      batimentRepositoryEvent.emit('searchBatimentsError',err.detail);
   })
 };
 exports.batimentRepositoryEvent = batimentRepositoryEvent;

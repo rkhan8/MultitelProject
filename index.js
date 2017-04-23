@@ -66,7 +66,14 @@ persistanceService.persistenceEvent.once('signalsData', function(signals){
 });
 persistanceService.persistenceEvent.on('batimentAjouterOk', function(){
     io.sockets.emit('batimentAjouterOk');
+});
+persistanceService.persistenceEvent.on('compagnies', function(data){
+    io.sockets.emit('compagnie', data);
+});
+persistanceService.persistenceEvent.on('batimentsName', function(data){
+    io.sockets.emit('batimentsName', data);
 })
+
 
 
 
@@ -116,7 +123,12 @@ io.on('connection', function (socket) {
     socket.on('ajouterBatiment', function(batiment){
         persistanceService.ajouterBatiment(batiment.compagnie, batiment.nomBatiment, batiment.nbEtages, batiment.adresse, batiment.codePostal, batiment.numero);
     });
-
+    socket.on('getComapgniesName', function(){
+       persistanceService.searchCompagnies();
+    });
+    socket.on('getCompagnieBatiment', function(compagnie){
+        persistanceService.searchCompagnieBatimentsName(compagnie)
+    })
     socket.on('disconnect', function () {
         socket.removeAllListeners('createSignal');
         socket.removeAllListeners('activateGenerators');
@@ -125,6 +137,7 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('getSignalsCategories');
         socket.removeAllListeners('getSignalsUnity');
         socket.removeAllListeners('getRecordingDates');
+        socket.removeAllListeners('ajouterBatiment');
 
 
     });
