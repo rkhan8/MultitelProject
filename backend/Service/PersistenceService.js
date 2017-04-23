@@ -149,17 +149,14 @@ initialisePersitenceEvent();
 
 exports.storeSignalInformation = function (signalId, category, minVal, maxVal, unity) {
     signalRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
-}
-
+};
 exports.saveSignalValue = function (signalId, value) {
     signalRepository.insertSignalValue(signalId, value);
-}
-
+};
 exports.getSignalFromDB = function (signalId, category, minVal, maxVal, unity) {
     signalRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
 
-}
-
+};
 exports.getRecordingDates = function () {
     signalRepository.getRecordingDates();
 }
@@ -194,12 +191,12 @@ exports.removeSignalFromDisplay = function(signalId){
 exports.addSignalOnDisplay = function(signalId){
     signalRepository.updateSignalStatus(signalId, 1);
 };
-exports.deleteSignalPosition = function(singnalId){
-    signalRepository.deleteSignalPosition(singnalId);
-}
+exports.deleteSignalPosition = function(singnalId, view){
+    signalRepository.deleteSignalPosition(singnalId, view);
+};
 exports.updateSignalPosition = function(signalId, positionLeft, posistion, view){
     signalRepository.updateSignalPosition(signalId, positionLeft, posistion, view);
-}
+};
 
 exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
     batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
@@ -216,38 +213,33 @@ exports.getBatimentsInformations = function (compagnie, nomBatiment) {
 
 
 function initialisePersistenceError() {
-    signalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
+    signalRepository.signalRepositoryEvent.on('signalCreateError', function (signalId) {
         persistenceEvent.emit('signalCreateError', signalId);
     });
-
-    signalRepository.SignalRepositoryEvent.on('getSignalsError', function (signalId) {
+    signalRepository.signalRepositoryEvent.on('getSignalsError', function (signalId) {
         persistenceEvent.emit('getSignalsError', '');
     });
-
-
-    signalRepository.SignalRepositoryEvent.on('signalValueCreateError', function (signalId) {
+    signalRepository.signalRepositoryEvent.on('signalValueCreateError', function (signalId) {
         persistenceEvent.emit('signalValueCreateError', signalId);
     });
-
-    signalRepository.SignalRepositoryEvent.on('signalValueRecordingDateError', function () {
+    signalRepository.signalRepositoryEvent.on('signalValueRecordingDateError', function () {
         persistenceEvent.emit('errorGetRecordingDate', '');
     });
-
-    signalRepository.SignalRepositoryEvent.on('signalsIdError', function () {
+    signalRepository.signalRepositoryEvent.on('signalsIdError', function () {
         persistenceEvent.emit('errorGetSignalsId', '');
     });
 
-    signalRepository.SignalRepositoryEvent.on('signalsUnityError', function () {
+    signalRepository.signalRepositoryEvent.on('signalsUnityError', function () {
         persistenceEvent.emit('errorGetSignalsUnity', '');
     });
 
-    signalRepository.SignalRepositoryEvent.on('signalsCategoriesError', function () {
+    signalRepository.signalRepositoryEvent.on('signalsCategoriesError', function () {
         persistenceEvent.emit('errorSignalsCategories', '');
     });
-    signalRepository.SignalRepositoryEvent.on('searchNotDisplayedSignalsError', function (details) {
+    signalRepository.signalRepositoryEvent.on('searchNotDisplayedSignalsError', function (details) {
         persistenceEvent.emit('errorSearchNotDisplayedSignals', details);
     });
-    signalRepository.SignalRepositoryEvent.on('getSignalDisplayedErr', function(details){
+    signalRepository.signalRepositoryEvent.on('getSignalDisplayedErr', function(details){
         persistenceEvent.emit('errorGetDisplayedSignal', details);
     })
 
@@ -265,39 +257,49 @@ function initialisePersistenceError() {
     });
 }
 function initialisePersitenceEvent() {
-    signalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {
+    signalRepository.signalRepositoryEvent.on('signalsCategoriesFound', function (data) {
         persistenceEvent.emit('signalsCategories', data);
     });
 
-    signalRepository.SignalRepositoryEvent.on('searchSignalValueError', function () {
+    signalRepository.signalRepositoryEvent.on('searchSignalValueError', function () {
         persistenceEvent.emit('getSignalValueError', '');
     });
 
-    signalRepository.SignalRepositoryEvent.on('signalCreated', function (signalInfos) {
+    signalRepository.signalRepositoryEvent.on('signalCreated', function (signalInfos) {
         persistenceEvent.emit('signalCreated', signalInfos);
     });
 
-    signalRepository.SignalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
+    signalRepository.signalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
         persistenceEvent.emit('recordingDates', data);
     });
-    signalRepository.SignalRepositoryEvent.on('signalsFounded', function (data) {
+    signalRepository.signalRepositoryEvent.on('signalsFounded', function (data) {
         persistenceEvent.emit('signalsData', data);
     });
-    signalRepository.SignalRepositoryEvent.on('signalsIdFound', function (data) {
+    signalRepository.signalRepositoryEvent.on('signalsIdFound', function (data) {
         persistenceEvent.emit('signalsId', data);
     });
-    signalRepository.SignalRepositoryEvent.on('signalsUnityFound', function (data) {
+    signalRepository.signalRepositoryEvent.on('signalsUnityFound', function (data) {
         persistenceEvent.emit('signalsUnity', data);
     });
-    signalRepository.SignalRepositoryEvent.on('notDisplayedSignalsFound', function (data) {
+    signalRepository.signalRepositoryEvent.on('notDisplayedSignalsFound', function (data) {
         persistenceEvent.emit('notDisplayedSignals', data);
     });
-    signalRepository.SignalRepositoryEvent.on('signalsByStatusFounded', function(data){
+    signalRepository.signalRepositoryEvent.on('signalsByStatusFounded', function(data){
         persistenceEvent.emit('displayedSignals', data);
     });
-    signalRepository.SignalRepositoryEvent.on('signalValueFound', function (data) {
+    signalRepository.signalRepositoryEvent.on('signalValueFound', function (data) {
         persistenceEvent.emit('signalValueData', data);
     });
+    signalRepository.signalRepositoryEvent.on('signalPositionDeleted',function(){
+        persistenceEvent.emit('signalPositionDeleted');
+    });
+    signalRepository.signalRepositoryEvent.on('signalPositionUdpate', function(){
+        persistenceEvent.emit('signalPositionUdpate');
+    });
+    signalRepository.signalRepositoryEvent.on('signalStatusUpdated', function(){
+        persistenceEvent.emit('signalStatusUpdated');
+    });
+
     batimentRepository.batimentRepositoryEvent.on('batimentAjouterOk', function () {
         persistenceEvent.emit('batimentAjouterOk');
     });

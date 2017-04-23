@@ -144,16 +144,16 @@ exports.getSignalByStatus = function (status) {
     })
 };
 
-exports.deleteSignalPosition = function (signalId) {
+exports.deleteSignalPosition = function (signalId, view) {
     connection.db.signalpositiOndropZoneModel.destroy({
         where: {
-            idN: signalId
+            idN: signalId,
+            view: view
         }
-    })
-        .then(function () {
+    })  .then(function () {
             signalRepositoryEvent.emit('signalPositionDeleted')
         })
-        .cacth(function (err) {
+        .catch(function (err) {
             signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
         });
 }
@@ -171,7 +171,7 @@ exports.updateSignalPosition = function (signalId, positionLeft, positionTop, vi
         }.then(function () {
             signalRepositoryEvent.emit('signalPositionUdpate');
         })
-            .cacth(function (err) {
+            .catch(function (err) {
                 signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
             })
     )
@@ -187,7 +187,7 @@ exports.updateSignalStatus = function (signalId, newStatus) {
     ).then(function () {
         signalRepositoryEvent.emit('signalStatusUpdated')
     })
-        .cacth(function (err) {
+        .catch(function (err) {
             signalRepositoryEvent.emit('errorUpdateSignalStatus', err.detail);
         });
 }
@@ -252,7 +252,7 @@ exports.getSignalsValues = function (signalId, category, unity, startDate, endDa
 }
 
 
-exports.SignalRepositoryEvent = signalRepositoryEvent;
+exports.signalRepositoryEvent = signalRepositoryEvent;
 
 
 

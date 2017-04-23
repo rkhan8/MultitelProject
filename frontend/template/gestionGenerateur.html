@@ -207,28 +207,28 @@
               </tr>
               <tr>
                 <th>
-                  <label for="Compagnie">Compagnie : </label>
+                  <label for="newCompagnieGenerateur">Compagnie : </label>
                 </th>
                 <td>
-                  <select id="compagnie">
+                  <select id="newCompagnieGenerateur">
                   </select>
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="nomBatiment">Batiment : </label>
+                  <label for="newNomBatiment">Batiment : </label>
                 </th>
                 <td>
-                  <select id="nomBatiment">
+                  <select id="newNomBatiment">
                   </select>
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="numeroEtage">Etage : </label>
+                  <label for="newNumeroEtage">Etage : </label>
                 </th>
                 <td>
-                  <select id="numeroEtage">
+                  <select id="newNumeroEtage">
                   </select>
                 </td>
               </tr>
@@ -236,7 +236,7 @@
           </div>
           <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button close">Fermer</button>
-            <button type="button" class="mdl-button save" onclick="createNewSignal();">Enregistrer</button>
+            <button type="button" class="mdl-button save" onclick="addSignalOnDisplaying();">Enregistrer</button>
           </div>
         </dialog>
 
@@ -276,10 +276,10 @@
               </tr>
               <tr>
                 <th>
-                  <label for="compagnie">Compagnie : </label>
+                  <label for="lastCompagnie">Compagnie : </label>
                 </th>
                 <td>
-                  <select id="compagnie">
+                  <select id="lastCompagnie">
                   </select>
                 </td>
               </tr>
@@ -306,7 +306,7 @@
           <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button close">Fermer</button>
             <button type="button" class="mdl-button save" onclick="updateSignal();">Mettre à jour</button>
-            <button type="button" class="mdl-button save" onclick="removeSignalFromDisplay();">Supprimer</button>
+            <button id="removeSignalButton" type="button" class="mdl-button save" >Supprimer</button>
           </div>
         </dialog>
 
