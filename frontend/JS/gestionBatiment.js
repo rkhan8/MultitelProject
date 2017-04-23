@@ -121,7 +121,7 @@ function ValidateField() {
     }
 }
 
-
+/*
 function ValidateBatimentSearch() {
     debugger;
     if ($("CompagnieListbox").val() == "") {
@@ -130,3 +130,10 @@ function ValidateBatimentSearch() {
         $("#batimentListbox").combobox('enable');
     }
 }
+*/
+
+
+
+$( "button" ).click(function() {
+  $( "#AddBatiment" ).slideToggle( "slow" );
+});
