@@ -1,4 +1,39 @@
-function populateSignalsValuesTable(signalsValues) {
+function populateComboboxDateFromArray(comboboxId, array){
+  ///ANGE
+}
+
+
+function SearchBatimentGenerator(){
+
+  var compagnie = $('#CompagnieListbox option:selected').text();
+  var batiment = $('#BatListbox option:selected').text();
+  var adresse = $('#AdressListbox option:selected').text();
+
+
+  socket.emit('searchBatimentValues', compagnie, batiment, adresse);
+}
+
+
+function populateBatimentValuesTable(batimentValues) {
+
+  $("#tableBatiment tr").remove(); //remove previous search data
+    var table = document.getElementById("tableBatiment");
+  //show element first table (id, cat, oldVolume, newVolume)
+  for(var j =0; j < batimentValues.length; j++)
+  {
+    //inserting table content by incrementing all the element into the arraylist
+
+    var row = table.insertRow(table.rows.length);
+
+    //A MODIFIER
+    row.insertCell(0).innerHTML = batimentValues[j].Compagnie;
+    row.insertCell(1).innerHTML = batimentValues[j].NomBatiment;
+    row.insertCell(2).innerHTML = batimentValues[j].signal.MinValue;
+    row.insertCell(3).innerHTML = batimentValues[j].Adressse;
+    row.insertCell(4).innerHTML = batimentValues[j].Etage;
+    row.insertCell(5).innerHTML = batimentValues[j].NbCapteur;
+
+  }
 
 }
 
