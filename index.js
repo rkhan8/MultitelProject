@@ -73,6 +73,9 @@ persistanceService.persistenceEvent.on('compagnies', function(data){
 persistanceService.persistenceEvent.on('batimentsName', function(data){
     io.sockets.emit('batimentsName', data);
 })
+persistanceService.persistenceEvent.on('batimentInfos', function(data){
+    io.sockets.emit('batimentsInfos', data);
+})
 
 
 
@@ -101,9 +104,7 @@ io.on('connection', function (socket) {
 
     socket.on('getSignalsId', function () {
         persistanceService.getSignalsId();
-
     });
-
     socket.on('getSignalsCategories', function () {
         persistanceService.getSignalsCategories();
     });
@@ -128,7 +129,11 @@ io.on('connection', function (socket) {
     });
     socket.on('getCompagnieBatiment', function(compagnie){
         persistanceService.searchCompagnieBatimentsName(compagnie)
-    })
+    });
+    socket.on('searchBatimentsValues', function(searchKey){
+        persistanceService.searchBatimentsInformations(searchKey.compagnie, searchKey.NomBatiment);
+    });
+
     socket.on('disconnect', function () {
         socket.removeAllListeners('createSignal');
         socket.removeAllListeners('activateGenerators');
@@ -138,6 +143,9 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('getSignalsUnity');
         socket.removeAllListeners('getRecordingDates');
         socket.removeAllListeners('ajouterBatiment');
+        socket.removeAllListeners('getComapgniesName');
+        socket.removeAllListeners('getCompagnieBatiment');
+
 
 
     });

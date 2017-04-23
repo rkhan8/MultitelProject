@@ -2,14 +2,14 @@
  * Created by angem on 2017-04-22.
  */
 
-var mySqlCOnnection = require('../Repository/DBconnection')
+var connection = require('../Repository/DBconnection')
 var EventEmitter = require('events').EventEmitter;
 var batimentRepositoryEvent = new EventEmitter();
 var _ = require('lodash');
 
 
 exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
-    mySqlCOnnection.db.batimentModel.create({
+    connection.db.batimentModel.create({
         Compagnie: Compagnie,
         NomBatiment: NomBatiment,
         NbEtages: Nbetages,
@@ -17,7 +17,7 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         CodePostal: CodePostal,
         Numero: Numero
     })
-        .then(function(){
+        .then(function () {
             batimentRepositoryEvent.emit('batimentAjouterOk');
         })
         .catch(function (err) {
@@ -26,33 +26,52 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         });
 
 }
-exports.searchCompagnies= function(){
-    mySqlCOnnection.db.batimentModel.findAll({
-        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
+exports.searchCompagnies = function () {
+    connection.db.batimentModel.findAll({
+        attributes: [[connection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
     }).then(function (result) {
         var compagnies = JSON.parse(JSON.stringify(result));
-        batimentRepositoryEvent.emit('compagniesFound',_.map(compagnies, 'Compagnie'));
+        batimentRepositoryEvent.emit('compagniesFound', _.map(compagnies, 'Compagnie'));
 
     }).catch(function (err) {
         console.log(err);
-        batimentRepositoryEvent.emit('searchCompagniesError',err.detail);
+        batimentRepositoryEvent.emit('searchCompagniesError', err.detail);
 
     });
 };
-exports.searchCompagnieBatimentsName = function(compagnieName){
+exports.searchCompagnieBatimentsName = function (compagnieName) {
 
-  mySqlCOnnection.db.batimentModel.findAll({
-      attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT NomBatiment'), 'NomBatiment']],
-      where: {
-          Compagnie: compagnieName
+    connection.db.batimentModel.findAll({
+        attributes: [[connection.sequelize.literal('DISTINCT NomBatiment'), 'NomBatiment']],
+        where: {
+            Compagnie: compagnieName
 
-      }
-  }).then(function(result){
-      var batiments = JSON.parse(JSON.stringify(result));
-      batimentRepositoryEvent.emit('batimentsFound',_.map(batiments, 'NomBatiment'));
-  }).catch(function(err){
-      console.log(err);
-      batimentRepositoryEvent.emit('searchBatimentsError',err.detail);
-  })
+        }
+    }).then(function (result) {
+        var batiments = JSON.parse(JSON.stringify(result));
+        batimentRepositoryEvent.emit('batimentsFound', _.map(batiments, 'NomBatiment'));
+    }).catch(function (err) {
+        console.log(err);
+        batimentRepositoryEvent.emit('searchBatimentsError', err.detail);
+    })
 };
+
+exports.searchBatimentsInformations = function (compagnie, nomBatiment) {
+    var whereClause = {
+        Compagnie: compagnie,
+        NomBatiment: nomBatiment
+    }
+    whereClause = _.pickBy(whereClause);
+    connection.db.batimentModel.findAll({
+        where: whereClause
+    })
+        .then(function (result) {
+            batimentRepositoryEvent.emit('batimentInfosFound', JSON.parse(JSON.stringify(result)));
+        })
+        .catch(function (err) {
+            console.log(err.detail);
+            batimentRepositoryEvent.emit('searchBatimentInfosError', err.detail);
+        });
+
+}
 exports.batimentRepositoryEvent = batimentRepositoryEvent;

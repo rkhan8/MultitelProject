@@ -1,3 +1,60 @@
+
+
+var socket = io();
+
+socket.emit('getComapgniesName');
+
+socket.on('batimentAjouterOk', function () {
+    PopUpCreerSucess();
+});
+
+socket.on('compagnie', function (data) {
+    populateComboboxFromArray('CompagnieListbox', data)
+});
+
+socket.on('batimentsName', function (data) {
+    $('#batimentListbox option').remove();
+    populateComboboxFromArray('batimentListbox', data)
+});
+
+socket.on('batimentsInfos', function(data){
+    console.log(data);
+})
+
+$(function () {
+    $('#CompagnieListbox').change(function () {
+        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
+    });
+});
+
+function searchBatimentGenerator() {
+
+    socket.emit('searchBatimentsValues', {
+        compagnie: $('#CompagnieListbox option:selected').text(),
+        NomBatiment: $('#batimentListbox option:selected').text()
+    });
+}
+
+function CreateBatiment() {
+
+    socket.emit('ajouterBatiment', {
+        compagnie: $('#compagnie').val(),
+        nomBatiment: $('#batiment').val(),
+        nbEtages: $('#nbEtages').val(),
+        adresse: $('#adresse').val(),
+        codePostal: $('#codePostal').val(),
+        numero: $('#numero').val()
+    });
+}
+
+function PopUpCreerSucess() {
+    var dialog = document.querySelector('#SuccessPopUp');
+    dialog.showModal();
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
+    });
+}
+
 function populateComboboxDateFromArray(comboboxId, array) {
     ///ANGE
 }
@@ -26,58 +83,6 @@ function populateBatimentValuesTable(batimentValues) {
 
     }
 
-}
-
-var socket = io();
-
-socket.emit('getComapgniesName');
-
-socket.on('batimentAjouterOk', function () {
-    PopUpCreer();
-});
-
-socket.on('compagnie', function (data) {
-    populateComboboxFromArray('CompagnieListbox', data)
-});
-
-socket.on('batimentsName', function (data) {
-    $('#batimentListbox option').remove();
-    populateComboboxFromArray('batimentListbox', data)
-});
-
-$(function () {
-    $('#CompagnieListbox').change(function () {
-        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
-    });
-});
-
-function SearchBatimentGenerator() {
-
-    socket.emit('searchBatimentValues', {
-        compagnie: $('#CompagnieListbox option:selected').text(),
-        batiment: $('#batimentListbox option:selected').text(),
-        adresse: $('#AdressListbox option:selected').text(),
-    });
-}
-
-function CreateBatiment() {
-
-    socket.emit('ajouterBatiment', {
-        compagnie: $('#compagnie').val(),
-        nomBatiment: $('#batiment').val(),
-        nbEtages: $('#nbEtages').val(),
-        adresse: $('#adresse').val(),
-        codePostal: $('#codePostal').val(),
-        numero: $('#numero').val()
-    });
-}
-
-function PopUpCreer() {
-    var dialog = document.querySelector('#SuccessPopUp');
-    dialog.showModal();
-    dialog.querySelector('.close').addEventListener('click', function () {
-        dialog.close();
-    });
 }
 
 

@@ -196,6 +196,9 @@ exports.searchCompagnies = function(){
 exports.searchCompagnieBatimentsName = function(compagnie){
     batimentRepository.searchCompagnieBatimentsName(compagnie);
 }
+exports.searchBatimentsInformations = function(compagnie, nomBatiment){
+    batimentRepository.searchBatimentsInformations(compagnie, nomBatiment);
+}
 
 function initialisePersistenceError() {
     SignalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
@@ -236,6 +239,9 @@ function initialisePersistenceError() {
     batimentRepository.batimentRepositoryEvent.on('searchBatimentsError', function(data){
         persistenceEvent.emit('searchBatimentsNameError', data);
     });
+    batimentRepository.batimentRepositoryEvent.on('searchBatimentInfosError', function(details){
+        persistenceEvent.emit('searchBatimentInfosError',details );
+    })
 }
 function initialisePersitenceEvent() {
     SignalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {
@@ -277,6 +283,9 @@ function initialisePersitenceEvent() {
     batimentRepository.batimentRepositoryEvent.on('batimentsFound', function(data){
         persistenceEvent.emit('batimentsName', data);
     });
+    batimentRepository.batimentRepositoryEvent.on('batimentInfosFound', function(data){
+        persistenceEvent.emit('batimentInfos', data);
+    })
 }
 
 
