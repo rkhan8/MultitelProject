@@ -25,11 +25,24 @@ $(function () {
         containment : '#droppableContent'
     });
 
+    /*
+    $(".ui-draggable").draggable({
+        stack: ".draggable",
+        cursor: 'hand',
+        helper: 'clone',
+        containment : '#droppableContent',
+        drag : function()
+        {
+          alert("ok");
+
+        }
+    });
+    */
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
-        //accept: '.generator, .oldGenerator, .drag, .ui-draggable',
-        accept: '.ui-draggable',
+        accept: '.generator, .oldGenerator, .drag',
+        //accept: '.ui-draggable',
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
@@ -45,35 +58,51 @@ $(function () {
             generator.draggable();
             generator.appendTo(dropZone);
 
-            if ($(generator).hasClass('ui-draggable')) {
+
+            if ($(generator).hasClass('drag'))
+            {
                 $(generator).addClass('drag');
-                //$(generator).removeClass('ui-draggable');
             }
+            else
+            {
 
-            if ($(generator).hasClass('generator')) {
-                setupNewGenerator(generator);
-                $(generator).removeClass('generator');
-            }
-
-            if ($(generator).hasClass('oldGenerator')) {
-                setupOldGenerator(generator);
-                ui.draggable.remove();
-                $(generator).removeClass('oldGenerator');
-            }
-
-            $(".drag").draggable({
-              stack: ".draggable",
-              cursor: 'hand',
-              containment : '#droppableContent',
-              drag: function(event, ui) {
-
-                // Show the current dragged position of image
+              if ($(generator).hasClass('ui-draggable')) {
+                  $(generator).addClass('drag');
+                  $(generator).removeClass('ui-draggable');
               }
-            });
 
-            if ($(generator).hasClass('drag')) {
-              $(generator).removeClass('drag');
+              if ($(generator).hasClass('generator')) {
+                  setupNewGenerator(generator);
+                  $(generator).removeClass('generator');
+              }
+
+              if ($(generator).hasClass('oldGenerator')) {
+                  setupOldGenerator(generator);
+                  ui.draggable.remove();
+                  $(generator).removeClass('oldGenerator');
+              }
+
+              $(".drag").draggable({
+                stack: ".draggable",
+                cursor: 'hand',
+                containment : '#droppableContent',
+                drag: function(event, ui) {
+
+                  // Show the current dragged position of image
+                  $(generator).removeClass('drag');
+
+                }
+              });
+
             }
+
+
+
+
+
+
+
+            //$(generator).addClass('drag');
 
             //event when click to generator
             $(generator).click(function () {

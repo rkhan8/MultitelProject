@@ -44,6 +44,10 @@
 
       <script src="../JS/gestionBatiment.js"></script>
 
+      <!--filter-->
+      <script type="text/javascript" src="../JS/Libraries/filter.js"></script>
+      <script type="text/javascript" src="../JS/Libraries/jquery.tablesorter.min.js"></script>
+
 
 
   </head>
@@ -60,7 +64,7 @@
             <div id="champAlign">
               Compagnie :
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="compagnie" required="">
+                <input class="mdl-textfield__input" type="text" id="compagnie" required="" onchange ="ValidateField();">
                 <label class="mdl-textfield__label" for="compagnie">Compagnie...</label>
                 <span class="mdl-textfield__error">Veuillez renseignez ce champs</span>
               </div>
@@ -68,7 +72,7 @@
             </br>
               Batiment :
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="batiment" required="">
+                <input class="mdl-textfield__input" type="text" id="batiment" required="" onchange="ValidateField();">
                 <label class="mdl-textfield__label" for="adresse">Batiment...</label>
                 <span class="mdl-textfield__error">Veuillez renseignez ce champs</span>
               </div>
@@ -104,7 +108,7 @@
                 </div>
 
               <div class="dataButtons">
-                <a id="addBatimentButton" onclick="CreateBatiment();"
+                <a id="addBatimentButton" onclick="CreateBatiment();" disabled="true"
                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
                   Créer
                 </a>
@@ -129,7 +133,9 @@
 
               <div id="choiceSearch">
                 Compagnie :
-                <select id="compagnieList">
+
+                <select id="CompagnieListbox">
+
                 </select>
 
                 Bâtiment :
