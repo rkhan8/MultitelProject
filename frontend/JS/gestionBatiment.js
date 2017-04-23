@@ -134,7 +134,18 @@ function ValidateBatimentSearch() {
 
 
 
-$( "button" ).click(function() {
-  //$( "#AddBatiment" ).slideToggle( "slow" );
-  alert("ok");
+
+
+$(function () {
+
+  $( "#SlideDownAddBatiment" ).click(function() {
+    $( "#AddBatiment" ).slideToggle( "slow" );
+    //alert("ok");
+  });
+
+  $( "#SlideDownSearchBatiment" ).click(function() {
+    $( "#search" ).slideToggle( "slow" );
+    //alert("ok");
+  });
+
 });
