@@ -135,5 +135,6 @@ function ValidateBatimentSearch() {
 
 
 $( "button" ).click(function() {
-  $( "#AddBatiment" ).slideToggle( "slow" );
+  //$( "#AddBatiment" ).slideToggle( "slow" );
+  alert("ok");
 });
