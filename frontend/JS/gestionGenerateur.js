@@ -60,7 +60,7 @@ $(function () {
 
             if ($(generator).hasClass('ui-draggable')) {
                 $(generator).addClass('drag');
-                //$(generator).removeClass('ui-draggable');
+                $(generator).removeClass('ui-draggable');
             }
 
             if ($(generator).hasClass('generator')) {
