@@ -75,6 +75,9 @@ persistanceService.persistenceEvent.on('batimentsName', function(data){
 })
 persistanceService.persistenceEvent.on('batimentInfos', function(data){
     io.sockets.emit('batimentsInfos', data);
+});
+persistanceService.persistenceEvent.on('notDisplayedSignals', function(data){
+    io.sockets.emit('notDisplayedSignals', data);
 })
 
 
@@ -125,13 +128,16 @@ io.on('connection', function (socket) {
         persistanceService.ajouterBatiment(batiment.compagnie, batiment.nomBatiment, batiment.nbEtages, batiment.adresse, batiment.codePostal, batiment.numero);
     });
     socket.on('getComapgniesName', function(){
-       persistanceService.searchCompagnies();
+       persistanceService.getCompagnies();
     });
     socket.on('getCompagnieBatiment', function(compagnie){
-        persistanceService.searchCompagnieBatimentsName(compagnie)
+        persistanceService.getCompagnieBatimentsName(compagnie)
     });
     socket.on('searchBatimentsValues', function(searchKey){
-        persistanceService.searchBatimentsInformations(searchKey.compagnie, searchKey.NomBatiment);
+        persistanceService.getBatimentsInformations(searchKey.compagnie, searchKey.NomBatiment);
+    });
+    socket.on('getNotDisplayedSignalsId', function(){
+        persistanceService.getNotDiplayedSignalsId();
     });
 
     socket.on('disconnect', function () {
@@ -145,6 +151,7 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('ajouterBatiment');
         socket.removeAllListeners('getComapgniesName');
         socket.removeAllListeners('getCompagnieBatiment');
+        socket.removeAllListeners('searchBatimentsValues');
 
 
 

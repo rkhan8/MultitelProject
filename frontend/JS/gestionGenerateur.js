@@ -16,6 +16,12 @@ socket.on('signals', function (signals) {
     initializeOldSignal(signals);
 });
 
+socket.on('notDisplayedSignals', function(data){
+    $('#generatorNameIdList option').remove();
+    populateComboboxFromArray('generatorNameIdList', data)
+});
+
+
 $(function () {
 
     $(".generator").draggable({
@@ -25,19 +31,6 @@ $(function () {
         containment : '#droppableContent'
     });
 
-    /*
-    $(".ui-draggable").draggable({
-        stack: ".draggable",
-        cursor: 'hand',
-        helper: 'clone',
-        containment : '#droppableContent',
-        drag : function()
-        {
-          alert("ok");
-
-        }
-    });
-    */
 
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
@@ -46,7 +39,7 @@ $(function () {
         drop: function (event, ui) {
             var dropZone = $(this);
             var generator = ui.draggable.clone();
-            var currentPos = ui.helper.position();
+           // var currentPos = ui.helper.position();
 
             var valueDisplayer = createAndSetupInput();
             $(valueDisplayer).addClass("valueDisplay");
@@ -55,21 +48,8 @@ $(function () {
             generator.css('position', 'absolute');
             generator.css('top', ui.position.top);
             generator.css('left', ui.position.left);
-            generator.draggable();
             generator.appendTo(dropZone);
 
-
-            if ($(generator).hasClass('drag'))
-            {
-                $(generator).addClass('drag');
-            }
-            else
-            {
-
-              if ($(generator).hasClass('ui-draggable')) {
-                  $(generator).addClass('drag');
-                  $(generator).removeClass('ui-draggable');
-              }
 
               if ($(generator).hasClass('generator')) {
                   setupNewGenerator(generator);
@@ -82,27 +62,17 @@ $(function () {
                   $(generator).removeClass('oldGenerator');
               }
 
-              $(".drag").draggable({
+
+            $(generator).draggable({
                 stack: ".draggable",
                 cursor: 'hand',
                 containment : '#droppableContent',
-                drag: function(event, ui) {
-
-                  // Show the current dragged position of image
-                  $(generator).removeClass('drag');
+                stop: function(event, ui) {
+                    //mettre le code recuperer la position ici !!
+                    alert("left="+parseInt($(this).position().left)+" top="+parseInt($(this).position().top));
 
                 }
-              });
-
-            }
-
-
-
-
-
-
-
-            //$(generator).addClass('drag');
+            });
 
             //event when click to generator
             $(generator).click(function () {
@@ -122,7 +92,7 @@ $(function () {
             });
 
 
-            alert("left="+parseInt(currentPos.left)+" top="+parseInt(currentPos.top));
+
 
 
         }
@@ -289,6 +259,7 @@ function show_popup(generatorId) {
     $('#popupContent').css('display', 'block');
     $('#generatorName').val(generatorId);
     */
+    socket.emit('getNotDisplayedSignalsId');
     $('#errorMsg').text("");
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     dialog.showModal();
@@ -300,6 +271,7 @@ function show_popup(generatorId) {
     dialog.querySelector('.close').addEventListener('click', function() {
       dialog.close();
     });
+
 
 }
 
@@ -357,4 +329,13 @@ function createAndSetupInput() {
     $(input).css('padding', '5px');
     $(input).css('height', '20px');
     return input;
+}
+
+function populateComboboxFromArray(comboboxId, array) {
+    $('#' + comboboxId).append(data);
+
+    for (i = 0; i < array.length; i++) {
+        var data = '<option>' + array[i] + '</option>'
+        $('#' + comboboxId).append(data);
+    }
 }

@@ -26,7 +26,7 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         });
 
 }
-exports.searchCompagnies = function () {
+exports.getCompagnies = function () {
     connection.db.batimentModel.findAll({
         attributes: [[connection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
     }).then(function (result) {
@@ -39,7 +39,7 @@ exports.searchCompagnies = function () {
 
     });
 };
-exports.searchCompagnieBatimentsName = function (compagnieName) {
+exports.getCompagnieBatimentsName = function (compagnieName) {
 
     connection.db.batimentModel.findAll({
         attributes: [[connection.sequelize.literal('DISTINCT NomBatiment'), 'NomBatiment']],
@@ -56,7 +56,7 @@ exports.searchCompagnieBatimentsName = function (compagnieName) {
     })
 };
 
-exports.searchBatimentsInformations = function (compagnie, nomBatiment) {
+exports.getBatimentsInformations = function (compagnie, nomBatiment) {
     var whereClause = {
         Compagnie: compagnie,
         NomBatiment: nomBatiment

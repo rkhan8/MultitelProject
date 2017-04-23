@@ -2,7 +2,7 @@
  * Created by angem on 2017-03-25.
  */
 
-var mySqlCOnnection = require ('../Repository/DBconnection')
+var connection = require ('../Repository/DBconnection')
 var EventEmitter = require('events').EventEmitter;
 var signalRepositoryEvent = new EventEmitter();
 var _ = require('lodash');
@@ -10,8 +10,8 @@ var _ = require('lodash');
 
 
 
-var signalValueModel = mySqlCOnnection.db.signalValueModel;
-var signalModel = mySqlCOnnection.db.signalModel;
+var signalValueModel = connection.db.signalValueModel;
+var signalModel = connection.db.signalModel;
 
 
 
@@ -44,7 +44,7 @@ exports.insertSignalValue = function(signalId, value) {
     signalValueModel.create({
         idN: signalId,
         ValueRec: value,
-        DateRec: mySqlCOnnection.sequelize.literal('CURRENT_TIMESTAMP()')
+        DateRec: connection.sequelize.literal('CURRENT_TIMESTAMP()')
     })
         .then(function() {
             signalRepositoryEvent.emit('valueInserted', signalId);
@@ -75,7 +75,7 @@ exports.getSignals = function(signalId, category, minVal, maxVal, unity) {
 }
 exports.getRecordingDates = function(){
     signalValueModel.findAll({
-        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
+        attributes:[[connection.sequelize.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
 
     }).then(function (result) {
         var dates = JSON.parse(JSON.stringify(result));
@@ -89,7 +89,7 @@ exports.getRecordingDates = function(){
 }
 exports.getSignalsCategories = function(){
     signalModel.findAll({
-        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Category'), 'Category']]
+        attributes:[[connection.sequelize.literal('DISTINCT Category'), 'Category']]
 
     }).then(function (result) {
         var categories = JSON.parse(JSON.stringify(result));
@@ -104,7 +104,7 @@ exports.getSignalsCategories = function(){
 
 exports.getSignalsUnity = function(){
     signalModel.findAll({
-        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT Unity'), 'Unity']]
+        attributes:[[connection.sequelize.literal('DISTINCT Unity'), 'Unity']]
 
     }).then(function (result) {
         var unities = JSON.parse(JSON.stringify(result));
@@ -119,7 +119,7 @@ exports.getSignalsUnity = function(){
 
 exports.getSignalsId = function(){
     signalModel.findAll({
-        attributes:[[mySqlCOnnection.sequelize.literal('DISTINCT idN'), 'idN']]
+        attributes:[[connection.sequelize.literal('DISTINCT idN'), 'idN']]
 
     }).then(function (result) {
         var ids = JSON.parse(JSON.stringify(result));
@@ -130,6 +130,24 @@ exports.getSignalsId = function(){
         signalRepositoryEvent.emit('signalsIdError');
 
     });
+}
+
+exports.getNotDiplayedSignalsId = function(){
+    connection.db.signalStatusModel.findAll({
+        attributes : ['idN'],
+        where: {
+            status: 0
+        }
+    }).then(function(result){
+        var ids = JSON.parse(JSON.stringify(result));
+        signalRepositoryEvent.emit('notDisplayedSignalsFound', _.map(ids,'idN'));
+
+    }).catch(function (err) {
+        console.log(err);
+        signalRepositoryEvent.emit('searchNotDisplayedSignalsError', err.detail);
+
+    });
+
 }
 
 

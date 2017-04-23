@@ -55,12 +55,6 @@ function PopUpCreerSucess() {
     });
 }
 
-function populateComboboxDateFromArray(comboboxId, array) {
-    ///ANGE
-}
-
-
-
 
 
 function populateBatimentValuesTable(batimentValues) {

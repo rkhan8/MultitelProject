@@ -136,11 +136,10 @@
  exports.QuerySearch = QuerySearch;
  exports.PreloadValueEvent = PreloadValueEvent;
  */
-var SignalRepository = require('../Repository/SignalRepository');
-var batimentRepository = require ('../Repository/BatimentRepository');
+var signalRepository = require('../Repository/SignalRepository');
+var batimentRepository = require('../Repository/BatimentRepository');
 var EventEmitter = require('events').EventEmitter;
 var persistenceEvent = new EventEmitter();
-
 
 
 initialisePersistenceError();
@@ -148,142 +147,149 @@ initialisePersistenceError();
 initialisePersitenceEvent();
 
 
-
-
-
-exports.storeSignalInformation = function(signalId, category, minVal, maxVal, unity) {
-        SignalRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
+exports.storeSignalInformation = function (signalId, category, minVal, maxVal, unity) {
+    signalRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
 }
 
-exports.saveSignalValue = function(signalId, value) {
-    SignalRepository.insertSignalValue(signalId, value);
+exports.saveSignalValue = function (signalId, value) {
+    signalRepository.insertSignalValue(signalId, value);
 }
 
-exports.getSignalFromDB = function(signalId, category, minVal, maxVal, unity) {
-    SignalRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
+exports.getSignalFromDB = function (signalId, category, minVal, maxVal, unity) {
+    signalRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
 
 }
 
-exports.getRecordingDates = function(){
-    SignalRepository.getRecordingDates();
+exports.getRecordingDates = function () {
+    signalRepository.getRecordingDates();
 }
 
-exports.getSignalsId = function(){
-    SignalRepository.getSignalsId();
+exports.getSignalsId = function () {
+    signalRepository.getSignalsId();
 }
 
-exports.getSignalsUnity = function(){
-    SignalRepository.getSignalsUnity();
+exports.getSignalsUnity = function () {
+    signalRepository.getSignalsUnity();
 }
 
-exports.getSignalsCategories= function(){
-    SignalRepository.getSignalsCategories();
+exports.getSignalsCategories = function () {
+    signalRepository.getSignalsCategories();
 }
 
-exports.getSignalsValues = function(signalId, category, unity, startDate, endDate) {
-    SignalRepository.getSignalsValues(signalId,category, unity, startDate, endDate);
+exports.getSignalsValues = function (signalId, category, unity, startDate, endDate) {
+    signalRepository.getSignalsValues(signalId, category, unity, startDate, endDate);
 }
-exports.getSignals = function(signalId, category, minVal, maxVal, unity){
-    SignalRepository.getSignals(signalId, category, minVal, maxVal, unity)
-}
+exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
+    signalRepository.getSignals(signalId, category, minVal, maxVal, unity)
+};
+exports.getNotDiplayedSignalsId = function () {
+    signalRepository.getNotDiplayedSignalsId();
+};
 
-exports.ajouterBatiment = function(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero){
+exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
     batimentRepository.ajouterBatiment(Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero);
 }
-exports.searchCompagnies = function(){
-    batimentRepository.searchCompagnies();
-}
-exports.searchCompagnieBatimentsName = function(compagnie){
-    batimentRepository.searchCompagnieBatimentsName(compagnie);
-}
-exports.searchBatimentsInformations = function(compagnie, nomBatiment){
-    batimentRepository.searchBatimentsInformations(compagnie, nomBatiment);
-}
+exports.getCompagnies = function () {
+    batimentRepository.getCompagnies();
+};
+exports.getCompagnieBatimentsName = function (compagnie) {
+    batimentRepository.getCompagnieBatimentsName(compagnie);
+};
+exports.getBatimentsInformations = function (compagnie, nomBatiment) {
+    batimentRepository.getBatimentsInformations(compagnie, nomBatiment);
+};
+
 
 function initialisePersistenceError() {
-    SignalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
+    signalRepository.SignalRepositoryEvent.on('signalCreateError', function (signalId) {
         persistenceEvent.emit('signalCreateError', signalId);
     });
 
-    SignalRepository.SignalRepositoryEvent.on('getSignalsError', function (signalId) {
+    signalRepository.SignalRepositoryEvent.on('getSignalsError', function (signalId) {
         persistenceEvent.emit('getSignalsError', '');
     });
 
 
-    SignalRepository.SignalRepositoryEvent.on('signalValueCreateError', function (signalId) {
+    signalRepository.SignalRepositoryEvent.on('signalValueCreateError', function (signalId) {
         persistenceEvent.emit('signalValueCreateError', signalId);
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalValueRecordingDateError', function () {
+    signalRepository.SignalRepositoryEvent.on('signalValueRecordingDateError', function () {
         persistenceEvent.emit('errorGetRecordingDate', '');
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalsIdError', function () {
+    signalRepository.SignalRepositoryEvent.on('signalsIdError', function () {
         persistenceEvent.emit('errorGetSignalsId', '');
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalsUnityError', function () {
+    signalRepository.SignalRepositoryEvent.on('signalsUnityError', function () {
         persistenceEvent.emit('errorGetSignalsUnity', '');
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalsCategoriesError', function () {
+    signalRepository.SignalRepositoryEvent.on('signalsCategoriesError', function () {
         persistenceEvent.emit('errorSignalsCategories', '');
     });
+    signalRepository.SignalRepositoryEvent.on('searchNotDisplayedSignalsError', function (details) {
+        persistenceEvent.emit('errorSearchNotDisplayedSignals', details);
+    });
 
-    batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function(message){
-        persistenceEvent.emit('errorAjouterBatiment',message);
+    batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function (message) {
+        persistenceEvent.emit('errorAjouterBatiment', message);
     });
-    batimentRepository.batimentRepositoryEvent.on('searchCompagniesError', function(data){
-        persistenceEvent.emit('searchCompagniesError',data);
+    batimentRepository.batimentRepositoryEvent.on('searchCompagniesError', function (data) {
+        persistenceEvent.emit('errorSearchCompagnies', data);
     });
-    batimentRepository.batimentRepositoryEvent.on('searchBatimentsError', function(data){
-        persistenceEvent.emit('searchBatimentsNameError', data);
+    batimentRepository.batimentRepositoryEvent.on('searchBatimentsError', function (data) {
+        persistenceEvent.emit('errorSearchBatimentsName', data);
     });
-    batimentRepository.batimentRepositoryEvent.on('searchBatimentInfosError', function(details){
-        persistenceEvent.emit('searchBatimentInfosError',details );
+    batimentRepository.batimentRepositoryEvent.on('searchBatimentInfosError', function (details) {
+        persistenceEvent.emit('errorSearchBatimentInfos', details);
     })
 }
 function initialisePersitenceEvent() {
-    SignalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {
+    signalRepository.SignalRepositoryEvent.on('signalsCategoriesFound', function (data) {
         persistenceEvent.emit('signalsCategories', data);
     });
 
-    SignalRepository.SignalRepositoryEvent.on('searchSignalValueError', function () {
+    signalRepository.SignalRepositoryEvent.on('searchSignalValueError', function () {
         persistenceEvent.emit('getSignalValueError', '');
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalCreated', function (signalInfos) {
+    signalRepository.SignalRepositoryEvent.on('signalCreated', function (signalInfos) {
         persistenceEvent.emit('signalCreated', signalInfos);
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
+    signalRepository.SignalRepositoryEvent.on('signalValueRecordingDateFound', function (data) {
         persistenceEvent.emit('recordingDates', data);
     });
-    SignalRepository.SignalRepositoryEvent.on('signalsFounded', function (data) {
+    signalRepository.SignalRepositoryEvent.on('signalsFounded', function (data) {
         persistenceEvent.emit('signalsData', data);
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalsIdFound', function (data) {
+    signalRepository.SignalRepositoryEvent.on('signalsIdFound', function (data) {
         persistenceEvent.emit('signalsId', data);
     });
 
-    SignalRepository.SignalRepositoryEvent.on('signalsUnityFound', function (data) {
+    signalRepository.SignalRepositoryEvent.on('signalsUnityFound', function (data) {
         persistenceEvent.emit('signalsUnity', data);
     });
+    signalRepository.SignalRepositoryEvent.on('notDisplayedSignalsFound', function (data) {
+        persistenceEvent.emit('notDisplayedSignals', data);
+    })
 
-    SignalRepository.SignalRepositoryEvent.on('signalValueFound', function (data) {
+    signalRepository.SignalRepositoryEvent.on('signalValueFound', function (data) {
         persistenceEvent.emit('signalValueData', data);
     });
-    batimentRepository.batimentRepositoryEvent.on('batimentAjouterOk', function(){
+    batimentRepository.batimentRepositoryEvent.on('batimentAjouterOk', function () {
         persistenceEvent.emit('batimentAjouterOk');
     });
-    batimentRepository.batimentRepositoryEvent.on('compagniesFound', function(data){
-        persistenceEvent.emit('compagnies',data);
+    batimentRepository.batimentRepositoryEvent.on('compagniesFound', function (data) {
+        persistenceEvent.emit('compagnies', data);
     });
-    batimentRepository.batimentRepositoryEvent.on('batimentsFound', function(data){
+    batimentRepository.batimentRepositoryEvent.on('batimentsFound', function (data) {
         persistenceEvent.emit('batimentsName', data);
     });
-    batimentRepository.batimentRepositoryEvent.on('batimentInfosFound', function(data){
+    batimentRepository.batimentRepositoryEvent.on('batimentInfosFound', function (data) {
         persistenceEvent.emit('batimentInfos', data);
     })
 }
