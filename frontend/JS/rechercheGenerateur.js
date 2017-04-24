@@ -54,7 +54,7 @@ function populateComboboxFromArray(comboboxId, array) {
 }
 
 
-function SearchBatimentGenerator()
+function findSignals()
 {
 
 }

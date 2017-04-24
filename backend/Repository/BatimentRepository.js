@@ -21,7 +21,7 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
             batimentRepositoryEvent.emit('batimentAjouterOk');
         })
         .catch(function (err) {
-            batimentRepositoryEvent.emit('ajouterBatimentError', err.detail);
+            batimentRepositoryEvent.emit('ajouterBatimentError', err.message);
             console.log(err);
         });
 
@@ -35,7 +35,7 @@ exports.getCompagnies = function () {
 
     }).catch(function (err) {
         console.log(err);
-        batimentRepositoryEvent.emit('searchCompagniesError', err.detail);
+        batimentRepositoryEvent.emit('searchCompagniesError', err.message);
 
     });
 };
@@ -52,7 +52,7 @@ exports.getCompagnieBatimentsName = function (compagnieName) {
         batimentRepositoryEvent.emit('batimentsFound', _.map(batiments, 'NomBatiment'));
     }).catch(function (err) {
         console.log(err);
-        batimentRepositoryEvent.emit('searchBatimentsError', err.detail);
+        batimentRepositoryEvent.emit('searchBatimentsError', err.message);
     })
 };
 
@@ -69,8 +69,8 @@ exports.getBatimentsInformations = function (compagnie, nomBatiment) {
             batimentRepositoryEvent.emit('batimentInfosFound', JSON.parse(JSON.stringify(result)));
         })
         .catch(function (err) {
-            console.log(err.detail);
-            batimentRepositoryEvent.emit('searchBatimentInfosError', err.detail);
+            console.log(err.message);
+            batimentRepositoryEvent.emit('searchBatimentInfosError', err.message);
         });
 
 }
@@ -88,13 +88,43 @@ exports.createSignalBatimentInformations = function (signalId, compagnie, nomBat
                 batimentId: batiment.batimentId,
                 idN: signalId,
                 Etage: Etage
-            }).then(function(){
+            }).then(function () {
                 batimentRepositoryEvent.emit('signalBatimentInfosCreated');
             })
         })
         .catch(function (err) {
-            console.log(err.detail);
-            batimentRepositoryEvent.emit('createBatimentInfosError', err.detail);
+            console.log(err.message);
+            batimentRepositoryEvent.emit('createBatimentInfosError', err.message);
         });
 }
+
+exports.updateSignalBatimentInformations = function (signalId, compagnie, nomBatiment, Etage) {
+
+    connection.db.batimentModel.findOne({
+        where: {
+            Compagnie: compagnie,
+            NomBatiment: nomBatiment
+        }
+    })
+        .then(function (result) {
+            var batiment = JSON.parse(JSON.stringify(result))
+            connection.db.signalBatimentModel.update(
+                {     batimentId: batiment.batimentId,
+                idN: signalId,
+                Etage: Etage}
+                , {
+                    where: {
+                        idN: signalId
+                    }
+                }
+            ).then(function () {
+                batimentRepositoryEvent.emit('signalBatimentInfosUpdated');
+            })
+        })
+        .catch(function (err) {
+            console.log(err.message);
+            batimentRepositoryEvent.emit('batimentInfosUpdatedError', err.message);
+        });
+}
+
 exports.batimentRepositoryEvent = batimentRepositoryEvent;

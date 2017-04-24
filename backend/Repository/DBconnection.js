@@ -3,10 +3,10 @@
  */
 var Sequelize = require("sequelize");
 
-function DBConnection(){
+function DBConnection() {
 
     this.db = {};
-    this.sequelize =  new Sequelize('multitel', 'multitel', 'multitel', {
+    this.sequelize = new Sequelize('multitel', 'multitel', 'multitel', {
         host: 'localhost',
         port: 3306,
         dialect: 'mysql',
@@ -22,28 +22,29 @@ function DBConnection(){
     this.db['signalValueModel'] = this.sequelize.import(__dirname + '/Model/SignalValue');
     this.db['signalStatusModel'] = this.sequelize.import(__dirname + '/Model/signalstatus')
 
-    this.db.batimentModel.hasMany(this.db.signalBatimentModel,{foreignKey: 'batimentId'});
+    this.db.batimentModel.hasMany(this.db.signalBatimentModel, {foreignKey: 'batimentId'});
     this.db.signalModel.hasMany(this.db.signalBatimentModel, {foreignKey: 'idN'});
-    this.db.signalModel.hasMany(this.db.signalpositiOndropZoneModel,{foreignKey: 'idN'});
+    this.db.signalModel.hasMany(this.db.signalpositiOndropZoneModel, {foreignKey: 'idN'});
     this.db.signalModel.hasMany(this.db.signalValueModel, {foreignKey: 'idN'});
-    this.db.signalBatimentModel.belongsTo(this.db.batimentModel,{foreignKey: 'batimentId'});
-    this.db.signalBatimentModel.belongsTo(this.db.signalModel,{foreignKey: 'idN'});
-    this.db.signalpositiOndropZoneModel.belongsTo(this.db.signalModel,{foreignKey: 'idN'});
+    this.db.signalModel.hasMany(this.db.signalStatusModel, {foreignKey: 'idN'});
+    this.db.signalBatimentModel.belongsTo(this.db.batimentModel, {foreignKey: 'batimentId'});
+    this.db.signalBatimentModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
+    this.db.signalpositiOndropZoneModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
     this.db.signalValueModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
-    this.db.signalStatusModel.hasOne(this.db.signalModel, {foreignKey: 'idN'});
+    this.db.signalStatusModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
 
 
     this.db.batimentModel.sync();
-    this.db.signalBatimentModel.sync();
     this.db.signalModel.sync();
+    this.db.signalBatimentModel.sync();
     this.db.signalValueModel.sync();
     this.db.signalpositiOndropZoneModel.sync();
     this.db.signalStatusModel.sync();
 }
 
 DBConnection.instance = null;
-DBConnection.getInstance = function(){
-    if(this.instance === null){
+DBConnection.getInstance = function () {
+    if (this.instance === null) {
         this.instance = new DBConnection();
     }
     return this.instance;

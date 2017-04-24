@@ -31,7 +31,7 @@ exports.insertNewSignal = function (signalId, category, minVal, maxVal, unity) {
         });
 
 }
-exports.updateSignalInformations = function (signalId, category, unity) {
+exports.updateSignalInformations = function (signalId, category, unity, oldSignal) {
     signalModel.update(
         {
             idN: signalId,
@@ -40,11 +40,16 @@ exports.updateSignalInformations = function (signalId, category, unity) {
         },
         {
             where: {
-                idN: signalId
+                idN: oldSignal
             }
         })
         .then(function () {
-            signalRepositoryEvent.emit('signalUpdated');
+            signalRepositoryEvent.emit('signalUpdated', {
+                oldSignalId: oldSignal,
+                signalId: signalId,
+                category: category,
+                unity: unity
+            });
         })
         .catch(function (err) {
             signalRepositoryEvent.emit('signalUpdateError', err.detail);
@@ -145,17 +150,26 @@ exports.getSignalsId = function () {
     });
 }
 
-exports.getSignalByStatus = function (status) {
+exports.getSignalByStatus = function (status, view) {
     connection.db.signalStatusModel.findAll({
         where: {
             status: status
-        }, include: [{
-            model: connection.db.signalModel
-        }]
+        }, include: [
+            {
+                model: connection.db.signalModel, include: [{
+                model: connection.db.signalpositiOndropZoneModel,
+                where: {
+                    view: view
+
+                }
+            }]
+            },
+
+        ]
     }).then(function (result) {
         signalRepositoryEvent.emit('signalsByStatusFounded', JSON.parse(JSON.stringify(result)));
     }).catch(function (err) {
-        console.log(err);
+        console.log(err.message);
         signalRepositoryEvent.emit('getSignalDisplayedErr', err.detail);
     })
 };
@@ -170,6 +184,7 @@ exports.deleteSignalPosition = function (signalId, view) {
         signalRepositoryEvent.emit('signalPositionDeleted')
     })
         .catch(function (err) {
+            console.log(err.message)
             signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
         });
 }
@@ -184,14 +199,33 @@ exports.updateSignalPosition = function (signalId, positionLeft, positionTop, vi
             where: {
                 idN: signalId
             }
-        }.then(function () {
+        }).then(function () {
             signalRepositoryEvent.emit('signalPositionUdpate');
         })
             .catch(function (err) {
+                console.log(err.message)
                 signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
             })
-    )
+
 }
+
+exports.createSignalPosition = function (signalId, positionLeft, positionTop, view) {
+    connection.db.signalpositiOndropZoneModel.create({
+        idN: signalId,
+        PositionTop: positionTop,
+        PositionLeft: positionLeft,
+        View: view
+    })
+        .then(function () {
+            signalRepositoryEvent.on('signalPositionCreated')
+        })
+        .catch(function (err) {
+            console.log(err.message);
+            signalRepositoryEvent.emit('createSignalPositionError')
+        })
+}
+
+
 exports.updateSignalStatus = function (signalId, newStatus) {
     connection.db.signalStatusModel.update(
         {status: newStatus},

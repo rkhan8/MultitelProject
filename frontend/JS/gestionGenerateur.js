@@ -22,18 +22,44 @@ socket.on('batimentsName', function (data) {
     populateComboboxFromArray('newNomBatiment', data)
     populateComboboxFromArray('lastBatimentName', data)
 });
-socket.on('batimentsInfos', function(batimenInfos){
+socket.on('batimentsInfos', function (batimenInfos) {
     var etages = new Array();
-    for(var i = 0; i <= batimenInfos[0].NbEtages ; i++){
+    for (var i = 0; i <= batimenInfos[0].NbEtages; i++) {
         etages.push(i);
     }
 
 
     $('#lastEtageNumber option').remove();
     $('#newNumeroEtage option').remove();
-    populateComboboxFromArray('lastEtageNumber',etages);
-    populateComboboxFromArray('newNumeroEtage',etages);
+    populateComboboxFromArray('lastEtageNumber', etages);
+    populateComboboxFromArray('newNumeroEtage', etages);
 
+});
+
+$(function () {
+    $('#newCompagnieGenerateur').change(function () {
+        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
+    });
+
+    $('#newNomBatiment').change(function () {
+
+        socket.emit('searchBatimentsValues', {
+            NomBatiment: $(this).find('option:selected').val(),
+            compagnie: $('#newCompagnieGenerateur').find('option:selected').val()
+        });
+    });
+
+    $('#lastCompagnie').change(function () {
+        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
+    });
+
+    $('#lastBatimentName').change(function () {
+
+        socket.emit('searchBatimentsValues', {
+            NomBatiment: $(this).find('option:selected').val(),
+            compagnie: $('#lastCompagnie').find('option:selected').val()
+        });
+    });
 });
 
 
@@ -56,14 +82,14 @@ socket.on('signalRemovedFromDisplay', function () {
 })
 
 
-
 $(function () {
 
     $(".generator").draggable({
         stack: ".draggable",
         cursor: 'hand',
         helper: 'clone',
-        containment: '#droppableContent'
+        containment: '#droppableContent',
+
     });
 
     $(".ui-drop").droppable({
@@ -105,34 +131,28 @@ $(function () {
                 $('#save').hide();
                 $('#update').show();
                 show_updatePopup(signalId);
+               // socket.emit('updateSignalPosition')
             });
+
+
             $(generator).draggable({
                 stack: ".draggable",
                 cursor: 'hand',
                 containment: '#droppableContent',
                 stop: function (event, ui) {
-                    //mettre le code recuperer la position ici !!
-                    alert("left=" + parseInt($(this).position().left) + " top=" + parseInt($(this).position().top));
+                    socket.emit('updateSignalPosition', {
+                        signalId: $(this).attr('id'),
+                        positionLeft: parseInt($(this).position().left),
+                        positionTop: parseInt($(this).position().top),
+                        view: 'gestionsignal'
+                    });
+                    //  alert("left=" + parseInt($(this).position().left) + " top=" + parseInt($(this).position().top));
 
                 }
             });
         }
     });
 
-});
-
-$(function () {
-    $('#newCompagnieGenerateur').change(function () {
-        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
-    });
-
-    $('#newNomBatiment').change(function () {
-
-        socket.emit('searchBatimentsValues', {
-            NomBatiment: $(this).find('option:selected').val(),
-            compagnie: $('#newCompagnieGenerateur').find('option:selected').val()
-        });
-    });
 });
 
 
@@ -143,22 +163,23 @@ function removeSignalFromDisplay(signalId) {
     $('#' + signalId).remove();
 }
 
-function updateSignal() {
-    if (validateFields()) {
-        newSignalId = $('#lastGeneratorName').val();
-        socket.emit("updateSignal",
-            {
-                signalId: $('#lastGeneratorName').val(),
-                category: $('#lastGategory').find(":selected").val(),
-                unity: $('#lastUnity').val(),
-                nomBatiment: $('#lastBatimentName').find(":selected").val(),
-                compagnie: $('#lastCompagnie').find(":selected").val(),
-                numeroEtage: $('#lastEtageNumber').find(":selected").val()
+function updateSignalInformations(oldSignalId) {
 
-            });
-        updateSignalInfos(newSignalId);
-        hide_popup();
-    }
+    newSignalId = $('#lastGeneratorName').val();
+    socket.emit("updateSignalInformations",
+        {
+            oldSignalId: oldSignalId,
+            signalId: $('#lastGeneratorName').val(),
+            category: $('#lastGategory').find(":selected").val(),
+            unity: $('#lastUnity').val(),
+            nomBatiment: $('#lastBatimentName').find(":selected").val(),
+            compagnie: $('#lastCompagnie').find(":selected").val(),
+            numeroEtage: $('#lastEtageNumber').find(":selected").val()
+
+        });
+    updateSignalInfos(newSignalId, oldSignalId);
+    hide_popup();
+
 }
 function setupOldsignal(signal) {
     var signalId = $(signal).attr('id');
@@ -184,26 +205,57 @@ function setupNewSignal(signal) {
 function initializeOldSignal(signals) {
 
     for (var i = 0; i < signals.length; i++) {
-        var signalName = createAndSetupInput();
-        var generator = $('<div class="oldGenerator"><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-        $("#draggableContentExisting").prepend(generator);
+        var generator = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
+        $("#droppableContent").append(generator);
         generator.get(0).setAttribute("id", signals[i].idN);
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            helper: 'clone',
-            containment: '#droppableContent'
+            containment: '#droppableContent',
+            stop: function (event, ui) {
+                socket.emit('updateSignalPosition', {
+                    signalId: $(this).attr('id'),
+                    positionLeft: parseInt($(this).position().left),
+                    positionTop: parseInt($(this).position().top),
+                    view: 'gestionsignal'
+                });
+                  alert("left=" + parseInt($(this).position().left) + " top=" + parseInt($(this).position().top));
+            }
         });
+        ///ajuster la position des anciens generateurs ici
+        $(generator).css({
+            top: $(generator).parent().offset().top + signals[i].signal.signalpositionondropzones[0].PositionTop,
+            left: $(generator).parent().offset().left + signals[i].signal.signalpositionondropzones[0].PositionLeft
+        });
+        var signalName = createAndSetupInput();
         $(signalName).addClass("signalName");
         $(signalName).val(signals[i].idN);
         $(generator).prepend(signalName);
         generators.push(signals[i].idN);
+
+        var valueDisplayer = createAndSetupInput();
+        $(valueDisplayer).addClass("valueDisplay");
+        $(generator).append(valueDisplayer);
+        $(generator).addClass('signal');
+
+        $('.signal').click(function () {
+            var currentGenerator = $(this);
+            var signalId = $(currentGenerator).attr('id');
+
+            socket.emit('getSignalInfos', signalId);
+            $('#save').hide();
+            $('#update').show();
+            show_updatePopup(signalId);
+           // socket.emit('updateSignalPosition')
+        });
     }
 }
 
 function addSignalOnDisplaying() {
-    if (validateFields()) {
+
         var signalId = $('#generatorNameIdList').val();
+
+
         socket.emit("addsignalOnPlayingList",
             {
                 signalId: $('#generatorNameIdList').find(':selected').val(),
@@ -213,10 +265,12 @@ function addSignalOnDisplaying() {
                 compagnie: $('#newCompagnieGenerateur').find(":selected").val(),
                 numeroEtage: $('#newNumeroEtage').find(":selected").val()
             });
+
+
         hide_popup();
         updateSignalInfos(signalId);
         createSignalGraph(signalId);
-    }
+
 
 }
 
@@ -285,8 +339,11 @@ function validateFields() {
 //Function To Display Popup
 
 
-function updateSignalInfos(newSignalId) {
-    var signal = $('#droppableContent').get(0).lastChild;
+function updateSignalInfos(newSignalId, oldSignalId) {
+    if (_.isUndefined(oldSignalId))
+        var signal = $('#droppableContent').get(0).lastChild;
+    else
+        var signal = $('#' + oldSignalId)
     var oldId = $(signal).attr('id');
 
 
@@ -297,6 +354,12 @@ function updateSignalInfos(newSignalId) {
     if (index != -1) {
         charts[index].id = newSignalId + 'canvas';
     }
+    socket.emit('createSignalPosition', {
+        signalId: newSignalId,
+        positionLeft: parseInt($('#' + newSignalId).position().left),
+        positionTop: parseInt($('#' + newSignalId).position().top),
+        view: 'gestionsignal'
+    });
 }
 
 function show_popup(signalId) {
@@ -306,11 +369,6 @@ function show_popup(signalId) {
     $('#errorMsg').text("");
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     dialog.showModal();
-    dialog.querySelector('.save').addEventListener('click', function () {
-        //validateFields();
-        // $('#generatorName').val(signalId);
-        dialog.close();
-    });
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
     });
@@ -320,6 +378,7 @@ function show_popup(signalId) {
 
 //Function show_updatePopup
 function show_updatePopup(signalId) {
+    socket.emit('getComapgniesName');
 
     $('#removeSignalButton').click(function () {
         removeSignalFromDisplay(signalId);
@@ -327,8 +386,8 @@ function show_updatePopup(signalId) {
     $('#errorMsg').text("");
     var dialog = document.querySelector('#UpdateGeneratorPopUp');
     dialog.showModal();
-    dialog.querySelector('.save').addEventListener('click', function () {
-        $('#generatorName').val(signalId);
+    $("#updateButton").one('click', function () {
+        updateSignalInformations(signalId);
         dialog.close();
     });
     dialog.querySelector('.close').addEventListener('click', function () {

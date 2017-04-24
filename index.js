@@ -84,7 +84,8 @@ persistanceService.persistenceEvent.on('displayedSignals', function (data) {
 persistanceService.persistenceEvent.on('signalStatusUpdated', function () {
     io.sockets.emit('signalRemovedFromDisplay');
 });
-persistanceService.persistenceEvent.on('signalUpdated', function(){
+persistanceService.persistenceEvent.on('signalUpdated', function(signalInfos){
+    signalService.updateSignal(signalInfos);
     io.sockets.emit('signalUpdated');
 })
 
@@ -106,25 +107,29 @@ io.on('connection', function (socket) {
         persistanceService.removeSignalFromDisplay(signalId);
     });
     socket.on('addSignalOnDisplay', function (signalId) {
-        persitanceService.addSignalOnDisplay(signalId)
+        persistanceService.addSignalOnDisplay(signalId)
     });
     socket.on('deletesignalPosition', function (signalId) {
         persistanceService.deleteSignalPosition(signalId)
     });
-    socket.on('updateSignalPosition', function (signalId, positionLeft, positionTop) {
-
+    socket.on('updateSignalPosition', function (signalPosition) {
+        persistanceService.updateSignalPosition(signalPosition.signalId, signalPosition.positionLeft, signalPosition.positionTop,signalPosition.view)
+    });
+    socket.on('createSignalPosition', function(signalPosition){
+      persistanceService.createSignalPosition(signalPosition.signalId, signalPosition.positionLeft, signalPosition.positionTop,signalPosition.view);
     })
 
-    socket.on('activateGenerators', function () {
+   /* socket.on('activateGenerators', function () {
         signalService.activateGenerators();
-    });
+    });*/
 
     socket.on('getSignalInfos', function (signalId) {
         signalService.getSignalInformations(signalId);
     });
 
-    socket.on('updateSignal', function (generatorInfos) {
-        signalService.updateSignal(generatorInfos);
+    socket.on('updateSignalInformations', function (signalInfos) {
+        persistanceService.updateSignalInformations(signalInfos.signalId, signalInfos.compagnie, signalInfos.nomBatiment, signalInfos.numeroEtage, signalInfos.unity,signalInfos.category,signalInfos.oldSignalId);
+
     });
 
     socket.on('getSignalsId', function () {
@@ -166,7 +171,7 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('createSignal');
         socket.removeAllListeners('activateGenerators');
         socket.removeAllListeners('getSignalInfos');
-        socket.removeAllListeners('updateSignal');
+        socket.removeAllListeners('updateSignalInformations');
         socket.removeAllListeners('getSignalsCategories');
         socket.removeAllListeners('getSignalsUnity');
         socket.removeAllListeners('getRecordingDates');
@@ -181,6 +186,7 @@ io.on('connection', function (socket) {
 
 initialise();
 function initialise() {
-    signalService.activateGenerators();
     persistanceService.getSignals();
+  signalService.activateGenerators();
+
 }
