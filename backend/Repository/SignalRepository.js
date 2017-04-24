@@ -31,7 +31,7 @@ exports.insertNewSignal = function (signalId, category, minVal, maxVal, unity) {
         });
 
 }
-exports.updateSignalInformations = function (signalId, category, unity) {
+exports.updateSignalInformations = function (signalId, category, unity, oldSignal) {
     signalModel.update(
         {
             idN: signalId,
@@ -40,7 +40,7 @@ exports.updateSignalInformations = function (signalId, category, unity) {
         },
         {
             where: {
-                idN: signalId
+                idN: oldSignal
             }
         })
         .then(function () {

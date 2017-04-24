@@ -217,6 +217,11 @@ exports.makeSignalDisplayable = function (signalId, compagnie, nomBatiment, Etag
     signalRepository.updateSignalInformations(signalId,category, unity)
 
 }
+exports.updateSignalInformations= function(signalId, compagnie, nomBatiment, Etage, unity, category, oldSignalId){
+    batimentRepository.updateSignalBatimentInformations(signalId, compagnie, nomBatiment, Etage);
+    signalRepository.updateSignalInformations(signalId,category, unity, oldSignalId);
+
+}
 
 
 function initialisePersistenceError() {
@@ -266,6 +271,9 @@ function initialisePersistenceError() {
     });
     batimentRepository.batimentRepositoryEvent.on('createBatimentInfosError', function(details){
        persistenceEvent.emit('errorCreateBatimentInfos',details)
+    });
+    batimentRepository.batimentRepositoryEvent.on('batimentInfosUpdatedError', function(details){
+        persistenceEvent.emit('errorBatimentInfosUpdated',details)
     });
 
 }
@@ -330,7 +338,11 @@ function initialisePersitenceEvent() {
     });
     batimentRepository.batimentRepositoryEvent.on('signalBatimentInfosCreated', function(){
         persistenceEvent.emit('signalBatimentInfosCreated')
+    });
+    batimentRepository.batimentRepositoryEvent.on('signalBatimentInfosUpdated', function(){
+        persistenceEvent.emit('signalBatimentInfosUpdated')
     })
+
 }
 
 

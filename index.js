@@ -123,8 +123,9 @@ io.on('connection', function (socket) {
         signalService.getSignalInformations(signalId);
     });
 
-    socket.on('updateSignal', function (generatorInfos) {
-        signalService.updateSignal(generatorInfos);
+    socket.on('updateSignalInformations', function (signalInfos) {
+        persistanceService.updateSignalInformations(signalInfos.signalId, signalInfos.compagnie, signalInfos.nomBatiment, signalInfos.numeroEtage, signalInfos.unity,signalInfos.category,signalInfos.oldSignalId);
+
     });
 
     socket.on('getSignalsId', function () {
@@ -166,7 +167,7 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('createSignal');
         socket.removeAllListeners('activateGenerators');
         socket.removeAllListeners('getSignalInfos');
-        socket.removeAllListeners('updateSignal');
+        socket.removeAllListeners('updateSignalInformations');
         socket.removeAllListeners('getSignalsCategories');
         socket.removeAllListeners('getSignalsUnity');
         socket.removeAllListeners('getRecordingDates');
@@ -181,6 +182,7 @@ io.on('connection', function (socket) {
 
 initialise();
 function initialise() {
-    signalService.activateGenerators();
     persistanceService.getSignals();
+  signalService.activateGenerators();
+
 }

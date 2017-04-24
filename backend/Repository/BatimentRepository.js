@@ -97,4 +97,34 @@ exports.createSignalBatimentInformations = function (signalId, compagnie, nomBat
             batimentRepositoryEvent.emit('createBatimentInfosError', err.message);
         });
 }
+
+exports.updateSignalBatimentInformations = function (signalId, compagnie, nomBatiment, Etage) {
+
+    connection.db.batimentModel.findOne({
+        where: {
+            Compagnie: compagnie,
+            NomBatiment: nomBatiment
+        }
+    })
+        .then(function (result) {
+            var batiment = JSON.parse(JSON.stringify(result))
+            connection.db.signalBatimentModel.update(
+                {     batimentId: batiment.batimentId,
+                idN: signalId,
+                Etage: Etage}
+                , {
+                    where: {
+                        idN: signalId
+                    }
+                }
+            ).then(function () {
+                batimentRepositoryEvent.emit('signalBatimentInfosUpdated');
+            })
+        })
+        .catch(function (err) {
+            console.log(err.message);
+            batimentRepositoryEvent.emit('batimentInfosUpdatedError', err.message);
+        });
+}
+
 exports.batimentRepositoryEvent = batimentRepositoryEvent;

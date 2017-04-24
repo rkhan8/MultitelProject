@@ -36,6 +36,32 @@ socket.on('batimentsInfos', function(batimenInfos){
 
 });
 
+$(function () {
+    $('#newCompagnieGenerateur').change(function () {
+        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
+    });
+
+    $('#newNomBatiment').change(function () {
+
+        socket.emit('searchBatimentsValues', {
+            NomBatiment: $(this).find('option:selected').val(),
+            compagnie: $('#newCompagnieGenerateur').find('option:selected').val()
+        });
+    });
+
+    $('#lastCompagnie').change(function () {
+        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
+    });
+
+    $('#lastBatimentName').change(function () {
+
+        socket.emit('searchBatimentsValues', {
+            NomBatiment: $(this).find('option:selected').val(),
+            compagnie: $('#lastCompagnie').find('option:selected').val()
+        });
+    });
+});
+
 
 socket.on('newValue', function (newValue) {
     $('#' + newValue.signalId).find('.valueDisplay').val(newValue.value);
@@ -121,19 +147,7 @@ $(function () {
 
 });
 
-$(function () {
-    $('#newCompagnieGenerateur').change(function () {
-        socket.emit('getCompagnieBatiment', $(this).find('option:selected').val());
-    });
 
-    $('#newNomBatiment').change(function () {
-
-        socket.emit('searchBatimentsValues', {
-            NomBatiment: $(this).find('option:selected').val(),
-            compagnie: $('#newCompagnieGenerateur').find('option:selected').val()
-        });
-    });
-});
 
 
 function removeSignalFromDisplay(signalId) {
@@ -143,11 +157,11 @@ function removeSignalFromDisplay(signalId) {
     $('#' + signalId).remove();
 }
 
-function updateSignal() {
-    if (validateFields()) {
+function updateSignalInformations(oldSignalId) {
+
         newSignalId = $('#lastGeneratorName').val();
-        socket.emit("updateSignal",
-            {
+        socket.emit("updateSignalInformations",
+            {   oldSignalId: oldSignalId,
                 signalId: $('#lastGeneratorName').val(),
                 category: $('#lastGategory').find(":selected").val(),
                 unity: $('#lastUnity').val(),
@@ -156,9 +170,9 @@ function updateSignal() {
                 numeroEtage: $('#lastEtageNumber').find(":selected").val()
 
             });
-        updateSignalInfos(newSignalId);
+        updateSignalInfos(newSignalId,oldSignalId);
         hide_popup();
-    }
+
 }
 function setupOldsignal(signal) {
     var signalId = $(signal).attr('id');
@@ -285,8 +299,11 @@ function validateFields() {
 //Function To Display Popup
 
 
-function updateSignalInfos(newSignalId) {
+function updateSignalInfos(newSignalId, oldSignalId) {
+    if(_.isUndefined(oldSignalId))
     var signal = $('#droppableContent').get(0).lastChild;
+    else
+        var signal = $( '#'+oldSignalId)
     var oldId = $(signal).attr('id');
 
 
@@ -306,11 +323,6 @@ function show_popup(signalId) {
     $('#errorMsg').text("");
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     dialog.showModal();
-    dialog.querySelector('.save').addEventListener('click', function () {
-        //validateFields();
-        // $('#generatorName').val(signalId);
-        dialog.close();
-    });
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
     });
@@ -320,6 +332,7 @@ function show_popup(signalId) {
 
 //Function show_updatePopup
 function show_updatePopup(signalId) {
+    socket.emit('getComapgniesName');
 
     $('#removeSignalButton').click(function () {
         removeSignalFromDisplay(signalId);
@@ -327,8 +340,8 @@ function show_updatePopup(signalId) {
     $('#errorMsg').text("");
     var dialog = document.querySelector('#UpdateGeneratorPopUp');
     dialog.showModal();
-    dialog.querySelector('.save').addEventListener('click', function () {
-        $('#generatorName').val(signalId);
+    $( "#updateButton" ).one('click', function () {
+        updateSignalInformations(signalId);
         dialog.close();
     });
     dialog.querySelector('.close').addEventListener('click', function () {

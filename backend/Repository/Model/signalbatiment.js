@@ -8,19 +8,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     idN: {
       type: DataTypes.STRING(255),
-      allowNull: false,
-      references: {
-        model: 'signals',
-        key: 'idN'
-      }
+      allowNull: false
+
     },
     batimentId: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'batiment',
-        key: 'batimentId'
-      }
+      allowNull: false
     }
   }, {
     tableName: 'signalbatiment'

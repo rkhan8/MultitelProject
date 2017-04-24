@@ -2,8 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('signals', {
-
-      idN: {
+    idN: {
       type: DataTypes.STRING(255),
       allowNull: false,
       primaryKey: true
