@@ -68,6 +68,7 @@ select
   border-style: dotted;
   float: left;
   margin-left: 2%;
+  overflow: auto;
 }
 
 #draggableContentExisting {

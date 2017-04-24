@@ -207,12 +207,12 @@ function initializeOldSignal(signals) {
 
     for (var i = 0; i < signals.length; i++) {
         var generator = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-        $("#roppableContent").append(generator);
+        $("#droppableContent").append(generator);
         generator.get(0).setAttribute("id", signals[i].idN);
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            /*containment: '#droppableContent',*/
+            //containment: '#droppableContent',
             stop: function (event, ui) {
                 socket.emit('updateSignalPosition', {
                     signalId: $(this).attr('id'),
