@@ -60,87 +60,11 @@
           <h3>Ajouter un batiment</h3>
         </div>
 
-        <button>Toggle</button>
+        <button id="SlideDownAddBatiment">Toggle</button>
 
 
           <div id="AddBatiment">
             <div id="champAlign">
-
-              <!--
-              <table>
-                <tr>
-                  <th>
-                    Compagnie :
-                  </th>
-                  <td>
-                    <div class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" id="compagnie" required="" onchange ="ValidateField();">
-                      <label class="mdl-textfield__label" for="compagnie">Compagnie...</label>
-                      <span class="mdl-textfield__error">Veuillez renseignez ce champs</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    Batiment :
-                  </th>
-                  <td>
-                    <div class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" id="batiment" required="" onchange="ValidateField();">
-                      <label class="mdl-textfield__label" for="adresse">Batiment...</label>
-                      <span class="mdl-textfield__error">Veuillez renseignez ce champs</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    Adresse :
-                  </th>
-                  <td>
-                    <div class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" id="adresse">
-                      <label class="mdl-textfield__label" for="adresse">Adresse...</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    Code Postal :
-                  </th>
-                  <td>
-                    <div class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" id="codePostal">
-                      <label class="mdl-textfield__label" for="codepostal">Code Postale...</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    Numéro :
-                  </th>
-                  <td>
-                    <div class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="numero">
-                      <label class="mdl-textfield__label" for="numero">Numero...</label>
-                      <span class="mdl-textfield__error">Il ne s'agit pas d'un nombre</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    Nb étage :
-                  </th>
-                  <td>
-                    <div class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="nbEtages">
-                      <label class="mdl-textfield__label" for="numero">Numero...</label>
-                      <span class="mdl-textfield__error">Il ne s'agit pas d'un nombre</span>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            -->
-
 
               Compagnie :
               <div class="mdl-textfield mdl-js-textfield">
@@ -198,12 +122,11 @@
 
                 <div class="clear"></div>
 
-
-
             </div>
           </div>
 
 
+        </br>
 
 
       </div>
@@ -215,55 +138,63 @@
               <h3>Information du batiment</h3>
             </div>
 
-            <div class="columns">
 
-              <div id="choiceSearch">
-                Compagnie :
-                <select id="CompagnieListbox" onchange="ValidateBatimentSearch();">
-                </select>
+            <button id="SlideDownSearchBatiment">Toggle</button>
 
-                Bâtiment :
-                <select id="batimentListbox">
-                </select>
-              </div>
+            <div id="search">
 
-              <div class="dataButtons">
-                <a id="submitSearch" onclick="searchBatimentGenerator();"
-                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
-                  Recherche
-                </a>
-              </div>
+              <div class="columns">
 
-              <div class="space"></div>
+                <div id="choiceSearch">
+                  Compagnie :
+                  <select id="CompagnieListbox" onchange="ValidateBatimentSearch();">
+                  </select>
 
-              <div id="tableView">
-                  <div class="tbl-content">
-                    <table id="donneeBatiment" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab">
-                      <thead>
-                        <tr>
-                          <th>Compagnie</th>
-                          <th>Batiment</th>
-                          <th>Adresse</th>
-                          <th>Code postal</th>
-                          <th>NbEtage</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-
-                      <tbody id="tableBatiment">
-                      </tbody>
-
-                    </table>
-                  </div>
+                  Bâtiment :
+                  <select id="batimentListbox">
+                  </select>
                 </div>
+
+                <div class="dataButtons">
+                  <a id="submitSearch" onclick="searchBatimentGenerator();"
+                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
+                    Recherche
+                  </a>
+                </div>
+
+                <div class="space"></div>
+
+                <div id="tableView">
+                    <div class="tbl-content">
+                      <table id="donneeBatiment" cellpadding="0" cellspacing="0" border="0" data-filter="true" data-input="#input-tab">
+                        <thead>
+                          <tr>
+                            <th>Compagnie</th>
+                            <th>Batiment</th>
+                            <th>Adresse</th>
+                            <th>Code postal</th>
+                            <th>NbEtage</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+
+                        <tbody id="tableBatiment">
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+
+              </div>
+
+              <div class="clear"></div>
+
+              </br>
 
             </div>
 
-            <div class="clear"></div>
+          </div>
 
-          </br>
-
-      </div>
 
     </br>
 
