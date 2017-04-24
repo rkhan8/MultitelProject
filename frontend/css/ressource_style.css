@@ -58,7 +58,7 @@ select
 
 #draggableContent {
   width: 93.9%;
-  height: 10%;
+  height: 12%;
   padding: 0.5em;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 15px;
@@ -89,7 +89,7 @@ select
 }
 
 #droppableContent {
-  width: 72%;
+  width: 94%;
   height: 270px;
   padding: 0.5em;
   background: rgba(0, 0, 0, 0.3);

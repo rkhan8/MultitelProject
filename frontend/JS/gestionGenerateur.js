@@ -92,6 +92,8 @@ $(function () {
 
     });
 
+
+
     $(".ui-drop").droppable({
         activeClass: 'ui-state-hover',
         accept: '.generator, .oldGenerator, .drag',
@@ -123,18 +125,6 @@ $(function () {
                 $(generator).removeClass('oldGenerator');
             }
 
-            $('.signal').click(function () {
-                var currentGenerator = $(this);
-                var signalId = $(currentGenerator).attr('id');
-
-                socket.emit('getSignalInfos', signalId);
-                $('#save').hide();
-                $('#update').show();
-                show_updatePopup(signalId);
-               // socket.emit('updateSignalPosition')
-            });
-
-
             $(generator).draggable({
                 stack: ".draggable",
                 cursor: 'hand',
@@ -150,6 +140,20 @@ $(function () {
 
                 }
             });
+
+
+            $('.signal').click(function () {
+                var currentGenerator = $(this);
+                var signalId = $(currentGenerator).attr('id');
+
+                socket.emit('getSignalInfos', signalId);
+                $('#save').hide();
+                $('#update').show();
+                show_updatePopup(signalId);
+               // socket.emit('updateSignalPosition')
+            });
+
+
         }
     });
 
@@ -212,7 +216,7 @@ function initializeOldSignal(signals) {
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            //containment: '#droppableContent',
+            containment: '#droppableContent',
             stop: function (event, ui) {
                 socket.emit('updateSignalPosition', {
                     signalId: $(this).attr('id'),
@@ -220,25 +224,13 @@ function initializeOldSignal(signals) {
                     positionTop: parseInt($(this).position().top),
                     view: 'gestionsignal'
                 });
-                  alert("left=" + parseInt($(this).position().left) + " top=" + parseInt($(this).position().top));
             }
         });
 
-        //console.log(signals[i].signal.signalpositionondropzones[0].PositionTop);
-
-
-        ///ajuster la position des anciens generateurs ici
-
-        /*
         $(generator).css({
-
-            top: $(generator).parent().offset().top + signals[i].signal.signalpositionondropzones[0].PositionTop,
-            left: $(generator).parent().offset().left + signals[i].signal.signalpositionondropzones[0].PositionLeft
-
-
-        });
-        */
-
+             position: "fixed"
+         }).show();
+        ///ajuster la position des anciens generateurs ici
         $(generator).offset({top:signals[i].signal.signalpositionondropzones[0].PositionTop, left:signals[i].signal.signalpositionondropzones[0].PositionLeft});
 
 
@@ -261,6 +253,8 @@ function initializeOldSignal(signals) {
             $('#save').hide();
             $('#update').show();
             show_updatePopup(signalId);
+            setupOldsignal(generator);
+
            // socket.emit('updateSignalPosition')
         });
     }
@@ -281,7 +275,7 @@ function addSignalOnDisplaying() {
             });
 
 
-        hide_popup();
+        //hide_popup();
         updateSignalInfos(signalId);
         createSignalGraph(signalId);
 
@@ -381,6 +375,10 @@ function show_popup(signalId) {
     socket.emit('getComapgniesName');
     $('#errorMsg').text("");
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
+    $("#enregistrer").one('click', function () {
+
+        dialog.close();
+    });
     dialog.showModal();
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
@@ -393,6 +391,9 @@ function show_updatePopup(signalId) {
 
     $('#removeSignalButton').click(function () {
         removeSignalFromDisplay(signalId);
+        $( "#"+signalId+"canvas").remove();
+
+
     });
     $('#errorMsg').text("");
     var dialog = document.querySelector('#UpdateGeneratorPopUp');
