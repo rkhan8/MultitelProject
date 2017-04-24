@@ -228,7 +228,7 @@ function initializeOldSignal(signals) {
         });
 
         $(generator).css({
-             position: "fixed"
+             position: "absolute"
          }).show();
         ///ajuster la position des anciens generateurs ici
         $(generator).offset({top:signals[i].signal.signalpositionondropzones[0].PositionTop, left:signals[i].signal.signalpositionondropzones[0].PositionLeft});
