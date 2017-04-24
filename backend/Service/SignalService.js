@@ -38,9 +38,9 @@ exports.getSignals = function () {
 }
 
 exports.updateSignal = function (signalInfos) {
-    var index = searchSignalById(signalInfos.signalId);
+    var index = searchSignalById(signalInfos.oldSignalId);
     if (index != -1) {
-        signals.get(index).updateSignal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax, signalInfos.Unity);
+        signals.get(index).updateSignal(signalInfos.signalId, signalInfos.category, signalInfos.unity);
 
     }
     else {

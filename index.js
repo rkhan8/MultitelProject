@@ -84,7 +84,8 @@ persistanceService.persistenceEvent.on('displayedSignals', function (data) {
 persistanceService.persistenceEvent.on('signalStatusUpdated', function () {
     io.sockets.emit('signalRemovedFromDisplay');
 });
-persistanceService.persistenceEvent.on('signalUpdated', function(){
+persistanceService.persistenceEvent.on('signalUpdated', function(signalInfos){
+    signalService.updateSignal(signalInfos);
     io.sockets.emit('signalUpdated');
 })
 
@@ -106,18 +107,21 @@ io.on('connection', function (socket) {
         persistanceService.removeSignalFromDisplay(signalId);
     });
     socket.on('addSignalOnDisplay', function (signalId) {
-        persitanceService.addSignalOnDisplay(signalId)
+        persistanceService.addSignalOnDisplay(signalId)
     });
     socket.on('deletesignalPosition', function (signalId) {
         persistanceService.deleteSignalPosition(signalId)
     });
-    socket.on('updateSignalPosition', function (signalId, positionLeft, positionTop) {
-
+    socket.on('updateSignalPosition', function (signalPosition) {
+        persistanceService.updateSignalPosition(signalPosition.signalId, signalPosition.positionLeft, signalPosition.positionTop,signalPosition.view)
+    });
+    socket.on('createSignalPosition', function(signalPosition){
+      persistanceService.createSignalPosition(signalPosition.signalId, signalPosition.positionLeft, signalPosition.positionTop,signalPosition.view);
     })
 
-    socket.on('activateGenerators', function () {
+   /* socket.on('activateGenerators', function () {
         signalService.activateGenerators();
-    });
+    });*/
 
     socket.on('getSignalInfos', function (signalId) {
         signalService.getSignalInformations(signalId);

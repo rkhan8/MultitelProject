@@ -13,10 +13,10 @@ function Signal(signalId, category, min, max, unity) {
 }
 
 
-Signal.prototype.updateSignal = function (signalId, category, min, max) {
+Signal.prototype.updateSignal = function (signalId, category,unity) {
     this._signalId = signalId;
     this._category = category;
-    this._generator = new Generator(category, min, max);
+    this._unity = unity;
 };
 Signal.prototype.nextValue = function () {
     return {

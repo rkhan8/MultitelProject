@@ -3,16 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7a1ca8d0-23d0-4e35-8161-a655274b2428" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/BatimentRepository.js" afterPath="$PROJECT_DIR$/backend/Repository/BatimentRepository.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/DBconnection.js" afterPath="$PROJECT_DIR$/backend/Repository/DBconnection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/Model/signal.js" afterPath="$PROJECT_DIR$/backend/Repository/Model/signal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/Model/signalbatiment.js" afterPath="$PROJECT_DIR$/backend/Repository/Model/signalbatiment.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/Model/signalpositionondropzone.js" afterPath="$PROJECT_DIR$/backend/Repository/Model/signalpositionondropzone.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/Model/signalstatus.js" afterPath="$PROJECT_DIR$/backend/Repository/Model/signalstatus.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/DomaineModel/Signal.js" afterPath="$PROJECT_DIR$/backend/DomaineModel/Signal.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Repository/SignalRepository.js" afterPath="$PROJECT_DIR$/backend/Repository/SignalRepository.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Service/PersistenceService.js" afterPath="$PROJECT_DIR$/backend/Service/PersistenceService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/Service/SignalService.js" afterPath="$PROJECT_DIR$/backend/Service/SignalService.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/JS/gestionGenerateur.js" afterPath="$PROJECT_DIR$/frontend/JS/gestionGenerateur.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/template/gestionGenerateur.html" afterPath="$PROJECT_DIR$/frontend/template/gestionGenerateur.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/JS/rechercheGenerateur.js" afterPath="$PROJECT_DIR$/frontend/JS/rechercheGenerateur.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/template/rechercheGenerateur.html" afterPath="$PROJECT_DIR$/frontend/template/rechercheGenerateur.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -34,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/index.js">
+      <file leaf-file-name="Signal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/DomaineModel/Signal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
+            <state relative-caret-position="300">
+              <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -47,8 +44,28 @@
       <file leaf-file-name="SignalService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/Service/SignalService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="55" column="12" lean-forward="true" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+            <state relative-caret-position="134">
+              <caret line="40" column="15" lean-forward="false" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignalRepository.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/Repository/SignalRepository.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="446">
+              <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rechercheGenerateur.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/JS/rechercheGenerateur.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1263">
+              <caret line="56" column="22" lean-forward="true" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -57,42 +74,8 @@
       <file leaf-file-name="PersistenceService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/Service/PersistenceService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="219" column="114" lean-forward="false" selection-start-line="219" selection-start-column="114" selection-end-line="219" selection-end-column="114" />
-              <folding>
-                <element signature="n#!!block;n#initialisePersistenceError#0" expanded="false" />
-                <element signature="n#!!block;n#initialisePersitenceEvent#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gestionGenerateur.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/JS/gestionGenerateur.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="306" column="18" lean-forward="false" selection-start-line="306" selection-start-column="18" selection-end-line="306" selection-end-column="18" />
-              <folding>
-                <element signature="n#!!block;n#removeSignalFromDisplay#0" expanded="false" />
-                <element signature="n#!!block;n#setupOldsignal#0" expanded="false" />
-                <element signature="n#!!block;n#addSignalOnDisplaying#0" expanded="false" />
-                <element signature="n#!!block;n#createSignalGraph#0" expanded="false" />
-                <element signature="n#!!block;n#updateSignalChart#0" expanded="false" />
-                <element signature="n#!!block;n#validateFields#0" expanded="false" />
-                <element signature="n#!!block;n#show_popup#0" expanded="false" />
-                <element signature="n#!!block;n#hide_popup#0" expanded="false" />
-                <element signature="n#!!block;n#createAndSetupInput#0" expanded="false" />
-                <element signature="n#!!block;n#populateComboboxFromArray#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignalRepository.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/Repository/SignalRepository.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="46" column="11" lean-forward="false" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+            <state relative-caret-position="239">
+              <caret line="227" column="3" lean-forward="false" selection-start-line="227" selection-start-column="3" selection-end-line="227" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -108,11 +91,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BatimentRepository.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/Repository/BatimentRepository.js">
+      <file leaf-file-name="gestionGenerateur.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/JS/gestionGenerateur.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="120" column="15" lean-forward="false" selection-start-line="120" selection-start-column="15" selection-end-line="120" selection-end-column="15" />
+            <state relative-caret-position="538">
+              <caret line="272" column="0" lean-forward="false" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!block;n#removeSignalFromDisplay#0" expanded="false" />
+                <element signature="n#!!block;n#setupOldsignal#0" expanded="false" />
+                <element signature="n#!!block;n#createSignalGraph#0" expanded="false" />
+                <element signature="n#!!block;n#updateSignalChart#0" expanded="false" />
+                <element signature="n#!!block;n#validateFields#0" expanded="false" />
+                <element signature="n#!!block;n#show_popup#0" expanded="false" />
+                <element signature="n#!!block;n#hide_popup#0" expanded="false" />
+                <element signature="n#!!block;n#createAndSetupInput#0" expanded="false" />
+                <element signature="n#!!block;n#populateComboboxFromArray#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1546">
+              <caret line="94" column="4" lean-forward="false" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -130,6 +133,7 @@
       <find>update</find>
       <find>pop</find>
       <find>upd</find>
+      <find>signalUpdated</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,16 +144,19 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/backend/Repository/BatimentRepository.js" />
-        <option value="$PROJECT_DIR$/backend/Repository/SignalRepository.js" />
         <option value="$PROJECT_DIR$/frontend/template/gestionGenerateur.html" />
         <option value="$PROJECT_DIR$/backend/Repository/DBconnection.js" />
         <option value="$PROJECT_DIR$/backend/Repository/Model/signalbatiment.js" />
         <option value="$PROJECT_DIR$/backend/Repository/Model/signalpositionondropzone.js" />
         <option value="$PROJECT_DIR$/backend/Repository/Model/signalstatus.js" />
         <option value="$PROJECT_DIR$/backend/Repository/Model/signalvalue.js" />
-        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/backend/DomaineModel/Signal.js" />
+        <option value="$PROJECT_DIR$/backend/Service/SignalService.js" />
         <option value="$PROJECT_DIR$/backend/Service/PersistenceService.js" />
+        <option value="$PROJECT_DIR$/backend/Repository/SignalRepository.js" />
+        <option value="$PROJECT_DIR$/frontend/JS/rechercheGenerateur.js" />
         <option value="$PROJECT_DIR$/frontend/JS/gestionGenerateur.js" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -165,10 +172,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1909" />
-    <option name="y" value="-11" />
-    <option name="width" value="1942" />
-    <option name="height" value="1056" />
+    <option name="x" value="2869" />
+    <option name="y" value="-70" />
+    <option name="width" value="2902" />
+    <option name="height" value="1597" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -282,28 +289,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Repository" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Repository" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -441,12 +426,12 @@
       <updated>1492981898989</updated>
       <workItem from="1492981904871" duration="913000" />
       <workItem from="1492982841117" duration="16635000" />
-      <workItem from="1492999857061" duration="3287000" />
+      <workItem from="1492999857061" duration="19584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28307000" />
+    <option name="totallyTimeSpent" value="44604000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -458,19 +443,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1909" y="-11" width="1942" height="1056" extended-state="0" />
-    <editor active="false" />
+    <frame x="2869" y="-70" width="2902" height="1597" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24562334" sideWeight="0.78335375" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16274165" sideWeight="0.78335375" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925338" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24562334" sideWeight="0.51229507" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50550795" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5051546" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25703794" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26656848" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24562334" sideWeight="0.21664627" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41126072" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4108984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -489,73 +474,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/SignalRepository.js</url>
-          <line>169</line>
-          <option name="timeStamp" value="123" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/index.js</url>
-          <line>108</line>
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/index.js</url>
-          <line>111</line>
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/SignalRepository.js</url>
-          <line>187</line>
-          <option name="timeStamp" value="143" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Service/PersistenceService.js</url>
-          <line>220</line>
-          <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/BatimentRepository.js</url>
-          <line>120</line>
-          <option name="timeStamp" value="150" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/BatimentRepository.js</url>
-          <line>124</line>
-          <option name="timeStamp" value="151" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/index.js</url>
-          <line>126</line>
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/SignalRepository.js</url>
-          <line>46</line>
-          <option name="timeStamp" value="163" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/BatimentRepository.js</url>
-          <line>109</line>
-          <option name="timeStamp" value="164" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Repository/SignalRepository.js</url>
-          <line>50</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/Service/PersistenceService.js</url>
-          <line>221</line>
-          <properties />
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="172" />
+      <option name="time" value="190" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -745,13 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/JS/rechercheGenerateur.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/Repository/Model/activessignals.js" />
     <entry file="file://$PROJECT_DIR$/frontend/template/gestionBatiment.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -778,13 +693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/DomaineModel/Signal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -828,14 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/Repository/Model/signal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/Repository/Model/signalbatiment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -868,49 +768,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/Repository/Model/signal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/DomaineModel/Signal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/Repository/BatimentRepository.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
+        <state relative-caret-position="1044">
           <caret line="120" column="15" lean-forward="false" selection-start-line="120" selection-start-column="15" selection-end-line="120" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/Repository/SignalRepository.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="46" column="11" lean-forward="false" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/Service/SignalService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="55" column="12" lean-forward="true" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/Service/PersistenceService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="219" column="114" lean-forward="false" selection-start-line="219" selection-start-column="114" selection-end-line="219" selection-end-column="114" />
-          <folding>
-            <element signature="n#!!block;n#initialisePersistenceError#0" expanded="false" />
-            <element signature="n#!!block;n#initialisePersitenceEvent#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="239">
+          <caret line="227" column="3" lean-forward="false" selection-start-line="227" selection-start-column="3" selection-end-line="227" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/JS/rechercheGenerateur.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1263">
+          <caret line="56" column="22" lean-forward="true" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/Service/SignalService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="40" column="15" lean-forward="false" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/Repository/SignalRepository.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/JS/gestionGenerateur.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="306" column="18" lean-forward="false" selection-start-line="306" selection-start-column="18" selection-end-line="306" selection-end-column="18" />
+        <state relative-caret-position="538">
+          <caret line="272" column="0" lean-forward="false" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#removeSignalFromDisplay#0" expanded="false" />
             <element signature="n#!!block;n#setupOldsignal#0" expanded="false" />
-            <element signature="n#!!block;n#addSignalOnDisplaying#0" expanded="false" />
             <element signature="n#!!block;n#createSignalGraph#0" expanded="false" />
             <element signature="n#!!block;n#updateSignalChart#0" expanded="false" />
             <element signature="n#!!block;n#validateFields#0" expanded="false" />
@@ -924,8 +844,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="126" column="8" lean-forward="false" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
+        <state relative-caret-position="-1546">
+          <caret line="94" column="4" lean-forward="false" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
           <folding />
         </state>
       </provider>
