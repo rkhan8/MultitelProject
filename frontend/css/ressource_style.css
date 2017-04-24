@@ -609,3 +609,18 @@ canvas{
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+#SlideDownSearchBatiment
+{
+  margin-left: 93%;
+}
+
+#SlideDownAddBatiment
+{
+  margin-left: 85%;
+  width: 30px;
+}

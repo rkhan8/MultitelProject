@@ -204,14 +204,15 @@ function setupNewSignal(signal) {
 
 function initializeOldSignal(signals) {
 
+
     for (var i = 0; i < signals.length; i++) {
         var generator = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-        $("#droppableContent").append(generator);
+        $("#roppableContent").append(generator);
         generator.get(0).setAttribute("id", signals[i].idN);
         generator.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            containment: '#droppableContent',
+            /*containment: '#droppableContent',*/
             stop: function (event, ui) {
                 socket.emit('updateSignalPosition', {
                     signalId: $(this).attr('id'),
@@ -222,11 +223,25 @@ function initializeOldSignal(signals) {
                   alert("left=" + parseInt($(this).position().left) + " top=" + parseInt($(this).position().top));
             }
         });
+
+        //console.log(signals[i].signal.signalpositionondropzones[0].PositionTop);
+
+
         ///ajuster la position des anciens generateurs ici
+
+        /*
         $(generator).css({
+
             top: $(generator).parent().offset().top + signals[i].signal.signalpositionondropzones[0].PositionTop,
             left: $(generator).parent().offset().left + signals[i].signal.signalpositionondropzones[0].PositionLeft
+
+
         });
+        */
+
+        $(generator).offset({top:signals[i].signal.signalpositionondropzones[0].PositionTop, left:signals[i].signal.signalpositionondropzones[0].PositionLeft});
+
+
         var signalName = createAndSetupInput();
         $(signalName).addClass("signalName");
         $(signalName).val(signals[i].idN);
@@ -255,7 +270,6 @@ function addSignalOnDisplaying() {
 
         var signalId = $('#generatorNameIdList').val();
 
-
         socket.emit("addsignalOnPlayingList",
             {
                 signalId: $('#generatorNameIdList').find(':selected').val(),
@@ -270,7 +284,6 @@ function addSignalOnDisplaying() {
         hide_popup();
         updateSignalInfos(signalId);
         createSignalGraph(signalId);
-
 
 }
 
@@ -372,8 +385,6 @@ function show_popup(signalId) {
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
     });
-
-
 }
 
 //Function show_updatePopup
@@ -403,7 +414,6 @@ function hide_popup() {
     document.getElementById('categoryNewgenerateur').selectedIndex = 0;
     $('#popupContent').css('display', 'none');
 }
-
 
 function createAndSetupInput() {
     var input = document.createElement('input');
