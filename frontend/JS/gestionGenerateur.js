@@ -115,12 +115,15 @@ $(function () {
 
 
             if ($(generator).hasClass('generator')) {
+                //$( "canvas").remove();
                 setupNewSignal(generator);
                 $(generator).removeClass('generator');
             }
 
             if ($(generator).hasClass('oldGenerator')) {
-                //setupOldsignal(generator);
+                //$( "canvas").remove();
+
+                setupOldsignal(generator);
                 ui.draggable.remove();
                 $(generator).removeClass('oldGenerator');
             }
@@ -199,11 +202,7 @@ function updateSignalInformations(oldSignalId) {
 function setupOldsignal(signal) {
 
     var signalId = $(signal).attr('id');
-    console.log(""+signalId+"canvas")
-
-    //$( "#"+signalId+"canvas").remove();
-
-    //$( "#"+signalId+"canvas").remove();
+    //console.log(""+signalId+"canvas")
     createSignalGraph(signalId);
 }
 
@@ -271,7 +270,8 @@ function initializeOldSignal(signals) {
             $('#save').hide();
             $('#update').show();
             show_updatePopup(signalId);
-            //setupOldsignal(generator);
+            //$( "canvas").remove();
+            setupOldsignal(generator);
             alert("ok")
            // socket.emit('updateSignalPosition')
         });
@@ -292,10 +292,7 @@ function addSignalOnDisplaying() {
                 numeroEtage: $('#newNumeroEtage').find(":selected").val()
             });
 
-
-        //hide_popup();
         updateSignalInfos(signalId);
-        //$( "#"+signalId+"canvas").remove();
         createSignalGraph(signalId);
 
 }
