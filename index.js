@@ -124,7 +124,7 @@ io.on('connection', function (socket) {
     });*/
 
     socket.on('getSignalInfos', function (signalInfos) {
-        persistanceService.getSignals(signalInfos.signalId, signalInfos.category, signalInfos.minVal, signalInfos.maxVal, unity );
+        persistanceService.getSignals(signalInfos.signalId, signalInfos.category, signalInfos.minVal, signalInfos.maxVal, signalInfos.unity );
     });
 
     socket.on('updateSignalInformations', function (signalInfos) {
