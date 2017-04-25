@@ -20,18 +20,20 @@ function DBConnection() {
     this.db['signalModel'] = this.sequelize.import(__dirname + '/Model/Signal');
     this.db['signalpositiOndropZoneModel'] = this.sequelize.import(__dirname + '/Model/signalpositionondropzone');
     this.db['signalValueModel'] = this.sequelize.import(__dirname + '/Model/SignalValue');
-    this.db['signalStatusModel'] = this.sequelize.import(__dirname + '/Model/signalstatus')
+    this.db['signalStatusModel'] = this.sequelize.import(__dirname + '/Model/signalstatus');
+    this.db['capteur']= this.sequelize.import(__dirname + '/Model/capteur');
 
+
+    this.db.signalModel.hasOne(this.db.signalBatimentModel, {foreignKey: 'idN'});
+    this.db.signalModel.hasOne(this.db.signalStatusModel, {foreignKey: 'idN'});
     this.db.batimentModel.hasMany(this.db.signalBatimentModel, {foreignKey: 'batimentId'});
-    this.db.signalModel.hasMany(this.db.signalBatimentModel, {foreignKey: 'idN'});
-    this.db.signalModel.hasMany(this.db.signalpositiOndropZoneModel, {foreignKey: 'idN'});
     this.db.signalModel.hasMany(this.db.signalValueModel, {foreignKey: 'idN'});
-    this.db.signalModel.hasMany(this.db.signalStatusModel, {foreignKey: 'idN'});
-    this.db.signalBatimentModel.belongsTo(this.db.batimentModel, {foreignKey: 'batimentId'});
-    this.db.signalBatimentModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
-    this.db.signalpositiOndropZoneModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
     this.db.signalValueModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
-    this.db.signalStatusModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
+    this.db.signalModel.hasMany(this.db.signalpositiOndropZoneModel, {foreignKey: 'idN'});
+    this.db.signalpositiOndropZoneModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
+    this.db.signalBatimentModel.belongsTo(this.db.batimentModel, {foreignKey: 'batimentId'});
+    // this.db.signalBatimentModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
+    //this.db.signalStatusModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
 
 
     this.db.batimentModel.sync();
@@ -40,6 +42,7 @@ function DBConnection() {
     this.db.signalValueModel.sync();
     this.db.signalpositiOndropZoneModel.sync();
     this.db.signalStatusModel.sync();
+    this.db.capteur.sync();
 }
 
 DBConnection.instance = null;

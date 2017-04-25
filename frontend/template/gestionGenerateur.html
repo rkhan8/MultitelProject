@@ -43,6 +43,8 @@
       <script src="../JS/Libraries/lodash.js "></script>
 
       <script src="../JS/gestionGenerateur.js"></script>
+    <script src="../JS/Libraries/signalUtils.js"></script>
+    <script src="../JS/Libraries/utils.js"></script>
 
   </head>
 
@@ -187,7 +189,7 @@
                   <label for="generatorNameIdList">Nom : </label>
                 </th>
                 <td>
-                  <select id="generatorNameIdList">
+                  <select class="popUpField" id="generatorNameIdList">
                   </select>
                 </td>
               </tr>
@@ -196,7 +198,7 @@
                   <label for="categoryNewgenerateur">Catégorie : </label>
                 </th>
                 <td>
-                  <select id="categoryNewgenerateur">
+                  <select class="popUpCategoryField" id="categoryNewgenerateur">
                       <option value="">- Sélectionner la catégorie -</option>
                       <option value="analog">Analogique</option>
                       <option value="binary">Binaire</option>
@@ -208,7 +210,7 @@
                   <label for="unityNewGenerateur">Unité : </label>
                 </th>
                 <td>
-                  <input id="unityNewGenerateur" placeholder="Unité..." type="text">
+                  <input class="popUpField" id="unityNewGenerateur" placeholder="Unité..." type="text">
                 </td>
               </tr>
               <tr>
@@ -216,7 +218,7 @@
                   <label for="newCompagnieGenerateur">Compagnie : </label>
                 </th>
                 <td>
-                  <select id="newCompagnieGenerateur">
+                  <select class="popUpField" id="newCompagnieGenerateur">
                   </select>
                 </td>
               </tr>
@@ -225,7 +227,7 @@
                   <label for="newNomBatiment">Batiment : </label>
                 </th>
                 <td>
-                  <select id="newNomBatiment">
+                  <select class="popUpField" id="newNomBatiment">
                   </select>
                 </td>
               </tr>
@@ -234,7 +236,7 @@
                   <label for="newNumeroEtage">Etage : </label>
                 </th>
                 <td>
-                  <select id="newNumeroEtage">
+                  <select class="popUpField" id="newNumeroEtage">
                   </select>
                 </td>
               </tr>
@@ -247,25 +249,25 @@
         </dialog>
 
 
-        <dialog id="UpdateGeneratorPopUp" class="mdl-dialog">
+        <dialog id="UpdateSignalPopUp" class="mdl-dialog">
           <h4 class="mdl-dialog__title">Propriétés du générateur</h4>
           <div class="mdl-dialog__content">
 
             <table id="panelInfo" cellpadding="4">
               <tr>
                 <th>
-                  <label for="lastGeneratorName">Nom : </label>
+                  <label for="lastSignalName">Nom : </label>
                 </th>
                 <td>
-                  <input id="lastGeneratorName" placeholder="Nom..." type="text">
+                  <input class="popUpField" id="lastSignalName" placeholder="Nom..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="lastGategory">Catégorie : </label>
+                  <label  for="lastCategory">Catégorie : </label>
                 </th>
                 <td>
-                  <select id="lastGategory">
+                  <select class="popUpCategoryField" id="lastCategory">
                       <option value="">- Sélectionner la catégorie -</option>
                       <option value="analog">Analogique</option>
                       <option value="binary">Binaire</option>
@@ -274,18 +276,18 @@
               </tr>
               <tr>
                 <th>
-                  <label for="lastUnity">Unité : </label>
+                  <label  for="lastUnity">Unité : </label>
                 </th>
                 <td>
-                  <input id="lastUnity" placeholder="Unité..." type="text">
+                  <input  class="popUpField" id="lastUnity" placeholder="Unité..." type="text">
                 </td>
               </tr>
               <tr>
                 <th>
-                  <label for="lastCompagnie">Compagnie : </label>
+                  <label  for="lastCompagnie">Compagnie : </label>
                 </th>
                 <td>
-                  <select id="lastCompagnie">
+                  <select  class="popUpField" id="lastCompagnie">
                   </select>
                 </td>
               </tr>
@@ -294,7 +296,7 @@
                   <label for="lastBatimentName">Batiment : </label>
                 </th>
                 <td>
-                  <select id="lastBatimentName">
+                  <select class="popUpField" id="lastBatimentName">
                   </select>
                 </td>
               </tr>
@@ -303,7 +305,7 @@
                   <label for="lastEtageNumber">Etage : </label>
                 </th>
                 <td>
-                  <select id="lastEtageNumber">
+                  <select  class="popUpField" id="lastEtageNumber">
                   </select>
                 </td>
               </tr>

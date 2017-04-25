@@ -72,6 +72,39 @@ exports.insertSignalValue = function (signalId, value) {
             signalRepositoryEvent.emit('signalValueCreateError', signalId);
         })
 };
+
+exports.updateSignalPosition = function (signalId, positionLeft, positionTop, view) {
+    connection.db.signalpositiOndropZoneModel.upsert(
+        {
+            idN: signalId,
+            PositionTop: positionTop,
+            PositionLeft: positionLeft,
+            View: view
+        }).then(function () {
+        signalRepositoryEvent.emit('signalPositionUdpate');
+    })
+        .catch(function (err) {
+            console.log(err.message)
+            signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
+        })
+
+}
+
+exports.createSignalPosition = function (signalId, positionLeft, positionTop, view) {
+    connection.db.signalpositiOndropZoneModel.upsert({
+        idN: signalId,
+        PositionTop: positionTop,
+        PositionLeft: positionLeft,
+        View: view
+    })
+        .then(function () {
+            signalRepositoryEvent.on('signalPositionCreated')
+        })
+        .catch(function (err) {
+            console.log(err.message);
+            signalRepositoryEvent.emit('createSignalPositionError')
+        })
+}
 exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
     var whereClause = {
         idN: signalId,
@@ -81,7 +114,45 @@ exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
         unity: unity
     };
     whereClause = _.pickBy(whereClause);
-    signalModel.findAll({where: whereClause})
+    connection.db.signalModel.findAll({
+            where: whereClause
+
+        }
+    )
+        .then(function (result) {
+            signalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
+        })
+        .catch(function (err) {
+            console.log(err);
+            signalRepositoryEvent.emit('getSignalsError', signalId);
+        });
+
+}
+
+//ne fonctionne pas correctement -- verifier la requete -- n'existe pas encore dans le service de persistance ni dans index
+exports.getSignalInformations = function (signalId, category, minVal, maxVal, unity) {
+    var whereClause = {
+        idN: signalId,
+        MinValue: minVal,
+        MaxValue: maxVal,
+        category: category,
+        unity: unity
+    };
+    whereClause = _.pickBy(whereClause);
+    connection.db.signalModel.findOne({
+            where: whereClause, include: [{
+                model: connection.db.signalBatimentModel,
+                where: {
+                    idN: signalId
+                }, include: [{
+                    model: connection.db.batimentModel
+                }
+
+                ]
+            }
+            ]
+        }
+    )
         .then(function (result) {
             signalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
         })
@@ -151,18 +222,18 @@ exports.getSignalsId = function () {
 }
 
 exports.getSignalByStatus = function (status, view) {
-    connection.db.signalStatusModel.findAll({
-        where: {
-            status: status
-        }, include: [
+    connection.db.signalModel.findAll({
+        include: [
             {
-                model: connection.db.signalModel, include: [{
+                model: connection.db.signalStatusModel,
+                where: {
+                    status: status
+                },
                 model: connection.db.signalpositiOndropZoneModel,
                 where: {
                     view: view
 
                 }
-            }]
             },
 
         ]
@@ -187,42 +258,6 @@ exports.deleteSignalPosition = function (signalId, view) {
             console.log(err.message)
             signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
         });
-}
-exports.updateSignalPosition = function (signalId, positionLeft, positionTop, view) {
-    connection.db.signalpositiOndropZoneModel.update(
-        {
-            PositionTop: positionTop,
-            PositionLeft: positionLeft,
-            view: view
-        },
-        {
-            where: {
-                idN: signalId
-            }
-        }).then(function () {
-            signalRepositoryEvent.emit('signalPositionUdpate');
-        })
-            .catch(function (err) {
-                console.log(err.message)
-                signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
-            })
-
-}
-
-exports.createSignalPosition = function (signalId, positionLeft, positionTop, view) {
-    connection.db.signalpositiOndropZoneModel.create({
-        idN: signalId,
-        PositionTop: positionTop,
-        PositionLeft: positionLeft,
-        View: view
-    })
-        .then(function () {
-            signalRepositoryEvent.on('signalPositionCreated')
-        })
-        .catch(function (err) {
-            console.log(err.message);
-            signalRepositoryEvent.emit('createSignalPositionError')
-        })
 }
 
 

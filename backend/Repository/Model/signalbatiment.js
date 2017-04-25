@@ -8,7 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     idN: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+        primaryKey: true
 
     },
     batimentId: {
