@@ -115,6 +115,31 @@ exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
     };
     whereClause = _.pickBy(whereClause);
     connection.db.signalModel.findAll({
+            where: whereClause
+
+        }
+    )
+        .then(function (result) {
+            signalRepositoryEvent.emit('signalsFounded', JSON.parse(JSON.stringify(result)));
+        })
+        .catch(function (err) {
+            console.log(err);
+            signalRepositoryEvent.emit('getSignalsError', signalId);
+        });
+
+}
+
+//ne fonctionne pas correctement -- verifier la requete -- n'existe pas encore dans le service de persistance ni dans index
+exports.getSignalInformations = function (signalId, category, minVal, maxVal, unity) {
+    var whereClause = {
+        idN: signalId,
+        MinValue: minVal,
+        MaxValue: maxVal,
+        category: category,
+        unity: unity
+    };
+    whereClause = _.pickBy(whereClause);
+    connection.db.signalModel.findOne({
             where: whereClause, include: [{
                 model: connection.db.signalBatimentModel,
                 where: {
