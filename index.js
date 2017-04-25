@@ -100,17 +100,17 @@ io.on('connection', function (socket) {
     /* socket.on('getAllSignals', function(){
      socket.emit('signals',signalService.getSignals());
      });*/
-    socket.on('getAllDisplayedSignals', function () {
-        persistanceService.getDisplaySignalSignal();
+    socket.on('getAllDisplayedSignals', function (view) {
+        persistanceService.getDisplaySignalSignal(view);
     });
     socket.on('removeSignalFromDisplay', function (signalId) {
         persistanceService.removeSignalFromDisplay(signalId);
     });
-    socket.on('addSignalOnDisplay', function (signalId) {
+   /* socket.on('addSignalOnDisplay', function (signalId) {
         persistanceService.addSignalOnDisplay(signalId)
-    });
-    socket.on('deletesignalPosition', function (signalId) {
-        persistanceService.deleteSignalPosition(signalId)
+    });*/
+    socket.on('deletesignalPosition', function (signalInfos) {
+        persistanceService.deleteSignalPosition(signalInfos.signalId, signalInfos.view)
     });
     socket.on('updateSignalPosition', function (signalPosition) {
         persistanceService.updateSignalPosition(signalPosition.signalId, signalPosition.positionLeft, signalPosition.positionTop,signalPosition.view)
@@ -123,8 +123,8 @@ io.on('connection', function (socket) {
         signalService.activateGenerators();
     });*/
 
-    socket.on('getSignalInfos', function (signalId) {
-        signalService.getSignalInformations(signalId);
+    socket.on('getSignalInfos', function (signalInfos) {
+        persistanceService.getSignals(signalInfos.signalId, signalInfos.category, signalInfos.minVal, signalInfos.maxVal, unity );
     });
 
     socket.on('updateSignalInformations', function (signalInfos) {
@@ -179,6 +179,8 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('getComapgniesName');
         socket.removeAllListeners('getCompagnieBatiment');
         socket.removeAllListeners('searchBatimentsValues');
+        socket.removeAllListeners('createSignalPosition');
+        socket.removeAllListeners('addsignalOnPlayingList');
 
 
     });

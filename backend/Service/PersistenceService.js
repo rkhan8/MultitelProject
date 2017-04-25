@@ -182,8 +182,8 @@ exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
 exports.getNotDiplayedSignalsId = function () {
     signalRepository.getNotDiplayedSignalsId();
 };
-exports.getDisplaySignalSignal = function(){
-    signalRepository.getSignalByStatus(1, 'gestionsignal');
+exports.getDisplaySignalSignal = function(view){
+    signalRepository.getSignalByStatus(1, view);
 };
 exports.removeSignalFromDisplay = function(signalId){
     signalRepository.updateSignalStatus(signalId, 0);
@@ -227,6 +227,7 @@ exports.createSignalPosition = function(signalId, positionLeft, positionTop,view
 exports.updateSignalPosition= function(signalId, positionLeft, positionTop,view){
     signalRepository.updateSignalPosition(signalId, positionLeft, positionTop,view);
 }
+
 
 
 function initialisePersistenceError() {
