@@ -1,11 +1,5 @@
 
-function populateComboboxFromArray(comboboxId, array) {
-   // $('#' + comboboxId).append(data);
-    for (i = 0; i < array.length; i++) {
-        var data = '<option>' + array[i] + '</option>'
-        $('#' + comboboxId).append(data);
-    }
-}
+
 function createAndSetupInput() {
     var input = document.createElement('input');
     input.disabled = true;
@@ -33,7 +27,7 @@ function show_updatePopup(signalId) {
 
     });
     $('#errorMsg').text("");
-    var dialog = document.querySelector('#UpdateGeneratorPopUp');
+    var dialog = document.querySelector('#UpdateSignalPopUp');
     dialog.showModal();
     $("#updateButton").one('click', function () {
         updateSignalInformations(signalId);
@@ -42,4 +36,23 @@ function show_updatePopup(signalId) {
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
     });
+}
+
+function updateSignalInformations(oldSignalId) {
+
+    newSignalId = $('#lastSignalName').val();
+    socket.emit("updateSignalInformations",
+        {
+            oldSignalId: oldSignalId,
+            signalId: $('#lastSignalName').val(),
+            category: $('#lastCategory').find(":selected").val(),
+            unity: $('#lastUnity').val(),
+            nomBatiment: $('#lastBatimentName').find(":selected").val(),
+            compagnie: $('#lastCompagnie').find(":selected").val(),
+            numeroEtage: $('#lastEtageNumber').find(":selected").val()
+
+        });
+    updateSignalInfos(newSignalId, oldSignalId);
+    //   hide_popup();
+
 }
