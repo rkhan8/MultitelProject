@@ -117,9 +117,6 @@ $(function () {
 
             //generators.push(signal);
             showPopupForSetupNewSignalOnDisplay(signal);
-
-
-
             $(signal).draggable({
                 stack: ".draggable",
                 cursor: 'hand',
@@ -153,10 +150,7 @@ $(function () {
 function removeSignalFromDisplay(signalId) {
 
     socket.emit('removeSignalFromDisplay', signalId);
-    socket.emit('deletesignalPosition', {
-        signalId:signalId,
-        view: view
-    });
+    socket.emit('deletesignalPosition', signalId);
     $('#' + signalId).remove();
 }
 
@@ -175,6 +169,90 @@ function updateSignalInformations(oldSignalId) {
 
         });
     updateSignalInfos(newSignalId, oldSignalId);
+    hide_popup();
+
+}
+
+function initializeOldSignal(signals) {
+    for (var i = 0; i < signals.length; i++) {
+        var signal = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
+        $("#droppableContent").append(signal);
+        signal.get(0).setAttribute("id", signals[i].idN);
+        signal.draggable({
+            stack: ".draggable",
+            cursor: 'hand',
+            containment: '#droppableContent',
+            stop: function (event, ui) {
+                socket.emit('updateSignalPosition', {
+                    signalId: $(this).attr('id'),
+                    positionLeft: parseInt($(this).position().left),
+                    positionTop: parseInt($(this).position().top),
+                    view: view
+                });
+            }
+        });
+
+        $(signal).css({
+            position: "absolute"
+        }).show();
+        ///ajuster la position des anciens generateurs ici
+        $(signal).offset({
+            top: signals[i].signalpositionondropzones[0].PositionTop,
+            left: signals[i].signalpositionondropzones[0].PositionLeft
+        });
+
+
+        var signalName = createAndSetupInput();
+        $(signalName).addClass("signalName");
+        $(signalName).val(signals[i].idN);
+        $(signal).prepend(signalName);
+
+
+        var valueDisplayer = createAndSetupInput();
+        $(valueDisplayer).addClass("valueDisplay");
+        $(signal).append(valueDisplayer);
+
+
+        $(signal).click(function () {
+            var signalId = $(this).attr('id');
+            socket.emit('getSignalInfos', signalId);
+            show_updatePopup(signalId);
+
+        });
+        // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
+        //createSignalGraph(signals[i].idN);
+    }
+}
+
+
+
+function removeSignalFromDisplay(signalId) {
+
+    socket.emit('removeSignalFromDisplay', signalId);
+    socket.emit('deletesignalPosition', {
+        signalId:signalId,
+        view: view
+    });
+    $('#' + signalId).remove();
+}
+
+
+function updateSignalInformations(oldSignalId) {
+
+    newSignalId = $('#lastGeneratorName').val();
+    socket.emit("updateSignalInformations",
+        {
+            oldSignalId: oldSignalId,
+            signalId: $('#lastGeneratorName').val(),
+            category: $('#lastGategory').find(":selected").val(),
+            unity: $('#lastUnity').val(),
+            nomBatiment: $('#lastBatimentName').find(":selected").val(),
+            compagnie: $('#lastCompagnie').find(":selected").val(),
+            numeroEtage: $('#lastEtageNumber').find(":selected").val()
+
+        });
+    updateSignalInfos(newSignalId, oldSignalId);
+
 
 
 }
