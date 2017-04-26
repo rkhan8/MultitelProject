@@ -1,5 +1,6 @@
 
 var socket = io();
+var view ='rechercheSignal'
 
 socket.emit('getComapgniesName');
 
@@ -30,8 +31,8 @@ socket.on('batimentSignalInformations', function(data){
     // les donnees de la recherche sont retournee ici
     for(var i = 0; i<= data.length; i++){
         var signals = data[i].signalbatiments;
-
-        $('#droppableContentBatiment').append( putSignalOnDropZoneByBatimentEtage(signals));
+        var etageDropzoneId = data[i].NomBatiment + 'Etage' + i;
+        $('#droppableContentBatiment').append( putSignalOnDropZoneByBatimentEtage(signals,etageDropzoneId));
     }
 
 });
@@ -54,9 +55,10 @@ $(function () {
 
 
 
-function putSignalOnDropZoneByBatimentEtage(signals) {
+function putSignalOnDropZoneByBatimentEtage(signals, etageDropzoneId) {
     var dropzone = $('<div/>',{
-        class: 'droppableContentBatiment ui-drop'
+        class: 'droppableContentBatiment ui-drop',
+        id: etageDropzoneId
     });
     for (var i = 0; i < signals.length; i++) {
         var signal = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
@@ -65,7 +67,7 @@ function putSignalOnDropZoneByBatimentEtage(signals) {
         signal.draggable({
             stack: ".draggable",
             cursor: 'hand',
-            containment: dropzone,
+            containment: '#'+etageDropzoneId,
             stop: function (event, ui) {
                 socket.emit('updateSignalPosition', {
                     signalId: $(this).attr('id'),
