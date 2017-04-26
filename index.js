@@ -13,7 +13,8 @@ app.use(express.static(__dirname + '/frontend/'));
 //listening the node server on port 3000
 http.listen(3000, function () {
     console.log('listening on *:3000');
-})
+});
+
 
 
 persistanceService.persistenceEvent.on('signalsId', function (signalsId) {
@@ -87,6 +88,9 @@ persistanceService.persistenceEvent.on('signalStatusUpdated', function () {
 persistanceService.persistenceEvent.on('signalUpdated', function(signalInfos){
     signalService.updateSignal(signalInfos);
     io.sockets.emit('signalUpdated');
+});
+persistanceService.persistenceEvent.on('batimentSignalInformations', function(data){
+    io.sockets.emit('batimentSignalInformations', data)
 })
 
 
@@ -166,6 +170,10 @@ io.on('connection', function (socket) {
     socket.on('getNotDisplayedSignalsId', function () {
         persistanceService.getNotDiplayedSignalsId();
     });
+    socket.on('findSignalsBySelectOption', function(batimentInfos){
+        persistanceService.getBatimentSignalsInformations(batimentInfos.compagnie,batimentInfos.nomBatiment, batimentInfos.numeroEtage)
+    })
+
 
     socket.on('disconnect', function () {
         socket.removeAllListeners('createSignal');
@@ -181,6 +189,7 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('searchBatimentsValues');
         socket.removeAllListeners('createSignalPosition');
         socket.removeAllListeners('addsignalOnPlayingList');
+        socket.removeAllListeners('findSignalsBySelectOption');
 
 
     });

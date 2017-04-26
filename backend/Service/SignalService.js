@@ -15,7 +15,7 @@ var interval;
 exports.createSignal = function (signalInfos) {
     var index = searchSignalById(signalInfos.signalId);
     if (index === -1) {
-        var signal = new Signal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax,signalInfos.unity);
+        var signal = new Signal(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax, signalInfos.unity);
         signals.add(signal);
 
     }
@@ -23,7 +23,6 @@ exports.createSignal = function (signalInfos) {
         signalServiceEvent.emit('errorExistingSignalId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
     }
 }
-
 
 
 exports.createSignals = function (signalsInfos) {
@@ -69,17 +68,17 @@ exports.activateGenerators = function () {
 }
 
 
- exports.getSignalInformations = function(signalId) {
- var index = searchSignalById(signalId);
- if (index != -1) {
- var infos = signals.get(index).getSignalInformations();
- signalServiceEvent.emit('signalInfos', infos);
- }
- else {
- signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
- }
+exports.getSignalInformations = function (signalId) {
+    var index = searchSignalById(signalId);
+    if (index != -1) {
+        var infos = signals.get(index).getSignalInformations();
+        signalServiceEvent.emit('signalInfos', infos);
+    }
+    else {
+        signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
+    }
 
- }
+}
 
 
 exports.signalServiceEvent = signalServiceEvent;

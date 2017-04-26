@@ -226,6 +226,9 @@ exports.createSignalPosition = function(signalId, positionLeft, positionTop,view
 };
 exports.updateSignalPosition= function(signalId, positionLeft, positionTop,view){
     signalRepository.updateSignalPosition(signalId, positionLeft, positionTop,view);
+};
+exports.getBatimentSignalsInformations = function( compagnie, nombatiment,numeroEtage){
+    batimentRepository.getBatimentSignals(compagnie, nombatiment, numeroEtage);
 }
 
 
@@ -282,6 +285,9 @@ function initialisePersistenceError() {
     });
     batimentRepository.batimentRepositoryEvent.on('batimentInfosUpdatedError', function(details){
         persistenceEvent.emit('errorBatimentInfosUpdated',details)
+    });
+    batimentRepository.batimentRepositoryEvent.on('getBatimentSignalInformationsError',function(details){
+       persistenceEvent.emit('errorGetBatimentSignalInformations', details);
     });
 
 }
@@ -353,6 +359,9 @@ function initialisePersitenceEvent() {
     batimentRepository.batimentRepositoryEvent.on('signalBatimentInfosUpdated', function(){
         persistenceEvent.emit('signalBatimentInfosUpdated')
     });
+    batimentRepository.batimentRepositoryEvent.on('batimentSignalInformations', function(data){
+        persistenceEvent.emit('batimentSignalInformations', data);
+    })
 
 
 }

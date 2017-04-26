@@ -24,15 +24,18 @@ function DBConnection() {
     this.db['capteur']= this.sequelize.import(__dirname + '/Model/capteur');
 
 
-    this.db.signalModel.hasOne(this.db.signalBatimentModel, {foreignKey: 'idN'});
+    //this.db.signalModel.hasOne(this.db.signalBatimentModel, {foreignKey: 'idN'});
     this.db.signalModel.hasOne(this.db.signalStatusModel, {foreignKey: 'idN'});
+
     this.db.batimentModel.hasMany(this.db.signalBatimentModel, {foreignKey: 'batimentId'});
     this.db.signalModel.hasMany(this.db.signalValueModel, {foreignKey: 'idN'});
-    this.db.signalValueModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
     this.db.signalModel.hasMany(this.db.signalpositiOndropZoneModel, {foreignKey: 'idN'});
+
+    this.db.signalValueModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
     this.db.signalpositiOndropZoneModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
     this.db.signalBatimentModel.belongsTo(this.db.batimentModel, {foreignKey: 'batimentId'});
-    // this.db.signalBatimentModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
+
+    this.db.signalBatimentModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
     //this.db.signalStatusModel.belongsTo(this.db.signalModel, {foreignKey: 'idN'});
 
 

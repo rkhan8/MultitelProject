@@ -39,6 +39,40 @@ exports.getCompagnies = function () {
 
     });
 };
+
+exports.getBatimentSignals = function (compagnie, batiment, numeroEtage) {
+    connection.db.batimentModel.findAll({
+        where: {
+            Compagnie: compagnie,
+            NomBatiment: batiment
+        },
+        include: [{
+            model: connection.db.signalBatimentModel,
+            where:{
+                Etage : numeroEtage
+            },
+            include: [{model: connection.db.signalModel,
+                include:[{
+                model: connection.db.signalpositiOndropZoneModel,
+                    where: {
+                    view: 'rechercheSignal'
+                    }
+                }]
+            }]
+        }
+
+        ]
+    }).
+        then(function(result){
+            var res = JSON.parse(JSON.stringify(result));
+        batimentRepositoryEvent.emit('batimentSignalInformations', res);
+    })
+        .catch(function(err){
+            console.log(err);
+            batimentRepositoryEvent.emit('getBatimentSignalInformationsError',err.message);
+        })
+
+}
 exports.getCompagnieBatimentsName = function (compagnieName) {
 
     connection.db.batimentModel.findAll({
@@ -109,9 +143,11 @@ exports.updateSignalBatimentInformations = function (signalId, compagnie, nomBat
         .then(function (result) {
             var batiment = JSON.parse(JSON.stringify(result))
             connection.db.signalBatimentModel.update(
-                {     batimentId: batiment.batimentId,
-                idN: signalId,
-                Etage: Etage}
+                {
+                    batimentId: batiment.batimentId,
+                    idN: signalId,
+                    Etage: Etage
+                }
                 , {
                     where: {
                         idN: signalId

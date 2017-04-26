@@ -42,7 +42,9 @@
       <script src="//www.chartjs.org/assets/Chart.min.js"></script>
       <script src="../JS/Libraries/lodash.js "></script>
 
-      <script src="../JS/rechercheGenerateur.js"></script>
+      <script src="../JS/rechercheSignal.js"></script>
+    <script src="../JS/Libraries/signalUtils.js"></script>
+    <script src="../JS/Libraries/utils.js"></script>
 
 
 
@@ -60,15 +62,15 @@
 
             <div id="choiceSearch">
               Compagnie :
-              <select id="CompagnieListbox">
+              <select id="compagnieListbox">
               </select>
 
               Bâtiment :
-              <select id="BatimentListbox">
+              <select id="batimentListbox">
               </select>
 
               Etage :
-              <select id="EtageListbox">
+              <select id="etageListbox">
               </select>
             </div>
 
@@ -99,6 +101,74 @@
 
 
           <div class="clear"></div>
+        <dialog id="UpdateSignalPopUp" class="mdl-dialog">
+          <h4 class="mdl-dialog__title">Propriétés du générateur</h4>
+          <div class="mdl-dialog__content">
+
+            <table id="panelInfo" cellpadding="4">
+              <tr>
+                <th>
+                  <label for="lastSignalName">Nom : </label>
+                </th>
+                <td>
+                  <input class="popUpField" id="lastSignalName" placeholder="Nom..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label  for="lastCategory">Catégorie : </label>
+                </th>
+                <td>
+                  <select class="popUpCategoryField" id="lastCategory">
+                    <option value="">- Sélectionner la catégorie -</option>
+                    <option value="analog">Analogique</option>
+                    <option value="binary">Binaire</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label  for="lastUnity">Unité : </label>
+                </th>
+                <td>
+                  <input  class="popUpField" id="lastUnity" placeholder="Unité..." type="text">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label  for="lastCompagnie">Compagnie : </label>
+                </th>
+                <td>
+                  <select  class="popUpField" id="lastCompagnie">
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="lastBatimentName">Batiment : </label>
+                </th>
+                <td>
+                  <select class="popUpField" id="lastBatimentName">
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="lastEtageNumber">Etage : </label>
+                </th>
+                <td>
+                  <select  class="popUpField" id="lastEtageNumber">
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Fermer</button>
+            <button id="updateButton"type="button" class="mdl-button save">Mettre à jour</button>
+            <button id="removeSignalButton" type="button" class="mdl-button save" >Supprimer</button>
+          </div>
+        </dialog>
 
         </br>
 

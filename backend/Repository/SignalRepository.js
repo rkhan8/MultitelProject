@@ -224,23 +224,26 @@ exports.getSignalsId = function () {
 exports.getSignalByStatus = function (status, view) {
     connection.db.signalModel.findAll({
         include: [
+
             {
                 model: connection.db.signalStatusModel,
                 where: {
                     status: status
-                },
+                }
+            },
+
+            {
                 model: connection.db.signalpositiOndropZoneModel,
                 where: {
                     view: view
-
                 }
-            },
+            }
 
         ]
     }).then(function (result) {
         signalRepositoryEvent.emit('signalsByStatusFounded', JSON.parse(JSON.stringify(result)));
     }).catch(function (err) {
-        console.log(err.message);
+        console.log(err);
         signalRepositoryEvent.emit('getSignalDisplayedErr', err.detail);
     })
 };

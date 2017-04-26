@@ -11,7 +11,7 @@ console.log(signalInfos)
 })
 
 socket.on('compagnie', function (data) {
-    data.unshift('Compagnie')
+    data.unshift('Compagnie');
     populateComboboxFromArray('newCompagnieGenerateur', data)
     populateComboboxFromArray('lastCompagnie', data)
 });
@@ -148,55 +148,6 @@ $(function () {
     });
 });
 
-function initializeOldSignal(signals) {
-    for (var i = 0; i < signals.length; i++) {
-        var signal = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-        $("#droppableContent").append(signal);
-        signal.get(0).setAttribute("id", signals[i].idN);
-        signal.draggable({
-            stack: ".draggable",
-            cursor: 'hand',
-            containment: '#droppableContent',
-            stop: function (event, ui) {
-                socket.emit('updateSignalPosition', {
-                    signalId: $(this).attr('id'),
-                    positionLeft: parseInt($(this).position().left),
-                    positionTop: parseInt($(this).position().top),
-                    view: view
-                });
-            }
-        });
-
-        $(signal).css({
-            position: "absolute"
-        }).show();
-        ///ajuster la position des anciens generateurs ici
-        $(signal).offset({
-            top: signals[i].signalpositionondropzones[0].PositionTop,
-            left: signals[i].signalpositionondropzones[0].PositionLeft
-        });
-
-
-        var signalName = createAndSetupInput();
-        $(signalName).addClass("signalName");
-        $(signalName).val(signals[i].idN);
-        $(signal).prepend(signalName);
-
-
-        var valueDisplayer = createAndSetupInput();
-        $(valueDisplayer).addClass("valueDisplay");
-        $(signal).append(valueDisplayer);
-
-
-        $(signal).click(function () {
-            var signalId = $(this).attr('id');
-            socket.emit('getSignalInfos', signalId);
-            show_updatePopup(signalId);
-        });
-        // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
-        //createSignalGraph(signals[i].idN);
-    }
-}
 
 
 function removeSignalFromDisplay(signalId) {
@@ -245,7 +196,7 @@ function addSignalOnDisplaying() {
         });
     updateSignalInfos(signalId);
    // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
-    createSignalGraph(signalId);
+  //  createSignalGraph(signalId);
 
 }
 
@@ -329,6 +280,57 @@ function showPopupForSetupNewSignalOnDisplay(signal) {
         dialog.close();
     });
 }
+
+function initializeOldSignal(signals) {
+    for (var i = 0; i < signals.length; i++) {
+        var signal = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
+        $("#droppableContent").append(signal);
+        signal.get(0).setAttribute("id", signals[i].idN);
+        signal.draggable({
+            stack: ".draggable",
+            cursor: 'hand',
+            containment: '#droppableContent',
+            stop: function (event, ui) {
+                socket.emit('updateSignalPosition', {
+                    signalId: $(this).attr('id'),
+                    positionLeft: parseInt($(this).position().left),
+                    positionTop: parseInt($(this).position().top),
+                    view: view
+                });
+            }
+        });
+
+        $(signal).css({
+            position: "absolute"
+        }).show();
+        ///ajuster la position des anciens generateurs ici
+        $(signal).offset({
+            top: signals[i].signalpositionondropzones[0].PositionTop,
+            left: signals[i].signalpositionondropzones[0].PositionLeft
+        });
+
+
+        var signalName = createAndSetupInput();
+        $(signalName).addClass("signalName");
+        $(signalName).val(signals[i].idN);
+        $(signal).prepend(signalName);
+
+
+        var valueDisplayer = createAndSetupInput();
+        $(valueDisplayer).addClass("valueDisplay");
+        $(signal).append(valueDisplayer);
+
+
+        $(signal).click(function () {
+            var signalId = $(this).attr('id');
+            socket.emit('getSignalInfos', signalId);
+            show_updatePopup(signalId);
+        });
+        // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
+        //createSignalGraph(signals[i].idN);
+    }
+}
+
 
 
 
