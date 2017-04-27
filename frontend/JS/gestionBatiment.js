@@ -8,19 +8,23 @@ socket.on('batimentAjouterOk', function () {
     PopUpCreerSucess();
 });
 
+socket.on('batimentUpdated', function(){
+    //afficher un popup pour dire que les informations du batiments ont bien été mises a jour
+});
+
 socket.on('compagnie', function (data) {
+    data.unshift('');
     populateComboboxFromArray('CompagnieListbox', data)
 });
 
 socket.on('batimentsName', function (data) {
-    $('#batimentListbox option').remove();
+    data.unshift('');
     populateComboboxFromArray('batimentListbox', data)
 });
 
 socket.on('batimentsInfos', function(data){
-    // les informations pour remplir le tableau pour le resultat de la recherche sont ici
     populateBatimentValuesTable(data);
-})
+});
 
 $(function () {
     $('#CompagnieListbox').change(function () {
@@ -28,8 +32,9 @@ $(function () {
     });
 });
 
-function searchBatimentGenerator() {
 
+
+function searchBatimentInformations() {
     socket.emit('searchBatimentsValues', {
         compagnie: $('#CompagnieListbox option:selected').text(),
         NomBatiment: $('#batimentListbox option:selected').text()
@@ -83,20 +88,39 @@ function populateBatimentValuesTable(batimentValues) {
         row.insertCell(3).innerHTML = '<input id="adresse" type="text" value="'+batimentValues[j].Adresse+'"/>';
         row.insertCell(4).innerHTML = '<input id="codePostal" type="text" value="'+batimentValues[j].CodePostal+'"/>';
         row.insertCell(5).innerHTML = '<input id="NbEtage" type="text" value="'+batimentValues[j].NbEtages+'"/>';
-        row.insertCell(6).innerHTML = '<a id="MAJbatimentButton" onclick="updateBatiment();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">MAJ</a>'
-        row.insertCell(7).innerHTML = '<a id="DeletebatimentButton" onclick="deleteBatiment();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Supprimer</a>'
+        row.insertCell(6).innerHTML = '<a class="majbatimentbutton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">MAJ</a>'
+        row.insertCell(7).innerHTML = '<a class="deletebatimentButton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Supprimer</a>'
 
     }
+    $("#tableBatiment tr .majbatimentbutton").on('click', function(){
+        updateBatiment($(this).closest('td').parent()[0].sectionRowIndex)
+
+    });
+
+    $("#tableBatiment tr .deletebatimentButton").on('click', function(){
+        deleteBatiment($(this).closest('td').parent()[0].sectionRowIndex);
+
+    });
+
 
 }
 
 
-function updateBatiment(){
+function updateBatiment(numeroLigne){
+    socket.emit('updateBatimentInfos',{
+        batimentId:$('#tableBatiment').get(0).rows[numeroLigne].cells[0].innerHTML,
+        compagnie:$('#tableBatiment').get(0).rows[numeroLigne].cells[1].children[0].value,
+        nomBatiment: $('#tableBatiment').get(0).rows[numeroLigne].cells[2].children[0].value,
+        adresse: $('#tableBatiment').get(0).rows[numeroLigne].cells[3].children[0].value,
+        codePostal:$('#tableBatiment').get(0).rows[numeroLigne].cells[4].children[0].value,
+        nombreEtages:$('#tableBatiment').get(0).rows[numeroLigne].cells[5].children[0].value
+    });
 
 }
 
-function deleteBatiment(){
-
+function deleteBatiment(numeroLigne){
+    socket.emit('deleteBatiment', $('#tableBatiment').get(0).rows[numeroLigne].cells[0].innerHTML);
+    $('#tableBatiment').get(0).deleteRow(numeroLigne);
 }
 
 
@@ -120,19 +144,6 @@ function ValidateField() {
         $("#addBatimentButton").attr('disabled', false);
     }
 }
-
-/*
-function ValidateBatimentSearch() {
-    debugger;
-    if ($("CompagnieListbox").val() == "") {
-        $("#batimentListbox").combobox('disabled');
-    } else if ($("CompagnieListbox").val() != "") {
-        $("#batimentListbox").combobox('enable');
-    }
-}
-*/
-
-
 
 
 

@@ -91,6 +91,9 @@ persistanceService.persistenceEvent.on('signalUpdated', function(signalInfos){
 });
 persistanceService.persistenceEvent.on('batimentSignalInformations', function(data){
     io.sockets.emit('batimentSignalInformations', data)
+});
+persistanceService.persistenceEvent.on('batimentUpdated',function(){
+    io.sockets.emit('batimentUpdated');
 })
 
 
@@ -133,7 +136,6 @@ io.on('connection', function (socket) {
 
     socket.on('updateSignalInformations', function (signalInfos) {
         persistanceService.updateSignalInformations(signalInfos.signalId, signalInfos.compagnie, signalInfos.nomBatiment, signalInfos.numeroEtage, signalInfos.unity,signalInfos.category,signalInfos.oldSignalId);
-
     });
 
     socket.on('getSignalsId', function () {
@@ -172,6 +174,12 @@ io.on('connection', function (socket) {
     });
     socket.on('findSignalsBySelectOption', function(batimentInfos){
         persistanceService.getBatimentSignalsInformations(batimentInfos.compagnie,batimentInfos.nomBatiment, batimentInfos.numeroEtage)
+    });
+    socket.on('updateBatimentInfos', function(batimentInfos){
+        persistanceService.updateBatimentInformations(batimentInfos.batimentId,batimentInfos.compagnie, batimentInfos.nomBatiment, batimentInfos.nombreEtages, batimentInfos.adresse, batimentInfos.codePostal, batimentInfos.Numero)
+    });
+    socket.on('deleteBatiment', function(batimentId){
+        persistanceService.deleteBatiment(batimentId)
     })
 
 
@@ -190,6 +198,8 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('createSignalPosition');
         socket.removeAllListeners('addsignalOnPlayingList');
         socket.removeAllListeners('findSignalsBySelectOption');
+        socket.removeAllListeners('updateBatimentInfos');
+        socket.removeAllListeners('deleteBatiment');
 
 
     });

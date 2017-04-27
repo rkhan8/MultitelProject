@@ -43,6 +43,7 @@
       <script src="../JS/Libraries/lodash.js "></script>
 
       <script src="../JS/gestionBatiment.js"></script>
+    <script src="../JS/Libraries/utils.js"></script>
 
       <!--filter-->
       <script type="text/javascript" src="../JS/Libraries/filter.js"></script>
@@ -135,7 +136,7 @@
       </div>
 
 
-      <div id="contentG">
+      <div id="contentG2">
 
 
 
@@ -158,7 +159,7 @@
 
                 <div id="choiceSearch">
                   Compagnie :
-                  <select id="CompagnieListbox" onchange="ValidateBatimentSearch();">
+                  <select id="CompagnieListbox">
                   </select>
 
                   Bâtiment :
@@ -167,7 +168,7 @@
                 </div>
 
                 <div class="dataButtons">
-                  <a id="submitSearch" onclick="searchBatimentGenerator();"
+                  <a id="submitSearch" onclick="searchBatimentInformations();"
                      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">
                     Recherche
                   </a>

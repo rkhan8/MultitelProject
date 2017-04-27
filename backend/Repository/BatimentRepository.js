@@ -26,6 +26,45 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         });
 
 }
+exports.updateBatimentInformations = function (batimentId, Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
+
+    connection.db.batimentModel.update({
+        Compagnie: Compagnie,
+        NomBatiment: NomBatiment,
+        Adresse: Adresse,
+        CodePostal: CodePostal,
+        NbEtages: Nbetages,
+        Numero: Numero
+
+    }, {
+        where: {
+            batimentId: batimentId
+        }
+    })
+        .then(function () {
+            batimentRepositoryEvent.emit('batimentUpdated')
+        })
+        .catch(function (err) {
+            console.log(err);
+            batimentRepositoryEvent.emit('errorBatimentUpdate', err.message);
+        })
+}
+
+exports.deleteBatiment = function (batimentId) {
+
+
+    connection.db.batimentModel.destroy({
+        where: {
+            batimentId: batimentId
+        }
+    }).then(function () {
+        batimentRepositoryEvent.emit('batimentDeleted');
+    }).catch(function () {
+        console.log(err);
+        batimentRepositoryEvent.emit('errorDeleteBatiment', err.message);
+    })
+
+}
 exports.getCompagnies = function () {
     connection.db.batimentModel.findAll({
         attributes: [[connection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
@@ -48,28 +87,28 @@ exports.getBatimentSignals = function (compagnie, batiment, numeroEtage) {
         },
         include: [{
             model: connection.db.signalBatimentModel,
-            where:{
-                Etage : numeroEtage
+            where: {
+                Etage: numeroEtage
             },
-            include: [{model: connection.db.signalModel,
-                include:[{
-                model: connection.db.signalpositiOndropZoneModel,
+            include: [{
+                model: connection.db.signalModel,
+                include: [{
+                    model: connection.db.signalpositiOndropZoneModel,
                     where: {
-                    view: 'rechercheSignal'
+                        view: 'rechercheSignal'
                     }
                 }]
             }]
         }
 
         ]
-    }).
-        then(function(result){
-            var res = JSON.parse(JSON.stringify(result));
+    }).then(function (result) {
+        var res = JSON.parse(JSON.stringify(result));
         batimentRepositoryEvent.emit('batimentSignalInformations', res);
     })
-        .catch(function(err){
+        .catch(function (err) {
             console.log(err);
-            batimentRepositoryEvent.emit('getBatimentSignalInformationsError',err.message);
+            batimentRepositoryEvent.emit('getBatimentSignalInformationsError', err.message);
         })
 
 }

@@ -34,7 +34,6 @@ socket.on('batimentSignalInformations', function(data){
         var etageDropzoneId = data[i].NomBatiment + 'Etage' + i;
         $('#droppableContentBatiment').append( putSignalOnDropZoneByBatimentEtage(signals,etageDropzoneId));
     }
-
 });
 
 
