@@ -9,14 +9,16 @@ var _ = require('lodash');
 
 
 exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
-    connection.db.batimentModel.create({
+    var data = {
         Compagnie: Compagnie,
         NomBatiment: NomBatiment,
         NbEtages: Nbetages,
         Adresse: Adresse,
         CodePostal: CodePostal,
         Numero: Numero
-    })
+    }
+    data = _.pickBy(data);
+    connection.db.batimentModel.create(data)
         .then(function () {
             batimentRepositoryEvent.emit('batimentAjouterOk');
         })
