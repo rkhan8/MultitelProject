@@ -1,8 +1,8 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('capteur', {
-    idCapteur: {
+  return sequelize.define('sensor', {
+    idSensor: {
       type: DataTypes.STRING(255),
       allowNull: false,
       primaryKey: true
@@ -20,6 +20,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    tableName: 'capteur'
+    tableName: 'sensor'
   });
 };

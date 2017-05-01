@@ -1,27 +1,36 @@
-var socket = require('socket.io-client')('http://localhost:3000');
-var signalService = require('./Service/SignalService')
-var persistanceService = require('./Service/CapteurPersistance')
+var socket = require('socket.io-client')('http://localhost:3000/clientSensor');
+var sensorService = require('./Service/SensorService')
+var persistanceService = require('./Service/SensorPersistance')
 
 
-signalService.activateGenerators();
-persistanceService.persistanceEvent.on('capteurs',function( capteurs){
-    
-    signalService.createSignals(capteurs);
+sensorService.activateGenerators();
+persistanceService.persistanceEvent.on('newSensors',function( newSensors){
+    sensorService.createSensors(newSensors);
 });
 
-signalService.signalServiceEvent.on('newValueHasGenerate', function (val) {
-   // persistanceService.saveSignalValue(val.signalId, val.value);
+persistanceService.persistanceEvent.on('sensors', function(sensors){
+    socket.emit('sensors',sensors);
+});
+
+sensorService.sensorServiceEvent.on('newValueHasGenerate', function (val) {
+    val['signalId']= val.sensorId;
+    delete val['sensorId'];
     console.log(val);
-    socket.emit('newValueFromSignal', val);
+    socket.emit('newValueFromSensor', val);
 });
 
 
-socket.on('connect', function(){});
+socket.on('connect', function(){
+    persistanceService.getSensors();
+
+});
 socket.on('event', function(data){});
-socket.on('disconnect', function(){});
+socket.on('disconnect', function(){
+
+});
 
 
 
 interval = setInterval(function () {
-    persistanceService.getCapteurs(signalService.getSignalsIdList());
+    persistanceService.getNewSensors(sensorService.getSensorsIdList());
 }, 1000);

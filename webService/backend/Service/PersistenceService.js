@@ -147,13 +147,13 @@ initialisePersistenceError();
 initialisePersitenceEvent();
 
 
-exports.storeSignalInformation = function (signalId, category, minVal, maxVal, unity) {
-    signalRepository.insertNewSignal(signalId, category, minVal, maxVal, unity);
+exports.storeSignalInformation = function (signalId, category, unity) {
+    signalRepository.insertNewSignal(signalId, category, unity);
 };
 exports.saveSignalValue = function (signalId, value) {
     signalRepository.insertSignalValue(signalId, value);
 };
-exports.getSignalFromDB = function (signalId, category, minVal, maxVal, unity) {
+exports.getSignalFromDB = function (signalId, category, unity) {
     signalRepository.getSignalFromDB(signalId, category, minVal, maxVal, unity);
 
 };
@@ -176,8 +176,8 @@ exports.getSignalsCategories = function () {
 exports.getSignalsValues = function (signalId, category, unity, startDate, endDate) {
     signalRepository.getSignalsValues(signalId, category, unity, startDate, endDate);
 }
-exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
-    signalRepository.getSignals(signalId, category, minVal, maxVal, unity)
+exports.getSignals = function (signalId, category, unity) {
+    signalRepository.getSignals(signalId, category, unity)
 };
 exports.getNotDiplayedSignalsId = function () {
     signalRepository.getNotDiplayedSignalsId();
@@ -227,6 +227,8 @@ exports.createSignalPosition = function(signalId, positionLeft, positionTop,view
 exports.updateSignalPosition= function(signalId, positionLeft, positionTop,view){
     signalRepository.updateSignalPosition(signalId, positionLeft, positionTop,view);
 };
+
+
 exports.getBatimentSignalsInformations = function( compagnie, nombatiment,numeroEtage){
     batimentRepository.getBatimentSignals(compagnie, nombatiment, numeroEtage);
 }
@@ -272,6 +274,9 @@ function initialisePersistenceError() {
     signalRepository.signalRepositoryEvent.on('createSignalPositionError', function(details){
         persistenceEvent.emit('errorCreateSignalPosition', details);
     });
+
+
+
     batimentRepository.batimentRepositoryEvent.on('ajouterBatimentError', function (message) {
         persistenceEvent.emit('errorAjouterBatiment', message);
     });
@@ -351,6 +356,7 @@ function initialisePersitenceEvent() {
     signalRepository.signalRepositoryEvent.on('signalPositionCreated', function(){
         persistenceEvent.emit('signalPositionCreated')
     });
+
 
     batimentRepository.batimentRepositoryEvent.on('batimentAjouterOk', function () {
         persistenceEvent.emit('batimentAjouterOk');

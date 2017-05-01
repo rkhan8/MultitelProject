@@ -2,9 +2,9 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var signalService = require('./backend/Service/SignalService')
 var persistanceService = require('./backend/Service/PersistenceService')
 var events = require('events');
+
 
 
 //initialize the repository. Start the localhost server with index.html file
@@ -28,19 +28,6 @@ persistanceService.persistenceEvent.on('signalCreateError', function (signalId) 
     });
 });
 
-signalService.signalServiceEvent.on('newValueHasGenerate', function (val) {
-    persistanceService.saveSignalValue(val.signalId, val.value);
-    io.sockets.emit('newValue', val);
-});
-
-signalService.signalServiceEvent.on('errorExistingSignalId', function (message) {
-    socket.emit('errorExistingSignalId', message)
-});
-
-signalService.signalServiceEvent.on('signalInfos', function (val) {
-    io.sockets.emit('signalInfos', val)
-});
-
 persistanceService.persistenceEvent.on('signalsCategories', function (signalsCategories) {
     io.sockets.emit('signalsCategories', signalsCategories);
 });
@@ -57,13 +44,7 @@ persistanceService.persistenceEvent.on('signalValueData', function (dataSearch) 
     io.sockets.emit('signalsValues', dataSearch);
 });
 
-persistanceService.persistenceEvent.on('signalCreated', function (signalInfos) {
-    signalService.createSignal(signalInfos);
-});
 
-persistanceService.persistenceEvent.once('signalsData', function (signals) {
-    signalService.createSignals(signals);
-});
 persistanceService.persistenceEvent.on('batimentAjouterOk', function () {
     io.sockets.emit('batimentAjouterOk');
 });
@@ -86,7 +67,7 @@ persistanceService.persistenceEvent.on('signalStatusUpdated', function () {
     io.sockets.emit('signalRemovedFromDisplay');
 });
 persistanceService.persistenceEvent.on('signalUpdated', function(signalInfos){
-    signalService.updateSignal(signalInfos);
+ //   signalService.updateSignal(signalInfos);
     io.sockets.emit('signalUpdated');
 });
 persistanceService.persistenceEvent.on('batimentSignalInformations', function(data){
@@ -94,28 +75,41 @@ persistanceService.persistenceEvent.on('batimentSignalInformations', function(da
 });
 persistanceService.persistenceEvent.on('batimentUpdated',function(){
     io.sockets.emit('batimentUpdated');
-})
+});
 
+
+
+var clientSensor = io.of('/clientSensor');
+
+clientSensor.on('connect', function(socket){
+
+    socket.on('sensors', function(sensors){
+        sensors.forEach(function(sensor){
+            persistanceService.storeSignalInformation(sensor.idSensor,sensor.categorie);
+
+        });
+    });
+
+    socket.on('newValueFromSensor', function(newValue){
+        persistanceService.saveSignalValue(newValue.signalId, newValue.value);
+        io.sockets.emit('newValue', newValue);
+    });
+})
 
 io.on('connection', function (socket) {
 
+
     socket.on('addsignalOnPlayingList', function (signalInfos) {
-        // persistanceService.storeSignalInformation(signalInfos.signalId, signalInfos.category, signalInfos.valMin, signalInfos.valMax, signalInfos.unity);
         persistanceService.makeSignalDisplayable(signalInfos.signalId, signalInfos.compagnie, signalInfos.nomBatiment, signalInfos.numeroEtage, signalInfos.unity,signalInfos.category)
     });
 
-    /* socket.on('getAllSignals', function(){
-     socket.emit('signals',signalService.getSignals());
-     });*/
     socket.on('getAllDisplayedSignals', function (view) {
         persistanceService.getDisplaySignalSignal(view);
     });
     socket.on('removeSignalFromDisplay', function (signalId) {
         persistanceService.removeSignalFromDisplay(signalId);
     });
-   /* socket.on('addSignalOnDisplay', function (signalId) {
-        persistanceService.addSignalOnDisplay(signalId)
-    });*/
+
     socket.on('deletesignalPosition', function (signalInfos) {
         persistanceService.deleteSignalPosition(signalInfos.signalId, signalInfos.view)
     });
@@ -126,9 +120,6 @@ io.on('connection', function (socket) {
       persistanceService.createSignalPosition(signalPosition.signalId, signalPosition.positionLeft, signalPosition.positionTop,signalPosition.view);
     })
 
-   /* socket.on('activateGenerators', function () {
-        signalService.activateGenerators();
-    });*/
 
     socket.on('getSignalInfos', function (signalInfos) {
         persistanceService.getSignals(signalInfos.signalId, signalInfos.category, signalInfos.minVal, signalInfos.maxVal, signalInfos.unity );
@@ -184,8 +175,6 @@ io.on('connection', function (socket) {
 
 
     socket.on('disconnect', function () {
-        socket.removeAllListeners('createSignal');
-        socket.removeAllListeners('activateGenerators');
         socket.removeAllListeners('getSignalInfos');
         socket.removeAllListeners('updateSignalInformations');
         socket.removeAllListeners('getSignalsCategories');
@@ -200,14 +189,12 @@ io.on('connection', function (socket) {
         socket.removeAllListeners('findSignalsBySelectOption');
         socket.removeAllListeners('updateBatimentInfos');
         socket.removeAllListeners('deleteBatiment');
-
-
     });
 });
 
 initialise();
 function initialise() {
     persistanceService.getSignals();
-  signalService.activateGenerators();
+ // signalService.activateGenerators();
 
 }

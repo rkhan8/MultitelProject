@@ -12,15 +12,25 @@ var signalValueModel = connection.db.signalValueModel;
 var signalModel = connection.db.signalModel;
 
 
-exports.insertNewSignal = function (signalId, category, minVal, maxVal, unity) {
-    signalModel.create({
-        idN: signalId,
+exports.insertNewSignal = function (signalId, category,unity) {
+    signalModel.findOrCreate({
+      where:{
+          idN: signalId,
+      },
+      defaults:{
+
         Category: category,
-        MinValue: minVal,
-        MaxValue: maxVal,
-        Unity: unity
+        Unity: unity}
     })
         .then(function () {
+            connection.db.signalStatusModel.findOrCreate({
+                where:{
+                    idN:signalId
+                },
+                defaults: {
+                    status: 0
+                }})
+
             signalRepositoryEvent.emit('signalCreated');
 
         })
@@ -105,11 +115,9 @@ exports.createSignalPosition = function (signalId, positionLeft, positionTop, vi
             signalRepositoryEvent.emit('createSignalPositionError')
         })
 }
-exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
+exports.getSignals = function (signalId, category, unity) {
     var whereClause = {
         idN: signalId,
-        MinValue: minVal,
-        MaxValue: maxVal,
         category: category,
         unity: unity
     };
@@ -130,11 +138,9 @@ exports.getSignals = function (signalId, category, minVal, maxVal, unity) {
 }
 
 //ne fonctionne pas correctement -- verifier la requete -- n'existe pas encore dans le service de persistance ni dans index
-exports.getSignalInformations = function (signalId, category, minVal, maxVal, unity) {
+exports.getSignalInformations = function (signalId, category, unity) {
     var whereClause = {
         idN: signalId,
-        MinValue: minVal,
-        MaxValue: maxVal,
         category: category,
         unity: unity
     };

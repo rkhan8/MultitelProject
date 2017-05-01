@@ -344,6 +344,7 @@ function updateSignalInfos(newSignalId, oldSignalId) {
 
 function showPopupForSetupNewSignalOnDisplay(signal) {
     initializePopupField();
+
     socket.emit('getNotDisplayedSignalsId');
     socket.emit('getComapgniesName');
     $('#errorMsg').text("");

@@ -11,15 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    MinValue: {
-      type: "DOUBLE",
-      allowNull: false
-    },
-    MaxValue: {
-      type: "DOUBLE",
-      allowNull: false
-    },
-    Unity: {
+      Unity: {
       type: DataTypes.STRING(10),
       allowNull: true
     }
