@@ -47,7 +47,7 @@ describe("Sensor Persistance Test", function() {
 
     describe('event on new sensors', function() {
         it('Should emit newSensors Event', sinon.test(function () {
-            var newSensorsSpy = sinon.spy();
+            var newSensorsSpy = this.spy();
 
             persistanceEvent.on('newSensors', newSensorsSpy);
             persistanceEvent.emit('newSensors');
@@ -58,7 +58,7 @@ describe("Sensor Persistance Test", function() {
 
     describe("event on sensors", function() {
         it("Should emit sensors Event", sinon.test(function() {
-            var sensorsSpy = sinon.spy();
+            var sensorsSpy = this.spy();
 
             persistanceEvent.on('sensors', sensorsSpy);
             persistanceEvent.emit('sensors');
