@@ -25,10 +25,10 @@ exports.getAllSensor = function(){
             console.log(err);
             sensorRepositoryEvent.emit('getSensorError', err.message);
         })
-}
+};
 
 exports.getNewSensors = function (extingSignalsId) {
-    var whereClause
+    var whereClause;
     if(_.isEmpty(extingSignalsId)){
         whereClause = undefined;
     }
@@ -49,7 +49,7 @@ exports.getNewSensors = function (extingSignalsId) {
             console.log(err);
             sensorRepositoryEvent.emit('getNewSensorError', err.message);
         });
-}
+};
 
 exports.updateSensor = function (sensorId, category) {
     sensorModel.update({
@@ -66,6 +66,6 @@ exports.updateSensor = function (sensorId, category) {
         console.log(err);
     })
 
-}
+};
 exports.sensorRepositoryEvent = sensorRepositoryEvent;
 

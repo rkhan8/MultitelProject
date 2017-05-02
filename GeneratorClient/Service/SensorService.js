@@ -4,15 +4,12 @@
 var ArrayList = require('arraylist');
 var Sensor = require('../DomaineModel/Sensor');
 
-
-
 var EventEmitter = require('events').EventEmitter;
 var sensors = new ArrayList;
 var sensorsId = new ArrayList;
 var signalServiceEvent = new EventEmitter();
 signalServiceEvent.setMaxListeners(0);
 var interval;
-
 
 exports.createSensor = function (sensorInfos) {
     var index = searchSensorById(sensorInfos.sensorId);
@@ -24,19 +21,18 @@ exports.createSensor = function (sensorInfos) {
     else {
         signalServiceEvent.emit('errorExistingSignalId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
     }
-}
-
+};
 
 exports.createSensors = function (sensorInfos) {
     sensorInfos.forEach(function (sensor) {
         sensors.add(new Sensor(sensor.idSensor, sensor.categorie, sensor.valeurMax, sensor.valeurMin));
         sensorsId.add(sensor.idSensor);
     });
-}
+};
 
 exports.getSensors = function () {
     return JSON.parse(JSON.stringify(sensors));
-}
+};
 
 exports.updateSensor = function (sensorInfos) {
     var index = searchSensorById(sensorInfos.oldSignalId);
@@ -48,7 +44,7 @@ exports.updateSensor = function (sensorInfos) {
         signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
     }
 
-}
+};
 
 function searchSensorById(signalId) {
     for (i = 0; i < sensors.length; i++) {
@@ -68,11 +64,11 @@ exports.activateGenerators = function () {
 
     }, 500);
 
-}
+};
+
 exports.getSensorsIdList = function(){
     return sensorsId;
-}
-
+};
 
 exports.getSensorInformations = function (signalId) {
     var index = searchSensorById(signalId);
@@ -84,8 +80,7 @@ exports.getSensorInformations = function (signalId) {
         signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
     }
 
-}
-
+};
 
 exports.sensorServiceEvent = signalServiceEvent;
 

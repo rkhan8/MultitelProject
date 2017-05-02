@@ -1,5 +1,5 @@
 
-var Generator = require('C:/Users/Safa/WebstormProjects/MultitelProject/GeneratorClient/DomaineModel/Generator');
+var Generator = require('../DomaineModel/Generator');
 var expect = require("chai").expect;
 
 var minTest = 3;

@@ -1,7 +1,7 @@
 /**
  * Created by Safa on 2017-05-01.
  */
-var Sensor = require('C:/Users/Safa/WebstormProjects/MultitelProject/GeneratorClient/DomaineModel/Sensor');
+var Sensor = require('../DomaineModel/Sensor');
 var expect = require("chai").expect;
 
 var idTest = 'idTest1';
@@ -12,7 +12,6 @@ var unityTest = 'volt';
 var newIdTest = 'newIdTest1';
 var newCategoryTest = 'binary';
 var newUnityTest = 'joule';
-
 
 describe("Sensor Test", function() {
     describe("sensor constructor", function () {
