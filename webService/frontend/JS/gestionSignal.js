@@ -351,13 +351,16 @@ function showPopupForSetupNewSignalOnDisplay(signal) {
     var dialog = document.querySelector('#EnregistrerGeneratorPopUp');
     $("#enregistrer").one('click', function () {
         addSignalOnDisplaying();
+        $('#fermerButton').unbind( "click");
+        dialog.close();
+    });
+
+    $('#fermerButton').one('click', function () {
+        signal.remove();
+        $( "#enregistrer" ).unbind( "click");
         dialog.close();
     });
     dialog.showModal();
-    dialog.querySelector('.close').addEventListener('click', function () {
-        signal.remove();
-        dialog.close();
-    });
 }
 
 function initializeOldSignal(signals) {
