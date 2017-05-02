@@ -1,6 +1,4 @@
-/**
- * Created by angem on 2017-04-11.
- */
+
 var random = require('random-js')();
 
 function Generator(category, min, max) {
@@ -8,6 +6,7 @@ function Generator(category, min, max) {
     this._currentValue = undefined;
     this._min = min;
     this._max = max;
+    this._category = category;
     this._generatorFunction = setupGenerator(category);
 }
 
@@ -18,10 +17,14 @@ Generator.prototype.getMax = function(){
     return this._max;
 };
 
+Generator.prototype.getCategory = function() {
+    return this._category;
+};
+
 Generator.prototype.getNextValue= function(){
     this._currentValue = this._generatorFunction();
     return this._currentValue;
-}
+};
 
 function setupGenerator(category) {
     switch (category) {
@@ -34,12 +37,10 @@ function setupGenerator(category) {
 
 }
 
-
-var generateRealValue = function () {
+function generateRealValue() {
     if (this._currentValue == undefined) {
         this._currentValue = generateRandomValue(this._min, this._max);
         return this._currentValue
-
     }
     else {
         var minValue = this._currentValue - this._variance;
@@ -48,17 +49,16 @@ var generateRealValue = function () {
         if (maxValue > this._max) maxValue = this._max;
         this._currentValue = generateRandomValue(parseFloat(minValue), maxValue);
         return this._currentValue
-
     }
-};
+}
 
-var generateBinaryValue = function () {
+function generateBinaryValue() {
     return Number(random.bool());
-};
+}
 
-var generateRandomValue = function (min, max) {
+function generateRandomValue(min, max) {
     var value = parseFloat(random.real(parseFloat(min), parseFloat(max), true));
     return parseFloat(value.toFixed(2));
-};
+}
 
 module.exports = Generator;
