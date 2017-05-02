@@ -2,25 +2,72 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a1ca8d0-23d0-4e35-8161-a655274b2428" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/DomaineModel/Signal.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/Repository/CatpeurRepository.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/Repository/Model/capteur.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/Service/CapteurPersistance.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/Service/SignalService.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webService/backend/DomaineModel/Generator.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webService/backend/DomaineModel/Signal.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webService/backend/Service/SignalService.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/webService/test/GeneratorTest.js" afterPath="$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/webService/test/SignalServiceTest.js" afterPath="$PROJECT_DIR$/GeneratorClient/Test/SignalServiceTest.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/webService/test/SignalTest.js" afterPath="$PROJECT_DIR$/GeneratorClient/Test/SignalTest.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/.nyc_output/05f448765f255148c43a6a138144f917.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GeneratorClient/.nyc_output/9424a745d40a9098751a7f7b3461364b.json" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MultitelProject.iml" afterPath="$PROJECT_DIR$/.idea/MultitelProject.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/.idea/workspace.xml" afterPath="$PROJECT_DIR$/GeneratorClient/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/client.js" afterPath="$PROJECT_DIR$/GeneratorClient/client.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webService/backend/Repository/Model/signal.js" afterPath="$PROJECT_DIR$/webService/backend/Repository/Model/signal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js" afterPath="$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webService/backend/Service/PersistenceService.js" afterPath="$PROJECT_DIR$/webService/backend/Service/PersistenceService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webService/frontend/JS/gestionSignal.js" afterPath="$PROJECT_DIR$/webService/frontend/JS/gestionSignal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webService/index.js" afterPath="$PROJECT_DIR$/webService/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/DomaineModel/Generator.js" afterPath="$PROJECT_DIR$/GeneratorClient/DomaineModel/Generator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/DomaineModel/Sensor.js" afterPath="$PROJECT_DIR$/GeneratorClient/DomaineModel/Sensor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/Repository/SensorRepository.js" afterPath="$PROJECT_DIR$/GeneratorClient/Repository/SensorRepository.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js" afterPath="$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/Test/SignalServiceTest.js" afterPath="$PROJECT_DIR$/GeneratorClient/Test/SignalServiceTest.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/Test/SignalTest.js" afterPath="$PROJECT_DIR$/GeneratorClient/Test/SignalTest.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/AUTHORS" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/AUTHORS" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/CONTRIBUTING.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/Changelog.txt" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/Changelog.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/LICENSE" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/README.md" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/assert.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/assert.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/behavior.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/behavior.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/blob.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/blob.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/call.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/call.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/collect-own-methods.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/collect-own-methods.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/collection.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/collection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/color.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/color.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/default-behaviors.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/default-behaviors.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/match.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/match.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/mock-expectation.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/mock-expectation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/mock.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/mock.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/sandbox.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/sandbox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/spy-formatters.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/spy-formatters.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/spy.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/spy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub-descriptor.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub-descriptor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub-entire-object.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub-entire-object.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub-non-function-property.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub-non-function-property.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/stub.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/throw-on-falsy-object.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/throw-on-falsy-object.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/called-in-order.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/called-in-order.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/deep-equal.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/deep-equal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/default-config.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/default-config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/deprecated.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/deprecated.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/every.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/every.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/extend.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/extend.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/format.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/format.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/function-name.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/function-name.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/function-to-string.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/function-to-string.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/get-config.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/get-config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/get-property-descriptor.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/get-property-descriptor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/index.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/iterable-to-string.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/iterable-to-string.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/log_error.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/log_error.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/order-by-first-call.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/order-by-first-call.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/restore.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/restore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/times-in-words.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/times-in-words.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/typeOf.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/typeOf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/value-to-string.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/value-to-string.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/walk.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/walk.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/wrap-method.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/core/wrap-method.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/event.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/event.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_server.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_server_with_clock.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_server_with_clock.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_timers.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_timers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_xml_http_request.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/lib/sinon/util/fake_xml_http_request.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/package.json" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon-2.1.0.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon-2.1.0.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon-no-sourcemaps-2.1.0.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon-no-sourcemaps-2.1.0.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon-no-sourcemaps.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon-no-sourcemaps.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon.js" afterPath="$PROJECT_DIR$/GeneratorClient/node_modules/sinon/pkg/sinon.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,78 +82,50 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="PersistenceService.js" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/webService/backend/Service/PersistenceService.js">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="272">
-                    <caret line="338" column="7" lean-forward="false" selection-start-line="338" selection-start-column="7" selection-end-line="338" selection-end-column="7" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="MultitelProject" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webService/index.js">
+      <file leaf-file-name="Generator.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/DomaineModel/Generator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="60" column="46" lean-forward="false" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+            <state relative-caret-position="391">
+              <caret line="23" column="32" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gestionSignal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webService/frontend/JS/gestionSignal.js">
+      <file leaf-file-name="GeneratorTest.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3497">
-              <caret line="348" column="34" lean-forward="false" selection-start-line="348" selection-start-column="17" selection-end-line="348" selection-end-column="34" />
+            <state relative-caret-position="-187">
+              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignalRepository.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js">
+      <file leaf-file-name="Sensor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/DomaineModel/Sensor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="296" column="7" lean-forward="false" selection-start-line="296" selection-start-column="7" selection-end-line="296" selection-end-column="7" />
+            <state relative-caret-position="731">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BatimentRepository.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/webService/backend/Repository/BatimentRepository.js">
+      <file leaf-file-name="SensorTest.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/SensorTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="74" column="7" lean-forward="false" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GeneratorClient/client.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-153">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#41#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,9 +133,55 @@
       <file leaf-file-name="SensorRepository.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GeneratorClient/Repository/SensorRepository.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="9" />
+            <state relative-caret-position="340">
+              <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignalServiceTest.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/SignalServiceTest.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="385">
+              <caret line="75" column="5" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SensorService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/Service/SensorService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sensor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/Repository/Model/sensor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignalTest.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/SignalTest.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="57" column="46" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="46" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,20 +190,8 @@
         <entry file="file://$PROJECT_DIR$/GeneratorClient/Service/SensorPersistance.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webService/backend/Repository/Model/signal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -223,6 +276,13 @@
         <option value="$PROJECT_DIR$/webService/backend/Service/PersistenceService.js" />
         <option value="$PROJECT_DIR$/webService/index.js" />
         <option value="$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/Test/SignalServiceTest.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/Test/SignalTest.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/DomaineModel/Generator.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/DomaineModel/Sensor.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/Test/SensorTest.js" />
+        <option value="$PROJECT_DIR$/GeneratorClient/Repository/SensorRepository.js" />
       </list>
     </option>
   </component>
@@ -232,11 +292,26 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/GeneratorClient/node_modules" />
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+    <handled-path value="$PROJECT_DIR$/webService/node_modules" />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-11" />
-    <option name="y" value="-1631" />
-    <option name="width" value="2902" />
-    <option name="height" value="1597" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -253,6 +328,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -260,12 +336,14 @@
               <option name="myItemId" value="MultitelProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webService" />
+              <option name="myItemId" value="MultitelProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -280,28 +358,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -320,136 +376,11 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Repository" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Repository" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GeneratorClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GeneratorClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MultitelProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GeneratorClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Repository" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -460,6 +391,8 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="nodejs.mocha.mocha_node_package_dir" value="C:\Users\angem\Documents\Cours Hiver 2016\MultitelProject\node_modules\mocha" />
     <property name="js.eslint.eslintPackage" value="" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -480,10 +413,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.index.js (1)">
+  <component name="RunManager" selected="Mocha.GeneratorClient\Test\GeneratorTest.js">
     <configuration default="false" name="test" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
+      <command value="run-script" />
       <scripts>
         <script value="test" />
       </scripts>
@@ -497,26 +430,25 @@
     <configuration default="false" name="index.js (1)" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/webService">
       <method />
     </configuration>
+    <configuration default="false" name="GeneratorClient\Test\GeneratorTest.js" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST_FILE</test-kind>
+      <test-file>$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js</test-file>
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
     <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
-      <node-interpreter value="project" />
-      <working-dir value="" />
-      <envs />
-      <scope-kind value="ALL" />
-      <method />
-    </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
       <config-file value="" />
       <node-interpreter value="project" />
       <envs />
@@ -544,7 +476,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run" />
+      <command value="run-script" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -563,16 +495,18 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="npm.test" />
       <item index="1" class="java.lang.String" itemvalue="Node.js.index.js" />
       <item index="2" class="java.lang.String" itemvalue="Node.js.index.js (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Mocha.GeneratorClient\Test\GeneratorTest.js" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.index.js (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.index.js" />
-        <item index="2" class="java.lang.String" itemvalue="npm.test" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Mocha.GeneratorClient\Test\GeneratorTest.js" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.index.js (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.index.js" />
+        <item index="3" class="java.lang.String" itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -602,11 +536,13 @@
       <workItem from="1493412080135" duration="1564000" />
       <workItem from="1493413909903" duration="199000" />
       <workItem from="1493414147914" duration="221000" />
+      <workItem from="1493656660806" duration="20081000" />
+      <workItem from="1493688951147" duration="809000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124649000" />
+    <option name="totallyTimeSpent" value="145539000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -618,39 +554,39 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-1631" width="2902" height="1597" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16203867" sideWeight="0.78335375" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18814056" sideWeight="0.78335375" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925338" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3976436" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39902082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12297496" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18769716" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24562334" sideWeight="0.21664627" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33799705" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40881273" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925338" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24562334" sideWeight="0.51229507" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39902082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2054492" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.111072056" sideWeight="0.78335375" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32547864" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24562334" sideWeight="0.21664627" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40881273" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -750,39 +686,34 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webService/index.js</url>
-          <line>163</line>
-          <properties />
+          <line>154</line>
           <option name="timeStamp" value="252" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webService/index.js</url>
-          <line>60</line>
-          <properties />
+          <line>43</line>
           <option name="timeStamp" value="254" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webService/backend/Repository/BatimentRepository.js</url>
           <line>74</line>
-          <properties />
           <option name="timeStamp" value="256" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js</url>
-          <line>296</line>
-          <properties />
+          <line>302</line>
           <option name="timeStamp" value="263" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js</url>
-          <line>300</line>
-          <properties />
+          <line>306</line>
           <option name="timeStamp" value="264" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="265" />
+      <option name="time" value="266" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -791,20 +722,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/css/styles.css" />
-    <entry file="file://$PROJECT_DIR$/frontend/JS/Libraries/Export2Excel.js" />
-    <entry file="file://$PROJECT_DIR$/frontend/template/historique.html" />
-    <entry file="file://$PROJECT_DIR$/backend/Repository/Model/activessignals.js" />
-    <entry file="file://$PROJECT_DIR$/frontend/JS/historique.js" />
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/DomaineModel/Generator.js" />
-    <entry file="file://$PROJECT_DIR$/backend/Repository/Model/signal.js" />
     <entry file="file://$PROJECT_DIR$/backend/Repository/Model/batiment.js" />
     <entry file="file://$PROJECT_DIR$/backend/Repository/Model/signalvalue.js" />
     <entry file="file://$PROJECT_DIR$/frontend/JS/loading.js" />
@@ -836,10 +753,86 @@
     <entry file="file://$PROJECT_DIR$/frontend/JS/gestionSignal.js" />
     <entry file="file://$PROJECT_DIR$/websocket/server.js" />
     <entry file="file://$PROJECT_DIR$/websocket/client.js" />
+    <entry file="file://$PROJECT_DIR$/webService/backend/Repository/Model/signal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/node_modules/sequelize/lib/instance-validator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="73" column="13" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/node_modules/engine.io-parser/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="59" column="3" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/frontend/JS/gestionSignal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5916">
+          <caret line="349" column="28" selection-start-line="349" selection-start-column="17" selection-end-line="349" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5032">
+          <caret line="302" column="7" selection-start-line="302" selection-start-column="7" selection-end-line="302" selection-end-column="7" />
+          <folding>
+            <marker date="1493656507152" expanded="true" signature="4054:4110" ph="{&quot;idN&quot;: signalId...}" />
+            <marker date="1493656507152" expanded="true" signature="4054:4805" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/backend/Repository/BatimentRepository.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="74" column="7" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/backend/Service/PersistenceService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="343" column="7" selection-start-line="343" selection-start-column="7" selection-end-line="343" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webService/frontend/template/gestionBatiment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1451">
+          <caret line="120" column="67" selection-start-line="120" selection-start-column="53" selection-end-line="120" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GeneratorClient/Service/SensorService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -847,90 +840,80 @@
     <entry file="file://$PROJECT_DIR$/GeneratorClient/Service/SensorPersistance.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webService/backend/Repository/Model/signal.js">
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/DomaineModel/Generator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        <state relative-caret-position="391">
+          <caret line="23" column="32" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/DomaineModel/Sensor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/Repository/Model/sensor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webService/node_modules/sequelize/lib/instance-validator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneratorClient/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GeneratorClient/Repository/SensorRepository.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="9" />
+        <state relative-caret-position="340">
+          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webService/node_modules/engine.io-parser/lib/index.js">
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/SignalServiceTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="59" column="3" lean-forward="false" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="3" />
+        <state relative-caret-position="385">
+          <caret line="75" column="5" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/SignalTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="57" column="46" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="46" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/GeneratorTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webService/frontend/JS/gestionSignal.js">
+    <entry file="file://$PROJECT_DIR$/GeneratorClient/Test/SensorTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3497">
-          <caret line="348" column="34" lean-forward="false" selection-start-line="348" selection-start-column="17" selection-end-line="348" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webService/backend/Repository/SignalRepository.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="296" column="7" lean-forward="false" selection-start-line="296" selection-start-column="7" selection-end-line="296" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webService/backend/Service/PersistenceService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="338" column="7" lean-forward="false" selection-start-line="338" selection-start-column="7" selection-end-line="338" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webService/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="60" column="46" lean-forward="false" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webService/backend/Repository/BatimentRepository.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="74" column="7" lean-forward="false" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
-          <folding />
+        <state relative-caret-position="-153">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

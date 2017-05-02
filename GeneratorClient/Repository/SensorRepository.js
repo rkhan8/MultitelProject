@@ -1,6 +1,4 @@
-/**
- * Created by angem on 2017-04-28.
- */
+
 var Sequelize = require("sequelize");
 var _ = require('lodash');
 var EventEmitter = require('events').EventEmitter;

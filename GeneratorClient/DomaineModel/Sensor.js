@@ -12,26 +12,27 @@ function Sensor(sensorId, category, min, max, unity) {
     this._generator = new Generator(category, min, max);
 }
 
-
 Sensor.prototype.updateSensor = function (signalId, category, unity) {
     this._sensorId = signalId;
     this._category = category;
     this._unity = unity;
 };
+
 Sensor.prototype.nextValue = function () {
     return {
         value: this._generator.getNextValue(),
         sensorId: this._sensorId
     }
 };
+
 Sensor.prototype.getSignalID = function () {
     return this._sensorId;
 };
 
-
 Sensor.prototype.getCategory = function () {
     return this._category;
 };
+
 Sensor.prototype.getSensorInformations = function () {
     return {
 
@@ -40,7 +41,6 @@ Sensor.prototype.getSensorInformations = function () {
         unity: this._unity
     }
 };
-
 
 module.exports = Sensor;
 

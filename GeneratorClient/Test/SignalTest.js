@@ -2,7 +2,7 @@
  * Created by angem on 2017-03-03.
  */
 
-var expect    = require("chai").expect;
+/*var expect    = require("chai").expect;
 var Signal = require('./DomaineModel/Signal');
 var max = 10;
 var min = 1;
@@ -104,4 +104,4 @@ describe("Signal Test", function() {
 
     });
 
-});
+});*/
