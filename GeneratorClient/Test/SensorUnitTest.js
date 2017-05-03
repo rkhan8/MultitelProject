@@ -13,7 +13,7 @@ var newIdTest = 'newIdTest1';
 var newCategoryTest = 'binary';
 var newUnityTest = 'joule';
 
-describe("Sensor Test", function() {
+describe("Sensor Unit Test", function() {
     describe("sensor constructor", function () {
         it("Should create a sensor with the correct attributes", function () {
             var sensorTest = new Sensor(idTest,categoryTest, minTest, maxTest, unityTest);
