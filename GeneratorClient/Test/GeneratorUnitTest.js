@@ -7,7 +7,7 @@ var maxTest = 16;
 var analogCategoryTest = 'analog';
 var binaryCategoryTest = 'binary';
 
-describe("Generator Test", function() {
+describe("Generator Unit Test", function() {
     describe("generator constructor", function () {
         it("Should create a generator with the correct attributes", function () {
             var generatorTest = new Generator(analogCategoryTest, minTest, maxTest);
