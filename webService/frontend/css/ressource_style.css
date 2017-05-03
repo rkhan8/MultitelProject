@@ -56,6 +56,10 @@ select
   border-spacing: 5%;
 }
 
+#ChargerImage{
+  margin-left: 80%;
+}
+
 #draggableContent {
   width: 93.9%;
   height: 12%;
@@ -100,7 +104,33 @@ select
   border-style: dotted;
   float: right;
   margin-right: 2%;
+  /*background-image: url('../images/sky.jpg');*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+
+/*
+#droppableContent:hover {
+    -moz-transition: background-image 0.4s  ease-in-out 1s;
+    -webkit-transition: background-image 0.4s  ease-in-out 1s;
+    -ms-transition: background-image 0.4s  ease-in-out 1s;
+    -o-transition: background-image 0.4s  ease-in-out 1s;
+    background-image: url('../images/sky.jpg');
+    opacity: 1;
+}
+*/
+
+
+#my-awesome-dropzone{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
 
 #droppableContent .generator{
   position: absolute;

@@ -143,8 +143,13 @@ $(function () {
             });
         }
     });
+
+
+
+
 });
 
+$('#droppableContent').css('background-image', 'url("../images/sky.jpg")');
 
 
 function removeSignalFromDisplay(signalId) {
@@ -414,9 +419,41 @@ function initializeOldSignal(signals) {
 }
 
 
+function uploadImage()
+{
+  //alert("ok");
+
+      /*
+      var preview = document.querySelector('image'); //selects the query named img
+      var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+      var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+       */
+
+       var fileInput = document.querySelector('#ChargerImage');
+
+        fileInput.addEventListener('change', function() {
+
+            var reader = new FileReader();
+
+            reader.addEventListener('load', function() {
+                alert('Contenu du fichier "' + fileInput.files[0].name + '" :\n\n' + reader.result);
+            });
+
+            reader.readAsText(fileInput.files[0]);
+
+        });
+
+       $('#droppableContent').css('background-image', 'url("../images/electric.png")');
 
 
-
-
-
-
+}
