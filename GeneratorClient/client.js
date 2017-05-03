@@ -24,7 +24,9 @@ socket.on('connect', function(){
     persistanceService.getSensors();
 
 });
-socket.on('event', function(data){});
+socket.on('updateSensor', function(data){
+persistanceService.updateSensor(data.sensorId,data.categorie)
+});
 socket.on('disconnect', function(){
 
 });

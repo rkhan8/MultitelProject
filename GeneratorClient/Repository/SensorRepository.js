@@ -52,10 +52,12 @@ exports.getNewSensors = function (extingSignalsId) {
 };
 
 exports.updateSensor = function (sensorId, category) {
-    sensorModel.update({
-            idSensor: sensorId,
-            category: category
-        },
+    var data = {
+        idSensor: sensorId,
+        category: category
+    }
+    data = _.pickBy(data);
+    sensorModel.update(data,
         {
             where: {
                 idSensor: sensorId

@@ -126,6 +126,10 @@ io.on('connection', function (socket) {
     });
 
     socket.on('updateSignalInformations', function (signalInfos) {
+        clientSensor.emit('updateSensor',{
+            sensorId : signalInfos.signalId,
+            categorie : signalInfos.category
+        })
         persistanceService.updateSignalInformations(signalInfos.signalId, signalInfos.compagnie, signalInfos.nomBatiment, signalInfos.numeroEtage, signalInfos.unity,signalInfos.category,signalInfos.oldSignalId);
     });
 
