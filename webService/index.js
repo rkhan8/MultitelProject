@@ -121,8 +121,9 @@ io.on('connection', function (socket) {
     })
 
 
-    socket.on('getSignalInfos', function (signalInfos) {
-        persistanceService.getSignals(signalInfos.signalId, signalInfos.category, signalInfos.minVal, signalInfos.maxVal, signalInfos.unity );
+    socket.on('getSignalInfos', function (signalId) {
+      //  persistanceService.getSignals(signalInfos.signalId, signalInfos.category,signalInfos.unity );
+        persistanceService.getSignalInfos(signalId);
     });
 
     socket.on('updateSignalInformations', function (signalInfos) {

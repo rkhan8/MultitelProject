@@ -25,13 +25,47 @@ exports.insertNewSignal = function (signalId, category,unity) {
         .then(function () {
             connection.db.signalStatusModel.findOrCreate({
                 where:{
-                    idN:signalId
+                    idN:signalId,
+
                 },
                 defaults: {
                     status: 0
-                }})
+                }}).then(function(){
+                    connection.db.signalpositiOndropZoneModel.findOrCreate({
+                        where:{
+                            idN:signalId,
+                            view: 'rechercheSignal'
+                        },
+                        defaults: {
 
-            signalRepositoryEvent.emit('signalCreated');
+                            PositionTop:0,
+                            PositionLeft:0,
+                            View: 'rechercheSignal'
+
+                        }
+
+                    })
+            }).then(function(){
+                connection.db.signalpositiOndropZoneModel.findOrCreate({
+                    where:{
+                        idN:signalId,
+                        View: 'gestionSignal',
+
+                    },
+                    defaults: {
+
+                        PositionTop:0,
+                        PositionLeft:0,
+                        View: 'gestionSignal'
+
+                    }
+
+                })
+            }).then(function(){
+                signalRepositoryEvent.emit('signalCreated');
+            })
+
+
 
         })
         .catch(function (err) {
@@ -138,25 +172,17 @@ exports.getSignals = function (signalId, category, unity) {
 }
 
 //ne fonctionne pas correctement -- verifier la requete -- n'existe pas encore dans le service de persistance ni dans index
-exports.getSignalInformations = function (signalId, category, unity) {
-    var whereClause = {
-        idN: signalId,
-        category: category,
-        unity: unity
-    };
-    whereClause = _.pickBy(whereClause);
-    connection.db.signalModel.findOne({
-            where: whereClause, include: [{
-                model: connection.db.signalBatimentModel,
-                where: {
-                    idN: signalId
-                }, include: [{
-                    model: connection.db.batimentModel
-                }
+exports.getSignalInformations = function (signalId) {
 
-                ]
-            }
-            ]
+    connection.db.signalModel.findOne({
+            where: {
+                idN:signalId
+            }, include: [{
+                model: connection.db.signalBatimentModel}
+
+            ], include:[{
+                model:connection.db.batimentModel
+        }]
         }
     )
         .then(function (result) {

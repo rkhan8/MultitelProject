@@ -82,16 +82,20 @@ exports.getCompagnies = function () {
 };
 
 exports.getBatimentSignals = function (compagnie, batiment, numeroEtage) {
+    var whereClause1 = {
+        Compagnie: compagnie,
+        NomBatiment: batiment
+    }
+    var whereClause2 = {
+        Etage: numeroEtage
+    }
+    whereClause1 = _.pickBy(whereClause1);
+    whereClause2 = _.pickBy(whereClause2);
     connection.db.batimentModel.findAll({
-        where: {
-            Compagnie: compagnie,
-            NomBatiment: batiment
-        },
+        where: whereClause1,
         include: [{
             model: connection.db.signalBatimentModel,
-            where: {
-                Etage: numeroEtage
-            },
+            where: whereClause2,
             include: [{
                 model: connection.db.signalModel,
                 include: [{
