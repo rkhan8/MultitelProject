@@ -178,59 +178,6 @@ function updateSignalInformations(oldSignalId) {
 
 }
 
-function initializeOldSignal(signals) {
-    for (var i = 0; i < signals.length; i++) {
-        var signal = $('<div><img src="../images/temperature.jpg" height="50px" width="50px"></div>');
-        $("#droppableContent").append(signal);
-        signal.get(0).setAttribute("id", signals[i].idN);
-        signal.draggable({
-            stack: ".draggable",
-            cursor: 'hand',
-            containment: '#droppableContent',
-            stop: function (event, ui) {
-                socket.emit('updateSignalPosition', {
-                    signalId: $(this).attr('id'),
-                    positionLeft: parseInt($(this).position().left),
-                    positionTop: parseInt($(this).position().top),
-                    view: view
-                });
-            }
-        });
-
-        $(signal).css({
-            position: "absolute"
-        }).show();
-        ///ajuster la position des anciens generateurs ici
-        $(signal).offset({
-            top: signals[i].signalpositionondropzones[0].PositionTop,
-            left: signals[i].signalpositionondropzones[0].PositionLeft
-        });
-
-
-        var signalName = createAndSetupInput();
-        $(signalName).addClass("signalName");
-        $(signalName).val(signals[i].idN);
-        $(signal).prepend(signalName);
-
-
-        var valueDisplayer = createAndSetupInput();
-        $(valueDisplayer).addClass("valueDisplay");
-        $(signal).append(valueDisplayer);
-
-
-        $(signal).click(function () {
-            var signalId = $(this).attr('id');
-            socket.emit('getSignalInfos', signalId);
-            show_updatePopup(signalId);
-
-        });
-        // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
-        //createSignalGraph(signals[i].idN);
-    }
-}
-
-
-
 function removeSignalFromDisplay(signalId) {
 
     socket.emit('removeSignalFromDisplay', signalId);
@@ -239,6 +186,7 @@ function removeSignalFromDisplay(signalId) {
         view: view
     });
     $('#' + signalId).remove();
+    $('#' +signalId + 'canvas').remove();
 }
 
 
@@ -279,7 +227,7 @@ function addSignalOnDisplaying() {
         });
     updateSignalInfos(signalId);
    // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
-  //  createSignalGraph(signalId);
+  createSignalGraph(signalId);
 
 }
 
@@ -295,17 +243,36 @@ function createSignalGraph(signalId) {
     $(".chartsZone").append(div);
     canvas = $('#' + signalId + 'canvas').get(0).getContext('2d');
     var startingData = {
-        labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-        datasets: [
-            {
-                fillColor: "rgba(255,255,255,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            }]
+        type:'line',
+        data:{
+            labels: ["test", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+            datasets: [
+                {
+                    label:'histogramme signal ' +signalId,
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    spanGaps: false,
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                }]
+        }
+
     };
-    var chart = new Chart(canvas).Line(startingData);
+    var chart = new Chart(canvas,startingData);
     charts.push({
         id: signalId + 'canvas',
         chart: chart
@@ -314,10 +281,12 @@ function createSignalGraph(signalId) {
 
 
 function updateSignalChart(signalId, value) {
-    var chart = _.find(charts, {'id': signalId + 'canvas'});
-    if (!_.isUndefined(chart)) {
-        chart.chart.addData([value], "");
-        chart.chart.removeData();
+    var currentChart = _.find(charts, {'id': signalId + 'canvas'});
+    if (!_.isUndefined(currentChart)) {
+        currentChart.chart.data.datasets[0].data.pop();
+        currentChart.chart.data.datasets[0].data.unshift(value);
+
+        currentChart.chart.update();
     }
 }
 
@@ -414,7 +383,7 @@ function initializeOldSignal(signals) {
             show_updatePopup(signalId);
         });
         // decommenter cette ligne pour afficher le graphe en temps reel du signal -- Mais probleme de performance possible
-        //createSignalGraph(signals[i].idN);
+        createSignalGraph(signals[i].idN);
     }
 }
 
