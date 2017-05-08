@@ -4,15 +4,12 @@
 var sinon = require('sinon');
 var sinonTest = require('sinon-test');
 sinon.test = sinonTest.configureTest(sinon);
-
 var expect = require("chai").expect;
 var SequelizeMock = require('sequelize-mock');
 
 var sensorPersistence = require('../Service/SensorPersistance');
 var sensorRepository = require('../Repository/SensorRepository');
-var sensorService = require('../Service/SensorService');
 
-var serviceMock = sinon.mock(sensorService);
 var repositoryMock = sinon.mock(sensorRepository);
 
 var newId = 'newSensId';
@@ -28,7 +25,7 @@ var MySQLConnectionMock = new SequelizeMock('multitel', 'multitel', 'multitel', 
     }
 });
 
-// modèle non testé
+// modèle ne sert pas au test
 var SensorMock1 = MySQLConnectionMock.define('sensorModel1', {
     sensorId: 'testSens01',
     category: 'analog',
