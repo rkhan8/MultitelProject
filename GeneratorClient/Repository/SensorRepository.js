@@ -27,16 +27,16 @@ exports.getAllSensor = function(){
         })
 };
 
-exports.getNewSensors = function (extingSignalsId) {
+exports.getNewSensors = function (existingSignalsId) {
     var whereClause;
-    if(_.isEmpty(extingSignalsId)){
+    if(_.isEmpty(existingSignalsId)){
         whereClause = undefined;
     }
     else{
         whereClause ={
             where:{
                 idSensor:{
-                    $notIn: extingSignalsId
+                    $notIn: existingSignalsId
                 }
             }
         }
