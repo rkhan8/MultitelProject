@@ -178,11 +178,12 @@ exports.getSignalInformations = function (signalId) {
             where: {
                 idN:signalId
             }, include: [{
-                model: connection.db.signalBatimentModel}
-
-            ], include:[{
+                model: connection.db.signalBatimentModel
+            , include:[{
                 model:connection.db.batimentModel
-        }]
+            }]}
+
+            ]
         }
     )
         .then(function (result) {
@@ -356,9 +357,16 @@ exports.getSignalsValues = function (signalId, category, unity, startDate, endDa
         where: whereClause2,
         include: [{
             model: signalModel,
-            where: whereClause1
+            where: whereClause1,
+            include:[{
+                model:connection.db.signalBatimentModel,
+                include:[{
+                    model:connection.db.batimentModel
+                }]
+            }]
         }
         ]
+        ,limit: 4
     }).then(function (result) {
         signalRepositoryEvent.emit('signalValueFound', JSON.parse(JSON.stringify(result)));
 
