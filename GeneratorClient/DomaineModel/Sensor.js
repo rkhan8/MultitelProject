@@ -8,6 +8,8 @@ var Generator = require('../DomaineModel/Generator');
 function Sensor(sensorId, category, min, max, unity) {
     this._sensorId = sensorId;
     this._category = category;
+    this._min = min;
+    this._max = max;
     this._unity = unity;
     this._generator = new Generator(category, min, max);
 }
