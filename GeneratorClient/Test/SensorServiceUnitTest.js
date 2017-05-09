@@ -2,8 +2,6 @@
  * Created by Safa on 2017-05-08.
  */
 "use strict";
-var sinon = require('sinon');
-
 var SensorService = require('../Service/SensorService');
 var Sensor = require('../DomaineModel/Sensor');
 var expect = require("chai").expect;
@@ -52,6 +50,14 @@ describe("Sensor Service Unit Test", function() {
             expect(newSensor._unity).to.equal(sensor1.unity);
             expect(newSensor._min).to.equal(sensor1.valMin);
             expect(newSensor._max).to.equal(sensor1.valMax);
+        });
+        it("Should not create an existing sensor", function() {
+            SensorService.deleteAllSensors();
+            SensorService.createSensor(sensor1);
+            SensorService.createSensor(sensor1);
+
+            var sensorList = SensorService.getSensors();
+            expect(sensorList.length).to.equal(1);
         })
     });
 
