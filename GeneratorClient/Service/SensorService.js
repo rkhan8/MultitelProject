@@ -16,6 +16,7 @@ exports.createSensor = function (sensorInfos) {
     if (index === -1) {
         var signal = new Sensor(sensorInfos.sensorId, sensorInfos.category, sensorInfos.valMin, sensorInfos.valMax, sensorInfos.unity);
         sensors.add(signal);
+        sensorsId.add(sensorInfos.sensorId);
     }
     else {
         signalServiceEvent.emit('errorExistingSignalId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
@@ -37,12 +38,10 @@ exports.updateSensor = function (sensorInfos) {
     var index = searchSensorById(sensorInfos.oldSignalId);
     if (index != -1) {
         sensors.get(index).updateSensor(sensorInfos.idSensor, sensorInfos.categorie, sensorInfos.unity);
-
     }
     else {
-        signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
+        signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouvé');
     }
-
 };
 
 function searchSensorById(signalId) {
@@ -58,7 +57,7 @@ exports.activateGenerators = function () {
     interval = setInterval(function () {
         for (i = 0; i < sensors.length; i++) {
             var values = sensors.get(i).nextValue();
-            signalServiceEvent.emit('newValueHasGenerate', values);
+            signalServiceEvent.emit('newValueIsGenerated', values);
         }
 
     }, 500);
@@ -74,11 +73,32 @@ exports.getSensorInformations = function (signalId) {
     if (index != -1) {
         var infos = sensors.get(index).getSensorInformations();
         signalServiceEvent.emit('signalInfos', infos);
+        return infos;
     }
     else {
         signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouver');
     }
 
+};
+
+exports.deleteSensor = function(sensorId) {
+  var index = searchSensorById(sensorId);
+    if(index !== -1) {
+        sensors.toArray().splice(index, 1);
+        sensorsId.toArray().splice(index, 1);
+        sensors.length -= 1;
+        sensorsId.length -= 1;
+    }
+    else {
+        signalServiceEvent.emit('errorSignalId', 'Aucun generateur trouvé');
+    }
+};
+
+exports.deleteAllSensors = function() {
+    sensors = new ArrayList;
+    sensorsId = new ArrayList;
+    sensors.length = 0;
+    sensorsId.length = 0;
 };
 
 exports.sensorServiceEvent = signalServiceEvent;
