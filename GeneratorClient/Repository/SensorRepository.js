@@ -1,4 +1,4 @@
-
+'use strict';
 var Sequelize = require("sequelize");
 var _ = require('lodash');
 var EventEmitter = require('events').EventEmitter;
@@ -70,4 +70,4 @@ exports.updateSensor = function (sensorId, category) {
 
 };
 exports.sensorRepositoryEvent = sensorRepositoryEvent;
-
+//module.exports = SensorRepository;

@@ -16,7 +16,6 @@ exports.createSensor = function (sensorInfos) {
     if (index === -1) {
         var signal = new Sensor(sensorInfos.sensorId, sensorInfos.category, sensorInfos.valMin, sensorInfos.valMax, sensorInfos.unity);
         sensors.add(signal);
-
     }
     else {
         signalServiceEvent.emit('errorExistingSignalId', 'Ce generateur existe deja. Choisissez un autre nom de generateur');
