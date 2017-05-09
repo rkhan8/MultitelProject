@@ -13,5 +13,5 @@
    > Les valeurs du simulateur sont recupérées par le webService et sont enregistrée dans la BD, afficher la console du webService pour voir la trace des données
    > Ouvrir son navigateur internet (Chrome de préférence) et aller a l'adresse http://localhost:3000 
 * Pour lancer les tests
--  Se mettre a la racine du projet
-- Faire la commande ``` npm test```
+   >  Se mettre a la racine du projet <br/>
+   > Faire la commande ``` npm test```
