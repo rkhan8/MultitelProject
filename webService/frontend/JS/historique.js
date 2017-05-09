@@ -48,7 +48,7 @@ function searchSignalsValuesBySelectedKey()
 }
 
 function exportResearchData(type, fn) {
-    return export_table_to_excel('table1', type || 'xlsx', fn);
+    return export_table_to_excel('donnee', type || 'xlsx', fn);
 }
 
 
@@ -67,14 +67,14 @@ function populateSignalsValuesTable(signalsValues)
 
     row.insertCell(0).innerHTML = signalsValues[j].idN.replace('_', ' ');
     row.insertCell(1).innerHTML = signalsValues[j].signal.Category;
-    row.insertCell(2).innerHTML = signalsValues[j].signal.MinValue;
-    row.insertCell(3).innerHTML = signalsValues[j].signal.MaxValue;
-    row.insertCell(4).innerHTML = signalsValues[j].ValueRec;
-    row.insertCell(5).innerHTML = signalsValues[j].signal.Unity;
-    //var dateRec = $.datepicker.formatDate( "dd-mm-yy", new Date( signalsValues[j].DateRec ));
-      signalsValues[j].DateRec =  signalsValues[j].DateRec.replace('T', " ");
+    row.insertCell(2).innerHTML = signalsValues[j].ValueRec;
+    row.insertCell(3).innerHTML = signalsValues[j].signal.Unity;
+          signalsValues[j].DateRec =  signalsValues[j].DateRec.replace('T', " ");
       signalsValues[j].DateRec = signalsValues[j].DateRec.replace('Z',"")
-    row.insertCell(6).innerHTML = signalsValues[j].DateRec;
+    row.insertCell(4).innerHTML = signalsValues[j].DateRec;
+      row.insertCell(5).innerHTML = signalsValues[j].signal.signalbatiment.batiment.Compagnie;
+      row.insertCell(6).innerHTML = signalsValues[j].signal.signalbatiment.batiment.NomBatiment;
+      row.insertCell(7).innerHTML = signalsValues[j].signal.signalbatiment.Etage;
 
   }
 
