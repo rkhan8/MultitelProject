@@ -55,7 +55,7 @@ exports.updateSensor = function (sensorId, category) {
     var data = {
         idSensor: sensorId,
         category: category
-    }
+    };
     data = _.pickBy(data);
     sensorModel.update(data,
         {
@@ -70,4 +70,3 @@ exports.updateSensor = function (sensorId, category) {
 
 };
 exports.sensorRepositoryEvent = sensorRepositoryEvent;
-//module.exports = SensorRepository;

@@ -74,7 +74,7 @@ exports.insertNewSignal = function (signalId, category,unity) {
 
         });
 
-}
+};
 exports.updateSignalInformations = function (signalId, category, unity, oldSignal) {
     signalModel.update(
         {
@@ -128,11 +128,10 @@ exports.updateSignalPosition = function (signalId, positionLeft, positionTop, vi
         signalRepositoryEvent.emit('signalPositionUdpate');
     })
         .catch(function (err) {
-            console.log(err.message)
+            console.log(err.message);
             signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
         })
-
-}
+};
 
 exports.createSignalPosition = function (signalId, positionLeft, positionTop, view) {
     connection.db.signalpositiOndropZoneModel.upsert({
@@ -313,7 +312,7 @@ exports.updateSignalStatus = function (signalId, newStatus) {
         });
 }
 
-exports.getNotDiplayedSignalsId = function () {
+exports.getNotDisplayedSignalsId = function () {
     connection.db.signalStatusModel.findAll({
         attributes: ['idN'],
         where: {

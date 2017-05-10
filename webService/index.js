@@ -166,7 +166,7 @@ io.on('connection', function (socket) {
         persistanceService.getBatimentsInformations(searchKey.compagnie, searchKey.NomBatiment);
     });
     socket.on('getNotDisplayedSignalsId', function () {
-        persistanceService.getNotDiplayedSignalsId();
+        persistanceService.getNotDisplayedSignalsId();
     });
     socket.on('findSignalsBySelectOption', function(batimentInfos){
         persistanceService.getBatimentSignalsInformations(batimentInfos.compagnie,batimentInfos.nomBatiment, batimentInfos.numeroEtage)
