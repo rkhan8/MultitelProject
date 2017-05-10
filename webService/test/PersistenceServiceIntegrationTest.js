@@ -27,7 +27,7 @@ var buildingId = "testBuilding01";
 
 describe("Persistence Service Integration Test", function() {
     describe("store Signal Information", function() {
-        it("Should call signal signalRepository insertNewSignal function with correct arguments", sinon.test(function() {
+        it("Should call signalRepository insertNewSignal function with correct arguments", sinon.test(function() {
             var insertNewSignalSpy = this.spy(signalRepository, 'insertNewSignal');
 
             PersistenceService.storeSignalInformation(signalId, category, unity);
@@ -37,7 +37,7 @@ describe("Persistence Service Integration Test", function() {
     });
 
     describe("save Signal Value",  function() {
-        it("Should call signal signalRepository insertSignalValue function with correct arguments", sinon.test(function () {
+        it("Should call signalRepository insertSignalValue function with correct arguments", sinon.test(function () {
             var insertSignalValueSpy = this.spy(signalRepository, 'insertSignalValue');
 
             PersistenceService.saveSignalValue(signalId, value);
@@ -46,7 +46,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Recording Dates", function() {
-        it("Should call signal signalRepository getRecordingDates function", sinon.test(function() {
+        it("Should call signalRepository getRecordingDates function", sinon.test(function() {
             var getRecordingDatesSpy = this.spy(signalRepository, 'getRecordingDates');
 
             PersistenceService.getRecordingDates();
@@ -55,7 +55,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Signals Id", function() {
-        it("Should call signal signalRepository getSignalsId function", sinon.test(function() {
+        it("Should call signalRepository getSignalsId function", sinon.test(function() {
             var getSignalsIdSpy = this.spy(signalRepository, 'getSignalsId');
 
             PersistenceService.getSignalsId();
@@ -64,7 +64,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Signals Unity", function() {
-        it("Should call signal signalRepository getSignalsUnity function", sinon.test(function() {
+        it("Should call signalRepository getSignalsUnity function", sinon.test(function() {
             var getSignalsUnitySpy = this.spy(signalRepository, 'getSignalsUnity');
 
             PersistenceService.getSignalsUnity();
@@ -73,7 +73,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Signals Categories", function() {
-        it("Should call signal signalRepository getSignalsCategories function", sinon.test(function() {
+        it("Should call signalRepository getSignalsCategories function", sinon.test(function() {
             var getSignalsCategoriesSpy = this.spy(signalRepository, 'getSignalsCategories');
 
             PersistenceService.getSignalsCategories();
@@ -82,7 +82,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Signals Values", function() {
-        it("Should call signal signalRepository getSignalsValues function with correct arguments", sinon.test(function() {
+        it("Should call signalRepository getSignalsValues function with correct arguments", sinon.test(function() {
             var getSignalsValuesSpy = this.spy(signalRepository, 'getSignalsValues');
 
             PersistenceService.getSignalsValues(signalId, category, unity, startDate, endDate);
@@ -91,7 +91,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Signals", function() {
-        it("Should call signal signalRepository getSignals function with correct arguments", sinon.test(function() {
+        it("Should call signalRepository getSignals function with correct arguments", sinon.test(function() {
             var getSignalsSpy = this.spy(signalRepository, 'getSignals');
 
             PersistenceService.getSignals(signalId, category, unity);
@@ -100,7 +100,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Not Displayed SignalsId", function() {
-        it("Should call signal signalRepository getNotDisplayedSignalsId function", sinon.test(function() {
+        it("Should call signalRepository getNotDisplayedSignalsId function", sinon.test(function() {
             var getNotDisplayedSignalsIdSpy = this.spy(signalRepository, 'getNotDisplayedSignalsId');
 
             PersistenceService.getNotDisplayedSignalsId();
@@ -109,7 +109,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("remove Signal From Display", function() {
-        it("Should call signal signalRepository updateSignalStatus function with correct arguments", sinon.test(function() {
+        it("Should call signalRepository updateSignalStatus function with correct arguments", sinon.test(function() {
             var updateSignalStatusSpy = this.spy(signalRepository, 'updateSignalStatus');
 
             PersistenceService.removeSignalFromDisplay(signalId);
@@ -118,7 +118,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("add Signal On Display", function() {
-        it("Should call signal signalRepository updateSignalStatus function with correct arguments", sinon.test(function() {
+        it("Should call signalRepository updateSignalStatus function with correct arguments", sinon.test(function() {
             var updateSignalStatusSpy = this.spy(signalRepository, 'updateSignalStatus');
 
             PersistenceService.addSignalOnDisplay(signalId);
@@ -127,7 +127,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Signal Infos", function() {
-        it("Should call signal signalRepository getSignalInformations function with the same argument", sinon.test(function() {
+        it("Should call signalRepository getSignalInformations function with the same argument", sinon.test(function() {
             var getSignalInformationsSpy = this.spy(signalRepository, 'getSignalInformations');
 
             PersistenceService.getSignalInfos(signalId);
@@ -136,7 +136,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("ajouter Batiment", function() {
-        it("Should call building signalRepository ajouterBatiment function with the same arguments", sinon.test(function() {
+        it("Should call buildingRepository ajouterBatiment function with the same arguments", sinon.test(function() {
             var addBuildingSpy = this.spy(buildingRepository, 'ajouterBatiment');
 
             PersistenceService.ajouterBatiment(firm, buildingName, floorNumber, address, zipCode, number);
@@ -145,7 +145,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get firms", function() {
-        it("Should call building signalRepository getCompagnies", sinon.test(function() {
+        it("Should call buildingRepository getCompagnies", sinon.test(function() {
             var getFirmsSpy = this.spy(buildingRepository, 'getCompagnies');
 
             PersistenceService.getCompagnies();
@@ -154,7 +154,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get firm's Building name", function() {
-        it("Should call building signalRepository getCompagnieBatimentsName with the same argument", sinon.test(function() {
+        it("Should call buildingRepository getCompagnieBatimentsName with the same argument", sinon.test(function() {
             var getFirmBuildingNameSpy = this.spy(buildingRepository, 'getCompagnieBatimentsName');
 
             PersistenceService.getCompagnieBatimentsName(firm);
@@ -163,7 +163,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Batiments Information", function() {
-        it("Should call building signalRepository getBatimentsInformations with the same arguments", sinon.test(function() {
+        it("Should call buildingRepository getBatimentsInformations with the same arguments", sinon.test(function() {
             var getBuildingInformationSpy = this.spy(buildingRepository, 'getBatimentsInformations');
 
             PersistenceService.getBatimentsInformations(firm, buildingName);
@@ -172,7 +172,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("make Signal Displayable", function() {
-        it("Should call signal signalRepository and building signalRepository functions with the specific arguments", sinon.test(function() {
+        it("Should call signalRepository and buildingRepository functions with the specific arguments", sinon.test(function() {
             var updateSignalStatusSpy = this.spy(signalRepository, 'updateSignalStatus');
             var createSignalBuildingInformationSpy = this.spy(buildingRepository, 'createSignalBatimentInformations');
             var updateSignalInformationSpy = this.spy(signalRepository, 'updateSignalInformations');
@@ -185,7 +185,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("update Signal Information", function() {
-        it("Should call signal signalRepository and building signalRepository functions with the specific arguments", sinon.test(function() {
+        it("Should call signalRepository and buildingRepository functions with the specific arguments", sinon.test(function() {
             var updateSignalInformationSpy = this.spy(signalRepository, 'updateSignalInformations');
             var updateSignalBuildingInformationSpy = this.spy(buildingRepository, 'updateSignalBatimentInformations');
 
@@ -196,7 +196,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("get Building Signals Information", function() {
-        it("Should call building signalRepository getBatimentSignals function with the same arguments", sinon.test(function() {
+        it("Should call buildingRepository getBatimentSignals function with the same arguments", sinon.test(function() {
             var getBuildingSignalsSpy = this.spy(buildingRepository, 'getBatimentSignals');
 
             PersistenceService.getBatimentSignalsInformations(firm, buildingName, floorNumber);
@@ -205,7 +205,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("update Building Information", function() {
-        it("Should call building signalRepository updateBatimentInformations function with the same arguments", sinon.test(function() {
+        it("Should call buildingRepository updateBatimentInformations function with the same arguments", sinon.test(function() {
             var updateBuildingInformationSpy = this.spy(buildingRepository, 'updateBatimentInformations');
 
             PersistenceService.updateBatimentInformations(buildingId, firm, buildingName, floorNumber, address, zipCode, number);
@@ -214,7 +214,7 @@ describe("Persistence Service Integration Test", function() {
         }))
     });
     describe("delete Building", function() {
-        it("Should call building signalRepository deleteBatiment function with the same argument", sinon.test(function() {
+        it("Should call buildingRepository deleteBatiment function with the same argument", sinon.test(function() {
             var deleteBuildingSpy = this.spy(buildingRepository, 'deleteBatiment');
 
             PersistenceService.deleteBatiment(buildingId);
