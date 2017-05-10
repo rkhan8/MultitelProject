@@ -15,7 +15,7 @@ var categoryTest = 'analog';
 
 describe("Sensor Persistence Integration Test", function() {
     describe("get new sensors", function () {
-        it("Should call repository getNewSensors function with the same argument", sinon.test(function () {
+        it("Should call signalRepository getNewSensors function with the same argument", sinon.test(function () {
             var getNewSensorsSpy = this.spy(SensorRepository, 'getNewSensors');
 
             SensorPersistence.getNewSensors(existingSignalsId);
@@ -25,7 +25,7 @@ describe("Sensor Persistence Integration Test", function() {
     });
 
     describe("update sensor", function() {
-       it("Should call repository updateSensor function with the same argument", sinon.test(function() {
+       it("Should call signalRepository updateSensor function with the same argument", sinon.test(function() {
            var updateSensorSpy = this.spy(SensorRepository, 'updateSensor');
 
            SensorPersistence.updateSensor(idTest, categoryTest);
@@ -35,7 +35,7 @@ describe("Sensor Persistence Integration Test", function() {
     });
 
     describe("get sensors", function () {
-        it("Should call repository getAllSensors function", sinon.test(function () {
+        it("Should call signalRepository getAllSensors function", sinon.test(function () {
             var getAllSensorSpy = this.spy(SensorRepository, 'getAllSensor');
 
             SensorPersistence.getSensors();

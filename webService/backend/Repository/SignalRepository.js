@@ -2,15 +2,13 @@
  * Created by angem on 2017-03-25.
  */
 
-var connection = require('../Repository/DBconnection')
+var connection = require('../Repository/DBconnection');
 var EventEmitter = require('events').EventEmitter;
 var signalRepositoryEvent = new EventEmitter();
 var _ = require('lodash');
 
-
 var signalValueModel = connection.db.signalValueModel;
 var signalModel = connection.db.signalModel;
-
 
 exports.insertNewSignal = function (signalId, category,unity) {
     signalModel.findOrCreate({
@@ -100,7 +98,7 @@ exports.updateSignalInformations = function (signalId, category, unity, oldSigna
             console.log(err);
 
         })
-}
+};
 exports.insertSignalValue = function (signalId, value) {
 
     signalValueModel.create({
@@ -147,7 +145,7 @@ exports.createSignalPosition = function (signalId, positionLeft, positionTop, vi
             console.log(err.message);
             signalRepositoryEvent.emit('createSignalPositionError')
         })
-}
+};
 exports.getSignals = function (signalId, category, unity) {
     var whereClause = {
         idN: signalId,
@@ -168,7 +166,7 @@ exports.getSignals = function (signalId, category, unity) {
             signalRepositoryEvent.emit('getSignalsError', signalId);
         });
 
-}
+};
 
 //ne fonctionne pas correctement -- verifier la requete -- n'existe pas encore dans le service de persistance ni dans index
 exports.getSignalInformations = function (signalId) {
@@ -236,7 +234,7 @@ exports.getSignalsUnity = function () {
         signalRepositoryEvent.emit('signalsUnityError');
 
     });
-}
+};
 
 exports.getSignalsId = function () {
     signalModel.findAll({
@@ -251,7 +249,7 @@ exports.getSignalsId = function () {
         signalRepositoryEvent.emit('signalsIdError');
 
     });
-}
+};
 
 exports.getSignalByStatus = function (status, view) {
     connection.db.signalModel.findAll({
@@ -374,10 +372,7 @@ exports.getSignalsValues = function (signalId, category, unity, startDate, endDa
         signalRepositoryEvent.emit('searchSignalValueError', signalId);
 
     });
-
-
-}
-
+};
 
 exports.signalRepositoryEvent = signalRepositoryEvent;
 

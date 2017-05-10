@@ -45,7 +45,7 @@ describe("Sensor Persistence Unit Test", function() {
             SensorRepository.getAllSensor.restore();
             SensorPersistence.getSensors.restore();
         });
-        it('Should get all sensors from the repository', sinon.test(function () {
+        it('Should get all sensors from the signalRepository', sinon.test(function () {
             var result = SensorPersistence.getSensors();
             var expectedResult = SensorRepository.getAllSensor();
 
