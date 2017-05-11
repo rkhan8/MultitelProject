@@ -3,12 +3,11 @@ var socket = io();
 var charts = new Array();
 var view = 'gestionSignal';
 
-
 socket.emit('getAllDisplayedSignals', view);
 socket.on('signalInfos', function (signalInfos) {
 
 console.log(signalInfos)
-})
+});
 
 socket.on('compagnie', function (data) {
     data.unshift('Compagnie');
@@ -51,8 +50,7 @@ socket.on('notDisplayedSignals', function (data) {
 
 socket.on('signalRemovedFromDisplay', function () {
     //afficher un popup avec le message
-})
-
+});
 
 $(function () {
     $('#newCompagnieGenerateur').change(function () {
@@ -80,7 +78,6 @@ $(function () {
     });
 });
 
-
 $(function () {
 
     $(".generator").draggable({
@@ -88,7 +85,6 @@ $(function () {
         cursor: 'hand',
         helper: 'clone',
         containment: '#droppableContent',
-
     });
 
     $(".ui-drop").droppable({
@@ -109,7 +105,6 @@ $(function () {
             signal.css('left', ui.position.left);
             signal.appendTo(dropZone);
             // $(signal).addClass('signal')
-
 
             var signalName = createAndSetupInput();
             $(signalName).addClass("signalName");
@@ -132,7 +127,6 @@ $(function () {
                 }
             });
 
-
             $(signal).click(function () {
                 var currentSignal = $(this);
                 var signalId = $(currentSignal).attr('id');
@@ -143,40 +137,9 @@ $(function () {
             });
         }
     });
-
-
-
-
 });
 
 $('#droppableContent').css('background-image', 'url("../images/sky.jpg")');
-
-
-function removeSignalFromDisplay(signalId) {
-
-    socket.emit('removeSignalFromDisplay', signalId);
-    socket.emit('deletesignalPosition', signalId);
-    $('#' + signalId).remove();
-}
-
-function updateSignalInformations(oldSignalId) {
-
-    newSignalId = $('#lastGeneratorName').val();
-    socket.emit("updateSignalInformations",
-        {
-            oldSignalId: oldSignalId,
-            signalId: $('#lastGeneratorName').val(),
-            category: $('#lastGategory').find(":selected").val(),
-            unity: $('#lastUnity').val(),
-            nomBatiment: $('#lastBatimentName').find(":selected").val(),
-            compagnie: $('#lastCompagnie').find(":selected").val(),
-            numeroEtage: $('#lastEtageNumber').find(":selected").val()
-
-        });
-    updateSignalInfos(newSignalId, oldSignalId);
-    hide_popup();
-
-}
 
 function removeSignalFromDisplay(signalId) {
 
@@ -189,7 +152,6 @@ function removeSignalFromDisplay(signalId) {
     $('#' +signalId + 'canvas').remove();
 }
 
-
 function updateSignalInformations(oldSignalId) {
 
     newSignalId = $('#lastGeneratorName').val();
@@ -205,12 +167,7 @@ function updateSignalInformations(oldSignalId) {
 
         });
     updateSignalInfos(newSignalId, oldSignalId);
-
-
-
 }
-
-
 
 function addSignalOnDisplaying() {
 
@@ -230,8 +187,6 @@ function addSignalOnDisplaying() {
   createSignalGraph(signalId);
 
 }
-
-
 
 function createSignalGraph(signalId) {
     var div = $('<div />');
@@ -279,7 +234,6 @@ function createSignalGraph(signalId) {
     });
 }
 
-
 function updateSignalChart(signalId, value) {
     var currentChart = _.find(charts, {'id': signalId + 'canvas'});
     if (!_.isUndefined(currentChart)) {
@@ -289,9 +243,6 @@ function updateSignalChart(signalId, value) {
         currentChart.chart.update();
     }
 }
-
-
-
 
 function updateSignalInfos(newSignalId, oldSignalId) {
     if (_.isUndefined(oldSignalId))
@@ -365,17 +316,14 @@ function initializeOldSignal(signals) {
             left: signals[i].signalpositionondropzones[0].PositionLeft
         });
 
-
         var signalName = createAndSetupInput();
         $(signalName).addClass("signalName");
         $(signalName).val(signals[i].idN);
         $(signal).prepend(signalName);
 
-
         var valueDisplayer = createAndSetupInput();
         $(valueDisplayer).addClass("valueDisplay");
         $(signal).append(valueDisplayer);
-
 
         $(signal).click(function () {
             var signalId = $(this).attr('id');
@@ -386,7 +334,6 @@ function initializeOldSignal(signals) {
         createSignalGraph(signals[i].idN);
     }
 }
-
 
 function uploadImage()
 {
@@ -423,6 +370,4 @@ function uploadImage()
         });
 
        $('#droppableContent').css('background-image', 'url("../images/electric.png")');
-
-
 }

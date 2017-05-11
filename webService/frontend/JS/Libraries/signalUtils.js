@@ -11,14 +11,13 @@ function createAndSetupInput() {
 }
 
 function initializePopupField(){
-
     $('.popUpField option').remove();
     $('.popUpCategoryField').val("");
 }
 
-
 function show_updatePopup(signalId) {
     initializePopupField();
+    $('#lastSignalName').val(signalId);
     socket.emit('getComapgniesName');
 
     $('#removeSignalButton').click(function () {
