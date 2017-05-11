@@ -57,7 +57,7 @@ exports.activateGenerators = function () {
     interval = setInterval(function () {
         for (i = 0; i < sensors.length; i++) {
             var values = sensors.get(i).nextValue();
-            signalServiceEvent.emit('newValueIsGenerated', values);
+            signalServiceEvent.emit('newValueHasGenerate', values);
         }
 
     }, 500);

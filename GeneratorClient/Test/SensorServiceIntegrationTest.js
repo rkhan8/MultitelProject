@@ -54,8 +54,8 @@ describe("Sensor Service Integration Test", function() {
         }));
         it("Should emit newValueIsGenerated Event", sinon.test(function() {
             var generatedValueSpy = this.spy();
-            sensorServiceEvent.on('newValueIsGenerated', generatedValueSpy);
-            sensorServiceEvent.emit('newValueIsGenerated');
+            sensorServiceEvent.on('newValueHasGenerate', generatedValueSpy);
+            sensorServiceEvent.emit('newValueHasGenerate');
 
             SensorService.activateGenerators();
 
