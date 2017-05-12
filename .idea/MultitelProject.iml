@@ -22,5 +22,6 @@
     <orderEntry type="library" name="underscore" level="application" />
     <orderEntry type="library" name="xlsx.core" level="application" />
     <orderEntry type="library" name="xlsx.full" level="application" />
+    <orderEntry type="library" name="Chart.bundle" level="application" />
   </component>
 </module>

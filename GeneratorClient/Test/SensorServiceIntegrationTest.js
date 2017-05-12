@@ -6,7 +6,6 @@ var sinonTest = require('sinon-test');
 sinon.test = sinonTest.configureTest(sinon);
 var EventEmitter = require('events').EventEmitter;
 var sensorServiceEvent = new EventEmitter();
-var expect = require("chai").expect;
 
 var SensorService = require('../Service/SensorService');
 var Sensor = require('../DomaineModel/Sensor');
