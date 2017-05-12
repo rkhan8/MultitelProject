@@ -200,7 +200,7 @@ function createSignalGraph(signalId) {
     var startingData = {
         type:'line',
         data:{
-            labels: ["test", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+            labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             datasets: [
                 {
                     label:'histogramme signal ' +signalId,
