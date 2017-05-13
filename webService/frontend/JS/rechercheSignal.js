@@ -30,12 +30,13 @@ socket.on('batimentsInfos', function(batimenInfos){
 socket.on('batimentSignalInformations', function(data){
     // les donnees de la recherche sont retournee ici
     $('#droppableContentBatiment').empty();
-    for(var i = 0; i<= data.length; i++){
+    for(var i = 0; i < data.length; i++){
         var signals = data[i].signalbatiments;
-        var etageDropzoneId = data[i].NomBatiment + 'Etage' + i;
-        $('#droppableContentBatiment').append( putSignalOnDropZoneByBatimentEtage(signals,etageDropzoneId));
+        var nomBatiment = data[i].NomBatiment;
+        $('#droppableContentBatiment').append( putSignalOnDropZoneByBatimentEtage(signals,nomBatiment));
     }
 });
+
 
 
 
