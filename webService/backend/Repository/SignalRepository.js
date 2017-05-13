@@ -62,9 +62,6 @@ exports.insertNewSignal = function (signalId, category,unity) {
             }).then(function(){
                 signalRepositoryEvent.emit('signalCreated');
             })
-
-
-
         })
         .catch(function (err) {
             signalRepositoryEvent.emit('signalCreateError', err.detail);
@@ -190,8 +187,7 @@ exports.getSignalInformations = function (signalId) {
             console.log(err);
             signalRepositoryEvent.emit('getSignalsError', signalId);
         });
-
-}
+};
 exports.getRecordingDates = function () {
     signalValueModel.findAll({
         attributes: [[connection.sequelize.literal('DISTINCT DATE(`DateRec`)'), 'DateRec']]
@@ -205,7 +201,7 @@ exports.getRecordingDates = function () {
         signalRepositoryEvent.emit('signalValueRecordingDateError');
 
     });
-}
+};
 exports.getSignalsCategories = function () {
     signalModel.findAll({
         attributes: [[connection.sequelize.literal('DISTINCT Category'), 'Category']]
@@ -219,12 +215,11 @@ exports.getSignalsCategories = function () {
         signalRepositoryEvent.emit('signalsCategoriesError');
 
     });
-}
+};
 
 exports.getSignalsUnity = function () {
     signalModel.findAll({
-        attributes: [[connection.sequelize.literal('DISTINCT Unity'), 'Unity']]
-
+        //getSignalsCategories
     }).then(function (result) {
         var unities = JSON.parse(JSON.stringify(result));
         signalRepositoryEvent.emit('signalsUnityFound', _.map(unities, 'Unity'));
@@ -291,8 +286,7 @@ exports.deleteSignalPosition = function (signalId, view) {
             console.log(err.message)
             signalRepositoryEvent.emit('errorDeleteSignalPosition', err.detail);
         });
-}
-
+};
 
 exports.updateSignalStatus = function (signalId, newStatus) {
     connection.db.signalStatusModel.update(
@@ -308,7 +302,7 @@ exports.updateSignalStatus = function (signalId, newStatus) {
         .catch(function (err) {
             signalRepositoryEvent.emit('errorUpdateSignalStatus', err.detail);
         });
-}
+};
 
 exports.getNotDisplayedSignalsId = function () {
     connection.db.signalStatusModel.findAll({
@@ -326,8 +320,7 @@ exports.getNotDisplayedSignalsId = function () {
 
     });
 
-}
-
+};
 
 exports.getSignalsValues = function (signalId, category, unity, startDate, endDate) {
     var whereClause2;

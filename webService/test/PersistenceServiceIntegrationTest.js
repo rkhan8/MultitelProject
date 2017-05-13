@@ -23,7 +23,9 @@ var floorNumber = 3;
 var address = "avenue cartier, Québec";
 var zipCode = "F4k E8I";
 var number = 1718;
-var buildingId = "testBuilding01";
+var buildingId = 135;
+
+PersistenceService.deleteBatiment(5);
 
 describe("Persistence Service Integration Test", function() {
     describe("store Signal Information", function() {

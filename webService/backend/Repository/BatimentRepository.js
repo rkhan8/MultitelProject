@@ -2,7 +2,7 @@
  * Created by angem on 2017-04-22.
  */
 
-var connection = require('../Repository/DBconnection')
+var connection = require('../Repository/DBconnection');
 var EventEmitter = require('events').EventEmitter;
 var batimentRepositoryEvent = new EventEmitter();
 var _ = require('lodash');
@@ -16,7 +16,7 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
         Adresse: Adresse,
         CodePostal: CodePostal,
         Numero: Numero
-    }
+    };
     data = _.pickBy(data);
     connection.db.batimentModel.create(data)
         .then(function () {
@@ -27,7 +27,7 @@ exports.ajouterBatiment = function (Compagnie, NomBatiment, Nbetages, Adresse, C
             console.log(err);
         });
 
-}
+};
 exports.updateBatimentInformations = function (batimentId, Compagnie, NomBatiment, Nbetages, Adresse, CodePostal, Numero) {
 
     connection.db.batimentModel.update({
@@ -50,7 +50,7 @@ exports.updateBatimentInformations = function (batimentId, Compagnie, NomBatimen
             console.log(err);
             batimentRepositoryEvent.emit('errorBatimentUpdate', err.message);
         })
-}
+};
 
 exports.deleteBatiment = function (batimentId) {
 
@@ -65,8 +65,7 @@ exports.deleteBatiment = function (batimentId) {
         console.log(err);
         batimentRepositoryEvent.emit('errorDeleteBatiment', err.message);
     })
-
-}
+};
 exports.getCompagnies = function () {
     connection.db.batimentModel.findAll({
         attributes: [[connection.sequelize.literal('DISTINCT Compagnie'), 'Compagnie']]
@@ -85,10 +84,10 @@ exports.getBatimentSignals = function (compagnie, batiment, numeroEtage) {
     var whereClause1 = {
         Compagnie: compagnie,
         NomBatiment: batiment
-    }
+    };
     var whereClause2 = {
         Etage: numeroEtage
-    }
+    };
     whereClause1 = _.pickBy(whereClause1);
     whereClause2 = _.pickBy(whereClause2);
     connection.db.batimentModel.findAll({
@@ -116,8 +115,7 @@ exports.getBatimentSignals = function (compagnie, batiment, numeroEtage) {
             console.log(err);
             batimentRepositoryEvent.emit('getBatimentSignalInformationsError', err.message);
         })
-
-}
+};
 exports.getCompagnieBatimentsName = function (compagnieName) {
 
     connection.db.batimentModel.findAll({
@@ -139,7 +137,7 @@ exports.getBatimentsInformations = function (compagnie, nomBatiment) {
     var whereClause = {
         Compagnie: compagnie,
         NomBatiment: nomBatiment
-    }
+    };
     whereClause = _.pickBy(whereClause);
     connection.db.batimentModel.findAll({
         where: whereClause
@@ -151,8 +149,7 @@ exports.getBatimentsInformations = function (compagnie, nomBatiment) {
             console.log(err.message);
             batimentRepositoryEvent.emit('searchBatimentInfosError', err.message);
         });
-
-}
+};
 exports.createSignalBatimentInformations = function (signalId, compagnie, nomBatiment, Etage) {
 
     connection.db.batimentModel.findOne({
@@ -162,7 +159,7 @@ exports.createSignalBatimentInformations = function (signalId, compagnie, nomBat
         }
     })
         .then(function (result) {
-            var batiment = JSON.parse(JSON.stringify(result))
+            var batiment = JSON.parse(JSON.stringify(result));
             connection.db.signalBatimentModel.create({
                 batimentId: batiment.batimentId,
                 idN: signalId,
@@ -175,7 +172,7 @@ exports.createSignalBatimentInformations = function (signalId, compagnie, nomBat
             console.log(err.message);
             batimentRepositoryEvent.emit('createBatimentInfosError', err.message);
         });
-}
+};
 
 exports.updateSignalBatimentInformations = function (signalId, compagnie, nomBatiment, Etage) {
 
@@ -206,6 +203,6 @@ exports.updateSignalBatimentInformations = function (signalId, compagnie, nomBat
             console.log(err.message);
             batimentRepositoryEvent.emit('batimentInfosUpdatedError', err.message);
         });
-}
+};
 
 exports.batimentRepositoryEvent = batimentRepositoryEvent;
