@@ -9,7 +9,7 @@ socket.on('batimentAjouterOk', function () {
 });
 
 socket.on('batimentUpdated', function(){
-    //afficher un popup pour dire que les informations du batiments ont bien été mises a jour
+    PopUpUpdateSucess();
 });
 
 socket.on('compagnie', function (data) {
@@ -58,7 +58,30 @@ function PopUpCreerSucess() {
     dialog.showModal();
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
+        window.location.reload(true);
+
     });
+
+}
+
+function PopUpUpdateSucess() {
+    var dialog = document.querySelector('#SuccessUpdate');
+    dialog.showModal();
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
+        window.location.reload(true);
+    });
+
+}
+
+function PopUpDeleteSucess() {
+    var dialog = document.querySelector('#SuccessDelete');
+    dialog.showModal();
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
+        window.location.reload(true);
+    });
+
 }
 
 
@@ -121,6 +144,7 @@ function updateBatiment(numeroLigne){
 function deleteBatiment(numeroLigne){
     socket.emit('deleteBatiment', $('#tableBatiment').get(0).rows[numeroLigne].cells[0].innerHTML);
     $('#tableBatiment').get(0).deleteRow(numeroLigne);
+    PopUpDeleteSucess();
 }
 
 
@@ -156,5 +180,5 @@ $(function () {
   $( "#SlideDownSearchBatiment" ).click(function() {
     $( "#search" ).slideToggle( "slow" );
   });
-  
+
 });

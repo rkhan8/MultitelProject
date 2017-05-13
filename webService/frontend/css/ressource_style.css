@@ -35,6 +35,25 @@
   /*height: 100%;*/
 }
 
+#contentG2
+{
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  margin-top: 2%;
+  /*height: 100%;*/
+}
+
+#ContentIndex
+{
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  margin-top: 2%;
+  color: white;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 12%;
+}
+
 #search
 {
   display: none;
